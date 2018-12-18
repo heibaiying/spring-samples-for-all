@@ -1,13 +1,20 @@
 package com.heibaiying.config;
 
+import com.heibaiying.exception.NoAuthExceptionResolver;
+import com.heibaiying.interceptors.MyFirstInterceptor;
+import com.heibaiying.interceptors.MySecondInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import java.util.List;
 
 /**
  * @author : heibaiying
@@ -32,8 +39,23 @@ public class ServletConfig implements WebMvcConfigurer {
     /**
      * 配置静态资源处理器
      */
-
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
+    }
+
+    /**
+     * 添加自定义拦截器
+     */
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new MyFirstInterceptor()).addPathPatterns("/mvc/**").excludePathPatterns("mvc/login");
+        registry.addInterceptor(new MySecondInterceptor()).addPathPatterns("/mvc/**");
+    }
+
+
+    /**
+     * 添加全局异常处理器
+     */
+    public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
+        resolvers.add(new NoAuthExceptionResolver());
     }
 }

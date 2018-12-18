@@ -24,4 +24,21 @@
         <!-- 后缀 -->
         <property name="suffix" value=".jsp"/>
     </bean>
+
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/mvc/**"/>
+            <mvc:exclude-mapping path="/mvc/login"/>
+            <bean class="com.heibaiying.interceptors.MyFirstInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/mvc/**"/>
+            <bean class="com.heibaiying.interceptors.MySecondInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!--配置全局异常处理器-->
+    <bean class="com.heibaiying.exception.NoAuthExceptionResolver"/>
+
 </beans>
