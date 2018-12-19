@@ -17,6 +17,7 @@ public class MyFirstInterceptor implements HandlerInterceptor {
         return true;
     }
 
+    // 需要注意的是，如果对应的程序报错，不一定会进入这个方法 但一定会进入afterCompletion这个方法
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
         System.out.println("进入第一个拦截器postHandle");
     }
