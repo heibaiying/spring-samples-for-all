@@ -69,6 +69,9 @@ public class FileController {
     }
 
 
+     /***
+      * 上传用于下载的文件
+      */
     @PostMapping("upFileForDownload")
     public String upFileForDownload(MultipartFile file, HttpSession session, Model model) throws UnsupportedEncodingException {
         String path = FileUtil.saveFile(file, session.getServletContext().getRealPath("/image"));

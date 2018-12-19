@@ -370,3 +370,560 @@ public class HelloController {
 ```
 
 注：调用这个controller时，同时也可以验证在拦截器部分提到的：如果对应的程序报错，拦截器不一定会进入postHandle这个方法 但一定会进入afterCompletion这个方法
+
+
+
+## 四、参数绑定
+
+### 4.1 参数绑定
+
+1.新建Programmer.java
+
+```java
+package com.heibaiying.bean;
+
+import lombok.Data;
+
+/**
+ * @author : heibaiying
+ * @description :
+ */
+@Data
+public class Programmer {
+
+    private String name;
+
+    private int age;
+
+    private float salary;
+
+    private String birthday;
+}
+
+```
+
+注：@Data 是lombok包下的注解，用来生成相应的set、get方法和全参、无参构造器，使得类的书写更为简洁。
+
+2.新建ParamBindController.java 文件
+
+```java
+package com.heibaiying.controller;
+
+import com.heibaiying.bean.Programmer;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.datetime.DateFormatter;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Date;
+
+/**
+ * @author : heibaiying
+ * @description :参数绑定
+ */
+@Controller
+public class ParamBindController {
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.addCustomFormatter(new DateFormatter("yyyy-MM-dd HH:mm:ss"));
+    }
+
+
+    // 参数绑定与日期格式转换
+    @RequestMapping("param")
+    public String param(String name, int age, double salary, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date birthday, Model model) {
+        model.addAttribute("name", name);
+        model.addAttribute("age", age);
+        model.addAttribute("salary", salary);
+        model.addAttribute("birthday", birthday);
+        return "param";
+    }
+
+    @RequestMapping("param2")
+    public String param2(String name, int age, double salary, Date birthday, Model model) {
+        model.addAttribute("name", name);
+        model.addAttribute("age", age);
+        model.addAttribute("salary", salary);
+        model.addAttribute("birthday", birthday);
+        return "param";
+    }
+
+
+    @PostMapping("param3")
+    public String param3(Programmer programmer, String extendParam, Model model) {
+        System.out.println("extendParam" + extendParam);
+        model.addAttribute("p", programmer);
+        return "param";
+    }
+
+}
+
+```
+
+3.新建param.jsp 文件
+
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Restful</title>
+</head>
+<body>
+<ul>
+    <li>姓名：${empty name ? p.name : name}</li>
+    <li>年龄：${empty age ? p.age : age}</li>
+    <li>薪酬：${empty salary ? p.salary : salary}</li>
+    <li>生日：${empty birthday ? p.birthday : birthday}</li>
+</ul>
+</body>
+</html>
+
+```
+
+4.启动tomcat，用[postman](https://www.getpostman.com/)软件发送请求进行测试
+
+### 4.2 关于日期格式转换的三种方法
+
+1.如上实例代码所示，在对应的controller中初始化绑定
+
+```java
+@InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.addCustomFormatter(new DateFormatter("yyyy-MM-dd HH:mm:ss"));
+    }
+```
+
+2.利用@DateTimeFormat注解，如果是用实体类去接收参数，则在对应的属性上声明
+
+```java
+public String param(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date birthday)
+```
+
+3.使用全局的日期格式绑定，新建自定义日期格式转化类，之后在ServletConfig.java中进行注册
+
+```java
+package com.heibaiying.convert;
+
+import org.springframework.core.convert.converter.Converter;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
+ * @author : heibaiying
+ * @description :
+ */
+public class CustomDateConverter implements Converter<String, Date> {
+
+    public Date convert(String s) {
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return simpleDateFormat.parse(s);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+}
+
+```
+
+ServletConfig.java
+
+```java
+/**
+ * 添加全局日期处理
+ */
+public void addFormatters(FormatterRegistry registry) {
+	registry.addConverter(new CustomDateConverter());
+}
+```
+
+
+
+## 五、数据校验
+
+1.spring支持的数据校验是JSR303的标准，需要引入依赖的jar包
+
+```java
+ <!-- 数据校验依赖包 -->
+      <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.0.13.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
+        </dependency>
+```
+
+2.新建测试ParamValidController.java，主要是在需要校验的参数前加上@Validated，声明参数需要被校验，同时加上bindingResult参数，这个参数中包含了校验的结果
+
+```java
+package com.heibaiying.controller;
+
+import com.heibaiying.bean.Programmer;
+import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.datetime.DateFormatter;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * @author : heibaiying
+ * @description :数据校验
+ */
+@RestController
+public class ParamValidController {
+
+
+    @PostMapping("validate")
+    public void valid(@Validated Programmer programmer,
+                      BindingResult bindingResult) {
+        List<ObjectError> allErrors = bindingResult.getAllErrors();
+        for (ObjectError error : allErrors) {
+            System.out.println(error.getDefaultMessage());
+        }
+    }
+
+}
+
+```
+
+3.在Programmer.java的对应属性上加上注解约束(支持的注解可以在javax.validation.constraints包中查看)
+
+```java
+package com.heibaiying.bean;
+
+import lombok.Data;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+/**
+ * @author : heibaiying
+ * @description :
+ */
+@Data
+public class Programmer {
+
+    @NotNull
+    private String name;
+
+    @Min(value = 0,message = "年龄不能为负数！" )
+    private int age;
+
+    @Min(value = 0,message = "薪酬不能为负数！" )
+    private float salary;
+
+    private String birthday;
+}
+
+```
+
+## 六、文件上传与下载
+
+#### 6.1 文件上传
+
+1.在ServletConfig.java中进行配置，使之支持文件上传
+
+```java
+/**
+* 配置文件上传
+*/
+@Bean
+public CommonsMultipartResolver multipartResolver(){
+    CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+    resolver.setMaxUploadSize(1024*1000*10);
+    resolver.setMaxUploadSizePerFile(1024*1000);
+    resolver.setDefaultEncoding("utf-8");
+    return resolver;
+}
+```
+
+2.新建测试上传的FileController.java
+
+```java
+package com.heibaiying.controller;
+
+import com.heibaiying.utils.FileUtil;
+import org.apache.commons.io.FileUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+/**
+ * @author : heibaiying
+ * @description : 文件上传
+ */
+
+@Controller
+public class FileController {
+
+    @GetMapping("file")
+    public String filePage() {
+        return "file";
+    }
+
+
+    /***
+     * 单文件上传
+     */
+    @PostMapping("upFile")
+    public String upFile(MultipartFile file, HttpSession session) {
+        //保存在项目根目录下image文件夹下，如果文件夹不存在则创建
+        FileUtil.saveFile(file, session.getServletContext().getRealPath("/image"));
+        // success.jsp 就是一个简单的成功页面
+        return "success";
+    }
+
+    /***
+     * 多文件上传 多个文件用同一个名字
+     */
+    @PostMapping("upFiles")
+    public String upFiles(@RequestParam(name = "file") MultipartFile[] files, HttpSession session) {
+        for (MultipartFile file : files) {
+            FileUtil.saveFile(file, session.getServletContext().getRealPath("images"));
+        }
+        return "success";
+    }
+
+    /***
+     * 多文件上传方式2 分别为不同文件指定不同名字
+     */
+    @PostMapping("upFiles2")
+    public String upFile(String extendParam,
+                         @RequestParam(name = "file1") MultipartFile file1,
+                         @RequestParam(name = "file2") MultipartFile file2, HttpSession session) {
+        String realPath = session.getServletContext().getRealPath("images2");
+        FileUtil.saveFile(file1, realPath);
+        FileUtil.saveFile(file2, realPath);
+        System.out.println("extendParam:" + extendParam);
+        return "success";
+    }
+}
+
+```
+
+3.其中工具类FileUtil.java代码如下
+
+```java
+package com.heibaiying.utils;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * @author : heibaiying
+ * @description : 文件上传工具类
+ */
+public class FileUtil {
+
+    public static String saveFile(MultipartFile file, String path) {
+        String fullPath = path + File.separator + file.getOriginalFilename();
+        try {
+            File saveDir = new File(path);
+            if (!saveDir.exists()) {
+                saveDir.mkdirs();
+            }
+            FileOutputStream outputStream = new FileOutputStream(new File(fullPath));
+            InputStream inputStream = file.getInputStream();
+            byte[] bytes = new byte[1024 * 1024];
+            int read;
+            while ((read = inputStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return fullPath;
+    }
+
+}
+
+```
+
+4.新建用于上传的jsp页面，上传文件时表单必须声明 enctype="multipart/form-data"
+
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>文件上传</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/file.css">
+</head>
+<body>
+
+    <form action="${pageContext.request.contextPath }/upFile" method="post" enctype="multipart/form-data">
+        请选择上传文件：<input name="file" type="file"><br>
+        <input type="submit" value="点击上传文件">
+    </form>
+
+    <form action="${pageContext.request.contextPath }/upFiles" method="post" enctype="multipart/form-data">
+        请选择上传文件(多选)：<input name="file" type="file" multiple><br>
+        <input type="submit" value="点击上传文件">
+    </form>
+
+    <form action="${pageContext.request.contextPath }/upFiles2" method="post" enctype="multipart/form-data">
+        请选择上传文件1：<input name="file1" type="file"><br>
+        请选择上传文件2：<input name="file2" type="file"><br>
+        文件内容额外备注: <input name="extendParam" type="text"><br>
+        <input type="submit" value="点击上传文件">
+    </form>
+
+</body>
+</html>
+
+```
+
+#### 6.2 文件下载
+
+1.在fileController.java中加上方法：
+
+```java
+  /***
+   * 上传用于下载的文件
+   */
+    @PostMapping("upFileForDownload")
+    public String upFileForDownload(MultipartFile file, HttpSession session, Model model) throws UnsupportedEncodingException {
+        String path = FileUtil.saveFile(file, session.getServletContext().getRealPath("/image"));
+        model.addAttribute("filePath", URLEncoder.encode(path,"utf-8"));
+        model.addAttribute("fileName", file.getOriginalFilename());
+        return "fileDownload";
+    }
+
+    /***
+     * 下载文件
+     */
+    @GetMapping("download")
+    public ResponseEntity<byte[]> downloadFile(String filePath) throws IOException {
+        HttpHeaders headers = new HttpHeaders();
+        File file = new File(filePath);
+        // 解决文件名中文乱码
+        String fileName=new String(file.getName().getBytes("UTF-8"),"iso-8859-1");
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.setContentDispositionFormData("attachment", fileName);
+
+        return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),
+                headers, HttpStatus.CREATED);
+    }
+```
+
+2.其中fileDownload.jsp 如下：
+
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>文件下载</title>
+</head>
+<body>
+    <a href="${pageContext.request.contextPath}/download?filePath=${filePath}">${fileName}</a>
+</body>
+</html>
+```
+
+
+
+## 七、Restful风格的请求
+
+1.新建Pet.java实体类
+
+```java
+package com.heibaiying.bean;
+
+import lombok.Data;
+
+/**
+ * @author : heibaiying
+ * @description :测试restful风格的实体类
+ */
+
+@Data
+public class Pet {
+
+    private String ownerId;
+
+    private String petId;
+}
+
+```
+
+2.新建RestfulController.java，用@PathVariable和@ModelAttribute注解进行参数绑定。
+
+注： 在REST中，资源通过URL进行识别和定位。REST中的行为是通过HTTP方法定义的。在进行不同行为时对应HTTP方法和Spring注解分别如下：
+
+- 创建资源时：POST（PostMapping）
+- 读取资源时：GET（ @GetMapping）
+- 更新资源时：PUT或PATCH（PutMapping、PatchMapping）
+- 删除资源时：DELETE（DeleteMapping）
+
+```java
+package com.heibaiying.controller;
+
+import com.heibaiying.bean.Pet;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+/**
+ * @author : heibaiying
+ * @description : Restful 风格的请求
+ */
+
+@RestController
+public class RestfulController {
+
+    @GetMapping("restful/owners/{ownerId}/pets/{petId}")
+    public void get(@PathVariable String ownerId, @PathVariable String petId) {
+        System.out.println("ownerId:" + ownerId);
+        System.out.println("petId:" + petId);
+    }
+
+    @GetMapping("restful2/owners/{ownerId}/pets/{petId}")
+    public void get(@ModelAttribute Pet pet) {
+        System.out.println("ownerId:" + pet.getOwnerId());
+        System.out.println("petId:" + pet.getPetId());
+    }
+
+}
+
+```
+
