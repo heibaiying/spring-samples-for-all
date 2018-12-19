@@ -13,8 +13,8 @@
     <!--使用默认的Servlet来响应静态文件 详见README.md -->
     <mvc:default-servlet-handler/>
 
-    <!-- 开启注解驱动 详见 README.md -->
-    <mvc:annotation-driven/>
+    <!-- 开启注解驱动 并制定全局日期转换 详见 README.md -->
+    <mvc:annotation-driven conversion-service="formattingConversionService"/>
 
     <!-- 配置视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
@@ -40,5 +40,21 @@
 
     <!--配置全局异常处理器-->
     <bean class="com.heibaiying.exception.NoAuthExceptionResolver"/>
+
+    <!-- 全局日期格式转换  -->
+    <bean id="formattingConversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+    <property name="converters">
+        <list>
+            <bean class="com.heibaiying.convert.CustomDateConverter"/>
+        </list>
+    </property>
+    </bean>
+
+    <!--配置文件上传-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="102400000"/>
+        <property name="maxUploadSizePerFile" value="10240000"/>
+        <property name="defaultEncoding" value="utf-8"/>
+    </bean>
 
 </beans>

@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HelloController {
 
     @RequestMapping("hello")
-    private String hello() {
+    public String hello() {
         return "hello";
     }
 
 
     @RequestMapping("auth")
-    private void auth() {
+    public void auth() {
         throw new NoAuthException("没有对应的访问权限！");
     }
 }
