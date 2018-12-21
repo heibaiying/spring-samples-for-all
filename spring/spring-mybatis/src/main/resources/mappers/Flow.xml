@@ -1,0 +1,11 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heibaiying.dao.OracleDao">
+
+    <select id="queryById" resultType="com.heibaiying.bean.Flow">
+        select * from APEX_030200.WWV_FLOW_CALS where ID = #{id}
+    </select>
+
+</mapper>
