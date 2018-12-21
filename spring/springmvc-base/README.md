@@ -394,7 +394,7 @@ public class Programmer {
 
 ```
 
-注：@Data 是lombok包下的注解，用来生成相应的set、get方法和全参、无参构造器，使得类的书写更为简洁。
+注：@Data 是lombok包下的注解，用来生成相应的set、get方法，使得类的书写更为简洁。
 
 2.新建ParamBindController.java 文件
 
