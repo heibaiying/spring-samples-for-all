@@ -16,6 +16,8 @@ spring-cloud：Finchley.SR2
 
 下方表格中首列为项目地址链接，所有samples预计在1月底前完成。
 
+<br/>
+
 ## 1. spring samples
 
 注1：所有spring的项目我都会提供两个版本的sample,
@@ -39,7 +41,7 @@ spring-cloud：Finchley.SR2
 | spring-druid-netty<br/>spring-druid-netty-annotation         | spring 整合 netty                                            |                                                              |
 | spring-druid-scheduled<br/>spring-druid-scheduled-annotation | spring 定时任务                                              |                                                              |
 
-
+<br/>
 
 ## 2. spring-boot samples
 
@@ -68,7 +70,7 @@ spring-cloud：Finchley.SR2
 
 更多的场景和用例可参阅 [spring-boot 官方samples ](https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples)
 
-
+<br/>
 
 ## 3. spring-cloud samples
 
@@ -83,7 +85,7 @@ spring-cloud：Finchley.SR2
 
 推荐课程：[Spring Cloud微服务实战](https://coding.imooc.com/class/187.html) 廖大神结合实战，很详细的介绍spring cloud各个组件的使用。
 
-
+<br/>
 
 ## 4.参考资料
 
