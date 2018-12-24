@@ -435,4 +435,4 @@ public class OracleController {
 
 8、druid 监控页面访问地址http://localhost:8080/druid/index.html
 
-![druid控制台](D:\spring-samples-for-all\pictures\druid控制台.png)
+![druid控制台](https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/druid%E6%8E%A7%E5%88%B6%E5%8F%B0.png)
