@@ -30,7 +30,6 @@ public class ServletConfig implements WebMvcConfigurer {
 
     /**
      * 配置数据源
-     * sourceConfig
      */
     @Bean
     public DriverManagerDataSource dataSource(DataSourceConfig sourceConfig) {
