@@ -1,4 +1,4 @@
-# Spring-All-In-One
+# Spring-Samples-For-All
 
 该仓库提供spring、spring-boot、spirng-cloud 的常用samples。每个用例都提供详细的注释和搭建说明（详见每个sample项目根目录README.md），旨在总结自己工作和学习的结果，也为广大的Java学习和爱好者提供参考。另外因为samples 并不能涵盖该知识点的所有内容，所以每个sample我都会附上本部分内容官方文档的链接作为参考。
 
@@ -27,19 +27,19 @@ spring-cloud：Finchley.SR2
 
 | samples                                                      | 描述                                                         | 官方文档                                                     |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [springmvc-base](https://github.com/heibaiying/Spring-All-In-One/tree/master/spring/springmvc-base)<br/>[springmvc-base-annotation](https://github.com/heibaiying/Spring-All-In-One/tree/master/spring/springmvc-base-annotation) | springmvc基础、参数绑定、参数转换、数据校验、<br/>全局异常处理、 文件上传下载、jsp视图 | [spring mvc ](https://docs.spring.io/spring/docs/5.1.3.RELEASE/spring-framework-reference/web.html#mvc) |
-| [spring-jdbc](https://github.com/heibaiying/Spring-All-In-One/tree/master/spring/spring-jdbc)<br/>[spring-jdbc-annotation](https://github.com/heibaiying/Spring-All-In-One/tree/master/spring/spring-jdbc-annotation) | spring jdbc-template 的使用                                  | [Using JdbcTemplat](https://docs.spring.io/spring/docs/5.1.3.RELEASE/spring-framework-reference/data-access.html#jdbc-JdbcTemplate) |
-| [spring-mybatis](https://github.com/heibaiying/Spring-All-In-One/tree/master/spring/spring-mybatis)<br/>[spring-mybatis-annotation](https://github.com/heibaiying/Spring-All-In-One/tree/master/spring/mybatis-annotation) | spring 整合 mybatis                                          | [mybatis-spring中文文档](http://www.mybatis.org/spring/zh/index.html) |
-| spring-druid-mybtais<br/>spring-druid-mybtais-annotation     | spring 整合druid、mybatis                                    |                                                              |
-| spring-druid-redis<br/>spring-druid-redis-annotation         | spring 整合 redis                                            |                                                              |
-| spring-druid-mongodb<br/>spring-druid-mongodb-annotation     | spring 整合 mongodb                                          |                                                              |
-| spring-druid-memcached<br/>spring-druid-memcached-annotation | spring 整合 memcached                                        |                                                              |
-| spring-druid-rabbitmq<br/>spring-druid-rabbitmq-annotation   | spring 整合 rabbitmq                                         |                                                              |
-| spring-druid-kafka<br/>spring-druid-kafka-annotation         | spring 整合 kafka                                            |                                                              |
-| spring-druid-dubbo<br/>spring-druid-dubbo-annotation         | spring 整合 dubbo                                            |                                                              |
-| spring-druid-websocket<br/>spring-druid-websocket-annotation | spring 整合 websocket                                        |                                                              |
-| spring-druid-netty<br/>spring-druid-netty-annotation         | spring 整合 netty                                            |                                                              |
-| spring-druid-scheduled<br/>spring-druid-scheduled-annotation | spring 定时任务                                              |                                                              |
+| [springmvc-base](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring/springmvc-base)<br/>[springmvc-base-annotation](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring/springmvc-base-annotation) | springmvc基础、参数绑定、参数转换、数据校验、<br/>全局异常处理、 文件上传下载、jsp视图 | [spring mvc ](https://docs.spring.io/spring/docs/5.1.3.RELEASE/spring-framework-reference/web.html#mvc) |
+| [spring-jdbc](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring/spring-jdbc)<br/>[spring-jdbc-annotation](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring/spring-jdbc-annotation) | spring jdbc-template 的使用                                  | [Using JdbcTemplat](https://docs.spring.io/spring/docs/5.1.3.RELEASE/spring-framework-reference/data-access.html#jdbc-JdbcTemplate) |
+| [spring-mybatis](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring/spring-mybatis)<br/>[spring-mybatis-annotation](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring/mybatis-annotation) | spring 整合 mybatis                                          | [mybatis-spring中文文档](http://www.mybatis.org/spring/zh/index.html) |
+| [spring-druid-mybatis](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring/spring-druid-mybatis)<br/>[spring-druid-mybatis-annotation](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring/spring-druid-mybatis-annotation) | spring 整合druid、mybatis                                    | [alibaba druid](https://github.com/alibaba/druid/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98) |
+| spring-redis<br/>spring-redis-annotation                     | spring 整合 redis                                            |                                                              |
+| spring-mongodb<br/>spring-mongodb-annotation                 | spring 整合 mongodb                                          |                                                              |
+| spring-memcached<br/>spring-memcached-annotation             | spring 整合 memcached                                        |                                                              |
+| spring-rabbitmq<br/>spring-rabbitmq-annotation               | spring 整合 rabbitmq                                         |                                                              |
+| spring-kafka<br/>spring-kafka-annotation                     | spring 整合 kafka                                            |                                                              |
+| spring-dubbo<br/>spring-dubbo-annotation                     | spring 整合 dubbo                                            |                                                              |
+| spring-websocket<br/>spring-websocket-annotation             | spring 整合 websocket                                        |                                                              |
+| spring-netty<br/>spring-netty-annotation                     | spring 整合 netty                                            |                                                              |
+| spring-scheduled<br/>spring-scheduled-annotation             | spring 定时任务                                              |                                                              |
 
 <br/>
 

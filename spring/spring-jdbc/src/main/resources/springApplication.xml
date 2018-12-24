@@ -14,15 +14,15 @@
     <!--配置数据源-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <!--Mysql 配置-->
-        <!--<property name="driverClassName" value="${mysql.driverClassName}"/>
+        <property name="driverClassName" value="${mysql.driverClassName}"/>
         <property name="url" value="${mysql.url}"/>
         <property name="username" value="${mysql.username}"/>
-        <property name="password" value="${mysql.password}"/>-->
+        <property name="password" value="${mysql.password}"/>
         <!--Oracle 配置-->
-        <property name="driverClassName" value="${oracle.driverClassName}"/>
+        <!--<property name="driverClassName" value="${oracle.driverClassName}"/>
         <property name="url" value="${oracle.url}"/>
         <property name="username" value="${oracle.username}"/>
-        <property name="password" value="${oracle.password}"/>
+        <property name="password" value="${oracle.password}"/>-->
     </bean>
 
     <!--配置 jdbcTemplate -->

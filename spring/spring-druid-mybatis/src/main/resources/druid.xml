@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+
+    <!--指定配置文件的位置-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <!--配置druid数据源 关于更多的配置项 可以参考官方文档 <a src="https://github.com/alibaba/druid/wiki/DruidDataSource%E9%85%8D%E7%BD%AE%E5%B1%9E%E6%80%A7%E5%88%97%E8%A1%A8" > -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <!-- 基本属性 url、user、password -->
+        <property name="url" value="${mysql.url}"/>
+        <property name="username" value="${mysql.username}"/>
+        <property name="password" value="${mysql.password}"/>
+
+        <!-- 配置初始化大小、最小、最大连连接数量 -->
+        <property name="initialSize" value="5"/>
+        <property name="minIdle" value="10"/>
+        <property name="maxActive" value="20"/>
+
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="60000"/>
+
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="2000"/>
+
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="600000"/>
+        <!-- 配置一个连接在池中最大生存的时间，单位是毫秒 -->
+        <property name="maxEvictableIdleTimeMillis" value="900000"/>
+
+        <!--validationQuery 用来检测连接是否有效的sql，要求是一个查询语句，常用select 'x'。
+            但是在 oracle 数据库下需要写成 select 'x' from dual 不然实例化数据源的时候就会失败,
+            这是由于oracle 和 mysql 语法间的差异造成的-->
+        <property name="validationQuery" value="select 'x'"/>
+        <!--建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，
+        如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。-->
+        <property name="testWhileIdle" value="true"/>
+        <!--申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。-->
+        <property name="testOnBorrow" value="false"/>
+        <!--归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。-->
+        <property name="testOnReturn" value="false"/>
+
+        <!--连接池中的minIdle数量以内的连接，空闲时间超过minEvictableIdleTimeMillis，则会执行keepAlive操作。-->
+        <property name="keepAlive" value="true"/>
+        <property name="phyMaxUseCount" value="100000"/>
+
+        <!-- 配置监控统计拦截的filters Druid连接池的监控信息主要是通过StatFilter 采集的，
+        采集的信息非常全面，包括SQL执行、并发、慢查、执行时间区间分布等-->
+        <property name="filters" value="stat"/>
+    </bean>
+
+
+</beans>

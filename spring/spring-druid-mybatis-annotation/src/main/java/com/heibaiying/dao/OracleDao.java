@@ -9,7 +9,7 @@ import java.util.List;
  * @author : heibaiying
  * @description :
  */
-
+@Mapper
 public interface OracleDao {
 
     List<Flow> queryById(long id);

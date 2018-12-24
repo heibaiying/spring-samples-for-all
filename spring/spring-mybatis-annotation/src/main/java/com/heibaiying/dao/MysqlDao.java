@@ -10,7 +10,7 @@ import java.util.List;
  * @description :
  */
 
-@Mapper
+
 public interface MysqlDao {
 
     List<Relation> queryById(String id);

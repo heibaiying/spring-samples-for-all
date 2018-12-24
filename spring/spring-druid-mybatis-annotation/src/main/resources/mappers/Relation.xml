@@ -1,0 +1,14 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heibaiying.dao.MysqlDao">
+
+
+    <select id="queryById" resultType="com.heibaiying.bean.Relation">
+        SELECT help_keyword_id AS id,name
+        FROM HELP_KEYWORD
+        WHERE HELP_KEYWORD_ID = #{id}
+    </select>
+
+</mapper>
