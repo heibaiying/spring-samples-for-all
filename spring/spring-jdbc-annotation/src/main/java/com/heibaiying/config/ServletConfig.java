@@ -19,14 +19,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @ComponentScan(basePackages = {"com.heibaiying.*"})
 public class ServletConfig implements WebMvcConfigurer {
 
-    @Autowired
-    private DataSourceConfig sourceConfig;
-
     /**
      * 配置数据源
      */
     @Bean
-    public DriverManagerDataSource dataSource() {
+    public DriverManagerDataSource dataSource(DataSourceConfig sourceConfig) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(sourceConfig.getDriverClassName());
         dataSource.setUrl(sourceConfig.getUrl());
@@ -53,9 +50,9 @@ public class ServletConfig implements WebMvcConfigurer {
      * 定义事务管理器
      */
     @Bean
-    public DataSourceTransactionManager transactionManager() {
+    public DataSourceTransactionManager transactionManager(DriverManagerDataSource dataSource) {
         DataSourceTransactionManager manager = new DataSourceTransactionManager();
-        manager.setDataSource(dataSource());
+        manager.setDataSource(dataSource);
         return manager;
     }
 

@@ -2,14 +2,10 @@ package com.heibaiying.config;
 
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;;
-import org.springframework.context.annotation.DependsOn;
-import org.springframework.core.annotation.Order;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -26,19 +22,23 @@ import java.io.IOException;
 @ComponentScan(basePackages = {"com.heibaiying.*"})
 public class ServletConfig implements WebMvcConfigurer {
 
-    @Autowired
-    private DataSourceConfig sourceConfig;
+    /* @Autowired
+     * private DataSourceConfig sourceConfig;
+     * 不要采用这种方式注入DataSourceConfig,由于类的加载顺序影响会报空指针异常
+     * 最好的方式是在DriverManagerDataSource构造中采用参数注入
+     */
 
     /**
      * 配置数据源
+     * sourceConfig
      */
     @Bean
-    public DriverManagerDataSource dataSource() {
+    public DriverManagerDataSource dataSource(DataSourceConfig sourceConfig) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/mysql");
-        dataSource.setUsername("root");
-        dataSource.setPassword("root");
+        dataSource.setDriverClassName(sourceConfig.getDriverClassName());
+        dataSource.setUrl(sourceConfig.getUrl());
+        dataSource.setUsername(sourceConfig.getUsername());
+        dataSource.setPassword(sourceConfig.getPassword());
         return dataSource;
     }
 
@@ -74,9 +74,9 @@ public class ServletConfig implements WebMvcConfigurer {
      * 定义事务管理器
      */
     @Bean
-    public DataSourceTransactionManager transactionManager() {
+    public DataSourceTransactionManager transactionManager(DriverManagerDataSource dataSource) {
         DataSourceTransactionManager manager = new DataSourceTransactionManager();
-        manager.setDataSource(dataSource());
+        manager.setDataSource(dataSource);
         return manager;
     }
 

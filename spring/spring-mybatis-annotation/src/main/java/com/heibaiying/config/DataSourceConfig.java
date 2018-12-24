@@ -1,11 +1,9 @@
 package com.heibaiying.config;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.annotation.Order;
 
 /**
  * @author : heibaiying
@@ -15,7 +13,6 @@ import org.springframework.core.annotation.Order;
 @Configuration
 @PropertySource(value = "classpath:mysql.properties")
 @Data
-@NoArgsConstructor
 public class DataSourceConfig {
 
     /**
