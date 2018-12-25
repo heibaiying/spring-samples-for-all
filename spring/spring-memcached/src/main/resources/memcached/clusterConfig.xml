@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean name="memcachedClientBuilder" class="net.rubyeye.xmemcached.XMemcachedClientBuilder">
+        <!--memcached servers 节点列表-->
+        <constructor-arg name="addressList">
+            <list>
+                <bean class="java.net.InetSocketAddress">
+                    <constructor-arg value="192.168.200.201"/>
+                    <constructor-arg value="11211"/>
+                </bean>
+                <bean class="java.net.InetSocketAddress">
+                    <constructor-arg value="192.168.200.201"/>
+                    <constructor-arg value="11212"/>
+                </bean>
+            </list>
+        </constructor-arg>
+        <!--与servers对应的节点的权重-->
+        <constructor-arg name="weights">
+            <list>
+                <value>1</value>
+                <value>2</value>
+            </list>
+        </constructor-arg>
+        <!--连接池大小-->
+        <property name="connectionPoolSize" value="10"/>
+        <!--协议工厂-->
+        <property name="commandFactory">
+            <bean class="net.rubyeye.xmemcached.command.TextCommandFactory"/>
+        </property>
+        <!--分布策略，一致性哈希net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator或者ArraySessionLocator(默认)-->
+        <property name="sessionLocator">
+            <bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator"/>
+        </property>
+        <!--序列化转换器，默认使用net.rubyeye.xmemcached.transcoders.SerializingTranscoder-->
+        <property name="transcoder">
+            <bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder"/>
+        </property>
+    </bean>
+    <!-- 集群配置 实例化bean -->
+    <bean name="memcachedClientForCulster" factory-bean="memcachedClientBuilder"
+          factory-method="build" destroy-method="shutdown"/>
+</beans>

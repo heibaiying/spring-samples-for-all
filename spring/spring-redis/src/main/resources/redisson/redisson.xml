@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:redisson="http://redisson.org/schema/redisson"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://redisson.org/schema/redisson
+       http://redisson.org/schema/redisson/redisson.xsd">
+
+
+    <redisson:client>
+        <!--关于配置说明见官方文档 2.6.2. 通过JSON、YAML和Spring XML文件配置单节点模式
+         <a src="https://github.com/redisson/redisson/wiki/2.-%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95#26-%E5%8D%95redis%E8%8A%82%E7%82%B9%E6%A8%A1%E5%BC%8F"> -->
+        <redisson:single-server
+                address="redis://127.0.0.1:6379"
+                idle-connection-timeout="10000"
+                ping-timeout="1000"
+                connect-timeout="10000"
+                timeout="3000"
+                retry-attempts="3"
+                retry-interval="1500"
+                connection-minimum-idle-size="10"
+                connection-pool-size="64"
+                database="0"
+        />
+    </redisson:client>
+
+</beans>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--jedis 连接单机redis-->
+    <import resource="classpath:jedis/jedis.xml"/>
+
+    <!--jedis 连接集群redis-->
+    <!--<import resource="classpath:jedis/jedisCluster.xml"/>-->
+
+    <!--redisson 连接单机redis-->
+    <import resource="classpath:redisson/redisson.xml"/>
+
+    <!--redisson 连接集群redis-->
+   <!--<import resource="classpath:redisson/redissonCluster.xml"/>-->
+
+</beans>
