@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation=
+               "http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context.xsd
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/rabbit
+          http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
+
+    <context:property-placeholder location="rabbitmq.properties"/>
+
+    <!--声明连接工厂-->
+    <rabbit:connection-factory id="connectionFactory"
+                               addresses="${rabbitmq.addresses}"
+                               username="${rabbitmq.username}"
+                               password="${rabbitmq.password}"
+                               virtual-host="${rabbitmq.virtualhost}"/>
+
+    <!--创建一个管理器（org.springframework.amqp.rabbit.core.RabbitAdmin），用于管理交换，队列和绑定。
+    auto-startup 指定是否自动声明上下文中的队列,交换和绑定, 默认值为true。-->
+    <rabbit:admin connection-factory="connectionFactory" auto-startup="true"/>
+
+    <!--声明 template 的时候需要声明id 不然会抛出异常-->
+    <rabbit:template id="rabbitTemplate" connection-factory="connectionFactory"/>
+
+
+    <!--可以在xml采用如下方式声明交换机、队列、绑定管理 但是建议使用代码方式声明 方法更加灵活且可以采用链调用-->
+    <rabbit:queue name="remoting.queue"/>
+
+    <rabbit:direct-exchange name="remoting.exchange">
+        <rabbit:bindings>
+            <rabbit:binding queue="remoting.queue" key="remoting.binding"/>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+
+    <!--扫描rabbit包 自动声明交换器、队列、绑定关系-->
+    <context:component-scan base-package="com.heibaiying.rabbit"/>
+
+</beans>
