@@ -33,6 +33,7 @@ manifest.yml
 overridedb.*
 settings.xml
 target
+classes
 out
 transaction-logs
 .flattened-pom.xml

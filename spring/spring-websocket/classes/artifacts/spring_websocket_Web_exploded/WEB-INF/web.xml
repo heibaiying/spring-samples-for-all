@@ -21,7 +21,6 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <!--处理乱码-->
     <filter>
         <filter-name>characterEncodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
