@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--开启后允许使用Spring AOP的@AspectJ注解 如果是纯xml配置 可以不用开启这个声明-->
+    <aop:aspectj-autoproxy/>
+
+    <!-- 1.配置目标对象 -->
+    <bean name="orderService" class="com.heibaiying.service.OrderServiceImpl"/>
+    <!-- 2.声明切面 -->
+    <bean name="myAdvice" class="com.heibaiying.advice.CustomAdvice"/>
+    <!-- 3.配置将通知织入目标对象 -->
+    <aop:config>
+        <!--命名切入点 关于切入点更多表达式写法可以参见README.md-->
+        <aop:pointcut expression="execution(* com.heibaiying.service.OrderService.*(..))" id="cutPoint"/>
+        <aop:aspect ref="myAdvice">
+            <!-- 前置通知 -->
+            <aop:before method="before" pointcut-ref="cutPoint"/>
+            <!-- 后置通知 如果需要拿到返回值 则要指明返回值对应的参数名称-->
+            <aop:after-returning method="afterReturning" pointcut-ref="cutPoint" returning="result"/>
+            <!-- 环绕通知 -->
+            <aop:around method="around" pointcut-ref="cutPoint"/>
+            <!-- 后置异常 如果需要拿到异常 则要指明异常对应的参数名称 -->
+            <aop:after-throwing method="afterException" pointcut-ref="cutPoint" throwing="exception"/>
+            <!-- 最终通知 -->
+            <aop:after method="after" pointcut-ref="cutPoint"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
