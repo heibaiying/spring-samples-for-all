@@ -22,6 +22,6 @@ public class AopTest {
     @Test
     public void save() {
         orderService.createOrder(1283929319L, "手机");
-        //orderService.queryOrder(4891894129L);
+        orderService.queryOrder(4891894129L);
     }
 }

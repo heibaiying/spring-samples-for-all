@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @author : heibaiying
  * @description : 自定义切面
  */
-@Order(1)
+@Order(2)
 @Aspect
 @Component
 public class SecondAdvice {

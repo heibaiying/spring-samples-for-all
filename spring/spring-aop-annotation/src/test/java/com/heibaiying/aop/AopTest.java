@@ -25,9 +25,13 @@ public class AopTest {
     @Test
     public void saveAndQuery() {
         orderService.createOrder(1283929319L, "手机");
-        //orderService.queryOrder(4891894129L);
+        orderService.queryOrder(4891894129L);
     }
 
+    /**
+     * 多个切面作用于同一个切入点时，可以用@Order指定切面的执行顺序
+     * 优先级高的切面在切入方法前执行的通知(before)会优先执行，但是位于方法后执行的通知(after,afterReturning)反而会延后执行
+     */
     @Test
     public void delete() {
         orderService.deleteOrder(12793179L);
