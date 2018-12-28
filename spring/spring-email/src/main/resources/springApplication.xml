@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+    <!-- 开启注解包扫描-->
+    <context:component-scan base-package="com.heibaiying.email"/>
+
+    <!--在这里可以声明不同的邮件服务器主机，通常是SMTP主机,而具体的用户名和时授权码则建议在业务中从数据库查询-->
+    <bean id="qqMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <!--qq 邮箱配置 <a href="https://service.mail.qq.com/cgi-bin/help?subtype=1&no=167&id=28"> -->
+        <property name="host" value="smtp.qq.com"/>
+        <property name="port" value="587"/>
+    </bean>
+
+    <!--配置模板引擎-->
+    <bean id="resourceLoader" class="org.beetl.core.resource.ClasspathResourceLoader">
+        <!--指定加载模板资源的位置 指定在classpath:beetl下-->
+        <constructor-arg name="root" value="beetl"/>
+    </bean>
+    <!--beetl 配置  这里采用默认的配置-->
+    <bean id="configuration" class="org.beetl.core.Configuration" init-method="defaultConfiguration"/>
+    <bean id="groupTemplate" class="org.beetl.core.GroupTemplate">
+        <constructor-arg name="loader" ref="resourceLoader"/>
+        <constructor-arg name="conf" ref="configuration"/>
+    </bean>
+
+</beans>
