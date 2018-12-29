@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>spring-dubbo</artifactId>
+        <groupId>com.heibaiying</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>dubbo-provider</artifactId>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.heibaiying</groupId>
+            <artifactId>dubbo-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <!-- compile 默认值 表示被依赖项目需要参与当前项目的编译，还有后续的测试，
+            运行周期也参与其中，是一个比较强的依赖。打包的时候通常需要包含进去-->
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+</project>
