@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>thymeleaf模板引擎</title>
+</head>
+<body>
+    <ul th:each="programmer:${programmers}">
+        <li>
+            姓名:<span th:text="${programmer.name}"></span>
+            薪水:<span th:text="${programmer.salary}"></span>
+        </li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,18 @@
+# 字符串默认不用加上单引号或者双引号,但是如果字符串之中包含空格或特殊字符，需要放在引号之中。
+#  ""：双引号；双引号不会对特殊字符转义
+#  ''：单引号；会进行转义
+
+programmer:
+  name: xiaoming-PROD
+  age: 23
+  married: false
+  hireDate: 2018/12/23
+  salary: 66666.88
+  random: ${random.int[1024,65536]}
+  skill: {java: master, jquery: proficiency}
+  company: [baidu,tengxun,alibaba]
+  school:
+    name: unviersity
+    location: shanghai
+
+

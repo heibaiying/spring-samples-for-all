@@ -46,28 +46,24 @@ spring-cloud：Finchley.SR2
 
 ## 2. spring-boot samples
 
-| samples                     | 描述                           | 官方文档                                                     |
-| --------------------------- | ------------------------------ | ------------------------------------------------------------ |
-| spring-boot-base            | spring-boot 基础               | [spring boot 官方文档](https://docs.spring.io/spring-boot/docs/2.1.1.RELEASE/reference/htmlsingle/) |
-| spring-boot-aop             | spring aop                     |                                                              |
-| spring-boot-cache           | spring-boot 缓存               |                                                              |
-| spring-boot-profile         | spring 场景切换                |                                                              |
-| spring-boot-servlet         | 整合servlet 3.0                |                                                              |
-| spring-boot-test            | spring-boot 单元测试           |                                                              |
-| spring-boot-jpa             | spring-boot jpa 的使用         |                                                              |
-| spring-boot-freemarker      | freemarker 的使用              |                                                              |
-| spring-boot-jsp             | spring-boot 整合 jsp           |                                                              |
-| spring-boot-mybatis         | spring-boot 整合 mybatis       |                                                              |
-| spring-boot-druid-mybtais   | spring-boot 整合druid、mybatis |                                                              |
-| spring-boot-druid-redis     | spring-boot 整合 redis         |                                                              |
-| spring-boot-druid-mongodb   | spring-boot 整合 mongodb       |                                                              |
-| spring-boot-druid-memcached | spring-boot 整合 memcached     |                                                              |
-| spring-boot-druid-rabbitmq  | spring-boot 整合 rabbitmq      |                                                              |
-| spring-boot-druid-kafka     | spring-boot 整合 kafka         |                                                              |
-| spring-boot-druid-dubbo     | spring-boot 整合 dubbo         |                                                              |
-| spring-boot-druid-websocket | spring-boot 整合 websocket     |                                                              |
-| spring-boot-druid-netty     | spring-boot 整合 netty         |                                                              |
-| spring-boot-druid-scheduled | spring-boot 定时任务           |                                                              |
+| samples                 | 描述                           | 官方文档                                                     |
+| ----------------------- | ------------------------------ | ------------------------------------------------------------ |
+| spring-boot-base        | spring-boot 基础               | [spring boot 官方文档](https://docs.spring.io/spring-boot/docs/2.1.1.RELEASE/reference/htmlsingle/)<br>[spring boot 中文官方文档](https://www.breakyizhan.com/springboot/3028.html) |
+| spring-boot-cache       | spring-boot 缓存               |                                                              |
+| spring-boot-yml-profile | yml 语法和多配置切换           |                                                              |
+| spring-boot-servlet     | 整合servlet 3.0                |                                                              |
+| spring-boot-jpa         | spring-boot jpa 的使用         |                                                              |
+| spring-boot-jsp         | spring-boot 整合 jsp           |                                                              |
+| spring-boot-mybatis     | spring-boot 整合 mybatis       |                                                              |
+| spring-boot-mybtais     | spring-boot 整合druid、mybatis |                                                              |
+| spring-boot-redis       | spring-boot 整合 redis         |                                                              |
+| spring-boot-mongodb     | spring-boot 整合 mongodb       |                                                              |
+| spring-boot-memcached   | spring-boot 整合 memcached     |                                                              |
+| spring-boot-rabbitmq    | spring-boot 整合 rabbitmq      |                                                              |
+| spring-boot-kafka       | spring-boot 整合 kafka         |                                                              |
+| spring-boot-dubbo       | spring-boot 整合 dubbo         |                                                              |
+| spring-boot-websocket   | spring-boot 整合 websocket     |                                                              |
+| spring-boot-email       | spring-boot 邮件发送           |                                                              |
 
 更多的场景和用例可参阅 [spring-boot 官方samples ](https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples)
 

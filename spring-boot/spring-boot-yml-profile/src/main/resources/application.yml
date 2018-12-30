@@ -1,0 +1,13 @@
+# 指定启动的配置
+spring:
+  profiles:
+    active: dev
+
+# 配置的补充与优先级 在dev中没有配置age,所以会采用主配置的，在prod中配置dev,会按照精确优先，使用dev中的配置
+# 更多配置的优先级可以查看项目的README.md
+programmer:
+  age: 999
+
+
+
+
