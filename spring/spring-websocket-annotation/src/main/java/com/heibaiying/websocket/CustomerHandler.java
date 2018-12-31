@@ -23,6 +23,7 @@ public class CustomerHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session)  {
         String username = getNameFromSession(session);
+        //这个方法是线程不安全的
         nameAndSession.putIfAbsent(username, session);
     }
 

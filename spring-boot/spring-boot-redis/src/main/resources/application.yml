@@ -1,0 +1,9 @@
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    # 默认采用的也是 0 号数据库 redis官方在4.0之后版本就不推荐采用单节点多数据库(db1-db15)的方式存储数据，如果有需要应该采用集群方式构建
+    database: 0
+
+# 如果是集群节点 采用如下配置指定节点
+#spring.redis.cluster.nodes
