@@ -1,0 +1,18 @@
+spring:
+  rabbitmq:
+    addresses: 192.168.0.108:5672
+    # RabbitMQ 默认的用户名和密码都是guest 而虚拟主机名称是 "/"
+    # 如果配置其他虚拟主机地址，需要预先用管控台或者图形界面创建 图形界面地址 http://主机地址:15672
+    username: admin
+    password: admin
+    virtual-host: my_vhost
+    # 是否启用发布者确认 具体确认回调实现见代码
+    publisher-confirms: true
+    # 是否启用发布者返回 具体返回回调实现见代码
+    publisher-returns: true
+    # 是否启用强制消息 保证消息的有效监听
+    template.mandatory: true
+
+server:
+  port: 8090
+

@@ -1,0 +1,17 @@
+spring:
+  rabbitmq:
+    addresses: 192.168.0.108:5672
+    # RabbitMQ 默认的用户名和密码都是guest 而虚拟主机名称是 "/"
+    # 如果配置其他虚拟主机地址，需要预先用管控台或者图形界面创建 图形界面地址 http://主机地址:15672
+    username: admin
+    password: admin
+    virtual-host: my_vhost
+    listener:
+      simple:
+        # 签收模式设置为手工签收
+        acknowledge-mode: manual
+        # 侦听器调用者线程的最小数量
+        concurrency: 10
+        # 侦听器调用者线程的最大数量
+        max-concurrency: 50
+
