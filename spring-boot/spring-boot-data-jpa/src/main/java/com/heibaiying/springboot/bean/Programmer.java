@@ -19,7 +19,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity                      // 表示该类是一个数据库表映射实体
-@Table(name = "programmer") // 指明对应的数据库表的名称 不指定的默认就是类名
+@Table(name = "programmer")  // 指明对应的数据库表的名称 不指定的默认就是类名
 public class Programmer {
 
     /* AUTO:     默认值,主键由程序控制
@@ -40,6 +40,7 @@ public class Programmer {
     private float salary;
 
     private Date birthday;
+
 
     public Programmer(String name, int age, float salary, Date birthday) {
         this.name = name;

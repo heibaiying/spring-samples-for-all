@@ -5,10 +5,8 @@ spring:
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-      hibernate:
-        # ±íÓëÊµÌå²»Ò»ÑùÊ±ºò,»áÏàÓ¦µÄ¸üĞÂÊı¾İ¿âÖĞµÄ±í½á¹¹£¬µ«ÊÇ´æÔÚ±íÖĞÔ­ÏÈµÄÖµ²»»áÉ¾³ı
-        ddl-auto: update
-      # HibernateÄ¬ÈÏ´´½¨µÄ±íÊÇmyisamÒıÇæ£¬¿ÉÒÔÓÃÒÔÏÂ·½Ê½Ö¸¶¨ÎªÄ¬ÈÏÊ¹ÓÃinnodb´´½¨±í
-      database-platform: org.hibernate.dialect.MySQL57Dialect
-      show-sql: true
-
+    hibernate:
+      ddl-auto: update
+    #Hibernateé»˜è®¤åˆ›å»ºçš„è¡¨æ˜¯myisamå¼•æ“ï¼Œå¯ä»¥ç”¨ä»¥ä¸‹æ–¹å¼æŒ‡å®šä¸ºä½¿ç”¨innodbåˆ›å»ºè¡¨
+    database-platform: org.hibernate.dialect.MySQL57Dialect
+    show-sql: true
