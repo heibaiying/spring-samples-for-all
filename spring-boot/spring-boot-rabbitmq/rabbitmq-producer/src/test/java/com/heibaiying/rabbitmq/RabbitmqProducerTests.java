@@ -21,6 +21,9 @@ public class RabbitmqProducerTests {
     @Autowired
     private RabbitmqProducer producer;
 
+    /***
+     * 发送消息体为简单数据类型的消息
+     */
     @Test
     public void send() {
         Map<String, Object> heads = new HashMap<>();
@@ -31,6 +34,9 @@ public class RabbitmqProducerTests {
     }
 
 
+    /***
+     * 发送消息体为bean的消息
+     */
     @Test
     public void sendBean() {
         String id = String.valueOf(Math.round(Math.random() * 10000));
