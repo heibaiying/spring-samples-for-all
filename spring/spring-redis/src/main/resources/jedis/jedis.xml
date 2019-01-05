@@ -22,7 +22,7 @@
         <constructor-arg name="timeout" value="${redis.timeout}"/>
     </bean>
 
-    <!--把 jedis 创建与销毁交给spring 来管理 这个类建议声明为非单例模式 不然每次获得的就是同一个链接-->
-    <bean id="jedis" factory-bean="jedisPool" factory-method="getResource" destroy-method="close" scope="prototype"/>
+    <!--把 jedis 创建与销毁交给spring 来管理-->
+    <bean id="jedis" factory-bean="jedisPool" factory-method="getResource" destroy-method="close"/>
 
 </beans>

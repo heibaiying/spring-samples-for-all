@@ -28,7 +28,6 @@ public class SingleJedisConfig {
     }
 
     @Bean(destroyMethod = "close")
-    @Scope(value = SCOPE_PROTOTYPE)
     public Jedis jedis(JedisPool jedisPool) {
         return jedisPool.getResource();
     }

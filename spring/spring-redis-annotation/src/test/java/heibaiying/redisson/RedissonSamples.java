@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author : heibaiying
- * @description :redisson 操作普通对象
+ * @description :redisson 操作普通数据类型
  */
 
 
