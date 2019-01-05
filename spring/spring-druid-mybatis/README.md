@@ -106,6 +106,8 @@
 </project>
 ```
 
+<br/>
+
 #### 2、在web.xml 进行如下配置
 
 ```xml
@@ -175,6 +177,8 @@
 </web-app>
 ```
 
+<br/>
+
 #### 3、在resources文件夹下新建数据库配置文件jdbc.properties
 
 ```properties
@@ -188,6 +192,8 @@ oracle.url=jdbc:oracle:thin:@//IP地址:端口号/数据库实例名
 oracle.username=用户名
 oracle.password=密码
 ```
+
+<br/>
 
 #### 4、在resources文件夹下创建springApplication.xml 配置文件和druid.xml配置文件 
 
@@ -302,6 +308,8 @@ oracle.password=密码
 </beans>
 ```
 
+<br/>
+
 #### 5、新建mybtais 配置文件 更多settings配置项可以参考[官方文档](http://www.mybatis.org/mybatis-3/zh/configuration.html)
 
 ```xml
@@ -324,6 +332,8 @@ oracle.password=密码
 <!--更多settings配置项可以参考官方文档: <a href="http://www.mybatis.org/mybatis-3/zh/configuration.html"/>-->
 
 ```
+
+<br/>
 
 #### 6、新建查询接口及其对应的mapper文件
 
@@ -371,6 +381,8 @@ public interface OracleDao {
 
 </mapper>
 ```
+
+<br/>
 
 #### 7.新建测试controller进行测试
 
@@ -432,6 +444,8 @@ public class OracleController {
 }
 
 ```
+
+<br/>
 
 #### 8、druid 监控页面访问地址http://localhost:8080/druid/index.html
 
