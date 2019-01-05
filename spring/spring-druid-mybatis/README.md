@@ -1,6 +1,6 @@
 # spring +druid+ mybatis（xml配置方式）
 
-### 1、创建标准web maven工程，导入依赖
+#### 1、创建标准web maven工程，导入依赖
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -106,7 +106,7 @@
 </project>
 ```
 
-### 2、在web.xml 进行如下配置
+#### 2、在web.xml 进行如下配置
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -175,7 +175,7 @@
 </web-app>
 ```
 
-### 3、在resources文件夹下新建数据库配置文件jdbc.properties
+#### 3、在resources文件夹下新建数据库配置文件jdbc.properties
 
 ```properties
 # mysql 数据库配置
@@ -189,7 +189,7 @@ oracle.username=用户名
 oracle.password=密码
 ```
 
-### 4、在resources文件夹下创建springApplication.xml 配置文件和druid.xml配置文件
+#### 4、在resources文件夹下创建springApplication.xml 配置文件和druid.xml配置文件 
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -302,7 +302,7 @@ oracle.password=密码
 </beans>
 ```
 
-### 5、新建mybtais 配置文件 更多settings配置项可以参考[官方文档](http://www.mybatis.org/mybatis-3/zh/configuration.html)
+#### 5、新建mybtais 配置文件 更多settings配置项可以参考[官方文档](http://www.mybatis.org/mybatis-3/zh/configuration.html)
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -325,7 +325,7 @@ oracle.password=密码
 
 ```
 
-### 6、新建查询接口及其对应的mapper文件
+#### 6、新建查询接口及其对应的mapper文件
 
 ```java
 public interface MysqlDao {
@@ -372,7 +372,7 @@ public interface OracleDao {
 </mapper>
 ```
 
-### 7.新建测试controller进行测试
+#### 7.新建测试controller进行测试
 
 ```java
 package com.heibaiying.controller;
@@ -433,6 +433,6 @@ public class OracleController {
 
 ```
 
-### 8、druid 监控页面访问地址http://localhost:8080/druid/index.html
+#### 8、druid 监控页面访问地址http://localhost:8080/druid/index.html
 
 ![druid控制台](https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/druid%E6%8E%A7%E5%88%B6%E5%8F%B0.png)
