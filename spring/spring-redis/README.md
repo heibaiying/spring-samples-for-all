@@ -281,7 +281,7 @@ public class JedisClusterSamples {
     <!-- 最基本配置 -->
     <redisson:client>
         <!--集群更多配置参数见官方文档 2.4.2 通过JSON、YAML和Spring XML文件配置集群模式
-         <a src="https://github.com/redisson/redisson/wiki/2.-%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95#24-%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F"> -->
+         <a href="https://github.com/redisson/redisson/wiki/2.-%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95#24-%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F"> -->
         <redisson:cluster-servers>
             <redisson:node-address value="redis://127.0.0.1:6379"/>
             <redisson:node-address value="redis://127.0.0.1:6380"/>
