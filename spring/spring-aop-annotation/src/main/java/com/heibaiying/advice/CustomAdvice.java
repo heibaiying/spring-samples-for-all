@@ -34,6 +34,7 @@ public class CustomAdvice {
         System.out.println(name + "方法调用前：获取调用参数" + Arrays.toString(args));
     }
 
+    // returning 参数用于指定返回结果与哪一个参数绑定
     @AfterReturning(pointcut = "pointCut()", returning = "result")
     public void afterReturning(JoinPoint joinPoint, Object result) {
         System.out.println("后置返回通知结果" + result);
@@ -48,6 +49,7 @@ public class CustomAdvice {
         return proceed;
     }
 
+    // throwing 参数用于指定抛出的异常与哪一个参数绑定
     @AfterThrowing(pointcut = "pointCut()", throwing = "exception")
     public void afterThrowing(JoinPoint joinPoint, Exception exception) {
         System.err.println("后置异常通知:" + exception);

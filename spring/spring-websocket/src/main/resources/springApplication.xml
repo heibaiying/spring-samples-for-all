@@ -32,10 +32,10 @@
     </bean>
 
     <!--配置webSocket-->
-    <bean id="customerHandler" class="com.heibaiying.websocket.CustomerHandler"/>
+    <bean id="customHandler" class="com.heibaiying.websocket.CustomHandler"/>
     <websocket:handlers>
         <!--指定webSocket 地址-->
-        <websocket:mapping path="/socket" handler="customerHandler"/>
+        <websocket:mapping path="/socket" handler="customHandler"/>
         <!--webSocket握手-->
         <websocket:handshake-interceptors>
             <bean class="com.heibaiying.websocket.CustomHandshakeInterceptor"/>

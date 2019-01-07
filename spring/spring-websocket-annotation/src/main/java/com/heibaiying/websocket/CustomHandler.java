@@ -3,7 +3,6 @@ package com.heibaiying.websocket;
 import com.heibaiying.constant.Constant;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
@@ -16,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author : heibaiying
  * @description : 自定义消息处理类
  */
-public class CustomerHandler extends TextWebSocketHandler {
+public class CustomHandler extends TextWebSocketHandler {
 
     private Map<String, WebSocketSession> nameAndSession = new ConcurrentHashMap<>();
 
@@ -24,6 +23,7 @@ public class CustomerHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session)  {
         String username = getNameFromSession(session);
+        //这个方法是线程不安全的
         nameAndSession.putIfAbsent(username, session);
     }
 

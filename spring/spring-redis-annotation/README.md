@@ -24,7 +24,7 @@
 1. jedis和redisson的配置类和单元测试分别位于config和test下对应的包中，其中集群的配置类以cluster开头。
 2. 实体类Programmer.java用于测试Redisson序列化与反序列化
 
-![spring+redis+ano项目目录结构](D:\spring-samples-for-all\pictures\spring+redis+ano项目目录结构.png)
+![spring+redis+ano项目目录结构](D:\spring-samples-for-all\pictures\spring-redis-annotation.png)
 
 
 

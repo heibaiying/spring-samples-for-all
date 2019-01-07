@@ -11,7 +11,7 @@ import java.io.IOException;
 
 /**
  * @author : heibaiying
- * @description :
+ * @description : 邮件发送配置类
  */
 
 @Configuration

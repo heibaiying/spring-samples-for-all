@@ -17,7 +17,7 @@
         <property name="port" value="587"/>
     </bean>
 
-    <!--配置模板引擎-->
+    <!--配置beetle模板引擎-->
     <bean id="resourceLoader" class="org.beetl.core.resource.ClasspathResourceLoader">
         <!--指定加载模板资源的位置 指定在classpath:beetl下-->
         <constructor-arg name="root" value="beetl"/>

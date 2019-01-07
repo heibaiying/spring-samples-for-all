@@ -6,9 +6,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 
 /**
- * @author : 罗祥
+ * @author : heibaiying
  * @description : 编码过滤器 防止乱码
- * @date :create in 2018/12/27
  */
 @WebFilter(filterName = "characterEncodingFilter", urlPatterns = "/*",
         initParams = {

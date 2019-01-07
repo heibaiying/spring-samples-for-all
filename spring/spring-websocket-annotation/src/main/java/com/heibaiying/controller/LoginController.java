@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 
 /**
- * @author : 罗祥
+ * @author : heibaiying
  * @description : 简单登录
- * @date :create in 2018/12/27
  */
 @Controller
 public class LoginController {

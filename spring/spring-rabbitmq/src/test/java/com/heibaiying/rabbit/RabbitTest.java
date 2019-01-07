@@ -41,7 +41,7 @@ public class RabbitTest {
         Message message4 = new Message(notReceived.getBytes(), properties);
         rabbitTemplate.send("topic01", "quick.brown.fox", message4);
 
-        /*
+        /* 结果:
          * SecondQueue收到消息:我的路由键 quick.orange.rabbit 符合queue1 和 queue2 的要求，我应该被两个监听器接收到
          * FirstQueue收到消息:我的路由键 quick.orange.rabbit 符合queue1 和 queue2 的要求，我应该被两个监听器接收到
          * FirstQueue收到消息:我的路由键 quick.orange.fox 只符合queue1 的要求，只能被queue 1 接收到
