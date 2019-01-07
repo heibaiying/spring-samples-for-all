@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @author : heibaiying
@@ -15,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @EnableTransactionManagement // 开启声明式事务处理 等价于xml中<tx:annotation-driven/>
 @ComponentScan(basePackages = {"com.heibaiying.*"})
-public class ServletConfig implements WebMvcConfigurer {
+public class DatabaseConfig {
 
     /**
      * 配置数据源

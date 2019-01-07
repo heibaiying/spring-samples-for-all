@@ -1,112 +1,48 @@
-# spring +druid+ mybatis（注解配置方式）
+# spring +druid+ mybatis（注解方式）
 
-1、创建标准web maven工程，导入依赖
+### 项目目录结构
+
+![spring-druid-mybatis](D:\spring-samples-for-all\pictures\spring-druid-mybatis-annotation.png)
+
+#### 1、创建maven工程，除了Spring基本依赖外，还需要导入mybatis和druid的相关依赖
 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.heibaiying</groupId>
+<!--jdbc 相关依赖包-->
+<dependency>
+    <groupId>org.springframework</groupId>
     <artifactId>spring-jdbc</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <properties>
-        <spring-base-version>5.1.3.RELEASE</spring-base-version>
-    </properties>
-
-
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring-base-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>${spring-base-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring-base-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${spring-base-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring-base-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.4</version>
-            <scope>provided</scope>
-        </dependency>
-        <!--jdbc 相关依赖包-->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${spring-base-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.13</version>
-        </dependency>
-        <!--单元测试相关依赖包-->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${spring-base-version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc6</artifactId>
-            <version>11.2.0.3.0</version>
-        </dependency>
-        <!--mybatis 依赖包-->
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis-spring</artifactId>
-            <version>1.3.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.4.6</version>
-        </dependency>
-          <!--druid 依赖-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>1.1.12</version>
-        </dependency>
-    </dependencies>
-
-</project>
+    <version>${spring-base-version}</version>
+</dependency>
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.13</version>
+</dependency>
+<dependency>
+    <groupId>com.oracle</groupId>
+    <artifactId>ojdbc6</artifactId>
+    <version>11.2.0.3.0</version>
+</dependency>
+<!--mybatis 依赖包-->
+<dependency>
+    <groupId>org.mybatis</groupId>
+    <artifactId>mybatis-spring</artifactId>
+    <version>1.3.2</version>
+</dependency>
+<dependency>
+    <groupId>org.mybatis</groupId>
+    <artifactId>mybatis</artifactId>
+    <version>3.4.6</version>
+</dependency>
+<!--druid 依赖-->
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>druid</artifactId>
+    <version>1.1.12</version>
+</dependency>
 ```
 
-2、新建 DispatcherServletInitializer.java继承自AbstractAnnotationConfigDispatcherServletInitializer,等价于我们在web.xml中配置的前端控制器
+#### 2、新建 DispatcherServletInitializer.java继承自AbstractAnnotationConfigDispatcherServletInitializer,等价于我们在web.xml中配置的前端控制器
 
 ```java
 public class DispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -125,18 +61,11 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 }
 ```
 
-3、基础servlet 3.0的支持，可以采用注解的方式注册druid的servlet和filter 
+#### 3、基础servlet 3.0的支持，可以采用注解的方式注册druid的servlet和filter 
 
-​     注：关于servlet 注解支持可以查看[Servlet 规范文档](https://github.com/heibaiying/spring-samples-for-all/blob/master/referenced%20documents/Servlet3.1%E8%A7%84%E8%8C%83%EF%BC%88%E6%9C%80%E7%BB%88%E7%89%88%EF%BC%89.pdf)中**8.1小节 注解和可插拔性** 
+​     注：关于servlet 更多注解支持可以查看[Servlet 规范文档](https://github.com/heibaiying/spring-samples-for-all/blob/master/referenced%20documents/Servlet3.1%E8%A7%84%E8%8C%83%EF%BC%88%E6%9C%80%E7%BB%88%E7%89%88%EF%BC%89.pdf)中**8.1小节 注解和可插拔性** 
 
 ```java
-package com.heibaiying.config.druid;
-
-import com.alibaba.druid.support.http.StatViewServlet;
-
-import javax.servlet.annotation.WebInitParam;
-import javax.servlet.annotation.WebServlet;
-
 /**
  * @author : heibaiying
  * @description : 配置监控页面用户名密码
@@ -153,12 +82,6 @@ public class DruidStatViewServlet extends StatViewServlet {
 ```
 
 ```java
-package com.heibaiying.config.druid;
-
-import com.alibaba.druid.support.http.WebStatFilter;
-
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.annotation.WebInitParam;
 
 /**
  * @author : heibaiying
@@ -175,7 +98,7 @@ public class DruidStatFilter extends WebStatFilter {
 
 ```
 
-4、在resources文件夹下新建数据库配置文件mysql.properties、oracle.properties
+#### 4、在resources文件夹下新建数据库配置文件mysql.properties、oracle.properties
 
 ```properties
 # mysql 数据库配置
@@ -193,21 +116,9 @@ oracle.username=用户名
 oracle.password=密码
 ```
 
-5、在新建数据库配置映射类DataSourceConfig.java
+#### 5、在新建数据库配置映射类DataSourceConfig.java
 
 ```java
-package com.heibaiying.config;
-
-import lombok.Data;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-
-/**
- * @author : heibaiying
- * @description :
- */
-
 @Configuration
 @PropertySource(value = "classpath:mysql.properties")
 @Data
@@ -226,30 +137,9 @@ public class DataSourceConfig {
 
 ```
 
-6、新建ServletConfig.java，进行数据库相关配置
+#### 6、新建ServletConfig.java，进行数据库相关配置
 
 ```java
-package com.heibaiying.config;
-
-import com.alibaba.druid.pool.DruidDataSource;
-import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.mapper.MapperScannerConfigurer;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import java.io.IOException;
-import java.sql.SQLException;
-
-;
-
-
 /**
  * @author : heibaiying
  */
@@ -351,7 +241,7 @@ public class ServletConfig implements WebMvcConfigurer {
 
 ```
 
-7、新建mybtais 配置文件 更多settings配置项可以参考[官方文档](http://www.mybatis.org/mybatis-3/zh/configuration.html)
+#### 7、新建mybtais 配置文件，按需要进行额外参数配置， 更多settings配置项可以参考[官方文档](http://www.mybatis.org/mybatis-3/zh/configuration.html)
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -374,7 +264,7 @@ public class ServletConfig implements WebMvcConfigurer {
 
 ```
 
-8、新建查询接口及其对应的mapper文件
+#### 8、新建查询接口及其对应的mapper文件
 
 ```java
 public interface MysqlDao {
@@ -421,25 +311,9 @@ public interface OracleDao {
 </mapper>
 ```
 
-9.新建测试controller进行测试
+#### 9.新建测试controller进行测试
 
 ```java
-package com.heibaiying.controller;
-
-import com.heibaiying.bean.Relation;
-import com.heibaiying.dao.MysqlDao;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
-
-/**
- * @author : heibaiying
- * @description :
- */
-
 @RestController
 public class MysqlController {
 
@@ -455,19 +329,6 @@ public class MysqlController {
 ```
 
 ```java
-package com.heibaiying.controller;
-
-import com.heibaiying.dao.OracleDao;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-
-/**
- * @author : heibaiying
- * @description :
- */
-
 @RestController
 public class OracleController {
 
@@ -482,7 +343,7 @@ public class OracleController {
 
 ```
 
-10、druid 监控页面访问地址http://localhost:8080/druid/index.html
+#### 10、druid 监控页面访问地址http://localhost:8080/druid/index.html
 
 ![druid控制台](https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/druid%E6%8E%A7%E5%88%B6%E5%8F%B0.png)
 

@@ -1,8 +1,7 @@
 package com.heibaiying.dao;
 
 import com.heibaiying.bean.Relation;
-import com.heibaiying.config.DispatcherServletInitializer;
-import com.heibaiying.config.ServletConfig;
+import com.heibaiying.config.DatabaseConfig;
 import com.heibaiying.dao.impl.MysqlDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +17,7 @@ import java.util.List;
  */
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = {DispatcherServletInitializer.class, ServletConfig.class})
+@ContextConfiguration(classes = {DatabaseConfig.class})
 public class MysqlDaoTest {
 
     @Autowired
