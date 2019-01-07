@@ -40,7 +40,6 @@ spring-cloud：Finchley.SR2
 | [spring-websocket](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring/spring-websocket)<br/>[spring-websocket-annotation](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring/spring-websocket-annotation) | spring 整合 websocket                                        | [Spring Websocket](https://docs.spring.io/spring/docs/5.1.3.RELEASE/spring-framework-reference/web.html#websocket) |
 | [spring-mail](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring/spring-email) <br/>[spring-mail-annotation](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring/spring-email-annotation) | spring 普通文本邮件、附件邮件、模板邮件                      | [Spring Email](https://docs.spring.io/spring/docs/5.1.3.RELEASE/spring-framework-reference/integration.html#mail) |
 | [spring-scheduling](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring/spring-scheduling)<br/>[spring-scheduling-annotation](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring/spring-scheduling-annotation) | spring 定时任务                                              | [Task Execution and Scheduling](https://docs.spring.io/spring/docs/5.1.3.RELEASE/spring-framework-reference/integration.html#scheduling) |
-| spring-kafka<br/>spring-kafka-annotation                     | spring 整合 kafka                                            | [Spring for Apache Kafka](https://docs.spring.io/spring-kafka/docs/2.2.2.RELEASE/reference/html/) |
 
 <br/>
 
@@ -86,4 +85,5 @@ spring-cloud：Finchley.SR2
 代码涉及到的相关参考资料放在了仓库的referenced documents 目录下，文件清单如下：
 
 - Servlet3.1规范（最终版）.pdf
+- Thymeleaf中⽂参考⼿册.pdf
 

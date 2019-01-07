@@ -14,6 +14,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DubboConfiguration {
 
+    /**
+     * 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样
+     */
     @Bean
     public ApplicationConfig applicationConfig() {
         ApplicationConfig applicationConfig = new ApplicationConfig();
@@ -21,6 +24,10 @@ public class DubboConfiguration {
         return applicationConfig;
     }
 
+    /**
+     * 设置调用服务超时时间
+     * 关闭所有服务的启动时检查
+     */
     @Bean
     public ConsumerConfig consumerConfig() {
         ConsumerConfig consumerConfig = new ConsumerConfig();
@@ -29,6 +36,9 @@ public class DubboConfiguration {
         return consumerConfig;
     }
 
+    /**
+     * 使用zookeeper注册中心暴露发现服务地址
+     */
     @Bean
     public RegistryConfig registryConfig() {
         RegistryConfig registryConfig = new RegistryConfig();
@@ -37,11 +47,4 @@ public class DubboConfiguration {
         return registryConfig;
     }
 
-    @Bean
-    public ProtocolConfig protocolConfig() {
-        ProtocolConfig protocolConfig = new ProtocolConfig();
-        protocolConfig.setName("dubbo");
-        protocolConfig.setPort(20880);
-        return protocolConfig;
-    }
 }

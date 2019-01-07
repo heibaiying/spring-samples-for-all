@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author : heibaiying
- * @description : 声明队列、交换机、绑定关系、和队列消息监听
+ * @description : rabbitmq 基本配置
  */
 
 @Configuration

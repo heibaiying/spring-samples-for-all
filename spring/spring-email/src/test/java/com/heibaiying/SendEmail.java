@@ -29,13 +29,19 @@ public class SendEmail {
     // 接收方邮箱地址
     private static final String to = "接收方邮箱地址@qq.com";
 
+
+    /**
+     * 简单邮件测试
+     */
     @Test
     public void sendMessage() {
-
         springMail.sendTextMessage(from, authWord, to, "spring简单邮件", "Hello Spring Email!");
     }
 
 
+    /**
+     * 发送带附件的邮件
+     */
     @Test
     public void sendComplexMessage() {
         Map<String, File> fileMap = new HashMap<>();
@@ -45,12 +51,18 @@ public class SendEmail {
                 , "Hello Spring Email!", fileMap);
     }
 
+    /**
+     * 发送内嵌资源的邮件
+     */
     @Test
     public void sendEmailWithInline() {
         springMail.sendEmailWithInline(from, authWord, to, "spring内嵌资源邮件"
                 , "Hello Spring Email!", new File("D:\\LearningNotes\\picture\\RabbitMQ模型架构.png"));
     }
 
+    /**
+     * 发送模板邮件
+     */
     @Test
     public void sendEmailByTemplate() {
         springMail.sendEmailByTemplate(from, authWord, to,

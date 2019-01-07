@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * @author : heibaiying
- * @description :
+ * @description :消费服务
  */
 @Controller
 @RequestMapping("sell")

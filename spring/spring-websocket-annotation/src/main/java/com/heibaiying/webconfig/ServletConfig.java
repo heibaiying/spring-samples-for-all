@@ -10,9 +10,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
- * @author : 罗祥
+ * @author : heibaiying
  * @description : 主配置类
- * @date :create in 2018/12/27
  */
 @Configuration
 @EnableWebMvc

@@ -75,7 +75,10 @@ public class RabbitBaseAnnotation {
                 //得到消息体内容
                 byte[] body = message.getBody();
                 System.out.println(firstQueue().getName() + "收到消息:" + new String(body));
-                //第二个参数 代表是否一次签收多条
+                /*
+                 * DeliveryTag 是一个单调递增的整数
+                 * 第二个参数 代表是否一次签收多条，如果设置为true,则所有DeliveryTag小于该DeliveryTag的消息都会被签收
+                 */
                 channel.basicAck(properties.getDeliveryTag(), false);
             }
         });

@@ -3,9 +3,8 @@ package com.heibaiying.webconfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
- * @author : 罗祥
+ * @author : heibaiying
  * @description : 等价于 web.xml 中配置前端控制器
- * @date :create in 2018/12/27
  */
 public class DispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 

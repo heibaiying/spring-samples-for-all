@@ -17,7 +17,7 @@ import java.util.Map;
 
 /**
  * @author : heibaiying
- * @description :
+ * @description : 邮件发送基本类
  */
 @Component
 public class SpringMail {
