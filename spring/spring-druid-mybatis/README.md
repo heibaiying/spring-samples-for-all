@@ -2,7 +2,7 @@
 
 ### 项目目录结构
 
-![spring-druid-mybatis](D:\spring-samples-for-all\pictures\spring-druid-mybatis.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-druid-mybatis.png"/> </div>
 
 #### 1、创建maven工程，除了Spring基本依赖外，还需要导入mybatis和druid的相关依赖
 

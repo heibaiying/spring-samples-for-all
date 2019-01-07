@@ -8,7 +8,7 @@
 2. 自定义切面位于advice下，其中CustomAdvice是标准的自定义切面，FirstAdvice和SecondAdvice用于测试多切面共同作用于同一个被切入点时的执行顺序；
 3. OrderService是待切入方法。
 
-![spring+redis项目目录结构](D:\spring-samples-for-all\pictures\spring-aop-annotation.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-aop-annotation.png"/> </div>
 
 
 
@@ -166,4 +166,4 @@ public class AopTest {
 
 - 优先级高的切面在切入方法前执行的通知(before)会优先执行，但是位于方法后执行的通知(after,afterReturning)反而会延后执行，类似于同心圆原理。
 
-  ![aop执行顺序](D:\spring-samples-for-all\pictures\aop执行顺序.png)
+  <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/aop执行顺序.png"/> </div>

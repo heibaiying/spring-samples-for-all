@@ -6,7 +6,7 @@
 
 配置文件位于resources下,项目以单元测试的方式进行测试。
 
-![spring+redis项目目录结构](D:\spring-samples-for-all\pictures\spring-mongodb.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-mongodb.png"/> </div>
 
 
 

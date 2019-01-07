@@ -11,7 +11,7 @@
 5. webSocketConfig 是websocket 的主要配置类；
 6. 项目以web的方式构建。
 
-![spring-scheduling](D:\spring-samples-for-all\pictures\spring-websocket-annotation.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-websocket-annotation.png"/> </div>
 
 
 

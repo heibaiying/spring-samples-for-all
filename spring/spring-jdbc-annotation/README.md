@@ -7,7 +7,7 @@
 1. 数据源配置位于config目录下的DatabaseConfig.java和DataSourceConfig.java
 2. 项目以单元测试的方法进行测试
 
-![spring-jdbc-annotation](D:\spring-samples-for-all\pictures\spring-jdbc-annotation.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-jdbc-annotation.png"/> </div>
 
 
 

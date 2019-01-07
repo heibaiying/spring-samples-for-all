@@ -11,7 +11,7 @@
 
 注：关于redis其他语言官方推荐的客户端可以在[客户端](http://www.redis.cn/clients.html)该网页查看，其中官方推荐的用了黄色星星:star:标注。
 
-![redis官方推荐客户端](D:\spring-samples-for-all\pictures\redis官方推荐客户端.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/redis官方推荐客户端.png"/> </div>
 
 
 
@@ -24,7 +24,7 @@
 1. jedis和redisson的配置和单元测试分别位于resources和test下对应的包中，其中集群的配置文件以cluster结尾。所有配置按照需要在springApplication.xml用import导入。
 2. 实体类Programmer.java用于测试Redisson序列化与反序列化
 
-![spring+redis项目目录结构](D:\spring-samples-for-all\pictures\spring-redis.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-redis.png"/> </div>
 
 **springapplication.xml文件：**
 

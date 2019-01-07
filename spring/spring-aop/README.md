@@ -6,7 +6,7 @@
 
 切面配置位于resources下的aop.xml文件，其中CustomAdvice是自定义切面类，OrderService是待切入的方法。
 
-![spring+redis项目目录结构](D:\spring-samples-for-all\pictures\spring-aop.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-aop.png"/> </div>
 
 
 
