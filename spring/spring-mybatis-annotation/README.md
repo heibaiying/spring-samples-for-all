@@ -1,4 +1,4 @@
-# spring 整合 mybatis（xml配置方式）
+# spring 整合 mybatis（注解方式）
 
 ## 一、说明
 
