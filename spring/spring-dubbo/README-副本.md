@@ -10,7 +10,7 @@
 
 1.2  本项目dubbo的搭建采用zookeeper作为注册中心， 关于zookeeper的安装和基本操作可以参见我的手记[Zookeeper 基础命令与Java客户端](https://github.com/heibaiying/LearningNotes/blob/master/notes/%E4%B8%AD%E9%97%B4%E4%BB%B6/ZooKeeper/ZooKeeper%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%E4%B8%8EJava%E5%AE%A2%E6%88%B7%E7%AB%AF.md)
 
-<div align="center"> <img src="/heibaiying/spring-samples-for-all/tree/master/pictures/spring-dubbo.png"/> </div>
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/dubbo-common.png"/> </div>
 
 
 
@@ -51,7 +51,7 @@
 - api 下为公共的调用接口；
 - bean 下为公共的实体类。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/tree/master/pictures/dubbo-common.png"/> </div>
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/dubbo-common.png"/> </div>
 
 ## 四、 服务提供者（dubbo-provider）
 
