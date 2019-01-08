@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class KafkaBeanConsumer {
 
-    @KafkaListener(groupId = "group", topics = Topic.BEAN)
+    @KafkaListener(groupId = "beanGroup", topics = Topic.BEAN)
     public void consumer(ConsumerRecord<String, Object> record) {
         System.out.println("消费者收到消息:" + JSON.parseObject(record.value().toString(), Programmer.class));
     }
