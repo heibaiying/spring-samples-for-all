@@ -12,7 +12,7 @@
 
 #### 1.2 项目主要依赖
 
-需要说明的是按照spring 官方对应自定义的starter 命名规范的推荐：
+需要说明的是按照spring 官方对于自定义的starter 命名规范的推荐：
 
 - 官方的starter命名：spring-boot-starter-XXXX
 - 其他第三方starter命名：XXXX-spring-boot-starte
@@ -54,7 +54,7 @@ spring boot 与 mybatis 版本的对应关系：
 
 #### 2.1 在application.yml 中配置数据源
 
-本用例采用druid作为数据库连接池，虽然druid性能略逊于Hikari，但是提供了更为全面的监控管理，可以按照实际需求选用druid或者Hikari。（关于Hikari数据源的配置可以参考[spring-boot-mbatis项目](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-mybatis)）
+本用例采用druid作为数据库连接池，虽然druid性能略逊于Hikari，但是提供了更为全面的监控管理，可以按照实际需求选用druid或者Hikari。（关于Hikari数据源的配置可以参考[spring-boot-mybatis项目](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-mybatis)）
 
 ```yaml
 spring:
@@ -193,4 +193,4 @@ public class DruidStatController {
 
 #### 2.4 druid 控制台的使用，默认访问地址 http://localhost:8080/druid/login.html
 
-![spring-boot-druid 控制台](D:\spring-samples-for-all\pictures\spring-boot-druid 控制台.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-druid%20%E6%8E%A7%E5%88%B6%E5%8F%B0.png"/> </div>
