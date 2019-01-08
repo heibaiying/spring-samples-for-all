@@ -21,20 +21,28 @@ import java.net.URLDecoder;
 @Component
 public class ChatSocket {
 
-
-    @OnOpen   //建立连接时候触发
+    /**
+     * 建立连接时候触发
+     */
+    @OnOpen
     public void onOpen(Session session, @PathParam("username") String username) {
         // 这个方法是线程不安全的
         Constant.nameAndSession.putIfAbsent(username, session);
     }
 
 
-    @OnClose  //关闭连接时候触发
+    /**
+     * 关闭连接时候触发
+     */
+    @OnClose
     public void onClose(Session session, @PathParam("username") String username) {
         Constant.nameAndSession.remove(username);
     }
 
-    @OnMessage //处理消息
+    /**
+     * 处理消息
+     */
+    @OnMessage
     public void onMessage(Session session, String message, @PathParam("username") String username) throws UnsupportedEncodingException {
         // 防止中文乱码
         String msg = URLDecoder.decode(message, "utf-8");

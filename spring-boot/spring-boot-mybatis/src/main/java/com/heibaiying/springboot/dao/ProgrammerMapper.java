@@ -3,8 +3,6 @@ package com.heibaiying.springboot.dao;
 import com.heibaiying.springboot.bean.Programmer;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.List;
-
 /**
  * @author : heibaiying
  */

@@ -1,71 +1,70 @@
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/mysql?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://127.0.0.1:3306/mysql?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-    # Ê¹ÓÃ druid ×÷ÎªÁ¬½Ó³Ø  ¸ü¶àÅäÖÃµÄËµÃ÷¿ÉÒÔ²Î¼û druid starter ÖĞÎÄÎÄµµ https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
+    # ä½¿ç”¨ druid ä½œä¸ºè¿æ¥æ±   æ›´å¤šé…ç½®çš„è¯´æ˜å¯ä»¥å‚è§ druid starter ä¸­æ–‡æ–‡æ¡£ https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
-      # ³õÊ¼»¯Ê±½¨Á¢ÎïÀíÁ¬½ÓµÄ¸öÊı¡£³õÊ¼»¯·¢ÉúÔÚÏÔÊ¾µ÷ÓÃinit·½·¨£¬»òÕßµÚÒ»´ÎgetConnectionÊ±
+      # åˆå§‹åŒ–æ—¶å»ºç«‹ç‰©ç†è¿æ¥çš„ä¸ªæ•°ã€‚åˆå§‹åŒ–å‘ç”Ÿåœ¨æ˜¾ç¤ºè°ƒç”¨initæ–¹æ³•ï¼Œæˆ–è€…ç¬¬ä¸€æ¬¡getConnectionæ—¶
       initialSize: 5
-      # ×îĞ¡Á¬½Ó³ØÊıÁ¿
+      # æœ€å°è¿æ¥æ± æ•°é‡
       minIdle: 5
-      # ×î´óÁ¬½Ó³ØÊıÁ¿
+      # æœ€å¤§è¿æ¥æ± æ•°é‡
       maxActive: 10
-      # »ñÈ¡Á¬½ÓÊ±×î´óµÈ´ıÊ±¼ä£¬µ¥Î»ºÁÃë¡£ÅäÖÃÁËmaxWaitÖ®ºó£¬È±Ê¡ÆôÓÃ¹«Æ½Ëø£¬²¢·¢Ğ§ÂÊ»áÓĞËùÏÂ½µ£¬Èç¹ûĞèÒª¿ÉÒÔÍ¨¹ıÅäÖÃuseUnfairLockÊôĞÔÎªtrueÊ¹ÓÃ·Ç¹«Æ½Ëø¡£
+      # è·å–è¿æ¥æ—¶æœ€å¤§ç­‰å¾…æ—¶é—´ï¼Œå•ä½æ¯«ç§’ã€‚é…ç½®äº†maxWaitä¹‹åï¼Œç¼ºçœå¯ç”¨å…¬å¹³é”ï¼Œå¹¶å‘æ•ˆç‡ä¼šæœ‰æ‰€ä¸‹é™ï¼Œå¦‚æœéœ€è¦å¯ä»¥é€šè¿‡é…ç½®useUnfairLockå±æ€§ä¸ºtrueä½¿ç”¨éå…¬å¹³é”ã€‚
       maxWait: 60000
-      # DestroyÏß³Ì»á¼ì²âÁ¬½ÓµÄ¼ä¸ôÊ±¼ä£¬Èç¹ûÁ¬½Ó¿ÕÏĞÊ±¼ä´óÓÚµÈÓÚminEvictableIdleTimeMillisÔò¹Ø±ÕÎïÀíÁ¬½Ó¡£
+      # Destroyçº¿ç¨‹ä¼šæ£€æµ‹è¿æ¥çš„é—´éš”æ—¶é—´ï¼Œå¦‚æœè¿æ¥ç©ºé—²æ—¶é—´å¤§äºç­‰äºminEvictableIdleTimeMillisåˆ™å…³é—­ç‰©ç†è¿æ¥ã€‚
       timeBetweenEvictionRunsMillis: 60000
-      # Á¬½Ó±£³Ö¿ÕÏĞ¶ø²»±»ÇıÖğµÄ×îĞ¡Ê±¼ä
+      # è¿æ¥ä¿æŒç©ºé—²è€Œä¸è¢«é©±é€çš„æœ€å°æ—¶é—´
       minEvictableIdleTimeMillis: 300000
-      # ÓÃÀ´¼ì²âÁ¬½ÓÊÇ·ñÓĞĞ§µÄsql ÒòÊı¾İ¿â·½ÑÔ¶ø²î, ÀıÈç oracle Ó¦¸ÃĞ´³É SELECT 1 FROM DUAL
+      # ç”¨æ¥æ£€æµ‹è¿æ¥æ˜¯å¦æœ‰æ•ˆçš„sql å› æ•°æ®åº“æ–¹è¨€è€Œå·®, ä¾‹å¦‚ oracle åº”è¯¥å†™æˆ SELECT 1 FROM DUAL
       validationQuery: SELECT 1
-      # ½¨ÒéÅäÖÃÎªtrue£¬²»Ó°ÏìĞÔÄÜ£¬²¢ÇÒ±£Ö¤°²È«ĞÔ¡£ÉêÇëÁ¬½ÓµÄÊ±ºò¼ì²â£¬Èç¹û¿ÕÏĞÊ±¼ä´óÓÚtimeBetweenEvictionRunsMillis£¬Ö´ĞĞvalidationQuery¼ì²âÁ¬½ÓÊÇ·ñÓĞĞ§¡£
+      # å»ºè®®é…ç½®ä¸ºtrueï¼Œä¸å½±å“æ€§èƒ½ï¼Œå¹¶ä¸”ä¿è¯å®‰å…¨æ€§ã€‚ç”³è¯·è¿æ¥çš„æ—¶å€™æ£€æµ‹ï¼Œå¦‚æœç©ºé—²æ—¶é—´å¤§äºtimeBetweenEvictionRunsMillisï¼Œæ‰§è¡ŒvalidationQueryæ£€æµ‹è¿æ¥æ˜¯å¦æœ‰æ•ˆã€‚
       testWhileIdle: true
-      # ÉêÇëÁ¬½ÓÊ±Ö´ĞĞvalidationQuery¼ì²âÁ¬½ÓÊÇ·ñÓĞĞ§£¬×öÁËÕâ¸öÅäÖÃ»á½µµÍĞÔÄÜ¡£
+      # ç”³è¯·è¿æ¥æ—¶æ‰§è¡ŒvalidationQueryæ£€æµ‹è¿æ¥æ˜¯å¦æœ‰æ•ˆï¼Œåšäº†è¿™ä¸ªé…ç½®ä¼šé™ä½æ€§èƒ½ã€‚
       testOnBorrow: false
-      # ¹é»¹Á¬½ÓÊ±Ö´ĞĞvalidationQuery¼ì²âÁ¬½ÓÊÇ·ñÓĞĞ§£¬×öÁËÕâ¸öÅäÖÃ»á½µµÍĞÔÄÜ¡£
+      # å½’è¿˜è¿æ¥æ—¶æ‰§è¡ŒvalidationQueryæ£€æµ‹è¿æ¥æ˜¯å¦æœ‰æ•ˆï¼Œåšäº†è¿™ä¸ªé…ç½®ä¼šé™ä½æ€§èƒ½ã€‚
       testOnReturn: false
-      # ÊÇ·ñ×Ô¶¯»ØÊÕ³¬Ê±Á¬½Ó
+      # æ˜¯å¦è‡ªåŠ¨å›æ”¶è¶…æ—¶è¿æ¥
       removeAbandoned: true
-      # ³¬Ê±Ê±¼ä(ÒÔÃëÊıÎªµ¥Î»)
+      # è¶…æ—¶æ—¶é—´(ä»¥ç§’æ•°ä¸ºå•ä½)
       remove-abandoned-timeout: 180
 
-      # druid ¼à¿ØµÄÅäÖÃ Èç¹û²»Ê¹ÓÃ druid µÄ¼à¿Ø¹¦ÄÜµÄ»° ÒÔÏÂÅäÖÃ¾Í²»ÊÇ±ØĞëµÄ
-      # ±¾ÏîÄ¿¼à¿ØÌ¨·ÃÎÊµØÖ·: http://localhost:8080/druid/login.html
+      # druid ç›‘æ§çš„é…ç½® å¦‚æœä¸ä½¿ç”¨ druid çš„ç›‘æ§åŠŸèƒ½çš„è¯ ä»¥ä¸‹é…ç½®å°±ä¸æ˜¯å¿…é¡»çš„
+      # æœ¬é¡¹ç›®ç›‘æ§å°è®¿é—®åœ°å€: http://localhost:8080/druid/login.html
 
-      # WebStatFilterÓÃÓÚ²É¼¯web-jdbc¹ØÁª¼à¿ØµÄÊı¾İ¡£
-      # ¸ü¶àÅäÖÃ¿É²Î¼û: https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_%E9%85%8D%E7%BD%AEWebStatFilter
+      # WebStatFilterç”¨äºé‡‡é›†web-jdbcå…³è”ç›‘æ§çš„æ•°æ®ã€‚
+      # æ›´å¤šé…ç½®å¯å‚è§: https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_%E9%85%8D%E7%BD%AEWebStatFilter
       web-stat-filter:
-        # ÊÇ·ñ¿ªÆô WebStatFilter Ä¬ÈÏÊÇtrue
+        # æ˜¯å¦å¼€å¯ WebStatFilter é»˜è®¤æ˜¯true
         enabled: true
-        # ĞèÒªÀ¹½ØµÄurl
+        # éœ€è¦æ‹¦æˆªçš„url
         url-pattern: /*
-        # ÅÅ³ı¾²Ì¬×ÊÔ´µÄÇëÇó
+        # æ’é™¤é™æ€èµ„æºçš„è¯·æ±‚
         exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
 
-      # DruidÄÚÖÃÌá¹©ÁËÒ»¸öStatViewServletÓÃÓÚÕ¹Ê¾DruidµÄÍ³¼ÆĞÅÏ¢¡£
-      # ¸ü¶àÅäÖÃ¿É²Î¼û:https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_StatViewServlet%E9%85%8D%E7%BD%AE
+      # Druidå†…ç½®æä¾›äº†ä¸€ä¸ªStatViewServletç”¨äºå±•ç¤ºDruidçš„ç»Ÿè®¡ä¿¡æ¯ã€‚
+      # æ›´å¤šé…ç½®å¯å‚è§:https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_StatViewServlet%E9%85%8D%E7%BD%AE
       stat-view-servlet:
-        #ÊÇ·ñÆôÓÃStatViewServlet Ä¬ÈÏÖµtrue
+        #æ˜¯å¦å¯ç”¨StatViewServlet é»˜è®¤å€¼true
         enabled: true
-        # ĞèÒªÀ¹½ØµÄurl
+        # éœ€è¦æ‹¦æˆªçš„url
         url-pattern: /druid/*
-        # ÔÊĞíÇå¿ÕÍ³¼ÆÊı¾İ
+        # å…è®¸æ¸…ç©ºç»Ÿè®¡æ•°æ®
         reset-enable: true
         login-username: druid
         login-password: druid
 
 
 
-# mybatis Ïà¹ØÅäÖÃ
+# mybatis ç›¸å…³é…ç½®
 mybatis:
     configuration:
-      # µ±Ã»ÓĞÎª²ÎÊıÌá¹©ÌØ¶¨µÄ JDBC ÀàĞÍÊ±£¬Îª¿ÕÖµÖ¸¶¨ JDBC ÀàĞÍ¡£
-      # oracleÊı¾İ¿â½¨ÒéÅäÖÃÎªJdbcType.NULL, Ä¬ÈÏÊÇOther
+      # å½“æ²¡æœ‰ä¸ºå‚æ•°æä¾›ç‰¹å®šçš„ JDBC ç±»å‹æ—¶ï¼Œä¸ºç©ºå€¼æŒ‡å®š JDBC ç±»å‹ã€‚
+      # oracleæ•°æ®åº“å»ºè®®é…ç½®ä¸ºJdbcType.NULL, é»˜è®¤æ˜¯Other
       jdbc-type-for-null: 'null'
-      # ÊÇ·ñ´òÓ¡sqlÓï¾ä µ÷ÊÔµÄÊ±ºò¿ÉÒÔ¿ªÆô
-      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
+      # æ˜¯å¦æ‰“å°sqlè¯­å¥ è°ƒè¯•çš„æ—¶å€™å¯ä»¥å¼€å¯
+log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

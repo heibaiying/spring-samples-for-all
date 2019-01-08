@@ -1,55 +1,55 @@
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/mysql?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://127.0.0.1:3306/mysql?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-    # Èç¹û²»ÏëÅäÖÃÊı¾İÔ´µÄ»°,ÒÔÏÂ¹ØÓÚÁ¬½Ó³ØµÄÅäÖÃ¾Í²»ÊÇ±ØĞëµÄ
-    # spring-boot 2 Ä¬ÈÏ²ÉÓÃ¸ßĞÔÄÜµÄ Hikari ×÷ÎªÁ¬½Ó³Ø ¸ü¶àÅäÖÃ¿ÉÒÔ²Î¿¼ https://github.com/brettwooldridge/HikariCP#configuration-knobs-baby
+    # å¦‚æœä¸æƒ³é…ç½®å¯¹æ•°æ®åº“è¿æ¥æ± åšç‰¹æ®Šé…ç½®çš„è¯,ä»¥ä¸‹å…³äºè¿æ¥æ± çš„é…ç½®å°±ä¸æ˜¯å¿…é¡»çš„
+    # spring-boot 2 é»˜è®¤é‡‡ç”¨é«˜æ€§èƒ½çš„ Hikari ä½œä¸ºè¿æ¥æ±  æ›´å¤šé…ç½®å¯ä»¥å‚è€ƒ https://github.com/brettwooldridge/HikariCP#configuration-knobs-baby
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
-      # ³ØÖĞÎ¬»¤µÄ×îĞ¡¿ÕÏĞÁ¬½ÓÊı
+      # æ± ä¸­ç»´æŠ¤çš„æœ€å°ç©ºé—²è¿æ¥æ•°
       minimum-idle: 10
-      # ³ØÖĞ×î´óÁ¬½ÓÊı£¬°üÀ¨ÏĞÖÃºÍÊ¹ÓÃÖĞµÄÁ¬½Ó
+      # æ± ä¸­æœ€å¤§è¿æ¥æ•°ï¼ŒåŒ…æ‹¬é—²ç½®å’Œä½¿ç”¨ä¸­çš„è¿æ¥
       maximum-pool-size: 20
-      # ´ËÊôĞÔ¿ØÖÆ´Ó³Ø·µ»ØµÄÁ¬½ÓµÄÄ¬ÈÏ×Ô¶¯Ìá½»ĞĞÎª¡£Ä¬ÈÏÎªtrue
+      # æ­¤å±æ€§æ§åˆ¶ä»æ± è¿”å›çš„è¿æ¥çš„é»˜è®¤è‡ªåŠ¨æäº¤è¡Œä¸ºã€‚é»˜è®¤ä¸ºtrue
       auto-commit: true
-      # ÔÊĞí×î³¤¿ÕÏĞÊ±¼ä
+      # å…è®¸æœ€é•¿ç©ºé—²æ—¶é—´
       idle-timeout: 30000
-      # ´ËÊôĞÔ±íÊ¾Á¬½Ó³ØµÄÓÃ»§¶¨ÒåÃû³Æ£¬Ö÷ÒªÏÔÊ¾ÔÚÈÕÖ¾¼ÇÂ¼ºÍJMX¹ÜÀí¿ØÖÆÌ¨ÖĞ£¬ÒÔ±êÊ¶³ØºÍ³ØÅäÖÃ¡£ Ä¬ÈÏÖµ£º×Ô¶¯Éú³É
+      # æ­¤å±æ€§è¡¨ç¤ºè¿æ¥æ± çš„ç”¨æˆ·å®šä¹‰åç§°ï¼Œä¸»è¦æ˜¾ç¤ºåœ¨æ—¥å¿—è®°å½•å’ŒJMXç®¡ç†æ§åˆ¶å°ä¸­ï¼Œä»¥æ ‡è¯†æ± å’Œæ± é…ç½®ã€‚ é»˜è®¤å€¼ï¼šè‡ªåŠ¨ç”Ÿæˆ
       pool-name: custom-hikari
-      #´ËÊôĞÔ¿ØÖÆ³ØÖĞÁ¬½ÓµÄ×î³¤ÉúÃüÖÜÆÚ£¬Öµ0±íÊ¾ÎŞÏŞÉúÃüÖÜÆÚ£¬Ä¬ÈÏ1800000¼´30·ÖÖÓ
+      #æ­¤å±æ€§æ§åˆ¶æ± ä¸­è¿æ¥çš„æœ€é•¿ç”Ÿå‘½å‘¨æœŸï¼Œå€¼0è¡¨ç¤ºæ— é™ç”Ÿå‘½å‘¨æœŸï¼Œé»˜è®¤1800000å³30åˆ†é’Ÿ
       max-lifetime: 1800000
-      # Êı¾İ¿âÁ¬½Ó³¬Ê±Ê±¼ä,Ä¬ÈÏ30Ãë£¬¼´30000
+      # æ•°æ®åº“è¿æ¥è¶…æ—¶æ—¶é—´,é»˜è®¤30ç§’ï¼Œå³30000
       connection-timeout: 30000
-      # Á¬½Ó²âÊÔsql Õâ¸öµØ·½ĞèÒª¸ù¾İÊı¾İ¿â·½ÑÔ²îÒì¶øÅäÖÃ ÀıÈç oracle ¾ÍÓ¦¸ÃĞ´³É  select 1 from dual
+      # è¿æ¥æµ‹è¯•sql è¿™ä¸ªåœ°æ–¹éœ€è¦æ ¹æ®æ•°æ®åº“æ–¹è¨€å·®å¼‚è€Œé…ç½® ä¾‹å¦‚ oracle å°±åº”è¯¥å†™æˆ  select 1 from dual
       connection-test-query: SELECT 1
 
-# mybatis Ïà¹ØÅäÖÃ
+# mybatis ç›¸å…³é…ç½®
 mybatis:
-    # Ö¸¶¨ sql xml ÎÄ¼şµÄÎ»ÖÃ
+    # æŒ‡å®š sql xml æ–‡ä»¶çš„ä½ç½®
     mapper-locations: classpath*:mappers/*.xml
     configuration:
-      # µ±Ã»ÓĞÎª²ÎÊıÌá¹©ÌØ¶¨µÄ JDBC ÀàĞÍÊ±£¬Îª¿ÕÖµÖ¸¶¨ JDBC ÀàĞÍ¡£
-      # oracleÊı¾İ¿â½¨ÒéÅäÖÃÎªJdbcType.NULL, Ä¬ÈÏÊÇOther
+      # å½“æ²¡æœ‰ä¸ºå‚æ•°æä¾›ç‰¹å®šçš„ JDBC ç±»å‹æ—¶ï¼Œä¸ºç©ºå€¼æŒ‡å®š JDBC ç±»å‹ã€‚
+      # oracleæ•°æ®åº“å»ºè®®é…ç½®ä¸ºJdbcType.NULL, é»˜è®¤æ˜¯Other
       jdbc-type-for-null: 'null'
-      # ÊÇ·ñ´òÓ¡sqlÓï¾ä µ÷ÊÔµÄÊ±ºò¿ÉÒÔ¿ªÆô
+      # æ˜¯å¦æ‰“å°sqlè¯­å¥ è°ƒè¯•çš„æ—¶å€™å¯ä»¥å¼€å¯
       log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 
-# ×¢ 1
+# æ³¨ 1
   # oracle
   # driver="oracle.jdbc.driver.OracleDriver"
-  # url="jdbc:oracle:thin:@localhost:1521:Êı¾İ¿âÃû"
+  # url="jdbc:oracle:thin:@localhost:1521:æ•°æ®åº“å"
   # mysql
-  # driver="com.mysql.jdbc.Driver"
-  # url="jdbc:mysql://localhost/Êı¾İ¿âÃû?[ºó½Ó²ÎÊı]"
+  # driver="com.mysql.cj.jdbc.Driver"
+  # url="jdbc:mysql://localhost/æ•°æ®åº“å?[åæ¥å‚æ•°]"
 
 
-# ×¢ 2
-  # mybatis ÅäÖÃ¸ü¶àËµÃ÷¿ÉÒÔ²Î¿¼settings  http://www.mybatis.org/mybatis-3/zh/configuration.html
+# æ³¨ 2
+  # mybatis é…ç½®æ›´å¤šè¯´æ˜å¯ä»¥å‚è€ƒsettings  http://www.mybatis.org/mybatis-3/zh/configuration.html
 
 
-# ×¢ 3
-  # spring boot 2.0 Ä¬ÈÏ²ÉÓÃHikari ×÷ÎªÁ¬½Ó³Ø githubµØÖ· https://github.com/brettwooldridge/HikariCP
+# æ³¨ 3
+# spring boot 2.0 é»˜è®¤é‡‡ç”¨Hikari ä½œä¸ºè¿æ¥æ±  Hikari githubåœ°å€ https://github.com/brettwooldridge/HikariCP

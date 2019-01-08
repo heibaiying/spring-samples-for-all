@@ -4,7 +4,7 @@
 
 ### 1.1 项目结构说明
 
-1. 项目模拟一个简单的群聊功能，为区分不同的聊天客户端，登录时候用临时用户名作为session的id；
+1. 项目模拟一个简单的群聊功能，为区分不同的聊天客户端，登录时候将临时用户名存储在session当中；
 2. webconfig 包是基础注解的方式配置web，在spring-base-annotation项目中已经讲解过每个类作用；
 3. CustomHander为消息的自定义处理器；
 4. CustomHandershakerInterceptor为自定义的 websocket 的握手拦截器；

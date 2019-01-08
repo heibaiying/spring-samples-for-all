@@ -47,6 +47,7 @@
         </dependency>
     </dependencies>
 
+    <!--Spring Boot的Maven插件（Spring Boot Maven plugin）能够以Maven的方式为应用提供Spring Boot的支持-->
     <build>
         <plugins>
             <plugin>

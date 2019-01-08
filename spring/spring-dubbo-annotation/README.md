@@ -16,7 +16,7 @@
 
 ## 二、项目依赖
 
-**在父工程的项目中同一导入依赖dubbo依赖的的jar包**
+**在父工程的项目中统一导入依赖dubbo依赖的的jar包**
 
 这里需要注意的是ZooKeeper 3.5.x 和 ZooKeeper 3.4.x 是存在不兼容的情况 详见官网解释[ZooKeeper Version Compatibility](https://curator.apache.org/zk-compatibility.html), zookeeper 3.5 目前是beta版本，所以zookeeper 我选择的版本是 zookeeper-3.4.9 作为服务端。但默认情况下 curator-framework自动引用的最新的3.5的版本客户端，会出现 KeeperException$UnimplementedException 异常
 

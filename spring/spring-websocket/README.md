@@ -4,7 +4,7 @@
 
 ### 1.1 项目结构说明
 
-1. 项目模拟一个简单的群聊功能，为区分不同的聊天客户端，登录时候用临时用户名作为session的id；
+1. 项目模拟一个简单的群聊功能，为区分不同的聊天客户端，登录时候将临时用户名存储在session当中；
 2. CustomHander为消息的自定义处理器；
 3. CustomHandershakerInterceptor为自定义的 websocket 的握手拦截器；
 4. 项目以web的方式构建。

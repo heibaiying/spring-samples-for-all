@@ -1,14 +1,13 @@
 dubbo:
   application:
     name: boot-duboo-provider
-  # Ö¸¶¨×¢²áĞ­ÒéºÍ×¢²áµØÖ·  dubboÍÆ¼öÊ¹ÓÃzookeeper×÷Îª×¢²áÖĞĞÄ£¬²¢ÇÒÔÚstartÒÀÀµÖĞÒıÈëÁËzookeeperµÄjava¿Í»§¶ËCurator
+  # æŒ‡å®šæ³¨å†Œåè®®å’Œæ³¨å†Œåœ°å€  dubboæ¨èä½¿ç”¨zookeeperä½œä¸ºæ³¨å†Œä¸­å¿ƒï¼Œå¹¶ä¸”åœ¨startä¾èµ–ä¸­å¼•å…¥äº†zookeeperçš„javaå®¢æˆ·ç«¯Curator
   registry:
     protocol: zookeeper
     address: 127.0.0.1:2181
   protocol.name: dubbo
-  # ¹Ø±ÕËùÓĞ·şÎñµÄÆô¶¯Ê±¼ì²é (Ã»ÓĞÌá¹©ÕßÊ±±¨´í£©ÊÓÊµ¼ÊÇé¿öÉèÖÃ
+  # å…³é—­æ‰€æœ‰æœåŠ¡çš„å¯åŠ¨æ—¶æ£€æŸ¥ (æ²¡æœ‰æä¾›è€…æ—¶æŠ¥é”™ï¼‰è§†å®é™…æƒ…å†µè®¾ç½®
   consumer:
     check: false
 server:
-  port: 8090
-
+port: 8090

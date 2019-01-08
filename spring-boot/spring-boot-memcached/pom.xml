@@ -35,7 +35,7 @@
             <optional>true</optional>
         </dependency>
         <!--memcached java 客户端-->
-        <!--spring boot 并没有 memcached starter,所以对于memcached的整合是和在spring下整合方式是一样的-->
+        <!--spring boot 并没有官方 memcached starter,所以对于memcached的整合是和在spring下整合方式是一样的-->
         <dependency>
             <groupId>com.googlecode.xmemcached</groupId>
             <artifactId>xmemcached</artifactId>

@@ -1,7 +1,7 @@
 dubbo:
   application:
     name: boot-duboo-provider
-  # 指定注册协议和注册地址  dubbo推荐使用zookeeper作为注册中心，并且在start依赖中引入了zookeeper的java客户端Curator
+  # 鎸囧畾娉ㄥ唽鍗忚鍜屾敞鍐屽湴鍧�  dubbo鎺ㄨ崘浣跨敤zookeeper浣滀负娉ㄥ唽涓績锛屽苟涓斿湪start渚濊禆涓紩鍏ヤ簡zookeeper鐨刯ava瀹㈡埛绔疌urator
   registry:
     protocol: zookeeper
     address: 127.0.0.1:2181

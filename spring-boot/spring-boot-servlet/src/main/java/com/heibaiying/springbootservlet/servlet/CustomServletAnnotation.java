@@ -12,7 +12,7 @@ import java.io.IOException;
  * @description : 自定义servlet
  */
 @WebServlet(urlPatterns = "/servletAnn")
-public class CustomServletAnnation extends HttpServlet {
+public class CustomServletAnnotation extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
