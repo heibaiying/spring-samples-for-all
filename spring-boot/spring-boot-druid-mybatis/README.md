@@ -193,4 +193,4 @@ public class DruidStatController {
 
 #### 2.4 druid 控制台的使用，默认访问地址 http://localhost:8080/druid/login.html
 
-![spring-boot-druid 控制台](D:\spring-samples-for-all\pictures\spring-boot-druid 控制台.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-druid%20%E6%8E%A7%E5%88%B6%E5%8F%B0.png"/> </div>
