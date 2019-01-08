@@ -14,7 +14,7 @@
 
 
 
-![spring-rabbitmq](D:\spring-samples-for-all\pictures\spring-rabbitmq-annotation.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-rabbitmq-annotation.png"/> </div>
 
 
 

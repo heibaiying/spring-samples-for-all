@@ -20,7 +20,7 @@ import java.io.IOException;
 @Configuration
 @EnableTransactionManagement // 开启声明式事务处理 等价于xml中<tx:annotation-driven/>
 @ComponentScan(basePackages = {"com.heibaiying.*"})
-public class ServletConfig implements WebMvcConfigurer {
+public class DatabaseConfig {
 
     /* @Autowired
      * private DataSourceConfig sourceConfig;

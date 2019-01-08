@@ -6,7 +6,7 @@
 
 配置文件位于com.heibaiying.config下,项目以单元测试的方式进行测试。
 
-![spring-mongodb-annotation](D:\spring-samples-for-all\pictures\spring-mongodb-annotation.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-mongodb-annotation.png"/> </div>
 
 
 

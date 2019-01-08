@@ -11,7 +11,7 @@ XMemcached是基于java nio的memcached高性能客户端，支持完整的memca
 1. memcached的整合配置位于resources下的memcached文件夹下，其中集群配置用cluster开头。所有配置按照需要在springApplication.xml用import导入。
 2. 实体类Programmer.java用于测试memcached序列化与反序列化
 
-![spring+redis项目目录结构](D:\spring-samples-for-all\pictures\spring-memcached.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-memcached.png"/> </div>
 
 **springapplication.xml文件：**
 

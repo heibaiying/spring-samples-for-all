@@ -6,7 +6,7 @@
 
 关于任务的调度配置定义在ServletConfig.java中，为方便观察项目定时执行的情况，项目以web的方式构建。
 
-![spring-scheduling](D:\spring-samples-for-all\pictures\spring-scheduling-annotation.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-scheduling-annotation.png"/> </div>
 
 
 

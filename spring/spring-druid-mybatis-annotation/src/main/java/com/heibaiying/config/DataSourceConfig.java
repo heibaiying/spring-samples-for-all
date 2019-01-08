@@ -15,12 +15,6 @@ import org.springframework.context.annotation.PropertySource;
 @Data
 public class DataSourceConfig {
 
-    /**
-     * 感觉这种注入的方式并不够好
-     * 没有spring-boot中使用@ConfigurationProperties(prefix = "config")指定前缀注入的方式优雅
-     */
-    @Value("${mysql.driverClassName}")
-    private String driverClassName;
     @Value("${mysql.url}")
     private String url;
     @Value("${mysql.username}")

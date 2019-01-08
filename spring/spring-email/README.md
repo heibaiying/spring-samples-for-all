@@ -10,7 +10,7 @@
 
 
 
-![spring-email](D:\spring-samples-for-all\pictures\spring-email.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-email.png"/> </div>
 
 
 

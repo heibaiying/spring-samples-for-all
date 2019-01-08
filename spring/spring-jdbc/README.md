@@ -1,124 +1,38 @@
 # spring 整合 jdbc template（xml配置方式）
 
-1、创建标准web maven工程，导入依赖
+## 一、说明
+
+#### 1.1  项目结构
+
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-jdbc.png"/> </div>
+
+#### 1.2  项目依赖
 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.heibaiying</groupId>
+<!--jdbc 相关依赖包-->
+<dependency>
+    <groupId>org.springframework</groupId>
     <artifactId>spring-jdbc</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <properties>
-        <spring-base-version>5.1.3.RELEASE</spring-base-version>
-    </properties>
-
-
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring-base-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>${spring-base-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring-base-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${spring-base-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring-base-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.4</version>
-            <scope>provided</scope>
-        </dependency>
-        <!--jdbc 相关依赖包-->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${spring-base-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.13</version>
-        </dependency>
-        <!--单元测试相关依赖包-->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${spring-base-version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc6</artifactId>
-            <version>11.2.0.3.0</version>
-        </dependency>
-    </dependencies>
-
-</project>
+    <version>${spring-base-version}</version>
+</dependency>
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.13</version>
+</dependency>
+<dependency>
+    <groupId>com.oracle</groupId>
+    <artifactId>ojdbc6</artifactId>
+    <version>11.2.0.3.0</version>
+</dependency>
+</dependencies>
 ```
 
-2、在web.xml 进行如下配置
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
-		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-         version="3.1">
 
-    <!--配置spring前端控制器-->
-    <servlet>
-        <servlet-name>springMvc</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:springApplication.xml</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+## 二、 spring 整合 jdbc template
 
-    <servlet-mapping>
-        <servlet-name>springMvc</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
-
-</web-app>
-```
-
-3、在resources文件夹下新建数据库配置文件jdbc.properties
+#### 1、在resources文件夹下新建数据库配置文件jdbc.properties
 
 ```properties
 # mysql 数据库配置
@@ -134,7 +48,7 @@ oracle.username=用户名
 oracle.password=密码
 ```
 
-4、在resources文件夹下创建springApplication.xml 配置文件
+#### 2、配置Jdbc数据源并定义事务管理器
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -182,34 +96,9 @@ oracle.password=密码
 </beans>
 ```
 
-5、新建查询接口及其实现类,这里我查询的表是mysql和oracle中的字典表
+#### 3、新建查询接口及其实现类,这里我查询的表是mysql和oracle中的字典表
 
 ```java
-public interface MysqlDao {
-
-    List<Relation> get();
-}
-```
-
-```java
-package com.heibaiying.dao;
-
-import com.heibaiying.bean.Relation;
-import com.heibaiying.dao.impl.MysqlDao;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Repository;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-
-/**
- * @author : heibaiying
- * @description :
- */
-
 @Repository
 public class MysqlDaoImpl implements MysqlDao {
 
@@ -237,42 +126,7 @@ public class MysqlDaoImpl implements MysqlDao {
 
 ```
 
-```mysql
-package com.heibaiying.dao.impl;
-
-import com.heibaiying.bean.Flow;
-import java.util.List;
-
-/**
- * @author : heibaiying
- * @description :
- */
-public interface OracleDao {
-
-    List<Flow> get();
-}
-
-```
-
 ```java
-package com.heibaiying.dao;
-
-import com.heibaiying.bean.Flow;
-import com.heibaiying.dao.impl.OracleDao;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Repository;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-
-/**
- * @author : heibaiying
- * @description :
- */
-
 @Repository
 public class OracleDaoImpl implements OracleDao {
 
@@ -298,29 +152,11 @@ public class OracleDaoImpl implements OracleDao {
         return flows;
     }
 }
-
 ```
 
-6.新建测试类进行测试
+#### 4.新建测试类进行测试
 
 ```java
-package com.heibaiying.dao;
-
-import com.heibaiying.bean.Relation;
-import com.heibaiying.dao.impl.MysqlDao;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.List;
-
-/**
- * @author : heibaiying
- * @description :
- */
-
 @RunWith(SpringRunner.class)
 @ContextConfiguration({"classpath:springApplication.xml"})
 public class MysqlDaoTest {
@@ -342,24 +178,6 @@ public class MysqlDaoTest {
 ```
 
 ```java
-package com.heibaiying.dao;
-
-import com.heibaiying.bean.Flow;
-import com.heibaiying.dao.impl.OracleDao;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.List;
-
-/**
- * @author : heibaiying
- * @description :
- */
-
 @RunWith(SpringRunner.class)
 @ContextConfiguration({"classpath:springApplication.xml"})
 public class OracleDaoTest {

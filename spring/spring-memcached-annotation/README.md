@@ -10,7 +10,7 @@ XMemcached是基于java nio的memcached高性能客户端，支持完整的memca
 
 1. memcached的整合配置位于com.heibaiying.config文件夹下。
 
-![spring+redis项目目录结构](D:\spring-samples-for-all\pictures\spring-memcached-annotation.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-memcached-annotation.png"/> </div>
 
 ### 1.3 依赖说明
 

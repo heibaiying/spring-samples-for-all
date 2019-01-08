@@ -2,6 +2,7 @@ package com.heibaiying.memcached;
 
 import net.rubyeye.xmemcached.MemcachedClient;
 import net.rubyeye.xmemcached.exception.MemcachedException;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,6 @@ public class MemSamples {
         System.out.println("hello=" + value);
         memcachedClient.delete("hello");
         value = memcachedClient.get("hello");
-        System.out.println("hello=" + value);
+        Assert.assertNull(value);
     }
 }
