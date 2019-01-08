@@ -10,7 +10,7 @@ spring boot 官方并没有提供关于 memcached 的starter，所以我们这�
 
 memcached的整合配置位于config文件夹下。
 
-![spring+redis项目目录结构](D:\spring-samples-for-all\pictures\spring-boot-memcached.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-memcached.png"/> </div>
 
 ### 1.3 主要依赖
 

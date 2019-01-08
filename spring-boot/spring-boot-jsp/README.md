@@ -4,7 +4,7 @@
 
 #### 1.1 项目结构
 
-![spring-boot-servlet](D:\spring-samples-for-all\pictures\spring-boot-jsp.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-jsp.png"/> </div>
 
 #### 1.2 项目主要依赖
 

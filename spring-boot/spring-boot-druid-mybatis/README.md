@@ -8,7 +8,7 @@
 
 2. 为了使用druid控制台的功能，项目以web的方式构建。
 
-![spring-boot-servlet](D:\spring-samples-for-all\pictures\spring-boot-druid-mybatis.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-druid-mybatis.png"/> </div>
 
 #### 1.2 项目主要依赖
 
@@ -187,7 +187,7 @@ public class DruidStatController {
 }
 ```
 
-![druid-status](D:\spring-samples-for-all\pictures\druid-status.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/druid-status.png"/> </div>
 
 
 

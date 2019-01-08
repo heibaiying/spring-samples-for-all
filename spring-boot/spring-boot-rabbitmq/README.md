@@ -10,7 +10,7 @@
 
 1.2  关于rabbitmq安装、交换机、队列、死信队列等基本概念可以参考我的手记[《RabbitMQ实战指南》读书笔记](https://github.com/heibaiying/LearningNotes/blob/master/notes/%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/%E3%80%8ARabbitMQ%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0.md),里面有详细的配图说明。
 
-![spring-scheduling](D:\spring-samples-for-all\pictures\spring-boot-rabbitmq.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-rabbitmq.png"/> </div>
 
 
 
@@ -80,7 +80,7 @@
 - bean 下为公共的实体类。
 - constant 下为公共配置，用静态常量引用。（这里我使用静态常量是为了方便引用，实际中也可以按照情况，抽取为公共配置文件）
 
-![spring-scheduling](D:\spring-samples-for-all\pictures\rabbitmq-common.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/rabbitmq-common.png"/> </div>
 
 ```java
 package com.heibaiying.constant;
@@ -109,7 +109,7 @@ public class RabbitInfo {
 
 ## 四、服务消费者（rabbitmq-consumer）
 
-![boot-dubbo-consumer](D:\spring-samples-for-all\pictures\rabbitmq-consumer.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/rabbitmq-consumer.png"/> </div>
 
 #### 4.1 消息消费者配置
 
@@ -189,7 +189,7 @@ public class RabbitmqConsumer {
 
 ## 五、 消息生产者（rabbitmq-producer）
 
-![spring-scheduling](D:\spring-samples-for-all\pictures\rabbitmq-producer.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/rabbitmq-producer.png"/> </div>
 
 #### 5.1 消息生产者配置
 

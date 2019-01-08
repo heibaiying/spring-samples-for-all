@@ -7,7 +7,7 @@
 1. RedisConfig.java实现了redisTemplate 序列化与反序列化的配置；
 2. RedisOperation和RedisObjectOperation分别封装了对基本类型和对象的操作。
 
-![spring-boot-servlet](D:\spring-samples-for-all\pictures\spring-boot-redis.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-redis.png"/> </div>
 
 #### 1.2 项目主要依赖
 

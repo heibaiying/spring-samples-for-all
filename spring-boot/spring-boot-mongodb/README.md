@@ -8,7 +8,7 @@
 2. 提供用MongoTemplate的方式操作mongdb，见测试用例MongoOriginalTests.java
 3. 提供基于spring data jpa 的方式操作mongodb(推荐)，见测试用例MongoJPATests.java
 
-![spring-boot-servlet](D:\spring-samples-for-all\pictures\spring-boot-mongodb.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-mongodb.png"/> </div>
 
 #### 1.2 项目主要依赖
 

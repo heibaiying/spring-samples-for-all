@@ -8,7 +8,7 @@
 2. 模板引擎采用freemaker 和 thymeleaf 作为示例，分别对应模板文件makershow.ftl 和 leafShow.html；
 3. spring boot 2.x 默认是不支持jsp的，需要额外的配置，关于使用jsp的整合可以参考[spring-boot-jsp](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-jsp)项目。
 
-![spring-boot-base](D:\spring-samples-for-all\pictures\spring-boot-base.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-base.png"/> </div>
 
 #### 1.2 项目依赖
 
@@ -80,7 +80,7 @@
 
 1. spring boot 项目默认继承自spring-boot-starter-parent，而spring-boot-starter-parent继承自spring-boot-dependencies,  spring-boot-dependencies中定义了关于spring boot 依赖的各种jar包的版本，是spring boot 的版本管理中心。
 
-![spring-boot-dependencies](D:\spring-samples-for-all\pictures\spring-boot-dependencies.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-dependencies.png"/> </div>
 
 2. 关于spring boot 2.x官方支持的所有starter 可以参见官方文档 [Table 13.1. Spring Boot application starters](https://docs.spring.io/spring-boot/docs/2.1.1.RELEASE/reference/htmlsingle/#using-boot-starter)
 

@@ -9,7 +9,7 @@
 3. 模板引擎采用freemaker；
 4. 项目以web的方式构建。
 
-![spring-scheduling](D:\spring-samples-for-all\pictures\spring-boot-websocket.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-websocket.png"/> </div>
 
 
 

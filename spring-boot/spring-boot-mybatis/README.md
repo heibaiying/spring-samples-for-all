@@ -12,7 +12,7 @@
 
    注解写法：对应的类为Programmer.java ，用MybatisAnnotationTest进行测试。
 
-![spring-boot-servlet](D:\spring-samples-for-all\pictures\spring-boot-mybatis.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-mybatis.png"/> </div>
 
 #### 1.2 项目主要依赖
 

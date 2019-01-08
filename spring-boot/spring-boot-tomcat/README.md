@@ -6,7 +6,7 @@
 
 spring boot 整合 tomcat 后支持jsp 的使用（内置容器默认是不支持jsp），所以项目整合后采用jspController 跳转到show.jsp测试整合是否成功。
 
-![spring-boot-servlet](D:\spring-samples-for-all\pictures\spring-boot-tomcat.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-tomcat.png"/> </div>
 
 #### 1.2 项目主要依赖
 

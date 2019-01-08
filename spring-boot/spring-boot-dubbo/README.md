@@ -10,7 +10,7 @@
 
 1.2  本项目dubbo的搭建采用zookeeper作为注册中心， 关于zookeeper的安装和基本操作可以参见我的手记  [Zookeeper 基础命令与Java客户端](https://github.com/heibaiying/LearningNotes/blob/master/notes/%E4%B8%AD%E9%97%B4%E4%BB%B6/ZooKeeper/ZooKeeper%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%E4%B8%8EJava%E5%AE%A2%E6%88%B7%E7%AB%AF.md)
 
-![spring-scheduling](D:\spring-samples-for-all\pictures\spring-boot-dubbo.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-dubbo.png"/> </div>
 
 
 
@@ -90,11 +90,11 @@
 - api 下为公共的调用接口；
 - bean 下为公共的实体类。
 
-![spring-scheduling](D:\spring-samples-for-all\pictures\boot-dubbo-common.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/boot-dubbo-common.png"/> </div>
 
 ## 四、 服务提供者（boot-dubbo-provider）
 
-![spring-scheduling](D:\spring-samples-for-all\pictures\boot-dubbo-provider.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/boot-dubbo-provider.png"/> </div>
 
 #### 4.1 提供方配置
 
@@ -158,7 +158,7 @@ public class ProductService implements IProductService {
 
 ## 五、服务消费者（boot-dubbo-consumer）
 
-![boot-dubbo-consumer](D:\spring-samples-for-all\pictures\boot-dubbo-consumer1.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/boot-dubbo-consumer1.png"/> </div>
 
 #### 1.消费方的配置
 
