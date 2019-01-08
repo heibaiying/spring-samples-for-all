@@ -1,10 +1,6 @@
 # springmvc基础（基于xml配置）
 
-**开发环境：IDEA**
 
-**spring版本：5.1.3.RELEASE**
-
-**本部分内容官方文档链接：[Web Servlet](https://docs.spring.io/spring/docs/5.1.3.RELEASE/spring-framework-reference/web.html#spring-web)**
 
 ## 一、搭建hello spring工程
 
