@@ -54,7 +54,7 @@ spring boot 与 mybatis 版本的对应关系：
 
 #### 2.1 在application.yml 中配置数据源
 
-本用例采用druid作为数据库连接池，虽然druid性能略逊于Hikari，但是提供了更为全面的监控管理，可以按照实际需求选用druid或者Hikari。（关于Hikari数据源的配置可以参考[spring-boot-mbatis项目](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-mybatis)）
+本用例采用druid作为数据库连接池，虽然druid性能略逊于Hikari，但是提供了更为全面的监控管理，可以按照实际需求选用druid或者Hikari。（关于Hikari数据源的配置可以参考[spring-boot-mybatis项目](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-mybatis)）
 
 ```yaml
 spring:
