@@ -12,7 +12,7 @@
 
 #### 1.2 项目主要依赖
 
-需要说明的是按照spring 官方对应自定义的starter 命名规范的推荐：
+需要说明的是按照spring 官方对于自定义的starter 命名规范的推荐：
 
 - 官方的starter命名：spring-boot-starter-XXXX
 - 其他第三方starter命名：XXXX-spring-boot-starte
