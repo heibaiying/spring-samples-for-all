@@ -1,6 +1,6 @@
 # Spring-Samples-For-All
 
-![spring](https://img.shields.io/badge/spring-5.1.3.RELEASE-brightgreen.svg)![springboot](https://img.shields.io/badge/springboot-2.1.1.RELEASE-brightgreen.svg)![springcloud](https://img.shields.io/badge/springcloud-Finchley.SR2-brightgreen.svg)![jdk](https://img.shields.io/badge/jdk-1.8-blue.svg)
+![spring](https://img.shields.io/badge/spring-5.1.3.RELEASE-brightgreen.svg)      ![springboot](https://img.shields.io/badge/springboot-2.1.1.RELEASE-brightgreen.svg)      ![springcloud](https://img.shields.io/badge/springcloud-Finchley.SR2-brightgreen.svg)      ![jdk](https://img.shields.io/badge/jdk-1.8-blue.svg)
 
 <br/>
 
