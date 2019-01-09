@@ -8,7 +8,7 @@ kafka  的消息通过主题进行分类。一个主题可以被分为若干个�
 
 注意：由于一个主题包含多个分区，因此无法在整个主题范围内保证消息的顺序性，**但可以保证消息在单个分区内的顺序性**。
 
-![kafka主题和分区](D:\spring-samples-for-all\pictures\kafka主题和分区.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/kafka主题和分区.png"/> </div>
 
 ### 2.分区复制
 
@@ -29,7 +29,7 @@ kafka  的消息通过主题进行分类。一个主题可以被分为若干个�
 
 **一个分区只能被同一个消费者群组里面的一个消费者读取，但可以被不同消费者群组里面的多个消费者读取。多个消费者群组可以共同读取同一个主题，彼此之间互不影响**。
 
-![kafka消费者](D:\spring-samples-for-all\pictures\kafka消费者.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/kafka消费者.png"/> </div>
 
 ### 5.broker和集群
 
@@ -37,7 +37,7 @@ kafka  的消息通过主题进行分类。一个主题可以被分为若干个�
 
 broker是集群的组成部分。每一个集群都有一个broker同时充当了集群控制器的角色（自动从集群的活跃成员中选举出来）。控制器负责管理工作，包括将分区分配给broker和监控broker。**在集群中，一个分区从属一个broker,该broker被称为分区的首领**。一个分区可以分配给多个broker,这个时候会发生分区复制。这种复制机制为分区提供了消息冗余，如果有一个broker失效，其他broker可以接管领导权。
 
-![kafka集群复制](D:\spring-samples-for-all\pictures\kafka集群复制.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/kafka集群复制.png"/> </div>
 
 更多kafka 的说明可以参考我的个人笔记：[《Kafka权威指南》读书笔记](https://github.com/heibaiying/LearningNotes/blob/master/notes/%E4%B8%AD%E9%97%B4%E4%BB%B6/Kafka/%E3%80%8AKafka%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0.md#53-%E5%A4%8D%E5%88%B6)
 
@@ -55,7 +55,7 @@ broker是集群的组成部分。每一个集群都有一个broker同时充当�
 
 
 
-![spring-boot-kafka](D:\spring-samples-for-all\pictures\spring-boot-kafka.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-kafka.png"/> </div>
 
 #### 1.2 主要依赖
 
