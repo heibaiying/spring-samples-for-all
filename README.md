@@ -16,8 +16,6 @@ spring-boot：2.1.1.RELEASE
 
 spring-cloud：Finchley.SR2
 
-<br/>
-
 ## 1. spring samples
 
 所有spring的项目我都会提供两个版本的sample：
