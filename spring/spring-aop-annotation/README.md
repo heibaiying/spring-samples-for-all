@@ -167,3 +167,70 @@ public class AopTest {
 - 优先级高的切面在切入方法前执行的通知(before)会优先执行，但是位于方法后执行的通知(after,afterReturning)反而会延后执行，类似于同心圆原理。
 
   <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/aop执行顺序.png"/> </div>
+
+
+
+## 附： 关于切面表达式的说明
+
+切面表达式遵循以下格式：
+
+```shell
+execution(modifiers-pattern? ret-type-pattern declaring-type-pattern?name-pattern(param-pattern)
+            throws-pattern?)
+```
+
+- 除了返回类型模式，名字模式和参数模式以外，所有的部分都是可选的;
+-  `*`，它代表了匹配任意的返回类型; 
+- `()` 匹配了一个不接受任何参数的方法， 而 `(..)` 匹配了一个接受任意数量参数的方法（零或者更多）。 模式 `(*)` 匹配了一个接受一个任何类型的参数的方法。 模式 `(*,String)` 匹配了一个接受两个参数的方法，第一个可以是任意类型，第二个则必须是String类型。
+
+下面给出一些常见切入点表达式的例子。
+
+- 任意公共方法的执行：
+
+  ```java
+  execution(public * *(..))
+  ```
+
+- 任何一个以“set”开始的方法的执行：
+
+  ```java
+  execution(* set*(..))
+  ```
+
+- `AccountService` 接口的任意方法的执行：
+
+  ```java
+  execution(* com.xyz.service.AccountService.*(..))
+  ```
+
+- 定义在service包里的任意方法的执行：
+
+  ```java
+  execution(* com.xyz.service.*.*(..))
+  ```
+
+- 定义在service包或者子包里的任意方法的执行：
+
+  ```java
+  execution(* com.xyz.service..*.*(..))
+  ```
+
+- 在service包里的任意连接点（在Spring AOP中只是方法执行） ：
+
+  ```java
+  within(com.xyz.service.*)
+  ```
+
+- 在service包或者子包里的任意连接点（在Spring AOP中只是方法执行） ：
+
+  ```
+  within(com.xyz.service..*)
+  ```
+
+- 实现了 `AccountService` 接口的代理对象的任意连接点（在Spring AOP中只是方法执行） ：
+
+  ```
+  this(com.xyz.service.AccountService)
+  ```
+
+更多表达式可以参考官方文档：[Declaring a Pointcut](https://docs.spring.io/spring/docs/5.1.3.RELEASE/spring-framework-reference/core.html#aop-pointcuts)

@@ -244,4 +244,4 @@ freemarker：提供了完善的中文文档，地址 http://freemarker.foofun.cn
 
 thymeleaf：官方英文文档地址：[thymeleaf 3.0.11RELEASE](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.pdf)
 
-注：我在本仓库中也上传了一份[thymeleaf中文文档（gangzi828(刘明刚 译）](https://github.com/heibaiying/spring-samples-for-all/tree/master/referenced%20documents)，翻译的版本为3.0.5RELEASE
+注：我在本仓库中也上传了一份[thymeleaf中文文档（gangzi828(刘明刚 译))](https://github.com/heibaiying/spring-samples-for-all/tree/master/referenced%20documents)，翻译的版本为3.0.5RELEASE
