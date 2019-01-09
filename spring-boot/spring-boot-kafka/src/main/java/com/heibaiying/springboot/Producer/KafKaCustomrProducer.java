@@ -28,6 +28,7 @@ public class KafKaCustomrProducer {
          * 被用于ProducerRecord<K, V> producerRecord,即生产者发送消息的key,value 类型
          */
         ListenableFuture<SendResult<String, Object>> future = kafkaTemplate.send(topic, object);
+
         future.addCallback(new ListenableFutureCallback<SendResult<String, Object>>() {
             @Override
             public void onFailure(Throwable throwable) {
