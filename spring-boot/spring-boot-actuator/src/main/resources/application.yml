@@ -1,0 +1,15 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        # 这里用* 代表暴露所有端点只是为了观察效果，实际中按照需进行端点暴露
+        include: "*"
+  endpoint:
+    health:
+      # 详细信息显示给所有用户。
+      show-details: always
+  health:
+    status:
+      http-mapping:
+        # 自定义健康检查返回状态码对应的http状态码
+        FATAL:  503
