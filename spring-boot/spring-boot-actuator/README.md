@@ -107,7 +107,7 @@ management.endpoint.shutdown.enabled = true
 2. CustomHealthAggregator：自定义健康聚合规则；
 3. CustomEndPoint：自定义端点。
 
-![spring-boot-actuator](D:\spring-samples-for-all\pictures\spring-boot-actuator.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-actuator.png"/> </div>
 
 #### 1.2 主要依赖
 
@@ -142,7 +142,7 @@ management:
 
 导入actuator 的 start 并进行配置后，访问http://127.0.0.1:8080/actuator/health就可以看到对应的项目监控状态。
 
-![health](D:\spring-samples-for-all\pictures\health.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/health.png"/> </div>
 
 需要注意的是这里的监控状态根据实际项目所用到的技术不同而不同。因为以下HealthIndicators情况在适当时由Spring Boot自动配置的：
 
@@ -189,11 +189,11 @@ public class CustomHealthIndicator implements HealthIndicator {
 
 自定义检查通过的情况下：
 
-![actuator-health-up](D:\spring-samples-for-all\pictures\actuator-health-up.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/actuator-health-up.png"/> </div>
 
 自定义检查失败的情况：
 
-![health-fatal-200](D:\spring-samples-for-all\pictures\health-fatal-200.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/health-fatal-200.png"/> </div>
 
 
 
@@ -226,7 +226,7 @@ public class CustomHealthAggregator implements HealthAggregator {
 
 这是当我们自定义健康检查不通过时候的结果如下：
 
-![actuator-heath-503](D:\spring-samples-for-all\pictures\actuator-heath-503.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/actuator-heath-503.png"/> </div>
 
 这里需要注意的是返回我们自定义的聚合状态的时候，状态码也变成了503,这是我们在配置文件中进行定义的：
 
@@ -303,7 +303,7 @@ public class CustomEndPoint {
 
 #### 5.2 访问自定义端点http://127.0.0.1:8080/actuator/customEndPoint
 
-![actuator-customEndPoint](D:\spring-samples-for-all\pictures\actuator-customEndPoint.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/actuator-customEndPoint.png"/> </div>
 
 
 
@@ -311,4 +311,4 @@ public class CustomEndPoint {
 
 Sigar 下载包中也提供了各种参数的参考用例：
 
-![sigar](D:\spring-samples-for-all\pictures\sigar.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/sigar.png"/> </div>

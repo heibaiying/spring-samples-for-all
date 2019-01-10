@@ -58,7 +58,7 @@ spring-cloud：Finchley.SR2
 | [spring-boot-dubbo](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-dubbo) | spring-boot 整合 dubbo                     | [Dubbo ](http://dubbo.apache.org/zh-cn/docs/user/quick-start.html) |
 | [spring-boot-websocket](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-websocket) | spring-boot 整合 websocket                 | [Using @ServerEndpoint](https://docs.spring.io/spring-boot/docs/2.1.1.RELEASE/reference/htmlsingle/#howto-create-websocket-endpoints-using-serverendpoint) |
 | [spring-boot-kafka](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-kafka) | spring-boot 整合 kafka                     | [Apache Kafka Support](https://docs.spring.io/spring-boot/docs/2.1.1.RELEASE/reference/htmlsingle/#boot-features-kafka) |
-| spring-boot-actuator                                         | actuator + Hyperic SIGAR 应用信息监控      | [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/2.1.1.RELEASE/reference/htmlsingle/#production-ready) |
+| [spring-boot-actuator](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-actuator) | actuator + Hyperic SIGAR 应用信息监控      | [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/2.1.1.RELEASE/reference/htmlsingle/#production-ready) |
 
 更多的用例可参阅 [spring-boot 官方samples ](https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples)
 
