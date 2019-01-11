@@ -1,247 +1,177 @@
-# spring-boot 基础
+# spring-boot-yml-profile
 
-## 一、说明
+## 一、项目结构
 
-#### 1.1 项目结构说明
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-yml-profile.png"/> </div>
 
-1. 本项目搭建一个简单的hello spring 的 web工程，简单说明spring-boot 的开箱即用的特性；
-2. 模板引擎采用freemaker 和 thymeleaf 作为示例，分别对应模板文件makershow.ftl 和 leafShow.html；
-3. spring boot 2.x 默认是不支持jsp的，需要额外的配置，关于使用jsp的整合可以参考spring-boot-jsp项目。
+## 二、常用 yaml 语法讲解
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-base.png"/> </div>
+项目中的yml配置文件如下：
 
-#### 1.2 项目依赖
-
-导入相关的starter(启动器)
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.1.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-    <groupId>com.heibaiying</groupId>
-    <artifactId>spring-boot-base</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>spring-boot-base</name>
-    <description>Demo project for Spring Boot</description>
-
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
-
-    <dependencies>
-        <!--模板引擎-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-freemarker</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-        <!--web 启动器-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <!--lombok 插件-->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <!--测试相关依赖-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
-    <!--Spring Boot的Maven插件（Spring Boot Maven plugin）能够以Maven的方式为应用提供Spring Boot的支持-->
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
-</project>
-
+```yaml
+programmer:
+  name: xiaoming-DEV
+  married: false
+  hireDate: 2018/12/23
+  salary: 66666.88
+  random: ${random.int[1024,65536]}
+  skill: {java: master, jquery: proficiency}
+  company: [baidu,tengxun,alibaba]
+  school:
+    name: unviersity
+    location: shanghai
 ```
 
-1. spring boot 项目默认继承自spring-boot-starter-parent，而spring-boot-starter-parent继承自spring-boot-dependencies,  spring-boot-dependencies中定义了关于spring boot 依赖的各种jar包的版本，是spring boot 的版本管理中心。
+#### 2.1 基本规则
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-dependencies.png"/> </div>
+1. 大小写敏感 
+2. 使用缩进表示层级关系 
+3. 缩进长度没有限制，只要元素对齐就表示这些元素属于一个层级。 
+4. 使用#表示注释 
+5. 字符串默认不用加单双引号，但单引号和双引号都可以使用，双引号不会对特殊字符转义。
+6. YAML中提供了多种常量结构，包括：整数，浮点数，字符串，NULL，日期，布尔，时间。
 
-2. 关于spring boot 2.x官方支持的所有starter 可以参见官方文档 [Table 13.1. Spring Boot application starters](https://docs.spring.io/spring-boot/docs/2.1.1.RELEASE/reference/htmlsingle/#using-boot-starter)
+#### 2.2 对象的写法
+
+```yaml
+key: value
+```
+
+#### 2.3 map的写法
+
+```yaml
+# 写法一 同一缩进的所有键值对属于一个map
+key: 
+    key1: value1
+    key2: value2
+
+# 写法二
+{key1: value1, key2: value2}
+```
+
+#### 2.3 数组的写法
+
+```yaml
+# 写法一 使用一个短横线加一个空格代表一个数组项
+- a
+- b
+- c
+
+# 写法二
+[a,b,c]
+```
+
+#### 2.5 单双引号
+
+单引号和双引号都可以使用，双引号不会对特殊字符转义。
+
+```yaml
+s1: '内容\n字符串'
+s2: "内容\n字符串"
+
+转换后：
+{ s1: '内容\\n字符串', s2: '内容\n字符串' }
+```
+
+#### 2.6 特殊符号
+
+---  YAML可以在同一个文件中，使用---表示一个文档的开始。
 
 
 
-## 二、spring boot 主启动类
+## 三、spring boot 与 yaml
 
- 如果采用IDEA 或者 Spring Tool Suite (STS) 等开发工具创建的spring boot 工程，会默认创建启动类，如果没有创建，需要手动创建启动类
+#### 3.1  spring boot 支持使用 ${app.name} 引用预先定义的值
+
+```properties
+appName: MyApp
+appDescription: ${app.name} is a Spring Boot application
+```
+
+#### 3.2 spring boot 支持使用 ${random.xxx} 配置随机值
+
+```properties
+my.secret: ${random.value}
+my.number: ${random.int}
+my.bignumber: ${random.long}
+my.number.less.than.ten: ${random.int(10)}
+my.number.in.range: ${random.int[1024,65536]}
+```
+
+
+
+## 四、@ConfigurationProperties实现属性绑定
 
 ```java
-package com.heibaiying.springbootbase;
+@Component
+@ConfigurationProperties(prefix = "programmer")
+@Data
+@ToString
+public class Programmer {
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
-public class SpringBootBaseApplication {
-
-    // 启动类默认开启包扫描，扫描与主程序所在包及其子包，对于本工程而言 默认扫描 com.heibaiying.springbootbase
-    public static void main(String[] args) {
-        SpringApplication.run(SpringBootBaseApplication.class, args);
-    }
+    private String name;
+    private int age;
+    private boolean married;
+    private Date hireDate;
+    private float salary;
+    private int random;
+    private Map<String, String> skill;
+    private List company;
+    private School school;
 
 }
 ```
 
-@SpringBootApplication 注解是一个复合注解,里面包含了@ComponentScan注解，默认开启包扫描，扫描与主程序所在包及其子包，对于本工程而言 默认扫描 com.heibaiying.springbootbase
+Spring Boot将环境属性绑定到@ConfigurationProperties beans时会使用一些宽松的规则，称之为松散绑定。所以Environment属性名和bean属性名不需要精确匹配。常见的示例中有用的包括虚线分割（比如，context-path绑定到contextPath），将环境属性转为大写字母（比如，PORT绑定port）。
 
-```java
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-@Inherited
-@SpringBootConfiguration
-@EnableAutoConfiguration
-@ComponentScan(excludeFilters = {
-		@Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
-		@Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) })
-public @interface SpringBootApplication {
-    ...
-}
+需要注意的是`@Value`是不支持松散绑定的，所以建议除非有特殊的需求，否则在`ConfigurationProperties`和`value` 配置属性的时候最好都保持属性和变量的一致，以免造成不必要的勿扰。
+
+
+
+## 五、多配置文件
+
+多配置文件可以在同一个yml中使用 --- 分割为多个配置，或者遵循application-xxx.yml 的方式命名拆分为多个文件，并在主配置文件application.yml 中确定激活哪个配置文件，当然也可在命令行中确定，命令行的优先级大于配置文件。
+
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/profile.png"/> </div>
+
+```yaml
+# 配置文件中激活配置
+spring:
+  profiles:
+    active: dev
+```
+
+```shell
+# 命令行参数激活配置
+--spring.profiles.active=dev
 ```
 
 
 
-## 三、开箱即用的web工程
+## 六、优先级的说明
 
-在springbootBaseApplication.java 的同级目录创建controller文件夹，并在其中创建RestfulController.java,启动项目访问localhost:8080/restful/programmers 即可看到项目搭建成功。
+Spring Boot设计了一个非常特别的PropertySource顺序，以允许对属性值进行合理的覆盖，属性会以如下的顺序进行设值：
 
-```java
-/**
- * @author : heibaiying
- * @description : restful 控制器
- */
-@RestController
-@RequestMapping("restful")
-public class RestfulController {
+1. home目录下的devtools全局设置属性（~/.spring-boot-devtools.properties，如果devtools激活）。
+2. 测试用例上的@TestPropertySource注解。
+3. 测试用例上的@SpringBootTest#properties注解。
+4. 命令行参数
+5. 来自SPRING_APPLICATION_JSON的属性（环境变量或系统属性中内嵌的内联JSON）。
+6. ServletConfig初始化参数。
+7. ServletContext初始化参数。
+8. 来自于java:comp/env的JNDI属性。
+9. Java系统属性（System.getProperties()）。
+10. 操作系统环境变量。
+11. RandomValuePropertySource，只包含random.*中的属性。
+12. 没有打进jar包的Profile-specific应用属性（application-{profile}.properties和YAML变量）
+13. 打进jar包中的Profile-specific应用属性（application-{profile}.properties和YAML变量）。
+14. 没有打进jar包的应用配置（application.properties和YAML变量）。
+15. 打进jar包中的应用配置（application.properties和YAML变量）。
+16. @Configuration类上的@PropertySource注解。
+17. 默认属性（使用SpringApplication.setDefaultProperties指定）。
 
-    @GetMapping("programmers")
-    private List<Programmer> getProgrammers() {
-        List<Programmer> programmers = new ArrayList<>();
-        programmers.add(new Programmer("xiaoming", 12, 100000.00f, LocalDate.of(2019, Month.AUGUST, 2)));
-        programmers.add(new Programmer("xiaohong", 23, 900000.00f, LocalDate.of(2013, Month.FEBRUARY, 2)));
-        return programmers;
-    }
-}
-```
+这里做一下说明，上文第12,14 点没有打进jar包的文件指的是在启动时候通过`spring.config.location`参数指定的外部配置文件，外部配置文件的优先级应该是大于jar中的配置文件。
 
-这里之所以能够开箱即用，是因为我们在项目中导入spring-boot-starter-web启动器，而@SpringBootApplication 复合注解中默认开启了@EnableAutoConfiguration注解允许开启自动化配置，spring在检查导入starter-web的依赖后就会开启web的自动化配置。
+对上面的配置中常用的规则可以精简如下：
 
-
-
-## 四、模板引擎
-
-这里我们在一个项目中同时导入了freemaker 和 thymeleaf的starter（虽然并不推荐，但是在同一个项目中是可以混用这两种模板引擎的）。
-
-#### 4.1 freemarker
-
-```java
-/**
- * @author : heibaiying
- * @description : 跳转渲染模板引擎 默认模板的存放位置为classpath:templates
- */
-@Controller
-@RequestMapping("freemarker")
-public class FreeMarkerController {
-
-    @RequestMapping("show")
-    private String programmerShow(ModelMap modelMap){
-        List<Programmer> programmerList=new ArrayList<>();
-        programmerList.add(new Programmer("xiaoming",12,100000.00f,LocalDate.of(2019,Month.AUGUST,2)));
-        programmerList.add(new Programmer("xiaohong",23,900000.00f,LocalDate.of(2013,Month.FEBRUARY,2)));
-        modelMap.addAttribute("programmers",programmerList);
-        return "markerShow";
-    }
-}
-
-```
-
-```html
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>freemarker模板引擎</title>
-</head>
-<body>
-    <ul>
-        <#list programmers as programmer>
-           <li>姓名: ${programmer.name} 年龄: ${programmer.age}</li>
-        </#list>
-    </ul>
-</body>
-</html>
-```
-
-#### 4.2 thymeleaf
-
-```java
-/**
- * @author : heibaiying
- * @description : 跳转渲染模板引擎 默认模板的存放位置为classpath:templates
- */
-@Controller
-@RequestMapping("thymeleaf")
-public class ThymeleafController {
-
-    @RequestMapping("show")
-    private String programmerShow(ModelMap modelMap) {
-        List<Programmer> programmerList = new ArrayList<>();
-        programmerList.add(new Programmer("xiaoming", 12, 100000.00f, LocalDate.of(2019, Month.AUGUST, 2)));
-        programmerList.add(new Programmer("xiaohong", 23, 900000.00f, LocalDate.of(2013, Month.FEBRUARY, 2)));
-        modelMap.addAttribute("programmers", programmerList);
-        return "leafShow";
-    }
-}
-
-```
-
-```html
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>thymeleaf模板引擎</title>
-</head>
-<body>
-    <ul th:each="programmer:${programmers}">
-        <li>
-            姓名:<span th:text="${programmer.name}"></span>
-            薪水:<span th:text="${programmer.salary}"></span>
-        </li>
-    </ul>
-</body>
-</html>
-```
-
-#### 4.3 文档说明
-
-freemarker：提供了完善的中文文档，地址 http://freemarker.foofun.cn/
-
-thymeleaf：官方英文文档地址：[thymeleaf 3.0.11RELEASE](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.pdf)
-
-注：我在本仓库中也上传了一份[thymeleaf中文文档（gangzi828(刘明刚 译))](https://github.com/heibaiying/spring-samples-for-all/tree/master/referenced%20documents)，翻译的版本为3.0.5RELEASE
+**命令行 > application-{profile}.yml > application.yml > 默认属性**
