@@ -140,7 +140,7 @@ management:
 
 #### 1.4 查看监控状态
 
-导入actuator 的 start 并进行配置后，访问http://127.0.0.1:8080/actuator/health就可以看到对应的项目监控状态。
+导入actuator 的 start 并进行配置后，访问http://127.0.0.1:8080/actuator/health 就可以看到对应的项目监控状态。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/health.png"/> </div>
 
@@ -224,7 +224,7 @@ public class CustomHealthAggregator implements HealthAggregator {
 }
 ```
 
-这是当我们自定义健康检查不通过时候的结果如下：
+当我们自定义健康检查不通过时候的结果如下：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/actuator-heath-503.png"/> </div>
 
