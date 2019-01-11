@@ -66,18 +66,36 @@ spring-cloud：Finchley.SR2
 
 ## 3. spring-cloud samples
 
-| samples                    | 描述                              | 官方文档                                                     |
-| -------------------------- | --------------------------------- | ------------------------------------------------------------ |
-| spring-cloud-Eureka        | spring cloud 服务的注册和发现     | [Service Discovery: Eureka Clients](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.0.RC3/single/spring-cloud-netflix.html#_service_discovery_eureka_clients) |
-| spring-cloud-OpenFeign     | spring cloud 服务间通信           | [Spring Cloud OpenFeign 官方文档](https://spring.io/projects/spring-cloud-openfeign#learn) |
-| spring-cloud-config        | spring cloud 统一配置中心         | [Spring Cloud Config](https://spring.io/projects/spring-cloud-config#learn) |
-| spring-cloud-stream        | spring cloud 对消息服务的抽象整合 | [spring-cloud-stream官方文档](https://cloud.spring.io/spring-cloud-stream/) |
-| spring-cloud-zuul          | spring cloud 网关限流、权限验证   | [Router and Filter: Zuul](http://projects.spring.io/spring-cloud/spring-cloud.html#_router_and_filter_zuul) |
-| spring-cloud-sleuth-Zipkin | spring cloud 服务追踪             | [Spring Cloud Sleuth](https://spring.io/projects/spring-cloud-sleuth#learn) |
+| samples                     | 描述                              | 官方文档                                                     |
+| --------------------------- | --------------------------------- | ------------------------------------------------------------ |
+| spring-cloud-Eureka         | 服务的注册和发现                  | [Service Discovery: Eureka Clients](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.0.RC3/single/spring-cloud-netflix.html#_service_discovery_eureka_clients) |
+| spring-cloud-Eureka-cluster | eureka 高可用集群搭建             |                                                              |
+| spring-cloud-Ribbon         | 客户端负载均衡                    |                                                              |
+| spring-cloud-OpenFeign      | 声明式服务调用                    | [Spring Cloud OpenFeign 官方文档](https://spring.io/projects/spring-cloud-openfeign#learn) |
+| spring-cloud-Hystrix        | 服务容错与降级保护                |                                                              |
+| spring-cloud-config         | 分布式配置中心                    | [Spring Cloud Config](https://spring.io/projects/spring-cloud-config#learn) |
+| spring-cloud-stream         | spring cloud 对消息服务的抽象整合 | [spring-cloud-stream官方文档](https://cloud.spring.io/spring-cloud-stream/) |
+| spring-cloud-zuul           | spring cloud 网关服务             | [Router and Filter: Zuul](http://projects.spring.io/spring-cloud/spring-cloud.html#_router_and_filter_zuul) |
+| spring-cloud-sleuth-Zipkin  | 分布式服务追踪                    | [Spring Cloud Sleuth](https://spring.io/projects/spring-cloud-sleuth#learn) |
+| spring-cloud-config         | 分布式配置中心                    | [Spring Cloud Config](https://spring.io/projects/spring-cloud-config#learn) |
+| spring-cloud -bus           | spring cloud 消息总线             |                                                              |
 
 <br/>
 
-## 4.参考资料
+## 4.分布式session和分布式事务
+
+| 描述                                     | sample                       | 官方文档                                                     |
+| ---------------------------------------- | ---------------------------- | ------------------------------------------------------------ |
+| 分布式session解决方案（一）              | spring session               | [spring session](https://spring.io/projects/spring-session#learn) |
+| 分布式session 解决方案（二）             | spring boot + spring session |                                                              |
+| 分布式session 解决方案（三）             | memcached-session-manager    |                                                              |
+| 分布式事务解决方案（一）——JPA            | 待补充                       |                                                              |
+| 分布式事务解决方案（二）——Spring事务同步 | 待补充                       |                                                              |
+| 分布式事务解决方案（三）——链式事务       | 待补充                       |                                                              |
+
+
+
+## 5.参考资料
 
 相关参考文档放在了仓库的referenced documents 目录下，文件目录如下：
 

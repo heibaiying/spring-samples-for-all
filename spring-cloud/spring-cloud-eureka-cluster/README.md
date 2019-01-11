@@ -1,0 +1,3 @@
+2019-01-11 11:16:14.320  INFO 13496 --- [nio-8010-exec-4] c.n.e.registry.AbstractInstanceRegistry  : Registered instance SERVER/DESKTOP-8JGSFLJ:server:8010 with status UP (replication=true)
+2019-01-11 11:16:15.084  INFO 13496 --- [      Thread-41] c.n.e.registry.AbstractInstanceRegistry  : Registered instance SERVER/DESKTOP-8JGSFLJ:server:8020 with status UP (replication=true)
+2019-01-11 11:16:15.085  INFO 13496 --- [      Thread-41] c.n.e.registry.AbstractInstanceRegistry  : Registered instance SERVER/DESKTOP-8JGSFLJ:server:8030 with status UP (replication=true)
