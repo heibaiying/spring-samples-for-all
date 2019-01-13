@@ -2,7 +2,7 @@
 
 ## 一、项目结构
 
-![spring-cloud-eureka](D:\spring-samples-for-all\pictures\spring-boot-session.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-session.png"/> </div>
 
 
 
@@ -139,14 +139,14 @@ session 信息展示页面home.ftl：
 
 应用1启动配置：
 
-![spring-session-tomcat01](D:\spring-samples-for-all\pictures\spring-boot-session-app1.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-session-app1.png"/> </div>
 
 应用2启动配置，需要用 `--server.port `指定不同的端口号：
 
-![spring-session-tomcat02](D:\spring-samples-for-all\pictures\spring-boot-session-app2.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-session-app2.png"/> </div>
 
 **测试结果：**
 
-![spring-session-8080](D:\spring-samples-for-all\pictures\spring-boot-session-8080.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-session-8080.png"/> </div>
 
-![spring-session-8090](D:\spring-samples-for-all\pictures\spring-boot-session-8090.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-session-8090.png"/> </div>

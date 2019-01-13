@@ -6,7 +6,7 @@ eureka-server为服务注册中心，负责服务的管理；
 
 eureka-client 为eureka客户端；
 
-![spring-cloud-eureka](D:\spring-samples-for-all\pictures\spring-cloud-eureka-cluster.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-eureka-cluster.png"/> </div>
 
 
 
@@ -14,7 +14,7 @@ eureka-client 为eureka客户端；
 
 这里我们以单机伪集群的方式搭建，让三个单机注册中心互相注册，实现注册中心的高可用。配置示意图如下：
 
-![eureka-server-client](D:\spring-samples-for-all\pictures\eureka-server-client.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/eureka-server-client.png"/> </div>
 
 #### 2.1 引入eureka服务端依赖
 
@@ -27,7 +27,7 @@ eureka-client 为eureka客户端；
 
 #### 2.2  创建三份配置文件，分别代表不同注册中心的配置
 
-![eureka-application](D:\spring-samples-for-all\pictures\eureka-application.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/eureka-application.png"/> </div>
 
 application-01.yml:
 
@@ -149,7 +149,7 @@ public class EurekaClientApplication {
 
 ### 4.1 这里我们可以采用命令行方式指定配置，分别启动三个注册中心
 
-![eureka-active](D:\spring-samples-for-all\pictures\eureka-active.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/eureka-active.png"/> </div>
 
 ### 4.2  高可用集群搭建成功的判定
 
@@ -173,15 +173,15 @@ public class EurekaClientApplication {
 
 8010 注册中心：
 
-![eureka-8010](D:\spring-samples-for-all\pictures\eureka-8010.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/eureka-8010.png"/> </div>
 
 8020 注册中心：
 
-![eureka-8020](D:\spring-samples-for-all\pictures\eureka-8020.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/eureka-8020.png"/> </div>
 
 8030 注册中心：
 
-![eureka-8030](D:\spring-samples-for-all\pictures\eureka-8030.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/eureka-8030.png"/> </div>
 
 ### 4.3  prefer-ip-address 参数说明
 

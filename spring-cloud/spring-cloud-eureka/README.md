@@ -6,7 +6,7 @@ eureka-server为服务注册中心，负责服务的管理；
 
 eureka-client 为eureka客户端；
 
-![spring-cloud-eureka](D:\spring-samples-for-all\pictures\spring-cloud-eureka.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-eureka.png"/> </div>
 
 ## 二、三步搭建eureka 服务注册中心
 
@@ -95,4 +95,4 @@ public class EurekaClientApplication {
 
 #### 4.1 进入注册中心控制台，查看服务注册情况
 
-![eureka](D:\spring-samples-for-all\pictures\eureka.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/eureka.png"/> </div>
