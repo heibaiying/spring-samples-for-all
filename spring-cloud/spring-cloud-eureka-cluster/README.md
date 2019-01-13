@@ -160,7 +160,7 @@ public class EurekaClientApplication {
 1. hostname和prefer-ip-address都没有配置，则访问 主机名:服务名:端口号，
 
 ```
- 如：http://desktop-8jgsflj:8761/info
+    如：http://desktop-8jgsflj:8761/info
 ```
 
 2. 配置了hostname而没有配置prefer-ip-address，则访问 hostname:服务名:端口号，
