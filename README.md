@@ -82,16 +82,12 @@ spring-cloud：Finchley.SR2
 
 <br/>
 
-## 4.分布式session和分布式事务
+## 4.spring分布式session和分布式事务
 
-| 描述                                     | sample                       | 官方文档                                                     |
-| ---------------------------------------- | ---------------------------- | ------------------------------------------------------------ |
-| 分布式session解决方案（一）              | spring session               | [spring session](https://spring.io/projects/spring-session#learn) |
-| 分布式session 解决方案（二）             | spring boot + spring session |                                                              |
-| 分布式session 解决方案（三）             | memcached-session-manager    |                                                              |
-| 分布式事务解决方案（一）——JPA            | 待补充                       |                                                              |
-| 分布式事务解决方案（二）——Spring事务同步 | 待补充                       |                                                              |
-| 分布式事务解决方案（三）——链式事务       | 待补充                       |                                                              |
+| sample                       | 描述                       | 官方文档                                                     |
+| ---------------------------- | -------------------------- | ------------------------------------------------------------ |
+| spring-session               | spring 分布式 session      | [spring session](https://spring.io/projects/spring-session#learn) |
+| spring boot + spring session | spring boot 分布式 session | [spring session](https://spring.io/projects/spring-session#learn) |
 
 <br/>
 

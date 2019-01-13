@@ -1,0 +1,21 @@
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    jedis:
+      pool:
+        # 连接池最大连接数,使用负值表示无限制。
+        max-active: 8
+        # 连接池最大阻塞等待时间,使用负值表示无限制。
+        max-wait: -1s
+        # 连接池最大空闲数,使用负值表示无限制。
+        max-idle: 8
+        # 连接池最小空闲连接，只有设置为正值时候才有效
+        min-idle: 1
+    timeout: 300ms
+  session:
+    # session 存储方式 支持redis、mongo、jdbc、hazelcast
+    store-type: redis
+
+# 如果是集群节点 采用如下配置指定节点
+#spring.redis.cluster.nodes

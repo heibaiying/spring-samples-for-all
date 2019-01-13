@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+    <context:property-placeholder location="classpath:redis.properties"/>
+
+
+    <!--配置 http session-->
+    <bean id="redisHttpSessionConfiguration"
+          class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration">
+        <!--session 有效期 单位秒 每次访问都会刷新有效期-->
+        <property name="maxInactiveIntervalInSeconds" value="1800"/>
+    </bean>
+
+    <!--单机版本配置redis 配置-->
+    <bean id="redisStandaloneConfiguration"
+          class="org.springframework.data.redis.connection.RedisStandaloneConfiguration">
+        <constructor-arg name="hostName" value="${redis.host}"/>
+        <constructor-arg name="port" value="${redis.port}"/>
+    </bean>
+
+
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+          p:usePool="true">
+        <!--单机版本配置-->
+        <constructor-arg name="standaloneConfig" ref="redisStandaloneConfiguration"/>
+        <!--集群配置-->
+        <!--<constructor-arg name="clusterConfig" ref="redisClusterConfiguration"/>-->
+    </bean>
+
+
+    <!--集群配置-->
+    <!--<bean id="redisClusterConfiguration" class="org.springframework.data.redis.connection.RedisClusterConfiguration">
+        <property name="maxRedirects" value="3"/>
+        <constructor-arg>
+            <set>
+                <value>127.0.0.1:6379</value>
+                <value>127.0.0.1:6380</value>
+                <value>127.0.0.1:6381</value>
+            </set>
+        </constructor-arg>
+    </bean>-->
+
+
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+          p:connection-factory-ref="jedisConnectionFactory"/>
+
+</beans>
