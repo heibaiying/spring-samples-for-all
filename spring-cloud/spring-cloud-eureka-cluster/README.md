@@ -160,17 +160,18 @@ public class EurekaClientApplication {
 1. hostname和prefer-ip-address都没有配置，则访问 主机名:服务名:端口号，
 
 ```
- 如：http://desktop-8jgsflj:8761/info
+    如：http://desktop-8jgsflj:8761/info
 ```
 
 2. 配置了hostname而没有配置prefer-ip-address，则访问 hostname:服务名:端口号，
 
+```
      如：http://server:8761/info
-
+```
 3. 如果配置了prefer-ip-address，则访问 ipAddress:服务名:端口号，
-
+```
      如：http://192.168.200.228:8761/info
-
+```
 8010 注册中心：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/eureka-8010.png"/> </div>

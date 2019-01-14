@@ -86,8 +86,8 @@ spring-cloud：Finchley.SR2
 
 | sample                                                       | 描述                       | 官方文档                                                     |
 | ------------------------------------------------------------ | -------------------------- | ------------------------------------------------------------ |
-| [spring-session](https://github.com/heibaiying/spring-samples-for-all/tree/master/distributed%20solution/spring-session) | spring 分布式 session      | [spring session](https://spring.io/projects/spring-session#learn) |
-| [spring boot + spring session](https://github.com/heibaiying/spring-samples-for-all/tree/master/distributed%20solution/spring-boot-session) | spring boot 分布式 session | [spring session](https://spring.io/projects/spring-session#learn) |
+| [spring-session](https://github.com/heibaiying/spring-samples-for-all/tree/master/distributed-solution/spring-session) | spring 实现分布式 session      | [spring session](https://spring.io/projects/spring-session#learn) |
+| [spring boot + spring session](https://github.com/heibaiying/spring-samples-for-all/tree/master/distributed-solution/spring-boot-session) | spring boot + spring session 实现分布式 session | [spring session](https://spring.io/projects/spring-session#learn) |
 
 <br/>
 
