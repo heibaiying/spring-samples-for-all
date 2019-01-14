@@ -1,0 +1,12 @@
+server:
+  port: 8010
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    # 设置为false,代表不向注册中心注册自己
+    register-with-eureka: false
+    # 注册中心主要用于维护服务，并不需要检索服务，所以设置为false
+    fetch-registry: false
+    serviceUrl:
+          defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/

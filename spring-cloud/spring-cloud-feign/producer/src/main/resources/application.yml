@@ -1,0 +1,11 @@
+server:
+  port: 8020
+# 指定服务命名
+spring:
+  application:
+    name: producer
+# 指定注册中心地址
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8010/eureka/
