@@ -31,4 +31,7 @@ public class ProductService implements IProductService {
         return productList;
     }
 
+    public void saveProduct(Product product) {
+        restTemplate.postForObject("http://producer/product", product, Void.class);
+    }
 }

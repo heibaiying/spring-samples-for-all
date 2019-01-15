@@ -1,5 +1,5 @@
 server:
-  port: 8030
+  port: 8080
 # 指定服务命名
 spring:
   application:

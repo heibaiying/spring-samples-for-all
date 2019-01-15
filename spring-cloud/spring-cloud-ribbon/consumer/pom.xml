@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.heibaiying</groupId>
+        <groupId>com.heibaiying.ribbon</groupId>
         <artifactId>spring-cloud-ribbon</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -31,7 +31,7 @@
         </dependency>
         <!--引入对公共模块的依赖-->
         <dependency>
-            <groupId>com.heibaiying.eureka</groupId>
+            <groupId>com.heibaiying.ribbon</groupId>
             <artifactId>common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>

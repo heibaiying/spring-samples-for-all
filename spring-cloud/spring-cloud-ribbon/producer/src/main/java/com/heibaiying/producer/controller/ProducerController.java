@@ -4,9 +4,7 @@ package com.heibaiying.producer.controller;
 import com.heibaiying.common.api.IProductService;
 import com.heibaiying.common.bean.Product;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,13 +17,18 @@ public class ProducerController {
     @Autowired
     private IProductService productService;
 
-    @RequestMapping("products")
+    @GetMapping("products")
     public List<Product> productList() {
         return productService.queryAllProducts();
     }
 
-    @RequestMapping("product/{id}")
+    @GetMapping("product/{id}")
     public Product productDetail(@PathVariable int id) {
         return productService.queryProductById(id);
+    }
+
+    @PostMapping("product")
+    public void save(@RequestBody Product product) {
+        productService.saveProduct(product);
     }
 }

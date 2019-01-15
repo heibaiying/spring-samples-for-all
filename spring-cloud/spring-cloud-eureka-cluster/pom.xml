@@ -11,7 +11,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.heibaiying</groupId>
+    <groupId>com.heibaiying.eureka.cluster</groupId>
     <artifactId>eureka-cluster</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>eureka-cluster</name>

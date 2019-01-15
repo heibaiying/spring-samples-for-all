@@ -22,7 +22,7 @@
         </dependency>
         <!--引入对公共模块的依赖-->
         <dependency>
-            <groupId>com.heibaiying.eureka</groupId>
+            <groupId>com.heibaiying.ribbon</groupId>
             <artifactId>common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>

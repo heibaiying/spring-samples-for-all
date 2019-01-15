@@ -13,4 +13,6 @@ public interface IProductService {
     Product queryProductById(int id);
 
     List<Product> queryAllProducts();
+
+    void saveProduct(Product product);
 }

@@ -17,7 +17,7 @@ import java.util.Date;
 public class Product implements Serializable {
 
     // 产品序列号
-    private int id;
+    private long id;
 
     // 产品名称
     private String name;
