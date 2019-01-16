@@ -9,3 +9,9 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8010/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        # 需要开启hystrix.stream端点的暴露 这样才能获取到监控信息 * 代表开启可监控端点
+        include: "*"

@@ -1,5 +1,5 @@
 server:
-  port: 8090
+  port: 8040
 # 指定服务命名
 spring:
   application:
@@ -13,9 +13,9 @@ eureka:
 turbine:
   aggregator:
     cluster-config: default
-  app-config: consumer
-  clusterNameExpression: new String("default")
-  instanceUrlSuffix:
-    default: actuator/hystrix.stream
+  combine-host-port: true
+  app-config: consumer,producer
+  clusterNameExpression: "'default'"
+
 
 

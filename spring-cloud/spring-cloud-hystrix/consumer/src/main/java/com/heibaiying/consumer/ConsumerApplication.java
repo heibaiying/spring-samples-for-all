@@ -15,7 +15,17 @@ import org.springframework.context.annotation.Bean;
 @EnableHystrixDashboard
 public class ConsumerApplication {
 
-    @Bean
+    public static void main(String[] args) {
+        SpringApplication.run(ConsumerApplication.class, args);
+    }
+
+
+    /*
+     * 这种方式对servlet进行注册和在配置文件中开启端点是等效的
+     * 可以在启动的监控日志中看到端点的注册信息:
+     * o.s.b.a.e.web.ServletEndpointRegistrar   : Registered '/actuator/hystrix.stream' to hystrix.stream-actuator-endpoint
+
+     @Bean
     public ServletRegistrationBean getServlet() {
         HystrixMetricsStreamServlet streamServlet = new HystrixMetricsStreamServlet();
         ServletRegistrationBean registrationBean = new ServletRegistrationBean(streamServlet);
@@ -23,11 +33,7 @@ public class ConsumerApplication {
         registrationBean.addUrlMappings("/actuator/hystrix.stream");
         registrationBean.setName("HystrixMetricsStreamServlet");
         return registrationBean;
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(ConsumerApplication.class, args);
-    }
+    }*/
 
 }
 

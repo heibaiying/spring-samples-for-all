@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * @author : heibaiying
@@ -20,16 +22,18 @@ public class ProductService implements IProductService, ApplicationListener<WebS
     private static List<Product> productList = new ArrayList<>();
 
     public Product queryProductById(int id) {
-        for (Product product : productList) {
-            if (product.getId() == id) {
-                return product;
-            }
-        }
-        return null;
+        return productList.stream().filter(p->p.getId()==id).collect(Collectors.toList()).get(0);
     }
 
 
     public List<Product> queryAllProducts() {
+        // 用于测试 hystrix 超时熔断
+        try {
+            int i = new Random().nextInt(2500);
+            Thread.sleep(i);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return productList;
     }
 

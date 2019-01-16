@@ -3,6 +3,7 @@ package com.heibaiying.producer.controller;
 
 import com.heibaiying.common.api.IProductService;
 import com.heibaiying.common.bean.Product;
+import com.heibaiying.producer.service.api.ICustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,7 @@ public class ProducerController {
 
     @Autowired
     private IProductService productService;
+
 
     @GetMapping("products")
     public List<Product> productList() {
@@ -31,4 +33,5 @@ public class ProducerController {
     public void save(@RequestBody Product product) {
         productService.saveProduct(product);
     }
+
 }
