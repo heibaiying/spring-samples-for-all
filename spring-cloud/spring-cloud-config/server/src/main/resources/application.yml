@@ -1,0 +1,14 @@
+server:
+  port: 8010
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/heibaiying/spring-samples-for-all/
+          search-paths: spring-cloud/spring-cloud-eureka-cluster/eureka-server/src/main/resources/
+          username:
+          password:
+      label: master
