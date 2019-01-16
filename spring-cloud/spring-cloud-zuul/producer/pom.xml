@@ -4,19 +4,31 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.heibaiying.feign</groupId>
-        <artifactId>spring-cloud-feign</artifactId>
+        <groupId>com.heibaiying.zuul</groupId>
+        <artifactId>spring-cloud-zuul</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-
-    <artifactId>eureka</artifactId>
+    
+    <artifactId>producer</artifactId>
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <!--引入对公共模块的依赖-->
+        <dependency>
+            <groupId>com.heibaiying.zuul</groupId>
+            <artifactId>common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
+
 
     <build>
         <plugins>

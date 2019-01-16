@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -27,13 +26,6 @@ public class ProductService implements IProductService, ApplicationListener<WebS
 
 
     public List<Product> queryAllProducts() {
-        /*用于测试 hystrix 超时熔断
-        try {
-            int i = new Random().nextInt(2500);
-            Thread.sleep(i);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
         return productList;
     }
 
