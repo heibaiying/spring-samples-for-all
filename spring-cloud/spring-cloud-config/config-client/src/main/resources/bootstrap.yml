@@ -1,0 +1,47 @@
+server:
+  port: 8030
+spring:
+  application:
+    name: config-client
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        # 这里我们指定的是服务名 如果配置中心有多个，且用同一个服务名，我们的客户端拉取配置的时候是负载均衡的,配置中心也就是高可用
+        serviceId: config-server
+      # 指定分支
+      label: master
+      # 指定环境
+      profile: dev
+    bus:
+      #开启总线
+      enabled: true
+      # 打开ack跟踪的标志（默认关闭）
+      trace:
+        enabled: true
+  # 使用bus实现热更新
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+
+
+# 注意指定注册中心的配置不要从公共配置中拉取，要在本地的配置文件中指定
+# 因为我们必须要先从注册中心去获取可用的配置中心, 从配置中心去拉取配置
+eureka:
+    client:
+      serviceUrl:
+        defaultZone: http://localhost:8010/eureka/
+
+# 暴露热刷新的端点
+#management:
+#  endpoint:
+#    bus-refresh:
+#      enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
+

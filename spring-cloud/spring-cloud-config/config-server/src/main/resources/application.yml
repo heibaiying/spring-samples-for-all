@@ -1,0 +1,26 @@
+server:
+  port: 8020
+# 指定注册中心地址
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8010/eureka/
+# 指定服务命名
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/heibaiying/spring-samples-for-all/
+          search-paths: spring-cloud/spring-cloud-test-config/
+          # 如果代码仓库是公开的 则 不需要设置用户名和密码
+          username:
+          password:
+          # 指定拉取的配置文件的存放的位置,配置文件最后存储的目录为 basedir + search-paths
+          # 这个地方还需要注意的是，配置文件的仓库最好只放配置文件
+          # 因为配置中心不仅会拉取search-paths下的文件，还会把uri指定仓库中的全部文件拉取到basedir下
+          basedir: D:\git-config
+      # 指定分支
+      label: master
