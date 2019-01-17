@@ -8,15 +8,15 @@ import org.springframework.messaging.SubscribableChannel;
 /**
  * @author : heibaiying
  */
-public interface Custom {
+public interface CustomStream {
 
-    String INPUT = "input";
-    String OUTPUT = "output";
+    String INPUT = "customInput";
+    String OUTPUT = "customOutput";
 
-    @Input(Custom.INPUT)
+    @Input(CustomStream.INPUT)
     SubscribableChannel input();
 
-    @Output(Custom.OUTPUT)
+    @Output(CustomStream.OUTPUT)
     MessageChannel output();
 
 }

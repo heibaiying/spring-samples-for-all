@@ -1,7 +1,7 @@
 package com.heibaiying.stream.controller;
 
 import com.heibaiying.stream.bean.Programmer;
-import com.heibaiying.stream.stream.Custom;
+import com.heibaiying.stream.stream.CustomStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
@@ -21,29 +21,28 @@ import java.util.Map;
 public class MessageController {
 
     @Autowired
-    private Custom custom;
+    private CustomStream customStream;
 
     /***
-     * 发送简单消息
+     * 1、发送简单消息
      */
    @RequestMapping("sendSimpleMessage")
    public void sendSimpleMessage() {
-       custom.input().send(MessageBuilder.withPayload("hell spring cloud stream").build());
+       customStream.input().send(MessageBuilder.withPayload("hello spring cloud stream").build());
    }
 
 
     /***
-     * 发送消息体为对象的消息
-     *
+     * 2、发送消息体为对象的消息
      */
     @RequestMapping("sendObject")
     public void sendObject() {
         Programmer programmer=new Programmer("pro",12,212.2f,new Date());
-        custom.input().send(MessageBuilder.withPayload(programmer).build());
+        customStream.input().send(MessageBuilder.withPayload(programmer).build());
     }
 
     /**
-     * 发送带有消息头的消息
+     * 3、发送带有消息头的消息
      */
     @RequestMapping("sendWithHeads")
     public void sendWithHeads() {
@@ -52,11 +51,11 @@ public class MessageController {
         map.put("code","868686");
         MessageHeaders messageHeaders=new MessageHeaders(map);
         Message<Programmer> message= MessageBuilder.createMessage(programmer,messageHeaders);
-        custom.input().send(message);
+        customStream.input().send(message);
     }
 
     /**
-     * 条件消息 可以看做是消息路由键的一种实现
+     * 4、条件消息 可以看做是消息路由键的一种实现
      */
     @RequestMapping("sendWithKey")
     public void sendWithKey() {
@@ -66,13 +65,29 @@ public class MessageController {
         map.put("key","01");
         MessageHeaders messageHeaders=new MessageHeaders(map);
         Message<Programmer> message= MessageBuilder.createMessage(programmer,messageHeaders);
-        custom.input().send(message);
+        customStream.input().send(message);
 
         // 创建消息头key 为 02 的消息
         programmer.setName("key02");
         map.put("key","02");
         MessageHeaders messageHeaders02=new MessageHeaders(map);
         Message<Programmer> message02= MessageBuilder.createMessage(programmer,messageHeaders02);
-        custom.input().send(message02);
+        customStream.input().send(message02);
+    }
+
+    /**
+     * 5、消息转发
+     */
+    @RequestMapping("forward")
+    public void forward(){
+        customStream.input().send(MessageBuilder.withPayload("hello spring cloud stream").build());
+    }
+
+    /**
+     * 5、直接往output发消息
+     */
+    @RequestMapping("toOutPut")
+    public void toOutPut(){
+        customStream.output().send(MessageBuilder.withPayload("direct to output channel").build());
     }
 }

@@ -4,3 +4,12 @@ spring:
     port: 5672
     username: guest
     password: guest
+  # 指定消息的分组 默认交换机的类型是topic,发送消息是广播的方式，
+  # 所有客户端都会受到消息，指定分组后只有一个客户端可以接收到消息
+  cloud:
+    stream:
+      bindings:
+       # 和我们在接口中声明消息名称的保持一致
+       customInput:
+       # 分组名称任意填写即可
+        group: gro
