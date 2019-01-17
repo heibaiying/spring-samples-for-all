@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: server
+server:
+  port: 8010
+eureka:
+  server:
+    # 关闭自我保护机制 开发的时候可以开启 保证不可用的服务能够及时剔除
+    enable-self-preservation: false
+  instance:
+    hostname: 127.0.0.1
+  client:
+    serviceUrl:
+          defaultZone: http://localhost:8020/eureka/,http://192.168.200.228:8030/eureka/
+
+
+programmer:
+  name: xiaoming
+  married: false
+  hireDate: 2018/12/23
+  salary: 66666.88
+  random: ${random.int[1024,65536]}
+  skill: {java: master, jquery: proficiency}
+  company: [baidu,tengxun,alibaba]
