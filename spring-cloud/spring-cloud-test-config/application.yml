@@ -6,7 +6,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     
 programmer:
-  age:20
+  age: 20
   name: xiaohuo
   married: false
   hireDate: 2018/12/23
