@@ -16,7 +16,7 @@
 - 当一个服务的处理请求的失败次数大于阈值时候，熔断器开启，这时候所有的请求都会执行快速失败，是不会去调用实际的服务的；
 - 当熔断器处于打开状态的一段时间后，熔断器处于半打开状态，这时候一定数量的请求回去调用实际的服务，如果调用成功，则代表服务可用了，熔断器关闭；如果还是失败，则代表服务还是不可用，熔断器继续关闭。
 
-![circuitbreaker](D:\spring-samples-for-all\pictures\circuitbreaker.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/circuitbreaker.png"/> </div>
 
 ## 二、项目结构
 
@@ -28,7 +28,7 @@
 + eureka: 注册中心；
 + turbine:多个熔断器的聚合监控。
 
-![spring-cloud-hystrix](D:\spring-samples-for-all\pictures\spring-cloud-hystrix.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-hystrix.png"/> </div>
 
 
 
@@ -144,7 +144,7 @@ public List<Product> queryAllProducts() {
 
 3.5   启动服务，访问http://localhost:8030/sell/products ，多次刷新查看熔断情况
 
-![hystrix-8030](D:\spring-samples-for-all\pictures\hystrix-8030.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/hystrix-8030.png"/> </div>
 
 #### 3.5 启动服务，访问 localhost:8030/hystrix
 
@@ -154,15 +154,15 @@ public List<Product> queryAllProducts() {
 
 **登录页面**：
 
-![hystrix-single-login](D:\spring-samples-for-all\pictures\hystrix-single-login.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/hystrix-single-login.png"/> </div>
 
 **监控页面**：
 
-![hystrix-single](D:\spring-samples-for-all\pictures\hystrix-8030-login.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/hystrix-8030-login.png"/> </div>
 
 **关于各个参数的说明参见[官方wiki](https://github.com/Netflix-Skunkworks/hystrix-dashboard/wiki)提供的图**：
 
-![dashboard](D:\spring-samples-for-all\pictures\dashboard.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/dashboard.png"/> </div>
 
 
 
@@ -172,7 +172,7 @@ public List<Product> queryAllProducts() {
 
 单体监控和聚合监控：
 
-![dashboard-direct-vs-turbine-640](D:\spring-samples-for-all\pictures\dashboard-direct-vs-turbine-640.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/dashboard-direct-vs-turbine-640.png"/> </div>
 
 
 
@@ -279,11 +279,11 @@ public class TurbineApplication {
 
 在  localhost:8030/hystrix或者localhost:8030/hystrix（consumer和producer都集成了hystrix） 页面输入http://localhost:8040/turbine.stream，查看断路器聚合信息
 
-![hystrix-cluster-login](D:\spring-samples-for-all\pictures\hystrix-cluster-login.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/hystrix-cluster-login.png"/> </div>
 
 **显示了不同服务单元（consumer,producer）的多个断路器信息：**
 
-![hystrix-cluster](D:\spring-samples-for-all\pictures\hystrix-cluster.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/hystrix-cluster.png"/> </div>
 
 ## 五、整合过程中可能出现的问题
 
@@ -322,4 +322,4 @@ public class TurbineApplication {
 
 这种情况是熔断器所在的方法没有被调用，不是整合问题，这时候调用一下熔断器所在方法即可。
 
-![hystrix-loading](D:\spring-samples-for-all\pictures\hystrix-loading.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/hystrix-loading.png"/> </div>
