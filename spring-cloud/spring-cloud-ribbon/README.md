@@ -90,7 +90,7 @@ public class ProducerController {
 }
 ```
 
-#### 3.2 将服务注册到注册中心
+#### 3.2 指定注册中心地址,并在启动类上开启自动注册@EnableDiscoveryClient
 
 ```java
 server:
@@ -104,6 +104,19 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8010/eureka/
+```
+
+```java
+@SpringBootApplication
+@EnableDiscoveryClient
+public class ProducerApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ProducerApplication.class, args);
+    }
+
+}
+
 ```
 
 
@@ -122,7 +135,7 @@ eureka:
 </dependency>
 ```
 
-#### 4.2 指定注册中心的地址
+#### 4.2 指定注册中心地址,并在启动类上开启自动注册@EnableDiscoveryClient
 
 ```java
 server:
@@ -136,6 +149,18 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8010/eureka/
+```
+
+```java
+@SpringBootApplication
+@EnableDiscoveryClient
+public class ConsumerApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ConsumerApplication.class, args);
+    }
+
+}
 ```
 
 #### 4.3 使用@LoadBalanced配置RestTemplate即可实现客户端负载均衡
@@ -207,7 +232,9 @@ public class ProductService implements IProductService {
 
 ## 六、 附1： 关于RestTemplate的说明
 
-#### 6.1 restTemplate 调用对应resultful接口时候，使用的方法应该与接口声明方式（@GetMapping、@PostMapping、@PutMapping、@DeleteMapping）保持一致。请求类型与对应的调用方法如下。
+#### 6.1  restTemplate 规范
+
+restTemplate 调用对应resultful接口时候，使用的方法应该与接口声明方式（@GetMapping、@PostMapping、@PutMapping、@DeleteMapping）保持一致。请求类型与对应的调用方法如下。
 
 - GET请求(getForObject 、getForEntity)
 - POST请求（postForObject 、postForEntity）
