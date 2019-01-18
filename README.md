@@ -64,21 +64,20 @@ spring-cloud：Finchley.SR2
 
 <br/>
 
-## 3. spring-cloud samples
+## 3. spring-cloud  samples
 
-| samples                                                      | 描述                              | 官方文档                                                     |
-| ------------------------------------------------------------ | --------------------------------- | ------------------------------------------------------------ |
-| [spring-cloud-Eureka](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-eureka) | 服务的注册和发现                  | [Service Discovery: Eureka Clients](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.0.RC3/single/spring-cloud-netflix.html#_service_discovery_eureka_clients) |
-| [spring-cloud-Eureka-cluster](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-eureka-cluster) | eureka 高可用集群搭建             |                                                              |
-| spring-cloud-Ribbon                                          | 客户端负载均衡                    |                                                              |
-| spring-cloud-OpenFeign                                       | 声明式服务调用                    | [Spring Cloud OpenFeign 官方文档](https://spring.io/projects/spring-cloud-openfeign#learn) |
-| spring-cloud-Hystrix                                         | 服务容错与降级保护                |                                                              |
-| spring-cloud-config                                          | 分布式配置中心                    | [Spring Cloud Config](https://spring.io/projects/spring-cloud-config#learn) |
-| spring-cloud-stream                                          | spring cloud 对消息服务的抽象整合 | [spring-cloud-stream官方文档](https://cloud.spring.io/spring-cloud-stream/) |
-| spring-cloud-zuul                                            | spring cloud 网关服务             | [Router and Filter: Zuul](http://projects.spring.io/spring-cloud/spring-cloud.html#_router_and_filter_zuul) |
-| spring-cloud-sleuth-Zipkin                                   | 分布式服务追踪                    | [Spring Cloud Sleuth](https://spring.io/projects/spring-cloud-sleuth#learn) |
-| spring-cloud-config                                          | 分布式配置中心                    | [Spring Cloud Config](https://spring.io/projects/spring-cloud-config#learn) |
-| spring-cloud -bus                                            | spring cloud 消息总线             |                                                              |
+| samples                                                      | 描述                               | 官方文档                                                     |
+| ------------------------------------------------------------ | ---------------------------------- | ------------------------------------------------------------ |
+| spring-cloud                                                 | 微服务简介与用例说明               |                                                              |
+| [spring-cloud-Eureka](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-eureka) | 服务的注册和发现                   | [Service Discovery: Eureka Clients](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.0.RC3/single/spring-cloud-netflix.html#_service_discovery_eureka_clients) |
+| [spring-cloud-Eureka-cluster](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-eureka-cluster) | eureka 高可用集群搭建              |                                                              |
+| spring-cloud-Ribbon                                          | RestTemplate的使用、客户端负载均衡 | [ribbon](http://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-ribbon.html) |
+| spring-cloud-OpenFeign                                       | 声明式服务调用                     | [Spring Cloud OpenFeign 官方文档](https://spring.io/projects/spring-cloud-openfeign#learn) |
+| spring-cloud-Hystrix                                         | 熔断器                             |                                                              |
+| spring-cloud-zuul                                            | 网关服务                           | [Router and Filter: Zuul](http://projects.spring.io/spring-cloud/spring-cloud.html#_router_and_filter_zuul) |
+| spring-cloud-sleuth-Zipkin                                   | 分布式系统服务追踪                 | [Spring Cloud Sleuth](https://spring.io/projects/spring-cloud-sleuth#learn) |
+| spring-cloud-config-bus                                      | 配置中心 + 消息总线实现配置热更新  | [Spring Cloud Config](https://spring.io/projects/spring-cloud-config#learn) |
+| spring-cloud-stream                                          | spring cloud 对消息服务的抽象整合  | [spring-cloud-stream官方文档](https://cloud.spring.io/spring-cloud-stream/) |
 
 <br/>
 
