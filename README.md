@@ -66,18 +66,18 @@ spring-cloud：Finchley.SR2
 
 ## 3. spring-cloud  samples
 
-| samples                                                      | 描述                                      | 官方文档                                                     |
-| ------------------------------------------------------------ | ----------------------------------------- | ------------------------------------------------------------ |
-| spring-cloud                                                 | 微服务简介与用例说明                      |                                                              |
-| [spring-cloud-Eureka](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-eureka) | 服务的注册和发现                          | [Service Discovery: Eureka Clients](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.0.RC3/single/spring-cloud-netflix.html#_service_discovery_eureka_clients) |
-| [spring-cloud-Eureka-cluster](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-eureka-cluster) | eureka 高可用集群搭建                     |                                                              |
-| spring-cloud-Ribbon                                          | RestTemplate的使用、客户端负载均衡        | [ribbon](http://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-ribbon.html) |
-| spring-cloud-OpenFeign                                       | 声明式服务调用                            | [Spring Cloud OpenFeign 官方文档](https://spring.io/projects/spring-cloud-openfeign#learn) |
-| spring-cloud-Hystrix                                         | 熔断器的实现、熔断器监控、turbine聚合监控 |                                                              |
-| spring-cloud-zuul                                            | 网关服务                                  | [Router and Filter: Zuul](http://projects.spring.io/spring-cloud/spring-cloud.html#_router_and_filter_zuul) |
-| spring-cloud-sleuth-Zipkin                                   | 分布式系统服务追踪                        | [Spring Cloud Sleuth](https://spring.io/projects/spring-cloud-sleuth#learn) |
-| spring-cloud-config-bus                                      | 配置中心 + 消息总线实现配置热更新         | [Spring Cloud Config](https://spring.io/projects/spring-cloud-config#learn) |
-| spring-cloud-stream                                          | spring cloud 对消息服务的抽象整合         | [spring-cloud-stream官方文档](https://cloud.spring.io/spring-cloud-stream/) |
+| samples                                                      | 描述                                | 官方文档                                                     |
+| ------------------------------------------------------------ | ----------------------------------- | ------------------------------------------------------------ |
+| spring-cloud                                                 | 微服务简介与用例说明                |                                                              |
+| [spring-cloud-Eureka](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-eureka) | 服务的注册和发现                    | [Service Discovery: Eureka Server](https://cloud.spring.io/spring-cloud-static/Finchley.SR2/multi/multi_spring-cloud-eureka-server.html) |
+| [spring-cloud-Eureka-cluster](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-eureka-cluster) | eureka 高可用集群搭建               | [Service Discovery: Eureka Server](https://cloud.spring.io/spring-cloud-static/Finchley.SR2/multi/multi_spring-cloud-eureka-server.html) |
+| [spring-cloud-Ribbon](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-ribbon) | RestTemplate的使用、客户端负载均衡  | [Client Side Load Balancer: Ribbon](https://cloud.spring.io/spring-cloud-static/Finchley.SR2/multi/multi_spring-cloud-ribbon.html) |
+| [spring-cloud-OpenFeign](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-feign) | 声明式服务调用                      | [Declarative REST Client: Feign](https://cloud.spring.io/spring-cloud-static/Finchley.SR2/multi/multi_spring-cloud-feign.html) |
+| [spring-cloud-Hystrix](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-hystrix) | 熔断器、熔断器监控、turbine聚合监控 | [Circuit Breaker: Hystrix Clients](https://cloud.spring.io/spring-cloud-static/Finchley.SR2/multi/multi__circuit_breaker_hystrix_clients.html)<br/>[Hystrix metrics aggregation with Turbine and Consul](https://cloud.spring.io/spring-cloud-static/Finchley.SR2/multi/multi_spring-cloud-consul-turbine.html) |
+| [spring-cloud-zuul](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-zuul) | 网关服务                            | [Router and Filter: Zuul](https://cloud.spring.io/spring-cloud-static/Finchley.SR2/multi/multi__router_and_filter_zuul.html) |
+| [spring-cloud-sleuth-Zipkin](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-sleuth-zipkin) | 分布式系统服务追踪                  | [Spring Cloud Sleuth](https://cloud.spring.io/spring-cloud-static/Finchley.SR2/multi/multi__introduction.html#sleuth-adding-project) |
+| [spring-cloud-config-bus](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-config) | 配置中心 + 消息总线实现配置热更新   | [Spring Cloud Config Client](https://cloud.spring.io/spring-cloud-static/Finchley.SR2/multi/multi__spring_cloud_config_client.html) |
+| [spring-cloud-stream](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-stream) | spring cloud 对消息服务的抽象整合   | [spring-cloud-stream](http://cloud.spring.io/spring-cloud-stream/single/spring-cloud-stream.html) |
 
 <br/>
 
