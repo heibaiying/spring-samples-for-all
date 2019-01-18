@@ -224,7 +224,7 @@ public class ProductService implements IProductService {
 
 ```java
 ResponseEntity<Product> responseEntity = restTemplate.getForEntity("http://producer/product/{1}", Product.class, id);
-        Product product = restTemplate.getForObject("http://producer/product/{1}", Product.class, id);
+Product product = restTemplate.getForObject("http://producer/product/{1}", Product.class, id);
 ```
 
 
@@ -275,8 +275,8 @@ public class CustomConfiguration {
 
 在使用代码方式的时候需要注意 [官方文档](http://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-ribbon.html#_customizing_the_ribbon_client)中关于注解方式有以下强调：
 
-```properties
+
 The CustomConfiguration clas must be a @Configuration class, but take care that it is not in a @ComponentScan for the main application context. Otherwise, it is shared by all the @RibbonClients. If you use @ComponentScan (or @SpringBootApplication), you need to take steps to avoid it being included (for instance, you can put it in a separate, non-overlapping package or specify the packages to scan explicitly in the @ComponentScan).
-```
+
 
 该`CustomConfiguration`类必须是`@Configuration`标注的，但需要注意的它不是在`@ComponentScan`主应用程序上下文。否则，它将由所有`@RibbonClients`共享。如果你使用`@ComponentScan`（或`@SpringBootApplication`），你需要采取一些措施来避免它被扫描到（例如，你可以把它放在一个独立的，非重叠的包，或用`@ComponentScan`时显示扫描指定的包）。
