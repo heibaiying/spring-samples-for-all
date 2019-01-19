@@ -289,7 +289,7 @@ public class TurbineApplication {
 
 #### 5.1 无法访问监控页面
 
-1. 一般是端点链接输入不对，在F版本的spring cloud 中，输入监控的端点链接是 http://localhost:8030/actuator/hystrix.stream，中间是有/actuator/（之前版本的没有/actuator/）
+1. 一般是端点链接输入不对，在F版本的spring cloud 中，输入监控的端点链接是 http://localhost:8030/actuator/hystrix.stream ，中间是有/actuator/（之前版本的没有/actuator/）
 
 2.  没有暴露端点链接，暴露端点链接有两种方式，一种是我们在上文中提到的基于配置的方式
 
@@ -320,6 +320,6 @@ public class TurbineApplication {
 
 #### 5.2 页面一直loading 或者访问端点页面一直出现ping
 
-这种情况是熔断器所在的方法没有被调用，不是整合问题，这时候调用一下熔断器所在方法即可。
+这种情况是熔断器所在的方法没有被调用，所以没有产生监控数据，不是整合问题，这时候调用一下熔断器所在方法即可。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/hystrix-loading.png"/> </div>
