@@ -320,6 +320,6 @@ public class TurbineApplication {
 
 #### 5.2 页面一直loading 或者访问端点页面一直出现ping
 
-这种情况是熔断器所在的方法没有被调用，所有没有产生监控数据，不是整合问题，这时候调用一下熔断器所在方法即可。
+这种情况是熔断器所在的方法没有被调用，所以没有产生监控数据，不是整合问题，这时候调用一下熔断器所在方法即可。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/hystrix-loading.png"/> </div>
