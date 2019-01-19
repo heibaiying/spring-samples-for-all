@@ -18,7 +18,7 @@ zipkin 是一个开源的分布式跟踪系统，可以使用spring cloud sleuth
 + eureka: 注册中心；
 + zuul: api网关。
 
-
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-sleuth-zipkin.png"/> </div>
 
 ## 三、构建 zipkin 服务端
 
