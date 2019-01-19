@@ -28,17 +28,13 @@ spring:
 
 
 # 注意指定注册中心的配置不要从公共配置中拉取，要在本地的配置文件中指定
-# 因为我们必须要先从注册中心去获取可用的配置中心, 从配置中心去拉取配置
+# 因为我们必须要先从注册中心去获取可用的配置中心, 然后从配置中心去拉取配置
 eureka:
     client:
       serviceUrl:
         defaultZone: http://localhost:8010/eureka/
 
 # 暴露热刷新的端点
-#management:
-#  endpoint:
-#    bus-refresh:
-#      enabled: true
 management:
   endpoints:
     web:
