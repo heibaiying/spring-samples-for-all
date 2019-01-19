@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @author : heibaiying
- * @description : 声明式接口调用
+ * @description : 声明式服务调用
  */
 public interface ProductFeign {
 
