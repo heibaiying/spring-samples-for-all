@@ -1,6 +1,15 @@
 # eureka 服务的注册与发现
 
-## 一、项目结构
+## 一、eureka 简介
+
+Spring Cloud Eureka使用Netﬂix Eureka来实现服务注册与发现，它既包含了服务端组件，也包含了客户端组件。
+
+Eureka服务端：服务的注册中心，负责维护注册的服务列表。
+Eureka客户端： 在应用程序运行时，Eureka客户端向注册中心注册自身提供的服务，并周期性地发送心跳来更新它的服务租约。同时它也能把从服务端查询到服务信息缓存到本地，并周期性地刷新服务状态。 
+
+
+
+## 二、项目结构
 
 eureka-server为服务注册中心，负责服务的管理；
 
@@ -8,9 +17,11 @@ eureka-client 为eureka客户端；
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-eureka.png"/> </div>
 
-## 二、三步搭建eureka 服务注册中心
 
-#### 2.1 引入eureka服务端依赖
+
+## 三、三步搭建eureka 服务注册中心
+
+#### 3.1 引入eureka服务端依赖
 
 ```xml
 <dependency>
@@ -19,7 +30,7 @@ eureka-client 为eureka客户端；
 </dependency>
 ```
 
-#### 2.2 eureka 服务端配置
+#### 3.2 eureka 服务端配置
 
 ```yaml
 server:
@@ -36,7 +47,7 @@ eureka:
           defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 ```
 
-#### 2.3 启动类上增加注解@EnableEurekaServer激活eureka服务端自动配置
+#### 3.3 启动类上增加注解@EnableEurekaServer激活eureka服务端自动配置
 
 ```java
 @SpringBootApplication
@@ -50,7 +61,9 @@ public class EurekaServerApplication {
 }
 ```
 
-## 三、三步搭建eureka 客户端
+
+
+## 四、三步搭建eureka 客户端
 
 #### 3.1 引入eureka客户端依赖
 
@@ -91,8 +104,8 @@ public class EurekaClientApplication {
 }
 ```
 
-## 4.启动项目 
+## 五、启动项目 
 
-#### 4.1 进入注册中心控制台，查看服务注册情况
+#### 5.1 进入注册中心控制台，查看服务注册情况
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/eureka.png"/> </div>
