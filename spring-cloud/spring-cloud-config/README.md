@@ -130,13 +130,13 @@ spring:
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/config-dev.png"/> </div>
 
-**这说明在用配置中心拉取配置的时候，和我们在本地开发的时候是一致的，配置是互补的，即dev中的实际配置应该是主配置和dev配置的结合，且遵循同名属性精确优先的原则**。
+这说明在用配置中心拉取配置的时候，和我们在本地开发的时候是一致的，配置是互补的，即dev中的实际配置应该是主配置和dev配置的结合，且遵循同名属性精确优先的原则。
 
 
 
 #### 3.5 http请求地址和资源文件映射
 
-在本用例中如果我们想要直接访问主配置，用以下路径 http://localhost:8020/application.yml是不行的，会得到错误页面。如果想要访问主配置,，可以用http://localhost:8020/application-X.yml，其中可以是任意字符，原因是：
+在本用例中如果我们想要直接访问主配置，用以下路径 http://localhost:8020/application.yml 是不行的，会得到错误页面。如果想要访问主配置,，可以用http://localhost:8020/application-X.yml，其中可以是任意字符，原因是：
 
 请求地址和实际的配置文件应该遵循以下规则，application为配置文件名，profile 为环境，label为分支（如果不指定默认就是master分支）。
 
