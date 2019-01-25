@@ -1,0 +1,27 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.heibaiying.springboot.dao.ProgrammerMapper">
+
+    <select id="selectAll" resultType="com.heibaiying.springboot.bean.Programmer">
+        select * from programmer
+    </select>
+
+    <insert id="save">
+        insert into programmer (name, age, salary, birthday) VALUES (#{name}, #{age}, #{salary}, #{birthday})
+    </insert>
+
+    <select id="selectById" resultType="com.heibaiying.springboot.bean.Programmer">
+      select * from programmer where name = #{id}
+    </select>
+
+    <update id="modify">
+        update programmer set name=#{pro.name},age=#{pro.age},salary=#{pro.salary},birthday=#{pro.birthday} where id=#{pro.id}
+    </update>
+
+    <delete id="delete">
+        delete from programmer where id = #{id}
+    </delete>
+
+</mapper>
