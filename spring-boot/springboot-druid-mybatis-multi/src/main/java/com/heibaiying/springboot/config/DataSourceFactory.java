@@ -1,7 +1,7 @@
 package com.heibaiying.springboot.config;
 
 import com.alibaba.druid.pool.xa.DruidXADataSource;
-import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
+import com.atomikos.jdbc.AtomikosDataSourceBean;
 import com.heibaiying.springboot.constant.Data;
 import org.apache.ibatis.logging.stdout.StdOutImpl;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -10,8 +10,6 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.core.env.Environment;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
@@ -22,46 +20,57 @@ import java.util.Map;
  * @author : heibaiying
  * @description : 多数据源配置
  * 需要特别强调的是以下任意的DataSource的bean都不要用@Primary去修饰，包括动态数据源。原因是在事务下,spring在DataSourceUtils类中doGetConnection方法中判断获取当前数据源是否持有连接的时候，
- * 总是会传入用@Primary修饰的数据源，如果一个事务下有多个数据源，这种情况下就会出现connection复用，无法切换数据源, 源码截图详见README.md
+ * 总是会传入用@Primary修饰的数据源，如果一个事务下有多个数据源，这种情况下就会出现connection复用，无法切换数据源, 详见README.md
  */
 @Configuration
-@MapperScan(basePackages = DataSourceConfig.BASE_PACKAGES, sqlSessionTemplateRef = "sqlSessionTemplate")
-public class DataSourceConfig extends AbstractDataSourceConfig {
+@MapperScan(basePackages = DataSourceFactory.BASE_PACKAGES, sqlSessionTemplateRef = "sqlSessionTemplate")
+public class DataSourceFactory {
 
     static final String BASE_PACKAGES = "com.heibaiying.springboot.dao";
 
     private static final String MAPPER_LOCATION = "classpath:mappers/*.xml";
 
-    /**
-     * 创建数据源1，不要用@Primary去修饰
+
+    /***
+     * 创建 DruidXADataSource 1
      */
     @Bean
-    public DataSource dataSourceOne(Environment env) {
-        String prefix = "spring.datasource.druid.db1.";
-        return getDataSource(env, prefix, "one");
+    @ConfigurationProperties("spring.datasource.druid.db1")
+    public DataSource DruidDataSourceOne() {
+        return new DruidXADataSource();
+    }
+
+    /***
+     * 创建 DruidXADataSource 2
+     */
+    @Bean
+    @ConfigurationProperties("spring.datasource.druid.db2")
+    public DataSource DruidDataSourceTwo() {
+        return new DruidXADataSource();
     }
 
     /**
-     * 创建数据源2，不要用@Primary去修饰
+     * 创建支持XA事务的数据源1，不要用@Primary去修饰
      */
     @Bean
-    public DataSource dataSourceTwo(Environment env) {
-        String prefix = "spring.datasource.druid.db2.";
-        return getDataSource(env, prefix, "two");
+    public DataSource dataSourceOne(DataSource DruidDataSourceOne) {
+        AtomikosDataSourceBean sourceBean = new AtomikosDataSourceBean();
+        sourceBean.setXaDataSource((DruidXADataSource) DruidDataSourceOne);
+        sourceBean.setUniqueResourceName("db1");
+        return sourceBean;
     }
 
+    /**
+     * 创建支持XA事务的数据源2，不要用@Primary去修饰
+     */
+    @Bean
+    public DataSource dataSourceTwo(DataSource DruidDataSourceTwo) {
+        AtomikosDataSourceBean sourceBean = new AtomikosDataSourceBean();
+        sourceBean.setXaDataSource((DruidXADataSource) DruidDataSourceTwo);
+        sourceBean.setUniqueResourceName("db2");
+        return sourceBean;
+    }
 
-  /* @Bean
-   @ConfigurationProperties("spring.datasource.druid.db1")
-   public DataSource dataSourceOne() {
-       return new DruidXADataSource();
-   }
-
-   @Bean
-   @ConfigurationProperties("spring.datasource.druid.db2")
-   public DataSource dataSourceTwo() {
-       return new DruidXADataSource();
-   }*/
 
     /**
      * 设置多数据源，不要用@Primary去修饰
@@ -117,7 +126,7 @@ public class DataSourceConfig extends AbstractDataSourceConfig {
         sqlSessionFactoryMap.put(Data.DATASOURCE2, sqlSessionFactoryTwo);
 
         CustomSqlSessionTemplate customSqlSessionTemplate = new CustomSqlSessionTemplate(sqlSessionFactoryOne);
-        customSqlSessionTemplate.setTargetSqlSessionFactorys(sqlSessionFactoryMap);
+        customSqlSessionTemplate.setTargetSqlSessionFactories(sqlSessionFactoryMap);
         return customSqlSessionTemplate;
     }
 

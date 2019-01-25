@@ -13,7 +13,7 @@ import javax.transaction.UserTransaction;
 
 /**
  * @author : heibaiying
- * @description : 分布式事务配置
+ * @description : JTA事务配置
  */
 @Configuration
 @EnableTransactionManagement
