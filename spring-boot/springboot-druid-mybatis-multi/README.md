@@ -1,5 +1,16 @@
 # spring boot + druid + mybatis + atomikos 配置多数据源 并支持分布式事务
 
+<a href="#一综述">一、综述</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目说明">1.1 项目说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目结构">1.2 项目结构</a><br/>
+<a href="#二配置多数据源并支持分布式事务">二、配置多数据源并支持分布式事务</a><br/>
+<a href="#三整合结果测试">三、整合结果测试</a><br/>
+<a href="#四JTA与两阶段提交">四、JTA与两阶段提交</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-XA-与-JTA">4.1 XA 与 JTA</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-两阶段提交">4.2 两阶段提交</a><br/>
+<a href="#五常见整合异常">五、常见整合异常</a><br/>
+
+
 ## 一、综述
 
 ### 1.1 项目说明
@@ -10,7 +21,7 @@
 
 主要配置如下：
 
-![springboot-druid-mybatis-multi](D:\spring-samples-for-all\pictures\springboot-druid-mybatis-multi.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/springboot-druid-mybatis-multi.png"/> </div>
 
 
 
@@ -426,7 +437,7 @@ public class DataSourceContextHolder {
 
 这里我一共给了三种情况的测试接口，如下：
 
-![springboot-druid-mybatis-multi-test](D:\spring-samples-for-all\pictures\springboot-druid-mybatis-multi-test.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/springboot-druid-mybatis-multi-test.png"/> </div>
 
 ### 3.1  测试数据库整合结果
 
@@ -434,17 +445,17 @@ public class DataSourceContextHolder {
 
 mysql数据库：
 
-![mysql01](D:\spring-samples-for-all\pictures\mysql01.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/mysql01.png"/> </div>
 
 mysql02 数据库：
 
 
 
-![mysql02](D:\spring-samples-for-all\pictures\mysql02.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/mysql02.png"/> </div>
 
 **前端查询结果**：
 
-![mysql0102](D:\spring-samples-for-all\pictures\mysql0102.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/mysql0102.png"/> </div>
 
 
 
@@ -527,17 +538,17 @@ public class XATransactionController {
 
 数据源1：
 
-![druid-mysql01](D:\spring-samples-for-all\pictures\druid-mysql01.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/druid-mysql01.png"/> </div>
 
 
 
 数据源2：
 
-![durud-mysql02](D:\spring-samples-for-all\pictures\durud-mysql02.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/durud-mysql02.png"/> </div>
 
 url 监控情况：
 
-![durid-mysql-weburl](D:\spring-samples-for-all\pictures\durid-mysql-weburl.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/durid-mysql-weburl.png"/> </div>
 
 
 
@@ -555,7 +566,7 @@ XA是由X/Open组织提出的分布式事务的规范。XA规范主要定义了(
 
 **而 JTA 就是 XA 规范在java语言上的实现。JTA 采用两阶段提交实现分布式事务。**
 
-![XA](D:\spring-samples-for-all\pictures\XA.gif)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/XA.gif"/> </div>
 
 
 
@@ -572,7 +583,7 @@ XA是由X/Open组织提出的分布式事务的规范。XA规范主要定义了(
 
 在一个分布式事务中，必须有一个场地的Server作为协调者(coordinator)，它能向  其它场地的Server发出请求，并对它们的回答作出响应，由它来控制一个分布式事务的提交或撤消。该分布式事务中涉及到的其它场地的Server称为参与者（Participant）。
 
-![commit](D:\spring-samples-for-all\pictures\commit.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/commit.png"/> </div>
 
 事务两阶段提交的过程如下：
 
@@ -603,15 +614,15 @@ XA是由X/Open组织提出的分布式事务的规范。XA规范主要定义了(
 
 
 
-## 五、补充说明及常见整合异常
+## 五、常见整合异常
 
-### 5.1 @Transactional 下多数据源无法切换
+### 5.1 事务下多数据源无法切换
 
-这里是主要是对上文提到为什么不重写sqlSessionTemplate会导致数据源切换失败的补充，我们先看看sqlSessionTemplate源码中关于该类的定义：
+这里是主要是对上文提到为什么不重写sqlSessionTemplate会导致在事务下数据源切换失败的补充，我们先看看sqlSessionTemplate源码中关于该类的定义：
 
 > sqlSessionTemplate与Spring事务管理一起使用，以确保使用的实际SqlSession是与当前Spring事务关联的,此外它还管理会话生命周期，包括根据Spring事务配置根据需要关闭，提交或回滚会话
 
-![sqlSessionTemplate](D:\spring-samples-for-all\pictures\sqlSessionTemplate.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/sqlSessionTemplate.png"/> </div>
 
 这里最主要的是说明sqlSession是与当前是spring 事务是关联的。
 
@@ -691,25 +702,25 @@ public static Connection doGetConnection(DataSource dataSource) throws SQLExcept
 
 这里主要的问题是`TransactionSynchronizationManager.getResource(dataSource)`中dataSource参数是在哪里进行注入的，这里可以沿着调用堆栈往上寻找，可以看到是在这个参数是`SpringManagedTransaction`类中获取连接的时候传入的。
 
-![opneConnection](D:\spring-samples-for-all\pictures\opneConnection.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/opneConnection.png"/> </div>
 
 而`SpringManagedTransaction`这类中的dataSource是如何得到赋值的，这里可以进入这个类中查看，只有在创建这个类的时候传入有为dataSource赋值，那么是哪个方法创建了`SpringManagedTransaction`?
 
-![springManagerTransaction](D:\spring-samples-for-all\pictures\springManagerTransaction.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/springManagerTransaction.png"/> </div>
 
 在构造器上打一个断点，沿着调用的堆栈往上寻找可以看到是`DefaultSqlSessionFactory`在创建`SpringManagedTransaction`中传入的，**这个数据源就是与session的会话工厂`sqlSessionFactory`中数据源**。
 
-![DefaultSqlSessionFactory](D:\spring-samples-for-all\pictures\DefaultSqlSessionFactory.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/DefaultSqlSessionFactory.png"/> </div>
 
 
 
 **这里说明连接的复用是与我们创建sqlSession时候传入的sqlSessionFactory是否是同一个有关**。
 
-![getsqlSession](D:\spring-samples-for-all\pictures\getsqlSession.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/getsqlSession.png"/> </div>
 
 所以我们才重写了sqlSessionTemplate中的`getSqlSession`方法，获取sqlSession时候传入正在使用的数据源对应的`sqlSessionFactory`，这样即便在同一个的事务中，由于传入的`sqlSessionFactory`中不同，就不会出现连接复用。
 
-![customSqlSessionTemplate](D:\spring-samples-for-all\pictures\customSqlSessionTemplate.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/customSqlSessionTemplate.png"/> </div>
 
 
 
@@ -749,7 +760,7 @@ private SqlSessionFactory createSqlSessionFactory(DataSource dataSource) throws 
 
 正常绑定的情况下，我们是可以在sqlSessionFactory中查看到绑定好的查询接口：
 
-![sqlSessionFactory](D:\spring-samples-for-all\pictures\sqlSessionFactory.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/sqlSessionFactory.png"/> </div>
 
 <br>
 
