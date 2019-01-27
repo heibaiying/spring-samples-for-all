@@ -610,7 +610,7 @@ XA是由X/Open组织提出的分布式事务的规范。XA规范主要定义了(
 
 <br>
 
-本小结的表述参考自博客[浅谈分布式事务](https://www.cnblogs.com/baiwa/p/5328722.html)
+本小结的表述引用自博客[浅谈分布式事务](https://www.cnblogs.com/baiwa/p/5328722.html)
 
 
 
