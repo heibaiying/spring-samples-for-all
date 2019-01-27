@@ -79,7 +79,7 @@ public class CustomSqlSessionTemplate extends SqlSessionTemplate {
     @Override
     public SqlSessionFactory getSqlSessionFactory() {
 
-        String dataSourceKey = DataSourceContextHolder.getDataKey();
+        String dataSourceKey = DataSourceContextHolder.getDataSourceKey();
         log.info("当前会话工厂 : {}", dataSourceKey);
         SqlSessionFactory targetSqlSessionFactory = targetSqlSessionFactories.get(dataSourceKey);
         if (targetSqlSessionFactory != null) {

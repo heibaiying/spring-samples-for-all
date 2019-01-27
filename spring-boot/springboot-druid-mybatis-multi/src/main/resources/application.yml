@@ -62,6 +62,7 @@ spring:
         removeAbandoned: true
         # 超时时间(以秒数为单位)
         remove-abandoned-timeout: 1800
+
       # WebStatFilter用于采集web-jdbc关联监控的数据。
       web-stat-filter:
         # 是否开启 WebStatFilter 默认是true

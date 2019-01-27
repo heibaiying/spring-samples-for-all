@@ -27,14 +27,14 @@ public class DynamicDataSourceAspect {
         Object[] args = point.getArgs();
 
         if (args == null || args.length < 1 || !Data.DATASOURCE2.equals(args[0])) {
-            DataSourceContextHolder.setDataKey(Data.DATASOURCE1);
+            DataSourceContextHolder.setDataSourceKey(Data.DATASOURCE1);
         } else {
-            DataSourceContextHolder.setDataKey(Data.DATASOURCE2);
+            DataSourceContextHolder.setDataSourceKey(Data.DATASOURCE2);
         }
     }
 
     @After(value = "dataSourcePointCut()")
     public void afterSwitchDS(JoinPoint point) {
-        DataSourceContextHolder.clearDataKey();
+        DataSourceContextHolder.clearDataSourceKey();
     }
 }

@@ -10,6 +10,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
@@ -50,7 +51,7 @@ public class DataSourceFactory {
     }
 
     /**
-     * 创建支持XA事务的数据源1，不要用@Primary去修饰
+     * 创建支持XA事务的Atomikos数据源1，不要用@Primary去修饰
      */
     @Bean
     public DataSource dataSourceOne(DataSource DruidDataSourceOne) {
@@ -61,7 +62,7 @@ public class DataSourceFactory {
     }
 
     /**
-     * 创建支持XA事务的数据源2，不要用@Primary去修饰
+     * 创建支持XA事务的Atomikos数据源2，不要用@Primary去修饰
      */
     @Bean
     public DataSource dataSourceTwo(DataSource DruidDataSourceTwo) {
