@@ -4,9 +4,9 @@
 
 Spring Cloud Eureka使用Netﬂix Eureka来实现服务注册与发现，它既包含了服务端组件，也包含了客户端组件。
 
-Eureka服务端：服务的注册中心，负责维护注册的服务列表。
+**Eureka服务端**：服务的注册中心，负责维护注册的服务列表。
 
-Eureka客户端： 在应用程序运行时，Eureka客户端向注册中心注册自身提供的服务，并周期性地发送心跳来更新它的服务租约。同时它也能把从服务端查询到服务信息缓存到本地，并周期性地刷新服务状态。 
+**Eureka客户端**： 在应用程序运行时，Eureka客户端向注册中心注册自身提供的服务，并周期性地发送心跳来更新它的服务租约。同时它也能把从服务端查询到服务信息缓存到本地，并周期性地刷新服务状态。 
 
 
 
@@ -66,7 +66,7 @@ public class EurekaServerApplication {
 
 ## 四、三步搭建eureka 客户端
 
-#### 3.1 引入eureka客户端依赖
+#### 4.1 引入eureka客户端依赖
 
 ```xml
 <dependency>
@@ -75,7 +75,7 @@ public class EurekaServerApplication {
 </dependency>
 ```
 
-#### 3.2 eureka 客户端配置
+#### 4.2 eureka 客户端配置
 
 ```yaml
 server:
@@ -91,7 +91,7 @@ eureka:
       defaultZone: http://localhost:8010/eureka/
 ```
 
-#### 3.3 启动类上增加注解@EnableDiscoveryClient激活eureka客户端自动配置
+#### 4.3 启动类上增加注解@EnableDiscoveryClient激活eureka客户端自动配置
 
 ```java
 @SpringBootApplication

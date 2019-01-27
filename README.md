@@ -2,9 +2,7 @@
 
 ![spring](https://img.shields.io/badge/spring-5.1.3.RELEASE-brightgreen.svg)    ![springboot](https://img.shields.io/badge/springboot-2.1.1.RELEASE-brightgreen.svg)    ![springcloud](https://img.shields.io/badge/springcloud-Finchley.SR2-brightgreen.svg)    ![jdk](https://img.shields.io/badge/jdk->=1.8-blue.svg)    ![author](https://img.shields.io/badge/author-heibaiying-orange.svg)
 
-本项目提供spring、spring-boot、spirng-cloud 的常用整合用例。每个用例都提供详细的注释和搭建说明，旨在总结自己工作和学习的结果，也希望能为java学习者提供参考。本仓库的用例会持续更新完善。
-
-由于用例并不能涵盖该知识点的所有内容，所以每个用例我都会附上官方文档的原文链接作为参考。
+本项目仓库提供spring、spring-boot、spring-cloud 的常用整合用例。**每个用例都提供详细的图文说明**，并给出官方文档的具体链接作为参考。随着spring的迭代，本仓库会持续更新，升级版本和丰富用例。
 
 **版本说明**：
 
