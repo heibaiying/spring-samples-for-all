@@ -431,6 +431,39 @@ public class DataSourceContextHolder {
 }
 ```
 
+#### 5.  JTA 事务管理器配置
+
+```java
+/**
+ * @author : heibaiying
+ * @description : JTA事务配置
+ */
+@Configuration
+@EnableTransactionManagement
+public class XATransactionManagerConfig {
+
+    @Bean
+    public UserTransaction userTransaction() throws Throwable {
+        UserTransactionImp userTransactionImp = new UserTransactionImp();
+        userTransactionImp.setTransactionTimeout(10000);
+        return userTransactionImp;
+    }
+
+    @Bean(initMethod = "init", destroyMethod = "close")
+    public TransactionManager atomikosTransactionManager() {
+        UserTransactionManager userTransactionManager = new UserTransactionManager();
+        userTransactionManager.setForceShutdown(false);
+        return userTransactionManager;
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager(UserTransaction userTransaction,
+                                                         TransactionManager transactionManager) {
+        return new JtaTransactionManager(userTransaction, transactionManager);
+    }
+}
+```
+
 
 
 ## 三、整合结果测试
