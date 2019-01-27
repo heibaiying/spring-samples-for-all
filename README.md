@@ -11,12 +11,11 @@ spring： 5.1.3.RELEASE
 spring-boot：2.1.1.RELEASE
 
 spring-cloud：Finchley.SR2
+<br/>
 
 **更新日志**：
 
 >2019.01.27	 新增用例 :  [spring boot + druid + mybatis + atomikos](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/springboot-druid-mybatis-multi) 配置多数据源、支持分布式事务( JTA方式实现)
-
-<br/>
 
 ## 1. spring samples
 
