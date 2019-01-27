@@ -24,8 +24,8 @@ public class XATransactionController {
     @RequestMapping("/db/change")
     @Transactional
     public void changeDb() {
-        Programmer programmer01 = new Programmer(1, "xiaolandb1", 100, 6662.32f, new Date());
-        Programmer programmer02 = new Programmer(1, "xiaohongdb2", 100, 6662.32f, new Date());
+        Programmer programmer01 = new Programmer(1, "db1", 100, 6662.32f, new Date());
+        Programmer programmer02 = new Programmer(1, "db2", 100, 6662.32f, new Date());
         programmerDao.modify(Data.DATASOURCE1, programmer01);
         programmerDao.modify(Data.DATASOURCE2, programmer02);
     }
@@ -33,8 +33,8 @@ public class XATransactionController {
     @RequestMapping("ts/db/change")
     @Transactional
     public void changeTsDb() {
-        Programmer programmer01 = new Programmer(1, "xiaolandb1", 99, 6662.32f, new Date());
-        Programmer programmer02 = new Programmer(1, "xiaohongdb2", 99, 6662.32f, new Date());
+        Programmer programmer01 = new Programmer(1, "db1", 99, 6662.32f, new Date());
+        Programmer programmer02 = new Programmer(1, "db2", 99, 6662.32f, new Date());
         programmerDao.modify(Data.DATASOURCE1, programmer01);
         programmerDao.modify(Data.DATASOURCE2, programmer02);
         int i = 1 / 0;

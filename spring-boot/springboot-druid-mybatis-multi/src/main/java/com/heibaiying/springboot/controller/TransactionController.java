@@ -24,14 +24,14 @@ public class TransactionController {
     @RequestMapping("db1/change")
     @Transactional
     public void changeDb1() {
-        Programmer programmer = new Programmer(1, "xiaolandb1", 99, 6662.32f, new Date());
+        Programmer programmer = new Programmer(1, "db1", 99, 6662.32f, new Date());
         programmerDao.modify(Data.DATASOURCE1, programmer);
     }
 
     @RequestMapping("ts/db1/change")
     @Transactional
     public void changeTsDb1() {
-        Programmer programmer = new Programmer(1, "xiaolandb1", 88, 6662.32f, new Date());
+        Programmer programmer = new Programmer(1, "db1", 88, 6662.32f, new Date());
         programmerDao.modify(Data.DATASOURCE1, programmer);
         // 抛出异常 查看回滚
         int j = 1 / 0;

@@ -10,7 +10,6 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
@@ -20,8 +19,6 @@ import java.util.Map;
 /**
  * @author : heibaiying
  * @description : 多数据源配置
- * 需要特别强调的是以下任意的DataSource的bean都不要用@Primary去修饰，包括动态数据源。原因是在事务下,spring在DataSourceUtils类中doGetConnection方法中判断获取当前数据源是否持有连接的时候，
- * 总是会传入用@Primary修饰的数据源，如果一个事务下有多个数据源，这种情况下就会出现connection复用，无法切换数据源, 详见README.md
  */
 @Configuration
 @MapperScan(basePackages = DataSourceFactory.BASE_PACKAGES, sqlSessionTemplateRef = "sqlSessionTemplate")
@@ -33,11 +30,11 @@ public class DataSourceFactory {
 
 
     /***
-     * 创建 DruidXADataSource 1
+     * 创建 DruidXADataSource 1 用@ConfigurationProperties自动配置属性
      */
     @Bean
     @ConfigurationProperties("spring.datasource.druid.db1")
-    public DataSource DruidDataSourceOne() {
+    public DataSource druidDataSourceOne() {
         return new DruidXADataSource();
     }
 
@@ -46,48 +43,31 @@ public class DataSourceFactory {
      */
     @Bean
     @ConfigurationProperties("spring.datasource.druid.db2")
-    public DataSource DruidDataSourceTwo() {
+    public DataSource druidDataSourceTwo() {
         return new DruidXADataSource();
     }
 
     /**
-     * 创建支持XA事务的Atomikos数据源1，不要用@Primary去修饰
+     * 创建支持XA事务的Atomikos数据源1
      */
     @Bean
-    public DataSource dataSourceOne(DataSource DruidDataSourceOne) {
+    public DataSource dataSourceOne(DataSource druidDataSourceOne) {
         AtomikosDataSourceBean sourceBean = new AtomikosDataSourceBean();
-        sourceBean.setXaDataSource((DruidXADataSource) DruidDataSourceOne);
+        sourceBean.setXaDataSource((DruidXADataSource) druidDataSourceOne);
+        // 必须为数据源指定唯一标识
         sourceBean.setUniqueResourceName("db1");
         return sourceBean;
     }
 
     /**
-     * 创建支持XA事务的Atomikos数据源2，不要用@Primary去修饰
+     * 创建支持XA事务的Atomikos数据源2
      */
     @Bean
-    public DataSource dataSourceTwo(DataSource DruidDataSourceTwo) {
+    public DataSource dataSourceTwo(DataSource druidDataSourceTwo) {
         AtomikosDataSourceBean sourceBean = new AtomikosDataSourceBean();
-        sourceBean.setXaDataSource((DruidXADataSource) DruidDataSourceTwo);
+        sourceBean.setXaDataSource((DruidXADataSource) druidDataSourceTwo);
         sourceBean.setUniqueResourceName("db2");
         return sourceBean;
-    }
-
-
-    /**
-     * 设置多数据源，不要用@Primary去修饰
-     */
-    @Bean
-    public DataSource dynamicDataSource(DataSource dataSourceOne, DataSource dataSourceTwo) {
-        DynamicDataSource dynamicDataSource = new DynamicDataSource();
-        // 设置默认数据源
-        dynamicDataSource.setDefaultTargetDataSource(dataSourceOne);
-        // 设置多数据源
-        Map<Object, Object> dsMap = new HashMap<>();
-        dsMap.put(Data.DATASOURCE1, dataSourceOne);
-        dsMap.put(Data.DATASOURCE2, dataSourceTwo);
-
-        dynamicDataSource.setTargetDataSources(dsMap);
-        return dynamicDataSource;
     }
 
 
