@@ -14,7 +14,7 @@ spring-cloud：Finchley.SR2
 
 **更新日志**：
 
->2019.01.27	 新增用例 :  [spring boot + druid + mybatis + atomikos](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/[springboot-druid-mybatis-multi) 配置多数据源、支持分布式事务( JTA方式实现)
+>2019.01.27	 新增用例 :  [spring boot + druid + mybatis + atomikos](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/springboot-druid-mybatis-multi) 配置多数据源、支持分布式事务( JTA方式实现)
 
 <br/>
 
@@ -89,7 +89,7 @@ spring-cloud：Finchley.SR2
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [spring-session](https://github.com/heibaiying/spring-samples-for-all/tree/master/distributed-solution/spring-session) | spring 实现分布式 session                                    | [spring session](https://spring.io/projects/spring-session#learn) |
 | [spring boot + spring session](https://github.com/heibaiying/spring-samples-for-all/tree/master/distributed-solution/spring-boot-session) | spring boot + spring session 实现分布式 session              | [spring session](https://spring.io/projects/spring-session#learn) |
-| [springboot-druid-mybatis-atomikos](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/[springboot-druid-mybatis-multi) | spring boot + druid + mybatis + atomikos<BR> 配置多数据源、支持分布式事务( JTA 方式实现) | [Distributed Transactions with JTA](https://docs.spring.io/spring-boot/docs/2.1.2.RELEASE/reference/htmlsingle/#boot-features-jta) |
+| [springboot-druid-mybatis-atomikos](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/springboot-druid-mybatis-multi) | spring boot + druid + mybatis + atomikos<BR> 配置多数据源、支持分布式事务( JTA 方式实现) | [Distributed Transactions with JTA](https://docs.spring.io/spring-boot/docs/2.1.2.RELEASE/reference/htmlsingle/#boot-features-jta) |
 
 <br/>
 

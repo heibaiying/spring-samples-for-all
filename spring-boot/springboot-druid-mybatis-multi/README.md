@@ -581,7 +581,7 @@ XA是由X/Open组织提出的分布式事务的规范。XA规范主要定义了(
 
 在分布式更新期间，各服务器首先标志它们已经完成（但未提交）指定给它们的分布式事务的那一部分，并准备提交（以使它们的更新部分成为永久性的）。这是   两阶段提交的第一阶段。如果有一结点不能响应，那么控制服务器要指示其它结点撤消分布式事务的各个部分的影响。如果所有结点都回答准备好提交，控制服务器  则指示它们提交并等待它们的响应。等待确认信息阶段是第二阶段。在接收到可以提交指示后，每个服务器提交分布式事务中属于自己的那一部分，并给控制服务器 发回提交完成信息。
 
-在一个分布式事务中，必须有一个场地的Server作为协调者(coordinator)，它能向  其它场地的Server发出请求，并对它们的回答作出响应，由它来控制一个分布式事务的提交或撤消。该分布式事务中涉及到的其它场地的Server称为参与者（Participant）。
+在一个分布式事务中，必须有一个场地的Server作为协调者(coordinator)，它能向  其它场地的Server发出请求，并对它们的回答作出响应，由它来控制一个分布式事务的提交或撤消。该分布式事务中涉及到的其它场地的Server称为参与者(Participant)。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/commit.png"/> </div>
 
@@ -593,9 +593,10 @@ XA是由X/Open组织提出的分布式事务的规范。XA规范主要定义了(
 
 ​	(1) 协调者准备局部（即在本地）提交并在日志中写入"预提交"日志项，并包含有该事务的所有参与者的名字。
 
-​	(2)  协调者询问参与者能否提交该事务。一个参与者可能由于多种原因不能提交。例如，该Server提供的约束条件（Constraints）的延迟检查不符合   限制条件时，不能提交；参与者本身的Server进程或硬件发生故障，不能提交；或者协调者访问不到某参与者（网络故障），这时协调者都认为是收到了一个  否定的回答。
+​	(2)  协调者询问参与者能否提交该事务。一个参与者可能由于多种原因不能提交。例如，该Server提供的约束条(Constraints)的延迟检查不符合   限制条件时，不能提交；参与者本身的Server进程或硬件发生故障，不能提交；或者协调者访问不到某参与者（网络故障），这时协调者都认为是收到了一个  否定的回答。
 
 ​	(3) 如果参与者能够提交，则在其本身的日志中写入"准备提交"日志项，该日志项立即写入硬盘，然后给协调者发回，已准备好提交"的回答。
+
 ​	(4) 协调者等待所有参与者的回答，如果有参与者发回否定的回答，则协调者撤消该事务并给所有参与者发出一个"撤消该事务"的消息，结束该分布式事务，撤消该事务的所有影响。
 
 **第二阶段**：
@@ -704,7 +705,7 @@ public static Connection doGetConnection(DataSource dataSource) throws SQLExcept
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/opneConnection.png"/> </div>
 
-而`SpringManagedTransaction`这类中的dataSource是如何得到赋值的，这里可以进入这个类中查看，只有在创建这个类的时候传入有为dataSource赋值，那么是哪个方法创建了`SpringManagedTransaction`?
+而`SpringManagedTransaction`这类中的dataSource是如何得到赋值的，这里可以进入这个类中查看，只有在创建这个类的时候通过构造器为dataSource赋值，那么是哪个方法创建了`SpringManagedTransaction`?
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/springManagerTransaction.png"/> </div>
 
