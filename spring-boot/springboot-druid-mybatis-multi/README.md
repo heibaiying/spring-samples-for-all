@@ -742,7 +742,7 @@ public static Connection doGetConnection(DataSource dataSource) throws SQLExcept
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/springManagerTransaction.png"/> </div>
 
-在构造器上打一个断点，沿着调用的堆栈往上寻找可以看到是`DefaultSqlSessionFactory`在创建`SpringManagedTransaction`中传入的，**这个数据源就是与session的会话工厂`sqlSessionFactory`中数据源**。
+在构造器上打一个断点，沿着调用的堆栈往上寻找可以看到是`DefaultSqlSessionFactory`在创建`SpringManagedTransaction`中传入的，**这个数据源就是创建sqlSession的`sqlSessionFactory`中数据源**。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/DefaultSqlSessionFactory.png"/> </div>
 
