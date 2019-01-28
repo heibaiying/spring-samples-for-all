@@ -190,7 +190,7 @@ public class DruidMybatisMultiApplication {
 
 + 这里我们创建druid数据源的时候，创建的是`DruidXADataSource`，它继承自`DruidDataSource `并支持XA分布式事务；
 + 使用 `AtomikosDataSourceBean` 包装我们创建的`DruidXADataSource`，使得数据源能够被 JTA 事务管理器管理；
-+ 这里我们使用的sqlSessionTemplate是我们重写的`CustomSqlSessionTemplate`,原生的sqlSessionTemplate在@Transactional 注解下，是不能实现在一个事务中实现数据源切换的。（为了不占用篇幅，我会在后文再给出详细的原因分析）
++ 这里我们使用的sqlSessionTemplate是我们重写的`CustomSqlSessionTemplate`,原生的sqlSessionTemplate是不能实现在一个事务中实现数据源切换的。（为了不占用篇幅，我会在后文再给出详细的原因分析）
 
 ```java
 /**
@@ -494,7 +494,7 @@ mysql02 数据库：
 
 ### 3.2 测试单数据库事务
 
-这里因为没有负载的业务逻辑，我直接将@Transactional加载controller层，实际中最好加到service层
+这里因为没有复杂的业务逻辑，我直接将@Transactional加载controller层，实际中最好加到service层
 
 ```java
 /**
@@ -779,7 +779,7 @@ private SqlSessionFactory createSqlSessionFactory(DataSource dataSource) throws 
     }
 ```
 
-上面这段代码没有任何编译问题，导致这个错误不容易发现，但是在调用sql时候就会出现异常。原因是`factoryBean.getObject()`方法被调用已经创建了SqlSessionFactory，并且SqlSessionFactory只会被创建一次。此时还没有指定sql 文件的位置，导致mybatis无法将接口与xml中的sql语句进行绑定，所以出现BindingExceptionInvalid 绑定异常。
+上面这段代码没有任何编译问题，导致这个错误不容易发现，但是在调用sql时候就会出现异常。原因是`factoryBean.getObject()`方法被调用时就已经创建了SqlSessionFactory，并且SqlSessionFactory只会被创建一次。此时还没有指定sql 文件的位置，导致mybatis无法将接口与xml中的sql语句进行绑定，所以出现BindingExceptionInvalid 绑定异常。
 
 ```java
 @Override
