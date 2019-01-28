@@ -8,7 +8,7 @@ api 网关是整个微服务系统的门面，所有的外部访问需要通过�
 
 下图是直观的显示api Gateway 在微服务网关中的作用（图片引用自spring boot 官网）。
 
-![api gateway](D:\spring-samples-for-all\pictures\apiGateway.png)
+<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/apiGateway.png"/> </div>
 
 ### 1.2 zuul
 
