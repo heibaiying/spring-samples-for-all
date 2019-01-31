@@ -494,7 +494,7 @@ public class ParamBindController {
     }
 ```
 
-2.利用@DateTimeFormat注解，如果是用实体类去接收参数，则在对应的属性上声明
+2.利用@DateTimeFormat注解，如果是用实体类去接收参数，则在对应的属性上用@DateTimeFormat和@JsonFormat声明
 
 ```java
 public String param(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date birthday)
