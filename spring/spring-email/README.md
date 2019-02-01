@@ -1,4 +1,14 @@
 # spring 邮件发送（xml配置方式）
+## 目录<br/>
+<a href="#一说明">一、说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构说明">1.1 项目结构说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-依赖说明">1.2 依赖说明</a><br/>
+<a href="#二spring-email">二、spring email</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-邮件发送配置">2.1 邮件发送配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-新建邮件发送基本类">2.2 新建邮件发送基本类</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-邮件发送的测试">2.3 邮件发送的测试</a><br/>
+## 正文<br/>
+
 
 ## 一、说明
 

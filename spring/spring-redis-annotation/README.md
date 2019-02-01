@@ -1,4 +1,44 @@
 # spring 整合 redis （注解方式）
+## 目录<br/>
+<a href="#一说明">一、说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11--Redis-客户端说明">1.1  Redis 客户端说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-Redis可视化软件">1.2 Redis可视化软件 </a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-项目结构说明">1.3 项目结构说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-依赖说明">1.3 依赖说明</a><br/>
+<a href="#二spring-整合-jedis">二、spring 整合 jedis</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-新建基本配置文件和其映射类">2.1 新建基本配置文件和其映射类</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-单机配置">2.2 单机配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-集群配置">2.3 集群配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-单机版本测试用例">2.4 单机版本测试用例</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-集群版本测试用例">2.5 集群版本测试用例</a><br/>
+<a href="#三spring-整合-redisson">三、spring 整合 redisson</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-单机配置">2.1 单机配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-集群配置">2.2 集群配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-存储基本类型测试用例">2.3 存储基本类型测试用例</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-存储实体对象测试用例">2.4 存储实体对象测试用例</a><br/>
+<a href="#附Redis的数据结构和操作命令">附：Redis的数据结构和操作命令</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-预备">1.1 预备</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#111-全局命令">1.1.1 全局命令</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#112-数据结构和内部编码">1.1.2 数据结构和内部编码</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#113-单线程架构">1.1.3 单线程架构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-字符串">1.2 字符串</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-哈希">1.3 哈希</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-列表">1.4 列表</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#15-集合">1.5 集合</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#16-有序集合">1.6 有序集合</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#17-键管理">1.7 键管理</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#171-单个键管理">1.7.1 单个键管理</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1键重命名">1.键重命名  </a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-随机返回键">2. 随机返回键 </a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3键过期">3.键过期</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#172-键遍历">1.7.2 键遍历</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-全量键遍历">1. 全量键遍历</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-渐进式遍历">2. 渐进式遍历</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#173-数据库管理">1.7.3 数据库管理</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1切换数据库">1.切换数据库</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2flushdb/flushall">2.flushdb/flushall </a><br/>
+## 正文<br/>
+
 
 ## 一、说明
 

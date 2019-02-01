@@ -1,5 +1,16 @@
 # spring +druid+ mybatis（xml配置方式）
 
+## 目录<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1创建maven工程除了Spring基本依赖外还需要导入mybatis和druid的相关依赖">1、创建maven工程，除了Spring基本依赖外，还需要导入mybatis和druid的相关依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2在webxml-中配置spring前端控制器druid监控台servlet和filter">2、在web.xml 中配置spring前端控制器、druid监控台servlet和filter</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3在resources文件夹下新建数据库配置文件jdbcproperties">3、在resources文件夹下新建数据库配置文件jdbc.properties</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4在resources文件夹下创建springApplicationxml-配置文件和druidxml配置文件">4、在resources文件夹下创建springApplication.xml 配置文件和druid.xml配置文件 </a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#5新建mybtais-配置文件按需要进行额外配置更多settings配置项可以参考[官方文档]http//wwwmybatisorg/mybatis-3/zh/configurationhtml">5、新建mybtais 配置文件，按需要进行额外配置，更多settings配置项可以参考[官方文档](http://www.mybatis.org/mybatis-3/zh/configuration.html)</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#6新建查询接口及其对应的mapper文件">6、新建查询接口及其对应的mapper文件</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#7新建测试controller进行测试">7、新建测试controller进行测试</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#8druid-监控页面访问地址http//localhost8080/druid/indexhtml">8、druid 监控页面访问地址http://localhost:8080/druid/index.html</a><br/>
+## 正文<br/>
+
 ### 项目目录结构
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-druid-mybatis.png"/> </div>
@@ -308,7 +319,7 @@ public interface OracleDao {
 </mapper>
 ```
 
-#### 7.新建测试controller进行测试
+#### 7、新建测试controller进行测试
 
 ```java
 package com.heibaiying.controller;

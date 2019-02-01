@@ -1,4 +1,18 @@
 # spring 整合 dubbo（xml配置方式）
+## 目录<br/>
+<a href="#一-项目结构说明">一、 项目结构说明</a><br/>
+<a href="#二项目依赖">二、项目依赖</a><br/>
+<a href="#三公共模块dubbo-common">三、公共模块（dubbo-common）</a><br/>
+<a href="#四-服务提供者dubbo-provider">四、 服务提供者（dubbo-provider）</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41--productService是服务的提供者-商品数据用模拟数据展示">4.1  productService是服务的提供者（ 商品数据用模拟数据展示）</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-在dubboxml暴露服务">4.2 在dubbo.xml暴露服务</a><br/>
+<a href="#五服务消费者dubbo-consumer">五、服务消费者（dubbo-consumer）</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1在dubboxml调用远程的服务">1.在dubbo.xml调用远程的服务</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2消费服务">2.消费服务</a><br/>
+<a href="#六项目构建的说明">六、项目构建的说明</a><br/>
+<a href="#七关于dubbo新版本管理控制台的安装说明">七、关于dubbo新版本管理控制台的安装说明</a><br/>
+## 正文<br/>
+
 
 ## 一、 项目结构说明
 

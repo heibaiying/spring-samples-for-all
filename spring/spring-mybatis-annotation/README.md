@@ -1,4 +1,16 @@
 # spring 整合 mybatis（注解方式）
+## 目录<br/>
+<a href="#一说明">一、说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目依赖">1.2 项目依赖</a><br/>
+<a href="#二spring-整合-mybatis">二、spring 整合 mybatis</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21--在resources文件夹下新建数据库配置文件jdbcproperties及其映射类">2.1  在resources文件夹下新建数据库配置文件jdbc.properties及其映射类</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22--配置数据源和mybatis会话工厂定义事务管理器">2.2  配置数据源和mybatis会话工厂、定义事务管理器</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-新建mybtais配置文件按照需求配置额外参数-更多settings配置项可以参考[官方文档]http//wwwmybatisorg/mybatis-3/zh/configurationhtml">2.3 新建mybtais配置文件，按照需求配置额外参数， 更多settings配置项可以参考[官方文档](http://www.mybatis.org/mybatis-3/zh/configuration.html)</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-新建查询接口及其对应的mapper文件">2.4 新建查询接口及其对应的mapper文件</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-新建测试类进行测试">2.5 新建测试类进行测试</a><br/>
+## 正文<br/>
+
 
 ## 一、说明
 

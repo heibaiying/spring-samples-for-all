@@ -1,4 +1,20 @@
 # spring 整合 rabbitmq（注解方式）
+## 目录<br/>
+<a href="#一说明">一、说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构说明">1.1 项目结构说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-依赖说明">1.2 依赖说明</a><br/>
+<a href="#二spring-rabbit-基本配置">二、spring rabbit 基本配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-基本配置属性及其映射类">2.1 基本配置属性及其映射类</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-创建连接工厂管理器">2.2 创建连接工厂、管理器</a><br/>
+<a href="#三简单消费的发送">三、简单消费的发送</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-声明交换机队列绑定关系和消费者监听器">3.1 声明交换机、队列、绑定关系和消费者监听器</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-测试简单消息的发送">3.2 测试简单消息的发送</a><br/>
+<a href="#四传输对象">四、传输对象</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-创建消息的委托处理器">4.1 创建消息的委托处理器</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-声明交换机队列绑定关系和消费者监听器">4.2 声明交换机、队列、绑定关系和消费者监听器</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#43-测试对象消息的发送">4.3 测试对象消息的发送</a><br/>
+## 正文<br/>
+
 
 ## 一、说明
 

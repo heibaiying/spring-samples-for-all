@@ -1,5 +1,16 @@
 # spring 整合 jdbc template（注解方式）
 
+## 目录<br/>
+<a href="#1说明">1.说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12--项目依赖">1.2  项目依赖</a><br/>
+<a href="#二spring-整合-jdbc-template">二、spring 整合 jdbc template</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-在resources文件夹下新建数据库配置文件mysqlpropertiesoracleproperties及其映射类">2.1 在resources文件夹下新建数据库配置文件mysql.properties、oracle.properties及其映射类</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-新建数据库配置类DatabaseConfigjava">2.2 新建数据库配置类DatabaseConfig.java</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-新建查询接口及其实现类这里我查询的表是mysql和oracle中的字典表">2.3 新建查询接口及其实现类</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-新建测试类进行测试">2.4 新建测试类进行测试</a><br/>
+## 正文<br/>
+
+
 ## 1.说明
 
 #### 1.1 项目目录结构

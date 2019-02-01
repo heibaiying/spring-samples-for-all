@@ -1,5 +1,18 @@
 # spring +druid+ mybatis（注解方式）
 
+## 目录<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1创建maven工程除了Spring基本依赖外还需要导入mybatis和druid的相关依赖">1、创建maven工程，除了Spring基本依赖外，还需要导入mybatis和druid的相关依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2新建-DispatcherServletInitializerjava继承自AbstractAnnotationConfigDispatcherServletInitializer等价于我们在webxml中配置的前端控制器">2、新建 DispatcherServletInitializer.java继承自AbstractAnnotationConfigDispatcherServletInitializer,等价于我们在web.xml中配置的前端控制器</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3基于servlet-30的支持可以采用注解的方式注册druid的servlet和filter">3、基于servlet 3.0的支持，可以采用注解的方式注册druid的servlet和filter </a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4在resources文件夹下新建数据库配置文件mysqlpropertiesoracleproperties">4、在resources文件夹下新建数据库配置文件mysql.properties、oracle.properties</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#5在新建数据库配置映射类DataSourceConfigjava">5、在新建数据库配置映射类DataSourceConfig.java</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#6新建ServletConfigjava进行数据库相关配置">6、新建ServletConfig.java，进行数据库相关配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#7新建mybtais-配置文件按需要进行额外参数配置-更多settings配置项可以参考[官方文档]http//wwwmybatisorg/mybatis-3/zh/configurationhtml">7、新建mybtais 配置文件，按需要进行额外参数配置， 更多settings配置项可以参考[官方文档](http://www.mybatis.org/mybatis-3/zh/configuration.html)</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#8新建查询接口及其对应的mapper文件">8、新建查询接口及其对应的mapper文件</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#9新建测试controller进行测试">9、新建测试controller进行测试</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#10druid-监控页面访问地址http//localhost8080/druid/indexhtml">10、druid 监控页面访问地址http://localhost:8080/druid/index.html</a><br/>
+## 正文<br/>
+
 ### 项目目录结构
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-druid-mybatis-annotation.png"/> </div>
@@ -61,7 +74,7 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 }
 ```
 
-#### 3、基础servlet 3.0的支持，可以采用注解的方式注册druid的servlet和filter 
+#### 3、基于servlet 3.0的支持，可以采用注解的方式注册druid的servlet和filter 
 
 ​     注：关于servlet 更多注解支持可以查看[Servlet 规范文档](https://github.com/heibaiying/spring-samples-for-all/blob/master/referenced%20documents/Servlet3.1%E8%A7%84%E8%8C%83%EF%BC%88%E6%9C%80%E7%BB%88%E7%89%88%EF%BC%89.pdf)中**8.1小节 注解和可插拔性** 
 
@@ -311,7 +324,7 @@ public interface OracleDao {
 </mapper>
 ```
 
-#### 9.新建测试controller进行测试
+#### 9、新建测试controller进行测试
 
 ```java
 @RestController
