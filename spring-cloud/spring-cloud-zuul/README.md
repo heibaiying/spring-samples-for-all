@@ -1,24 +1,17 @@
 # spring-cloud-zuul
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一zuul简介">一、zuul简介</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-API-网关">1.1 API 网关</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-zuul">1.2 zuul</a><br/>
 <a href="#二项目结构">二、项目结构</a><br/>
 <a href="#三构建api-网关-zuul">三、构建api 网关 zuul</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-引入依赖">3.1 引入依赖</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-在启动类上添加注解@EnableZuulProxy和@EnableDiscoveryClient">3.2 在启动类上添加注解@EnableZuulProxy和@EnableDiscoveryClient</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33--指定注册中心配置网关的路由规则">3.3  指定注册中心、配置网关的路由规则</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34--启动eurekaproducerconsumerzuul服务访问-localhost8090/consumer/sell/product">3.4  启动eureka、producer、consumer、zuul服务，访问 localhost:8090/consumer/sell/product </a><br/>
 <a href="#四错误熔断">四、错误熔断</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41--zuul-默认整合了-hystrix-不用导入其他额外依赖">4.1  zuul 默认整合了 hystrix ，不用导入其他额外依赖</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-创建-CustomZuulFallbackProvider并实现FallbackProvider-接口同时用@Component声明为spring-组件即可实现熔断时候的回退服务">4.2 创建 CustomZuulFallbackProvider并实现FallbackProvider 接口，同时用@Component声明为spring 组件，即可实现熔断时候的回退服务</a><br/>
 <a href="#五zuul--过滤器">五、zuul  过滤器</a><br/>
 <a href="#六负载均衡">六、负载均衡</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#zuul-默认集成了ribbon-实现了负载均衡。只要启动多个实例即可查看到负载均衡的效果。">zuul 默认集成了ribbon 实现了负载均衡。只要启动多个实例即可查看到负载均衡的效果。</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#这里我们直接在idea-中启动多个实例来测试">这里我们直接在idea 中启动多个实例来测试：</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#负载均衡测试结果">负载均衡测试结果：</a><br/>
 <a href="#七附关于版本问题可能导致的-zuul-启动失败">七、附：关于版本问题可能导致的 zuul 启动失败</a><br/>
 ## 正文<br/>
+
 
 ## 一、zuul简介
 

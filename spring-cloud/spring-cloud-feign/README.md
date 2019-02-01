@@ -1,26 +1,14 @@
 # spring-cloud-feign
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一feign-简介">一、feign 简介</a><br/>
 <a href="#二项目结构">二、项目结构</a><br/>
 <a href="#三服务提供者的实现">三、服务提供者的实现</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-产品服务由`ProductService`提供并通过`ProducerController`将服务暴露给外部调用。">3.1 产品服务由`ProductService`提供，并通过`ProducerController`将服务暴露给外部调用。</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-指定注册中心地址并在启动类上开启自动注册@EnableDiscoveryClient">3.2 指定注册中心地址,并在启动类上开启自动注册@EnableDiscoveryClient</a><br/>
 <a href="#四服务消费者的实现">四、服务消费者的实现</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-导入openfeign依赖">4.1 导入openfeign依赖</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-指定注册中心地址并在启动类上添加注解@EnableDiscoveryClient和@EnableFeignClients">4.2 指定注册中心地址,并在启动类上添加注解@EnableDiscoveryClient和@EnableFeignClients</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#43-创建服务调用公共接口">4.3 创建服务调用公共接口</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#44-继承公共接口创建CProductFeign-用@FeignClient声明为feign客户端">4.4 继承公共接口，创建CProductFeign， 用@FeignClient声明为feign客户端</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#45--注入使用-feign-服务调用接口">4.5  注入使用 feign 服务调用接口</a><br/>
 <a href="#五启动测试">五、启动测试</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#51-启动一个Eureka服务三个producer服务注意区分端口和一个消费者服务">5.1 启动一个Eureka服务、三个producer服务（注意区分端口）、和一个消费者服务</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#52--访问http//localhost8080/sell/products-查看负载均衡的调用结果">5.2  访问http://localhost:8080/sell/products 查看负载均衡的调用结果</a><br/>
 <a href="#六-feign-的服务容错">六、 feign 的服务容错</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#61-feign-的依赖中默认导入了hystrix-的相关依赖我们不需要额外导入只需要开启相关配置即可">6.1 feign 的依赖中默认导入了hystrix 的相关依赖，我们不需要额外导入，只需要开启相关配置即可</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#62-在applicationyml-中开启hystrix">6.2 在application.yml 中开启hystrix</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#63-创建`CProductFeignImpl`继承feign接口CProductFeign定义熔断时候的回退处理">6.3 创建`CProductFeignImpl`,继承feign接口（CProductFeign），定义熔断时候的回退处理</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#64-在-@FeignClient-注解中用fallback参数指定熔断时候的回退处理">6.4 在 @FeignClient 注解中，用fallback参数指定熔断时候的回退处理</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#65-测试熔断处理">6.5 测试熔断处理</a><br/>
 ## 正文<br/>
+
 
 ## 一、feign 简介
 

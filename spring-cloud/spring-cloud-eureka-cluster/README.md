@@ -5,17 +5,17 @@
 <a href="#二三步搭建eureka-高可用注册中心">二、三步搭建eureka 高可用注册中心</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-引入eureka服务端依赖">2.1 引入eureka服务端依赖</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22--创建三份配置文件分别代表不同注册中心的配置">2.2  创建三份配置文件，分别代表不同注册中心的配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-启动类上增加注解@EnableEurekaServer激活eureka服务端自动配置">2.3 启动类上增加注解@EnableEurekaServer激活eureka服务端自动配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-启动类上增加注解EnableEurekaServer激活eureka服务端自动配置">2.3 启动类上增加注解@EnableEurekaServer激活eureka服务端自动配置</a><br/>
 <a href="#三三步搭建eureka-客户端">三、三步搭建eureka 客户端</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-引入eureka客户端依赖">3.1 引入eureka客户端依赖</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-eureka-客户端配置指定注册中心地址">3.2 eureka 客户端配置,指定注册中心地址</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-启动类上增加注解@EnableDiscoveryClient激活eureka客户端自动配置">3.3 启动类上增加注解@EnableDiscoveryClient激活eureka客户端自动配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-启动类上增加注解EnableDiscoveryClient激活eureka客户端自动配置">3.3 启动类上增加注解@EnableDiscoveryClient激活eureka客户端自动配置</a><br/>
 <a href="#4启动项目">4.启动项目 </a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-这里我们可以采用命令行方式指定配置分别启动三个注册中心">4.1 这里我们可以采用命令行方式指定配置，分别启动三个注册中心</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#42--高可用集群搭建成功的判定">4.2  高可用集群搭建成功的判定</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#**421--点击下面注册中心的可用实例列表中的地址访问链接分以下几个情况**">4.2.1  点击下面注册中心的可用实例列表中的地址，访问链接分以下几个情况：</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#43--prefer-ip-address-参数说明">4.3  prefer-ip-address 参数说明</a><br/>
 ## 正文<br/>
+
 
 ## 一、项目结构
 

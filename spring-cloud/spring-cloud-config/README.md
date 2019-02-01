@@ -1,26 +1,14 @@
 # spring-cloud-config
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一config-简介">一、config 简介</a><br/>
 <a href="#二项目结构">二、项目结构</a><br/>
 <a href="#三config-server-配置中心的实现">三、config-server 配置中心的实现</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-导入依赖">3.1 导入依赖 </a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-在启动类上添加@EnableDiscoveryClient和@EnableConfigServer-注解">3.2 在启动类上添加@EnableDiscoveryClient和@EnableConfigServer 注解</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33--指定注册中心地址并配置git仓库地址的配置文件路径">3.3  指定注册中心地址,并配置git仓库地址的配置文件路径</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34--启动eureka和config-server服务访问-http//localhost8020/application-devyml">3.4  启动eureka和config-server服务，访问 http://localhost:8020/application-dev.yml</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#35-http请求地址和资源文件映射">3.5 http请求地址和资源文件映射</a><br/>
 <a href="#四config-client-搭建">四、config-client 搭建</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-导入依赖">4.1 导入依赖</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-新建-`bootstrapyml`配置文件指定注册中心地址和配置中心服务名并在启动类上开启自动注册@EnableDiscoveryClient">4.2 新建 `bootstrap.yml`配置文件，指定注册中心地址和配置中心服务名,并在启动类上开启自动注册@EnableDiscoveryClient</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#43-创建配置映射类用于测试">4.3 创建配置映射类用于测试</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#44-依次启动eurekaconfig-serverconfig-client-访问-http//localhost8030/programmer">4.4 依次启动eureka,config-server,config-client ，访问 http://localhost:8030/programmer</a><br/>
 <a href="#五集成-spring-cloud-bus-实现配置热更新">五、集成 spring-cloud-bus 实现配置热更新</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#51-消息总线简介">5.1 消息总线简介</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#51-导入bus依赖">5.1 导入bus依赖</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#52-修改bootstrapyml-配置开启总线配置配置rabbitmq--和-开启热刷新[端点]https//githubcom/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-actuator">5.2 修改bootstrap.yml 配置，开启总线配置，配置rabbitmq  和 开启热刷新[端点](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-actuator)</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#53-用@RefreshScope指定需要热刷新的配置">5.3 用@RefreshScope指定需要热刷新的配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#54-依次启动eurekaconfig-server-config-client-服务">5.4 依次启动eureka，config-server, config-client 服务</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#56--直接在-git-上修改配置文件然后用-`post`-触发热刷新端点-http//localhost8030/actuator/bus-refresh-即可看到配置已经热刷新">5.6  直接在 git 上修改配置文件，然后用 `post` 触发热刷新端点 http://localhost:8030/actuator/bus-refresh ,即可看到配置已经热刷新</a><br/>
+
 ## 正文<br/>
+
 
 ## 一、config 简介
 
