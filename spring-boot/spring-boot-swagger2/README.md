@@ -1,5 +1,6 @@
 # spring boot 整合 swagger 2.0
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一Springfox-与-Swagger-简介">一、Springfox 与 Swagger 简介</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-Springfox">1.1 Springfox</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-Swagger">1.2 Swagger</a><br/>
@@ -43,7 +44,7 @@ swagger 是一个综合的开源项目，包含[swagger-core](https://github.com
 **Swagger Core 是 OpenApi 规范（以前称为Swagger规范）的Java 实现，而 Springfox 提供 Swagger 与 spring 的集成支持**。
 
 
-
+<br/>
 ## 二、spring boot 集成 swagger 2.0
 
 ### 2.1 导入项目相关依赖
@@ -250,7 +251,7 @@ swagger 为了最大程度防止对逻辑代码的侵入，基本都是依靠注
 
 ### 2.4 swagger-ui 可视化接口文档
 
-接口文档访问地址：http://localhost:8080/swagger-ui.html#/，文档主界面如下：
+接口文档访问地址：http://localhost:8080/swagger-ui.html#/ ，文档主界面如下：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/swagger-ui-index.png"/> </div>
 
