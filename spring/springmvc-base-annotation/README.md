@@ -1,7 +1,6 @@
 # springmvc基础（基于注解）
 
-
-## 目录<br/>
+## 目录<br/>
 <a href="#一搭建hello-spring工程">一、搭建hello spring工程</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目搭建">1.1 项目搭建</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-相关注解说明">1.2 相关注解说明</a><br/>
@@ -16,7 +15,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#62-文件下载">6.2 文件下载</a><br/>
 <a href="#七Restful风格的请求">七、Restful风格的请求</a><br/>
 ## 正文<br/>
-
 
 ## 一、搭建hello spring工程
 
@@ -510,7 +508,7 @@ public class ParamBindController {
     }
 ```
 
-2.利用@DateTimeFormat注解，如果是用实体类去接收参数，则在对应的属性上声明
+2.利用@DateTimeFormat注解，如果是用实体类去接收参数，则在对应的属性上用@DateTimeFormat和@JsonFormat声明
 
 ```java
 public String param(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date birthday)
@@ -951,3 +949,4 @@ public class RestfulController {
 
 ```
 
+>>>>>>> 719009b7e434876c2117d82a8a0cb31998acce33
