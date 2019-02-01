@@ -251,7 +251,7 @@ swagger 为了最大程度防止对逻辑代码的侵入，基本都是依靠注
 
 ### 2.4 swagger-ui 可视化接口文档
 
-接口文档访问地址：http://localhost:8080/swagger-ui.html#/ ，文档主界面如下：
+接口文档访问地址：http://localhost:8080/swagger-ui.html ，文档主界面如下：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/swagger-ui-index.png"/> </div>
 
