@@ -16,6 +16,8 @@ spring-cloud：Finchley.SR2
 **更新日志**：
 
 >2019.01.27	 新增用例 :  [spring boot + druid + mybatis + atomikos](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/springboot-druid-mybatis-multi) 配置多数据源、支持分布式事务( JTA方式实现)
+>
+>2019.02.01     新增用例：[spring-boot-swagger2](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-swagger2)  spring-boot 集成 Swagger2 打造在线接口文档
 
 ## 1. spring samples
 
@@ -62,8 +64,7 @@ spring-cloud：Finchley.SR2
 | [spring-boot-websocket](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-websocket) | spring-boot 整合 websocket                 | [Using @ServerEndpoint](https://docs.spring.io/spring-boot/docs/2.1.1.RELEASE/reference/htmlsingle/#howto-create-websocket-endpoints-using-serverendpoint) |
 | [spring-boot-kafka](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-kafka) | spring-boot 整合 kafka                     | [Apache Kafka Support](https://docs.spring.io/spring-boot/docs/2.1.1.RELEASE/reference/htmlsingle/#boot-features-kafka) |
 | [spring-boot-actuator](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-actuator) | actuator + Hyperic SIGAR 应用信息监控      | [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/2.1.1.RELEASE/reference/htmlsingle/#production-ready) |
-
-更多的用例可参阅 [spring-boot 官方samples ](https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples)
+| [spring-boot-swagger2](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-swagger2) | spring-boot 集成 Swagger2 打造在线接口文档 | [Springfox Reference Documentation](http://springfox.github.io/springfox/docs/current/) |
 
 <br/>
 
