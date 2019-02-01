@@ -41,10 +41,10 @@ swagger 是一个综合的开源项目，包含[swagger-core](https://github.com
 
 ### 1.3 OpenApi、Swagger、Springfox的关系
 
-**Swagger Core 是 OpenApi 规范（以前称为Swagger规范）的Java 实现，而 Springfox 提供 Swagger 与 spring 的集成支持**。
+**Swagger Core 是 OpenApi 规范（以前称为Swagger规范）的Java 实现，而 Springfox 提供 Swagger 与 spring 的集成支持**。<br/>
 
 
-<br/>
+
 ## 二、spring boot 集成 swagger 2.0
 
 ### 2.1 导入项目相关依赖
