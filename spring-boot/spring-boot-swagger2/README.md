@@ -1,6 +1,6 @@
 # spring boot 整合 swagger 2.0
 
-## 目录<br/>
+## 导航<br/>
 <a href="#一Springfox-与-Swagger-简介">一、Springfox 与 Swagger 简介</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-Springfox">1.1 Springfox</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-Swagger">1.2 Swagger</a><br/>
