@@ -74,7 +74,7 @@ swagger 是一个综合的开源项目，包含[swagger-core](https://github.com
 
 2. 在`SwaggerConfig`配置类上添加`@Profile({"dev","test"}) `注解，指明在开发环境和测试环境下激活此配置类，打包或者部署时候使用spring.profiles.active指明环境即可；
 
-3. 在配置文件中配置自定义的开关参数，并在在`SwaggerConfig`配置类上添加`@ConditionalOnProperty(name = "swagger.enable", havingValue = "true") `，指明配置类的生效条件
+3. 在配置文件中配置自定义的开关参数，并在`SwaggerConfig`配置类上添加`@ConditionalOnProperty(name = "swagger.enable", havingValue = "true") `，指明配置类的生效条件
 
    注：@ConditionalOnProperty 注解说明
 
