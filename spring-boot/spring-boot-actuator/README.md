@@ -1,4 +1,22 @@
 # spring boot actuator
+## 目录<br/>
+<a href="#一用例涉及到的概念综述">一、用例涉及到的概念综述</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-端点">1.1 端点</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-启用端点">1.2 启用端点</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-暴露端点">1.3 暴露端点</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-健康检查信息">1.4 健康检查信息</a><br/>
+<a href="#二项目说明">二、项目说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构说明">1.1 项目结构说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-主要依赖">1.2 主要依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-项目配置">1.3 项目配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-查看监控状态">1.4 查看监控状态</a><br/>
+<a href="#三自定义健康检查指标">三、自定义健康检查指标</a><br/>
+<a href="#四自定义健康状态聚合规则">四、自定义健康状态聚合规则</a><br/>
+<a href="#五@Endpoint自定义端点">五、@Endpoint自定义端点</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#51-自定义端点">5.1 自定义端点</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#52-访问自定义端点http//1270018080/actuator/customEndPoint">5.2 访问自定义端点http://127.0.0.1:8080/actuator/customEndPoint</a><br/>
+## 正文<br/>
+
 
 ## 一、用例涉及到的概念综述
 

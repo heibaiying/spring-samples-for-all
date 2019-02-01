@@ -1,4 +1,13 @@
 # spring boot 整合 tomcat
+## 目录<br/>
+<a href="#一说明">一、说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构说明">1.1 项目结构说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目主要依赖">1.2 项目主要依赖</a><br/>
+<a href="#二整合-tomcat">二、整合 tomcat</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-修改启动类继承自SpringBootServletInitializer并覆盖重写其中configure方法">2.1 修改启动类，继承自SpringBootServletInitializer，并覆盖重写其中configure方法</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-在applicationyml-中指定访问视图文件的前缀和后缀">2.2 在application.yml 中指定访问视图文件的前缀和后缀 </a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-新建controller和showjsp-测试整合是否成功">2.3 新建controller和show.jsp 测试整合是否成功</a><br/>
+## 正文<br/>
 
 ## 一、说明
 

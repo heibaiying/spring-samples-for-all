@@ -1,4 +1,15 @@
 # spring boot 整合 druid+mybatis
+## 目录<br/>
+<a href="#一说明">一、说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目主要依赖">1.2 项目主要依赖</a><br/>
+<a href="#二整合-druid-+-mybatis">二、整合 druid + mybatis</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-在applicationyml-中配置数据源">2.1 在application.yml 中配置数据源</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22--新建查询接口和controller">2.2  新建查询接口和controller</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-关于druid监控数据的外部化调用">2.3 关于druid监控数据的外部化调用</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-druid-控制台的使用默认访问地址-http//localhost8080/druid/loginhtml">2.4 druid 控制台的使用，默认访问地址 http://localhost:8080/druid/login.html</a><br/>
+## 正文<br/>
+
 
 ## 一、说明
 

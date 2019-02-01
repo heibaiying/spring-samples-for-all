@@ -8,7 +8,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1在resources文件夹下新建数据库配置文件jdbcproperties">1、在resources文件夹下新建数据库配置文件jdbc.properties</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2配置Jdbc数据源并定义事务管理器">2、配置Jdbc数据源并定义事务管理器</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3新建查询接口及其实现类这里我查询的表是mysql和oracle中的字典表">3、新建查询接口及其实现类</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4新建测试类进行测试">4.新建测试类进行测试</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4新建测试类进行测试">4、新建测试类进行测试</a><br/>
 ## 正文<br/>
 
 
@@ -166,7 +166,7 @@ public class OracleDaoImpl implements OracleDao {
 }
 ```
 
-#### 4.新建测试类进行测试
+#### 4、新建测试类进行测试
 
 ```java
 @RunWith(SpringRunner.class)

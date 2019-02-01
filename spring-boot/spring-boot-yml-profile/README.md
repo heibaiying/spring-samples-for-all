@@ -1,4 +1,20 @@
 # spring-boot-yml-profile
+## 目录<br/>
+<a href="#一项目结构">一、项目结构</a><br/>
+<a href="#二常用-yaml-语法讲解">二、常用 yaml 语法讲解</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-基本规则">2.1 基本规则</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-对象的写法">2.2 对象的写法</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-map的写法">2.3 map的写法</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-数组的写法">2.3 数组的写法</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-单双引号">2.5 单双引号</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#26-特殊符号">2.6 特殊符号</a><br/>
+<a href="#三spring-boot-与-yaml">三、spring boot 与 yaml</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31--spring-boot-支持使用-${appname}-引用预先定义的值">3.1  spring boot 支持使用 ${app.name} 引用预先定义的值</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-spring-boot-支持使用-${randomxxx}-配置随机值">3.2 spring boot 支持使用 ${random.xxx} 配置随机值</a><br/>
+<a href="#四@ConfigurationProperties实现属性绑定">四、@ConfigurationProperties实现属性绑定</a><br/>
+<a href="#五多配置文件">五、多配置文件</a><br/>
+<a href="#六优先级的说明">六、优先级的说明</a><br/>
+## 正文<br/>
 
 ## 一、项目结构
 

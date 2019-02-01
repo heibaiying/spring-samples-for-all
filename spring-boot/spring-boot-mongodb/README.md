@@ -1,4 +1,14 @@
 # spring boot 整合 mongodb
+## 目录<br/>
+<a href="#一说明">一、说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-用例结构">1.1 用例结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目主要依赖">1.2 项目主要依赖</a><br/>
+<a href="#二整合-mongodb">二、整合 mongodb</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-在applicationyml-中配置mongodb数据源">2.1 在application.yml 中配置mongodb数据源</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22--基于MongoTemplate实现对mongodb的操作">2.2  基于MongoTemplate实现对mongodb的操作</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-使用-data-jpa-方式操作mongodb-推荐使用">2.3 使用 data jpa 方式操作mongodb (推荐使用)</a><br/>
+## 正文<br/>
+
 
 ## 一、说明
 

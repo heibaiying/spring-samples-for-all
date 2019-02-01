@@ -1,4 +1,26 @@
 # spring-cloud-ribbon
+## 目录<br/>
+<a href="#一ribbon-简介">一、ribbon 简介</a><br/>
+<a href="#二项目结构">二、项目结构</a><br/>
+<a href="#三服务提供者的实现">三、服务提供者的实现</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-产品服务由`ProductService`提供并通过`ProducerController`将服务暴露给外部调用。">3.1 产品服务由`ProductService`提供，并通过`ProducerController`将服务暴露给外部调用。</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-指定注册中心地址并在启动类上开启自动注册@EnableDiscoveryClient">3.2 指定注册中心地址,并在启动类上开启自动注册@EnableDiscoveryClient</a><br/>
+<a href="#四服务消费者的实现">四、服务消费者的实现</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-导入负载均衡需要的依赖">4.1 导入负载均衡需要的依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-指定注册中心地址并在启动类上开启自动注册@EnableDiscoveryClient">4.2 指定注册中心地址,并在启动类上开启自动注册@EnableDiscoveryClient</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#43-使用@LoadBalanced配置RestTemplate即可实现客户端负载均衡">4.3 使用@LoadBalanced配置RestTemplate即可实现客户端负载均衡</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#44-使用RestTemplate调用远程服务">4.4 使用RestTemplate调用远程服务</a><br/>
+<a href="#五启动测试">五、启动测试</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#51-启动一个Eureka服务三个producer服务注意区分端口和一个消费者服务">5.1 启动一个Eureka服务、三个producer服务（注意区分端口）、和一个消费者服务</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#52--访问http//localhost8080/sell/products-查看负载均衡的调用结果">5.2  访问http://localhost:8080/sell/products 查看负载均衡的调用结果</a><br/>
+<a href="#六-附1-关于RestTemplate的说明">六、 附1： 关于RestTemplate的说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#61--restTemplate-规范">6.1  restTemplate 规范</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#62-ForEntity和ForObject的区别">6.2 ForEntity()和ForObject的区别</a><br/>
+<a href="#七-附2-关于ribbon更多负载均衡的策略">七、 附2： 关于ribbon更多负载均衡的策略</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#71-内置的负载均衡的策略如下图">7.1 内置的负载均衡的策略如下图</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#72-配置文件指定负载均衡的方式">7.2 配置文件指定负载均衡的方式</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#73-代码指定负载均衡的方式">7.3 代码指定负载均衡的方式</a><br/>
+## 正文<br/>
 
 ## 一、ribbon 简介
 

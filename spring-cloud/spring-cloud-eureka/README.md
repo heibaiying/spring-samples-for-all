@@ -1,4 +1,18 @@
 # eureka 服务的注册与发现
+## 目录<br/>
+<a href="#一eureka-简介">一、eureka 简介</a><br/>
+<a href="#二项目结构">二、项目结构</a><br/>
+<a href="#三三步搭建eureka-服务注册中心">三、三步搭建eureka 服务注册中心</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-引入eureka服务端依赖">3.1 引入eureka服务端依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-eureka-服务端配置">3.2 eureka 服务端配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-启动类上增加注解@EnableEurekaServer激活eureka服务端自动配置">3.3 启动类上增加注解@EnableEurekaServer激活eureka服务端自动配置</a><br/>
+<a href="#四三步搭建eureka-客户端">四、三步搭建eureka 客户端</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-引入eureka客户端依赖">4.1 引入eureka客户端依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-eureka-客户端配置">4.2 eureka 客户端配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#43-启动类上增加注解@EnableDiscoveryClient激活eureka客户端自动配置">4.3 启动类上增加注解@EnableDiscoveryClient激活eureka客户端自动配置</a><br/>
+<a href="#五启动项目">五、启动项目 </a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#51-进入注册中心控制台查看服务注册情况">5.1 进入注册中心控制台，查看服务注册情况</a><br/>
+## 正文<br/>
 
 ## 一、eureka 简介
 

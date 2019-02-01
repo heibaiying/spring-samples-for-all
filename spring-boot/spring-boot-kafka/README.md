@@ -1,4 +1,27 @@
 # spring boot 整合 kafka
+## 目录<br/>
+<a href="#一kafka的相关概念">一、kafka的相关概念：</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1主题和分区">1.主题和分区</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2分区复制">2.分区复制</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3-生产者">3. 生产者</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4-消费者">4. 消费者</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#5broker和集群">5.broker和集群</a><br/>
+<a href="#二项目说明">二、项目说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构说明">1.1 项目结构说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-主要依赖">1.2 主要依赖</a><br/>
+<a href="#二-整合-kafka">二、 整合 kafka</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-kafka基本配置">2.1 kafka基本配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-KafkaTemplate实现消息发送">2.2 KafkaTemplate实现消息发送</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23--@KafkaListener注解实现消息的监听">2.3  @KafkaListener注解实现消息的监听</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-测试整合结果">2.4 测试整合结果</a><br/>
+<a href="#三关于多消费者组的测试">三、关于多消费者组的测试</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31--创建多分区主题">3.1  创建多分区主题</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-多消费者组对同一主题的监听">3.2 多消费者组对同一主题的监听</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-发送消息时候指定主题的具体分区">3.2 发送消息时候指定主题的具体分区</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-测试结果">3.4 测试结果</a><br/>
+<a href="#四序列化与反序列化">四、序列化与反序列化</a><br/>
+## 正文<br/>
+
 
 ## 一、kafka的相关概念：
 

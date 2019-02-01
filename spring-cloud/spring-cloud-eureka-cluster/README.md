@@ -1,5 +1,22 @@
 # eureka 高可用注册中心的搭建
 
+## 目录<br/>
+<a href="#一项目结构">一、项目结构</a><br/>
+<a href="#二三步搭建eureka-高可用注册中心">二、三步搭建eureka 高可用注册中心</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-引入eureka服务端依赖">2.1 引入eureka服务端依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22--创建三份配置文件分别代表不同注册中心的配置">2.2  创建三份配置文件，分别代表不同注册中心的配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-启动类上增加注解@EnableEurekaServer激活eureka服务端自动配置">2.3 启动类上增加注解@EnableEurekaServer激活eureka服务端自动配置</a><br/>
+<a href="#三三步搭建eureka-客户端">三、三步搭建eureka 客户端</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-引入eureka客户端依赖">3.1 引入eureka客户端依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-eureka-客户端配置指定注册中心地址">3.2 eureka 客户端配置,指定注册中心地址</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-启动类上增加注解@EnableDiscoveryClient激活eureka客户端自动配置">3.3 启动类上增加注解@EnableDiscoveryClient激活eureka客户端自动配置</a><br/>
+<a href="#4启动项目">4.启动项目 </a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-这里我们可以采用命令行方式指定配置分别启动三个注册中心">4.1 这里我们可以采用命令行方式指定配置，分别启动三个注册中心</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42--高可用集群搭建成功的判定">4.2  高可用集群搭建成功的判定</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#**421--点击下面注册中心的可用实例列表中的地址访问链接分以下几个情况**">4.2.1  点击下面注册中心的可用实例列表中的地址，访问链接分以下几个情况：</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#43--prefer-ip-address-参数说明">4.3  prefer-ip-address 参数说明</a><br/>
+## 正文<br/>
+
 ## 一、项目结构
 
 eureka-server为服务注册中心，负责服务的管理；
@@ -155,7 +172,7 @@ public class EurekaClientApplication {
 
 这里需要主要的是仅仅status中出现其他注册中心时，并不一定是搭建成功的，**一定是当注册中心的DS Replicas 和 available replicas中显示其余的注册中心时候**，才代表搭建成功。
 
-#### **4.2.1  点击下面注册中心的可用实例列表中的地址，访问链接分以下几个情况：**
+#### 4.2.1  点击下面注册中心的可用实例列表中的地址，访问链接分以下几个情况：
 
 1. hostname和prefer-ip-address都没有配置，则访问 主机名:服务名:端口号，
 

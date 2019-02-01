@@ -1,4 +1,18 @@
 # spring boot 整合 rabbitmq
+## 目录<br/>
+<a href="#一-项目结构说明">一、 项目结构说明</a><br/>
+<a href="#二关键依赖">二、关键依赖</a><br/>
+<a href="#三公共模块rabbitmq-common">三、公共模块（rabbitmq-common）</a><br/>
+<a href="#四服务消费者rabbitmq-consumer">四、服务消费者（rabbitmq-consumer）</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-消息消费者配置">4.1 消息消费者配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-使用注解@RabbitListener和@RabbitHandler创建消息监听者">4.2 使用注解@RabbitListener和@RabbitHandler创建消息监听者</a><br/>
+<a href="#五-消息生产者rabbitmq-producer">五、 消息生产者（rabbitmq-producer）</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#51-消息生产者配置">5.1 消息生产者配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#52--创建消息生产者">5.2  创建消息生产者</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#53--以单元测试的方式发送消息">5.3  以单元测试的方式发送消息</a><br/>
+<a href="#六项目构建的说明">六、项目构建的说明</a><br/>
+## 正文<br/>
+
 
 ## 一、 项目结构说明
 
