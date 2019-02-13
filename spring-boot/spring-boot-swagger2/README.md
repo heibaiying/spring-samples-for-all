@@ -17,7 +17,7 @@
 
 ### 1.1 Springfox
 
-Springfox 是一个开源的API Doc的框架， 它的前身是swagger-springmvc，能够完美的支持springmvc和swagger，可以将spring 接口方法自动转换为接口文档。 目前spring fox 正致力于对更多JSON API规范和标准的扩展和支持，例如：[swagger](http://swagger.io/)，[RAML](http://raml.org/)和[jsonapi](http://jsonapi.org/)。
+Springfox 是一个开源的API Doc的框架， 它的前身是swagger-springmvc，能够完美的支持springmvc，可以将spring 接口方法自动转换为接口文档。 目前spring fox 正致力于对更多JSON API规范和标准的扩展和支持，例如：[swagger](http://swagger.io/)，[RAML](http://raml.org/)和[jsonapi](http://jsonapi.org/)。
 
 ### 1.2 Swagger
 
