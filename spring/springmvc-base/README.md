@@ -940,5 +940,3 @@ public class RestfulController {
 }
 
 ```
-
->>>>>>> 719009b7e434876c2117d82a8a0cb31998acce33
