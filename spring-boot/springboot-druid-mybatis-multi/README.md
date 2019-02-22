@@ -758,7 +758,7 @@ public static Connection doGetConnection(DataSource dataSource) throws SQLExcept
 
 
 
-关于mybati-spring 的更多事务处理机制，可以阅读博客[mybatis-spring事务处理机制分析](mybatis-spring事务处理机制分析)
+关于mybati-spring 的更多事务处理机制，推荐阅读博客[mybatis-spring事务处理机制分析](https://my.oschina.net/fifadxj/blog/785621)
 
 
 
