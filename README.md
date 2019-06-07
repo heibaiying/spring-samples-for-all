@@ -13,7 +13,7 @@ spring-boot：2.1.1.RELEASE
 spring-cloud：Finchley.SR2
 <br/>
 
->:star:对大数据技术栈感兴趣的小伙伴可以关注我的新仓库：[大数据入门指南](https://github.com/heibaiying/BigData-Notes)
+>:star::star::star:**对大数据技术栈感兴趣的小伙伴可以关注我的新仓库：[大数据入门指南](https://github.com/heibaiying/BigData-Notes)**
 
 ## 1. spring samples
 
