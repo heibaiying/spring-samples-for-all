@@ -13,11 +13,7 @@ spring-boot：2.1.1.RELEASE
 spring-cloud：Finchley.SR2
 <br/>
 
-**更新日志**：
-
->2019.01.27	 新增用例 :  [spring boot + druid + mybatis + atomikos](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/springboot-druid-mybatis-multi) 配置多数据源、支持分布式事务( JTA方式实现)
->
->2019.02.01     新增用例：[spring-boot-swagger2](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-swagger2)  spring-boot 集成 Swagger2 打造在线接口文档
+>:star:对大数据技术栈感兴趣的小伙伴可以关注我的新仓库：[大数据入门指南](https://github.com/heibaiying/BigData-Notes)
 
 ## 1. spring samples
 
