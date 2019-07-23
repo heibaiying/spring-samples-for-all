@@ -1,5 +1,6 @@
 # spring boot actuator
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一用例涉及到的概念综述">一、用例涉及到的概念综述</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-端点">1.1 端点</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-启用端点">1.2 启用端点</a><br/>
@@ -277,7 +278,7 @@ Sigar为不同平台提供了不同的库文件,下载后需要将库文件放�
 
 - Windows下配置：根据自己的操作系统版本选择sigar-amd64-winnt.dll或sigar-x86-winnt.dll拷贝到C:\Windows\System32中
 
-- Linux下配置：将libsigar-amd64-linux.so或libsigar-x86-linux.so拷贝到/usr/lib64或/lib64或/lib或/usr/lib目录下，如果不起作用，还需要sudochmod 744修改libsigar-amd64-linux.so文件权限
+- Linux下配置：将libsigar-amd64-linux.so或libsigar-x86-linux.so拷贝到/usr/lib64或/lib64或/lib或/usr/lib目录下，如果不起作用，还需要sudo chmod 744修改libsigar-amd64-linux.so文件权限
 
 ```java
 @Endpoint(id = "customEndPoint")
