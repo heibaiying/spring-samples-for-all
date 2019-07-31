@@ -1,5 +1,6 @@
 # spring AOP（注解方式）
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一说明">一、说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构说明">1.1 项目结构说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-依赖说明">1.2 依赖说明</a><br/>
@@ -17,9 +18,9 @@
 
 ### 1.1 项目结构说明
 
-1. 切面配置位于com.heibaiying.config下AopConfig.java文件；
-2. 自定义切面位于advice下，其中CustomAdvice是标准的自定义切面，FirstAdvice和SecondAdvice用于测试多切面共同作用于同一个被切入点时的执行顺序；
-3. OrderService是待切入方法。
+1. 切面配置位于 com.heibaiying.config 下 AopConfig.java 文件；
+2. 自定义切面位于 advice 下，其中 CustomAdvice 是标准的自定义切面，FirstAdvice 和 SecondAdvice 用于测试多切面共同作用于同一个被切入点时的执行顺序；
+3. OrderService 是待切入方法。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-aop-annotation.png"/> </div>
 
@@ -27,7 +28,7 @@
 
 ### 1.2 依赖说明
 
-除了spring的基本依赖外，需要导入aop依赖包
+除了 spring 的基本依赖外，需要导入 aop 依赖包
 
 ```xml
  <!--aop 相关依赖-->
@@ -71,7 +72,7 @@ public class OrderServiceImpl implements OrderService {
 
 #### 2.2 创建自定义切面类
 
-注：@Pointcut的值可以是多个切面表达式的组合。
+注：@Pointcut 的值可以是多个切面表达式的组合。
 
 ```java
 /**
@@ -79,7 +80,7 @@ public class OrderServiceImpl implements OrderService {
  * @description : 自定义切面
  */
 @Aspect
-@Component //除了加上@Aspect外 还需要声明为spring的组件 @Aspect只是一个切面声明
+@Component //除了加上@Aspect 外 还需要声明为 spring 的组件 @Aspect 只是一个切面声明
 public class CustomAdvice {
 
 
@@ -140,7 +141,7 @@ public class CustomAdvice {
  */
 @Configuration
 @ComponentScan("com.heibaiying.*")
-@EnableAspectJAutoProxy // 开启@Aspect注解支持 等价于<aop:aspectj-autoproxy>
+@EnableAspectJAutoProxy // 开启@Aspect 注解支持 等价于<aop:aspectj-autoproxy>
 public class AopConfig {
 }
 ```
@@ -163,8 +164,8 @@ public class AopTest {
     }
 
     /**
-     * 多个切面作用于同一个切入点时，可以用@Order指定切面的执行顺序
-     * 优先级高的切面在切入方法前执行的通知(before)会优先执行，但是位于方法后执行的通知(after,afterReturning)反而会延后执行
+     * 多个切面作用于同一个切入点时，可以用@Order 指定切面的执行顺序
+     * 优先级高的切面在切入方法前执行的通知 (before) 会优先执行，但是位于方法后执行的通知 (after,afterReturning) 反而会延后执行
      */
     @Test
     public void delete() {
@@ -175,11 +176,11 @@ public class AopTest {
 
 #### 2.5  切面执行顺序
 
-- 多个切面作用于同一个切入点时，可以用@Order指定切面的执行顺序
+- 多个切面作用于同一个切入点时，可以用@Order 指定切面的执行顺序
 
-- 优先级高的切面在切入方法前执行的通知(before)会优先执行，但是位于方法后执行的通知(after,afterReturning)反而会延后执行，类似于同心圆原理。
+- 优先级高的切面在切入方法前执行的通知 (before) 会优先执行，但是位于方法后执行的通知 (after,afterReturning) 反而会延后执行，类似于同心圆原理。
 
-  <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/aop执行顺序.png"/> </div>
+  <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/aop 执行顺序.png"/> </div>
 
 
 
@@ -194,7 +195,7 @@ execution(modifiers-pattern? ret-type-pattern declaring-type-pattern?name-patter
 
 - 除了返回类型模式，名字模式和参数模式以外，所有的部分都是可选的;
 -  `*`，它代表了匹配任意的返回类型; 
-- `()` 匹配了一个不接受任何参数的方法， 而 `(..)` 匹配了一个接受任意数量参数的方法（零或者更多）。 模式 `(*)` 匹配了一个接受一个任何类型的参数的方法。 模式 `(*,String)` 匹配了一个接受两个参数的方法，第一个可以是任意类型，第二个则必须是String类型。
+- `()` 匹配了一个不接受任何参数的方法， 而 `(..)` 匹配了一个接受任意数量参数的方法（零或者更多）。 模式 `(*)` 匹配了一个接受一个任何类型的参数的方法。 模式 `(*,String)` 匹配了一个接受两个参数的方法，第一个可以是任意类型，第二个则必须是 String 类型。
 
 下面给出一些常见切入点表达式的例子。
 
@@ -216,31 +217,31 @@ execution(modifiers-pattern? ret-type-pattern declaring-type-pattern?name-patter
   execution(* com.xyz.service.AccountService.*(..))
   ```
 
-- 定义在service包里的任意方法的执行：
+- 定义在 service 包里的任意方法的执行：
 
   ```java
   execution(* com.xyz.service.*.*(..))
   ```
 
-- 定义在service包或者子包里的任意方法的执行：
+- 定义在 service 包或者子包里的任意方法的执行：
 
   ```java
   execution(* com.xyz.service..*.*(..))
   ```
 
-- 在service包里的任意连接点（在Spring AOP中只是方法执行） ：
+- 在 service 包里的任意连接点（在 Spring AOP 中只是方法执行） ：
 
   ```java
   within(com.xyz.service.*)
   ```
 
-- 在service包或者子包里的任意连接点（在Spring AOP中只是方法执行） ：
+- 在 service 包或者子包里的任意连接点（在 Spring AOP 中只是方法执行） ：
 
   ```
   within(com.xyz.service..*)
   ```
 
-- 实现了 `AccountService` 接口的代理对象的任意连接点（在Spring AOP中只是方法执行） ：
+- 实现了 `AccountService` 接口的代理对象的任意连接点（在 Spring AOP 中只是方法执行） ：
 
   ```
   this(com.xyz.service.AccountService)

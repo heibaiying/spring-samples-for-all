@@ -19,25 +19,25 @@
 
 api 网关是整个微服务系统的门面，所有的外部访问需要通过网关进行调度和过滤。它实现了请求转发、负载均衡、校验过滤、错误熔断、服务聚合等功能。
 
-下图是直观的显示api Gateway 在微服务网关中的作用（图片引用自spring boot 官网）。
+下图是直观的显示 api Gateway 在微服务网关中的作用（图片引用自 spring boot 官网）。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/apiGateway.png"/> </div>
 
 ### 1.2 zuul
 
-spring cloud 中提供了基础Net flix Zuul 实现的网关组件，这就是Zuul,它除了实现负载均衡、错误熔断、路由转发等功能，还能与spring 其他组件无缝配合使用。
+spring cloud 中提供了基础 Net flix Zuul 实现的网关组件，这就是 Zuul,它除了实现负载均衡、错误熔断、路由转发等功能，还能与 spring 其他组件无缝配合使用。
 
 
 
 ## 二、项目结构
 
-[spring-cloud-feign](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-feign)用例已经实现通过feign实现服务间的调用，且提供了两个业务服务单元(consumer、producer)，可以方便直观的测试zuul的路由、负载均衡、和错误熔断等功能，所以本用例在其基础上进行zuul的整合。
+[spring-cloud-feign](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-feign) 用例已经实现通过 feign 实现服务间的调用，且提供了两个业务服务单元 (consumer、producer)，可以方便直观的测试 zuul 的路由、负载均衡、和错误熔断等功能，所以本用例在其基础上进行 zuul 的整合。
 
 + common: 公共的接口和实体类；
-+ consumer: 服务的消费者，采用feign调用产品服务；
++ consumer: 服务的消费者，采用 feign 调用产品服务；
 + producer：服务的提供者；
 + eureka: 注册中心；
-+ zuul: api网关。
++ zuul: api 网关。
 
 聚合项目目录如下：
 
@@ -131,7 +131,7 @@ zuul 项目目录如下：
 
 #### 3.2 在启动类上添加注解@EnableZuulProxy和@EnableDiscoveryClient
 
-@EnableZuulProxy会自动设置Zuul服务器端点并在其中开启一些反向代理过滤器，以便将请求转发到后端服务器。
+@EnableZuulProxy 会自动设置 Zuul 服务器端点并在其中开启一些反向代理过滤器，以便将请求转发到后端服务器。
 
 ```java
 @SpringBootApplication
@@ -150,7 +150,7 @@ public class ZuulApplication {
 
 #### 3.3  指定注册中心、配置网关的路由规则
 
-zuul 需要指定注册中心的地址，zuul 会从eureka获取其他微服务的实例信息，然后按照指定的路由规则进行请求转发。
+zuul 需要指定注册中心的地址，zuul 会从 eureka 获取其他微服务的实例信息，然后按照指定的路由规则进行请求转发。
 
 ```yaml
 server:
@@ -212,7 +212,7 @@ public class CustomZuulFallbackProvider implements FallbackProvider {
         return new ClientHttpResponse() {
 
             /**
-             * 返回响应的HTTP状态代码
+             * 返回响应的 HTTP 状态代码
              */
             @Override
             public HttpStatus getStatusCode() throws IOException {
@@ -220,7 +220,7 @@ public class CustomZuulFallbackProvider implements FallbackProvider {
             }
 
             /**
-             * 返回HTTP状态代码
+             * 返回 HTTP 状态代码
              */
             @Override
             public int getRawStatusCode() throws IOException {
@@ -228,7 +228,7 @@ public class CustomZuulFallbackProvider implements FallbackProvider {
             }
 
             /**
-             * 返回响应的HTTP状态文本
+             * 返回响应的 HTTP 状态文本
              */
             @Override
             public String getStatusText() throws IOException {
@@ -262,7 +262,7 @@ public class CustomZuulFallbackProvider implements FallbackProvider {
 }
 ```
 
-正确返回了内容、同时返回的http状态码也和我们设置的一样。
+正确返回了内容、同时返回的 http 状态码也和我们设置的一样。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-broker.png"/> </div>
 
@@ -270,12 +270,12 @@ public class CustomZuulFallbackProvider implements FallbackProvider {
 
 ## 五、zuul  过滤器
 
-创建自定义过滤器继承自CustomZuulFilter，当我们访问网关的时候，如果判断session 中没有对应的 code,则跳转到我们自定义的登录页面。
+创建自定义过滤器继承自 CustomZuulFilter，当我们访问网关的时候，如果判断 session 中没有对应的 code,则跳转到我们自定义的登录页面。
 
 ```java
 /**
  * @author : heibaiying
- * @description : 自定义filter过滤器
+ * @description : 自定义 filter 过滤器
  */
 
 @Component
@@ -306,7 +306,7 @@ public class CustomZuulFilter extends ZuulFilter {
     }
 
     /**
-     * ZuulFilter的核心校验方法
+     * ZuulFilter 的核心校验方法
      */
     @Override
     public Object run() throws ZuulException {
@@ -314,7 +314,7 @@ public class CustomZuulFilter extends ZuulFilter {
         HttpServletRequest request = currentContext.getRequest();
         String code = (String)request.getSession().getAttribute("code");
         if (StringUtils.isEmpty(code)){
-            // 设置值为false 不将请求转发到对应的服务上
+            // 设置值为 false 不将请求转发到对应的服务上
             currentContext.setSendZuulResponse(false);
             // 设置返回的状态码
             currentContext.setResponseStatusCode(HttpStatus.NON_AUTHORITATIVE_INFORMATION.value());
@@ -372,7 +372,7 @@ index.ftl:
 
 ## 七、附：关于版本问题可能导致的 zuul 启动失败
 
-如果出现以下错误导致启动失败，是 spring boot 版本不兼容导致的错误，Finchley SR2版本 spring cloud 中的 zuul 和 spring boot 2.1.x 版本存在不兼容。如果出现这个问题，则将 spring boot 将至 2.0.x 的版本即可，用例中采用的是 2.0.8 版本。在实际的开发中应该严格遵循spring 官方的版本依赖说明。
+如果出现以下错误导致启动失败，是 spring boot 版本不兼容导致的错误，Finchley SR2 版本 spring cloud 中的 zuul 和 spring boot 2.1.x 版本存在不兼容。如果出现这个问题，则将 spring boot 将至 2.0.x 的版本即可，用例中采用的是 2.0.8 版本。在实际的开发中应该严格遵循 spring 官方的版本依赖说明。
 
 ```java
 APPLICATION FAILED TO START

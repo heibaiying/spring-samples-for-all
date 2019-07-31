@@ -1,5 +1,6 @@
 # spring 定时任务（注解方式）
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一说明">一、说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构说明">1.1 项目结构说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-依赖说明">1.2 依赖说明</a><br/>
@@ -13,7 +14,7 @@
 
 ### 1.1 项目结构说明
 
-关于任务的调度配置定义在ServletConfig.java中，为方便观察项目定时执行的情况，项目以web的方式构建。
+关于任务的调度配置定义在 ServletConfig.java 中，为方便观察项目定时执行的情况，项目以 web 的方式构建。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-scheduling-annotation.png"/> </div>
 
@@ -105,8 +106,8 @@ public class Task {
     @Scheduled(fixedDelay = 5000, initialDelay = 1000)
     public void methodA() {
         Thread thread = Thread.currentThread();
-        System.out.println(String.format("线程名称：%s ; 线程ID：%s ; 调用方法：%s ; 调用时间：%s",
-                thread.getName(), thread.getId(), "methodA方法执行", LocalDateTime.now()));
+        System.out.println(String.format("线程名称：%s ; 线程 ID：%s ; 调用方法：%s ; 调用时间：%s",
+                thread.getName(), thread.getId(), "methodA 方法执行", LocalDateTime.now()));
     }
 
     /**
@@ -116,16 +117,16 @@ public class Task {
     @Async
     public void methodB() throws InterruptedException {
         Thread thread = Thread.currentThread();
-        System.out.println(String.format("线程名称：%s ; 线程ID：%s ; 调用方法：%s ; 调用时间：%s",
-                thread.getName(), thread.getId(), "methodB方法执行", LocalDateTime.now()));
+        System.out.println(String.format("线程名称：%s ; 线程 ID：%s ; 调用方法：%s ; 调用时间：%s",
+                thread.getName(), thread.getId(), "methodB 方法执行", LocalDateTime.now()));
         Thread.sleep(10 * 1000);
     }
 
     @Scheduled(cron = "0/10 * * * * ?")
     public void methodC() {
         Thread thread = Thread.currentThread();
-        System.out.println(String.format("线程名称：%s ; 线程ID：%s ; 调用方法：%s ; 调用时间：%s",
-                thread.getName(), thread.getId(), "methodC方法执行", LocalDateTime.now()));
+        System.out.println(String.format("线程名称：%s ; 线程 ID：%s ; 调用方法：%s ; 调用时间：%s",
+                thread.getName(), thread.getId(), "methodC 方法执行", LocalDateTime.now()));
     }
 }
 
@@ -140,8 +141,8 @@ public class Task {
  */
 @Configuration
 @EnableWebMvc
-@EnableScheduling  //启用Spring的计划任务执行功能
-@EnableAsync       //启用Spring的异步方法执行功能
+@EnableScheduling  //启用 Spring 的计划任务执行功能
+@EnableAsync       //启用 Spring 的异步方法执行功能
 @ComponentScan(basePackages = {"com.heibaiying.task"})
 public class ServletConfig implements WebMvcConfigurer, AsyncConfigurer, SchedulingConfigurer {
 
@@ -169,7 +170,7 @@ public class ServletConfig implements WebMvcConfigurer, AsyncConfigurer, Schedul
         };
     }
 
-    // 如果程序结束，需要关闭线程池 不然程序无法完全退出 只能kill才能完全退出
+    // 如果程序结束，需要关闭线程池 不然程序无法完全退出 只能 kill 才能完全退出
     @PreDestroy
     public void destroy() {
         if (executor != null) {
@@ -193,9 +194,9 @@ public class ServletConfig implements WebMvcConfigurer, AsyncConfigurer, Schedul
 
 **关于调度程序线程池作用说明**：
 
-按照例子 我们有methodA 、 methodB 、methodC 三个方法 其中 methodB 是耗时的方法如果不声明调度程序线程池 则methodB 会阻塞  methodA 、methodC 方法的执行 因为调度程序是单线程的
+按照例子 我们有 methodA 、 methodB 、methodC 三个方法 其中 methodB 是耗时的方法如果不声明调度程序线程池 则 methodB 会阻塞  methodA 、methodC 方法的执行 因为调度程序是单线程的
 
 **关于任务执行线程池作用说明**：
 
-按照例子 如果我们声明 methodB 是按照 fixedRate=5000 方法执行的 ，理论上不管任务耗时多久，任务都应该是每5秒执行一次，但是实际上任务是被加入执行队列，也不会立即被执行，因为默认执行任务是单线程的，这个时候需要开启@EnableAsync 并指定方法是 @Async 异步的，并且配置执行任务线程池(如果不配置就使用默认的线程池配置)
+按照例子 如果我们声明 methodB 是按照 fixedRate=5000 方法执行的 ，理论上不管任务耗时多久，任务都应该是每 5 秒执行一次，但是实际上任务是被加入执行队列，也不会立即被执行，因为默认执行任务是单线程的，这个时候需要开启@EnableAsync 并指定方法是 @Async 异步的，并且配置执行任务线程池 (如果不配置就使用默认的线程池配置)
 

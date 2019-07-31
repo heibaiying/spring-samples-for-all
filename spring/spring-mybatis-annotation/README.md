@@ -1,5 +1,6 @@
 # spring 整合 mybatis（注解方式）
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一说明">一、说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目依赖">1.2 项目依赖</a><br/>
@@ -20,7 +21,7 @@
 
 #### 1.2 项目依赖
 
-除了spring相关依赖外，还需要导入数据库驱动和对应的mybatis依赖包
+除了 spring 相关依赖外，还需要导入数据库驱动和对应的 mybatis 依赖包
 
 ```xml
 <!--jdbc 相关依赖包-->
@@ -65,7 +66,7 @@ mysql.password=root
 
 # oracle 数据库配置
 oracle.driverClassName=oracle.jdbc.driver.OracleDriver
-oracle.url=jdbc:oracle:thin:@//IP地址:端口号/数据库实例名
+oracle.url=jdbc:oracle:thin:@//IP 地址:端口号/数据库实例名
 oracle.username=用户名
 oracle.password=密码
 ```
@@ -95,14 +96,14 @@ public class DataSourceConfig {
  * @author : heibaiying
  */
 @Configuration
-@EnableTransactionManagement // 开启声明式事务处理 等价于xml中<tx:annotation-driven/>
+@EnableTransactionManagement // 开启声明式事务处理 等价于 xml 中<tx:annotation-driven/>
 @ComponentScan(basePackages = {"com.heibaiying.*"})
 public class DatabaseConfig {
 
     /* @Autowired
      * private DataSourceConfig sourceConfig;
-     * 不要采用这种方式注入DataSourceConfig,由于类的加载顺序影响会报空指针异常
-     * 最好的方式是在DriverManagerDataSource构造中采用参数注入
+     * 不要采用这种方式注入 DataSourceConfig,由于类的加载顺序影响会报空指针异常
+     * 最好的方式是在 DriverManagerDataSource 构造中采用参数注入
      */
 
     /**
@@ -119,10 +120,10 @@ public class DatabaseConfig {
     }
 
     /**
-     * 配置mybatis 会话工厂
+     * 配置 mybatis 会话工厂
      *
      * @param dataSource 这个参数的名称需要保持和上面方法名一致 才能自动注入,因为
-     *                   采用@Bean注解生成的bean 默认采用方法名为名称，当然也可以在使用@Bean时指定name属性
+     *                   采用@Bean 注解生成的 bean 默认采用方法名为名称，当然也可以在使用@Bean 时指定 name 属性
      */
     @Bean
     public SqlSessionFactoryBean sessionFactoryBean(DriverManagerDataSource dataSource) throws IOException {
@@ -135,7 +136,7 @@ public class DatabaseConfig {
     }
 
     /**
-     * 配置mybatis 会话工厂
+     * 配置 mybatis 会话工厂
      */
     @Bean
     public MapperScannerConfigurer MapperScannerConfigurer() {
@@ -172,7 +173,7 @@ public class DatabaseConfig {
     <settings>
         <!-- 开启驼峰命名 -->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
-        <!-- 打印查询sql -->
+        <!-- 打印查询 sql -->
         <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
 

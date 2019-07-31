@@ -1,5 +1,6 @@
 # spring 整合 mecached（xml配置方式）
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一说明">一、说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#11--XMemcached客户端说明">1.1  XMemcached客户端说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目结构说明">1.2 项目结构说明</a><br/>
@@ -17,16 +18,16 @@
 
 ### 1.1  XMemcached客户端说明
 
-XMemcached是基于java nio的memcached高性能客户端，支持完整的memcached协议，支持客户端分布并且提供了一致性哈希(consistent hash)算法的实现。
+XMemcached 是基于 java nio 的 memcached 高性能客户端，支持完整的 memcached 协议，支持客户端分布并且提供了一致性哈希 (consistent hash) 算法的实现。
 
 ### 1.2 项目结构说明
 
-1. memcached的整合配置位于resources下的memcached文件夹下，其中集群配置用cluster开头。所有配置按照需要在springApplication.xml用import导入。
-2. 实体类Programmer.java用于测试memcached序列化与反序列化
+1. memcached 的整合配置位于 resources 下的 memcached 文件夹下，其中集群配置用 cluster 开头。所有配置按照需要在 springApplication.xml 用 import 导入。
+2. 实体类 Programmer.java 用于测试 memcached 序列化与反序列化
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-memcached.png"/> </div>
 
-**springapplication.xml文件：**
+**springapplication.xml 文件：**
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -45,7 +46,7 @@ XMemcached是基于java nio的memcached高性能客户端，支持完整的memca
 
 ### 1.3 依赖说明
 
-除了spring的基本依赖外，需要导入xmemcached依赖包
+除了 spring 的基本依赖外，需要导入 xmemcached 依赖包
 
 ```xml
  <!--memcached java 客户端-->
@@ -100,7 +101,7 @@ XMemcached是基于java nio的memcached高性能客户端，支持完整的memca
                 </bean>
             </list>
         </constructor-arg>
-        <!--与servers对应的节点的权重-->
+        <!--与 servers 对应的节点的权重-->
         <constructor-arg name="weights">
             <list>
                 <value>1</value>
@@ -113,16 +114,16 @@ XMemcached是基于java nio的memcached高性能客户端，支持完整的memca
         <property name="commandFactory">
             <bean class="net.rubyeye.xmemcached.command.TextCommandFactory"/>
         </property>
-        <!--分布策略，一致性哈希net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator或者ArraySessionLocator(默认)-->
+        <!--分布策略，一致性哈希 net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator 或者 ArraySessionLocator(默认)-->
         <property name="sessionLocator">
             <bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator"/>
         </property>
-        <!--序列化转换器，默认使用net.rubyeye.xmemcached.transcoders.SerializingTranscoder-->
+        <!--序列化转换器，默认使用 net.rubyeye.xmemcached.transcoders.SerializingTranscoder-->
         <property name="transcoder">
             <bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder"/>
         </property>
     </bean>
-    <!-- 集群配置 实例化bean -->
+    <!-- 集群配置 实例化 bean -->
     <bean name="memcachedClientForCulster" factory-bean="memcachedClientBuilder"
           factory-method="build" destroy-method="shutdown"/>
 </beans>
@@ -130,7 +131,7 @@ XMemcached是基于java nio的memcached高性能客户端，支持完整的memca
 
 #### 2.3 存储基本类型测试用例
 
-xmemcached单机版本和集群版本注入的实例是相同的；
+xmemcached 单机版本和集群版本注入的实例是相同的；
 
 ```java
 /**
@@ -191,14 +192,14 @@ public class MemObjectSamples {
 | 命令            | 格式                                               | 说明                                  |
 | --------------- | -------------------------------------------------- | ------------------------------------- |
 | 新增 set        | set  key  flags   exTime  length -> value          | 无论什么情况，都可以插入              |
-| 新增 add        | add key  flags   exTime  length -> value           | 只有当key不存在的情况下，才可以插入   |
-| 替换 replace    | replace  key  flags   exTime  length -> value      | 只修改已存在key的value值              |
-| 追加内容append  | append  key  flags   exTime  length -> value       | length表示追加的长度而不是总长度      |
-| 前面追加prepend | prepend  key  flags   exTime  length -> value      | length表示追加的长度而不是总长度      |
+| 新增 add        | add key  flags   exTime  length -> value           | 只有当 key 不存在的情况下，才可以插入   |
+| 替换 replace    | replace  key  flags   exTime  length -> value      | 只修改已存在 key 的 value 值              |
+| 追加内容 append  | append  key  flags   exTime  length -> value       | length 表示追加的长度而不是总长度      |
+| 前面追加 prepend | prepend  key  flags   exTime  length -> value      | length 表示追加的长度而不是总长度      |
 | 查询操作 get    | get  key                                           |                                       |
 | 检查更新 cas    | cas  key  flags  exTime  length  version  -> value | 版本正确才更新                        |
 | 详细获取 gets   | gets   key                                         | 返回的最后一个数代表 key 的 CAS 令牌  |
 | 删除 delete     | delete   key                                       | 将数据打一个删除标记                  |
-| 自增 incr       | incr  key  增加偏移量                              | incr和decr只能操作能转换为数字的Value |
-| 自减 decr       | decr  key  减少偏移量                              | desr不能将数字减少至0以下             |
+| 自增 incr       | incr  key  增加偏移量                              | incr 和 decr 只能操作能转换为数字的 Value |
+| 自减 decr       | decr  key  减少偏移量                              | desr 不能将数字减少至 0 以下             |
 | 清库            | flush_all                                          |                                       |

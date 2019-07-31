@@ -1,5 +1,6 @@
 # spring boot 整合 rabbitmq
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一-项目结构说明">一、 项目结构说明</a><br/>
 <a href="#二关键依赖">二、关键依赖</a><br/>
 <a href="#三公共模块rabbitmq-common">三、公共模块（rabbitmq-common）</a><br/>
@@ -18,13 +19,13 @@
 
 ## 一、 项目结构说明
 
-1.1  之前关于spring 整合 rabbitmq 我们采用的是单项目的方式，为了使得用例更具有实际意义，这里采用maven多模块的构建方式，在spring-boot-rabbitmq下构建三个子模块：
+1.1  之前关于 spring 整合 rabbitmq 我们采用的是单项目的方式，为了使得用例更具有实际意义，这里采用 maven 多模块的构建方式，在 spring-boot-rabbitmq 下构建三个子模块：
 
-1. rabbitmq-common 是公共模块，用于存放公共的接口、配置和bean,被rabbitmq-producer和rabbitmq-consumer在pom.xml中引用；
+1. rabbitmq-common 是公共模块，用于存放公共的接口、配置和 bean,被 rabbitmq-producer 和 rabbitmq-consumer 在 pom.xml 中引用；
 2. rabbitmq-producer 是消息的生产者模块；
-3. rabbitmq-consumer是消息的消费者模块。
+3. rabbitmq-consumer 是消息的消费者模块。
 
-1.2  关于rabbitmq安装、交换机、队列、死信队列等基本概念可以参考我的手记[《RabbitMQ实战指南》读书笔记](https://github.com/heibaiying/LearningNotes/blob/master/notes/%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/%E3%80%8ARabbitMQ%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0.md),里面有详细的配图说明。
+1.2  关于 rabbitmq 安装、交换机、队列、死信队列等基本概念可以参考我的手记[《RabbitMQ 实战指南》读书笔记](https://github.com/heibaiying/LearningNotes/blob/master/notes/%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/%E3%80%8ARabbitMQ%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0.md),里面有详细的配图说明。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-rabbitmq.png"/> </div>
 
@@ -32,7 +33,7 @@
 
 ## 二、关键依赖
 
-在父工程的项目中统一导入依赖rabbitmq的starter(spring-boot-starter-amqp)，父工程的pom.xml如下
+在父工程的项目中统一导入依赖 rabbitmq 的 starter(spring-boot-starter-amqp)，父工程的 pom.xml 如下
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -133,7 +134,7 @@ public class RabbitInfo {
 spring:
   rabbitmq:
     addresses: 127.0.0.1:5672
-    # RabbitMQ 默认的用户名和密码都是guest 而虚拟主机名称是 "/"
+    # RabbitMQ 默认的用户名和密码都是 guest 而虚拟主机名称是 "/"
     # 如果配置其他虚拟主机地址，需要预先用管控台或者图形界面创建 图形界面地址 http://主机地址:15672
     username: guest
     password: guest
@@ -192,7 +193,7 @@ public class RabbitmqConsumer {
         MessageHeaders headers = message.getHeaders();
         // 获取消息头信息和消息体
         log.info("msgInfo:{} ; payload:{} ", headers.get("msgInfo"), message.getPayload());
-        //  DELIVERY_TAG 代表 RabbitMQ 向该Channel投递的这条消息的唯一标识ID，是一个单调递增的正整数
+        //  DELIVERY_TAG 代表 RabbitMQ 向该 Channel 投递的这条消息的唯一标识 ID，是一个单调递增的正整数
         Long deliveryTag = (Long) headers.get(AmqpHeaders.DELIVERY_TAG);
         // 第二个参数代表是否一次签收多条,当该参数为 true 时，则可以一次性确认 DELIVERY_TAG 小于等于传入值的所有消息
         channel.basicAck(deliveryTag, false);
@@ -213,7 +214,7 @@ public class RabbitmqConsumer {
 spring:
   rabbitmq:
     addresses: 127.0.0.1:5672
-    # RabbitMQ 默认的用户名和密码都是guest 而虚拟主机名称是 "/"
+    # RabbitMQ 默认的用户名和密码都是 guest 而虚拟主机名称是 "/"
     # 如果配置其他虚拟主机地址，需要预先用管控台或者图形界面创建 图形界面地址 http://主机地址:15672
     username: guest
     password: guest
@@ -250,7 +251,7 @@ public class RabbitmqProducer {
         // 创建消息
         Message<Object> msg = MessageBuilder.createMessage(message, messageHeaders);
         /* 确认的回调 确认消息是否到达 Broker 服务器 其实就是是否到达交换器
-           如果发送时候指定的交换器不存在 ack就是false 代表消息不可达 */
+           如果发送时候指定的交换器不存在 ack 就是 false 代表消息不可达 */
         rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> {
             log.info("correlationData：{} , ack:{}", correlationData.getId(), ack);
             if (!ack) {
@@ -264,7 +265,7 @@ public class RabbitmqProducer {
             log.info("message:{}; replyCode: {}; replyText: {} ; exchange:{} ; routingKey:{}",
                     message1, replyCode, replyText, exchange, routingKey);
         });
-        // 在实际中ID 应该是全局唯一 能够唯一标识消息 消息不可达的时候触发ConfirmCallback回调方法时可以获取该值，进行对应的错误处理
+        // 在实际中 ID 应该是全局唯一 能够唯一标识消息 消息不可达的时候触发 ConfirmCallback 回调方法时可以获取该值，进行对应的错误处理
         CorrelationData correlationData = new CorrelationData(messageId);
         rabbitTemplate.convertAndSend(exchangeName, key, msg, correlationData);
     }
@@ -288,14 +289,14 @@ public class RabbitmqProducerTests {
     public void send() {
         Map<String, Object> heads = new HashMap<>();
         heads.put("msgInfo", "自定义消息头信息");
-        // 模拟生成消息ID,在实际中应该是全局唯一的 消息不可达时候可以在setConfirmCallback回调中取得，可以进行对应的重发或错误处理
+        // 模拟生成消息 ID,在实际中应该是全局唯一的 消息不可达时候可以在 setConfirmCallback 回调中取得，可以进行对应的重发或错误处理
         String id = String.valueOf(Math.round(Math.random() * 10000));
         producer.sendSimpleMessage(heads, "hello Spring", id, RabbitInfo.EXCHANGE_NAME, "springboot.simple.abc");
     }
 
 
     /***
-     * 发送消息体为bean的消息
+     * 发送消息体为 bean 的消息
      */
     @Test
     public void sendBean() {
@@ -311,13 +312,13 @@ public class RabbitmqProducerTests {
 
 ## 六、项目构建的说明
 
-因为在项目中，consumer和producer模块均依赖公共模块,所以在构建consumer和producer项目前需要将common 模块安装到本地仓库，**依次**对**父工程**和**common模块**执行：
+因为在项目中，consumer 和 producer 模块均依赖公共模块,所以在构建 consumer 和 producer 项目前需要将 common 模块安装到本地仓库，**依次**对**父工程**和**common 模块**执行：
 
 ```shell
 mvn install -Dmaven.test.skip = true
 ```
 
-consumer中 pom.xml如下
+consumer 中 pom.xml 如下
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -360,7 +361,7 @@ consumer中 pom.xml如下
 </project>
 ```
 
-producer中 pom.xml如下
+producer 中 pom.xml 如下
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

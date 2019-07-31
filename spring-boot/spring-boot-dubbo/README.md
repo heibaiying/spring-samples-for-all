@@ -1,5 +1,6 @@
 # spring boot 整合 dubbo
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一-项目结构说明">一、 项目结构说明</a><br/>
 <a href="#二关键依赖">二、关键依赖</a><br/>
 <a href="#三公共模块boot-dubbo-common">三、公共模块（boot-dubbo-common）</a><br/>
@@ -18,13 +19,13 @@
 
 ## 一、 项目结构说明
 
-1.1  按照dubbo 文档推荐的服务最佳实践，建议将服务接口、服务模型、服务异常等均放在 API 包中，所以项目采用maven多模块的构建方式，在spring-boot-dubbo下构建三个子模块：
+1.1  按照 dubbo 文档推荐的服务最佳实践，建议将服务接口、服务模型、服务异常等均放在 API 包中，所以项目采用 maven 多模块的构建方式，在 spring-boot-dubbo 下构建三个子模块：
 
-1. boot-dubbo-common 是公共模块，用于存放公共的接口和bean,被boot-dubbo-provider和boot-dubbo-consumer在pom.xml中引用；
+1. boot-dubbo-common 是公共模块，用于存放公共的接口和 bean,被 boot-dubbo-provider 和 boot-dubbo-consumer 在 pom.xml 中引用；
 2. boot-dubbo-provider 是服务的提供者，提供商品的查询服务；
-3. boot-dubbo-consumer是服务的消费者，调用provider提供的查询服务。
+3. boot-dubbo-consumer 是服务的消费者，调用 provider 提供的查询服务。
 
-1.2  本项目dubbo的搭建采用zookeeper作为注册中心， 关于zookeeper的安装和基本操作可以参见我的手记  [Zookeeper 基础命令与Java客户端](https://github.com/heibaiying/LearningNotes/blob/master/notes/%E4%B8%AD%E9%97%B4%E4%BB%B6/ZooKeeper/ZooKeeper%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%E4%B8%8EJava%E5%AE%A2%E6%88%B7%E7%AB%AF.md)
+1.2  本项目 dubbo 的搭建采用 zookeeper 作为注册中心， 关于 zookeeper 的安装和基本操作可以参见我的手记  [Zookeeper 基础命令与 Java 客户端](https://github.com/heibaiying/LearningNotes/blob/master/notes/%E4%B8%AD%E9%97%B4%E4%BB%B6/ZooKeeper/ZooKeeper%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%E4%B8%8EJava%E5%AE%A2%E6%88%B7%E7%AB%AF.md)
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-dubbo.png"/> </div>
 
@@ -32,7 +33,7 @@
 
 ## 二、关键依赖
 
-在父工程的项目中统一导入依赖dubbo的starter，父工程的pom.xml如下
+在父工程的项目中统一导入依赖 dubbo 的 starter，父工程的 pom.xml 如下
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -88,7 +89,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--引入dubbo start依赖-->
+        <!--引入 dubbo start 依赖-->
         <dependency>
             <groupId>com.alibaba.boot</groupId>
             <artifactId>dubbo-spring-boot-starter</artifactId>
@@ -118,7 +119,7 @@
 dubbo:
   application:
     name: boot-duboo-provider
-  # 指定注册协议和注册地址  dubbo推荐使用zookeeper作为注册中心，并且在start依赖中引入了zookeeper的java客户端Curator
+  # 指定注册协议和注册地址  dubbo 推荐使用 zookeeper 作为注册中心，并且在 start 依赖中引入了 zookeeper 的 java 客户端 Curator
   registry:
     protocol: zookeeper
     address: 127.0.0.1:2181
@@ -127,7 +128,7 @@ dubbo:
 
 #### 4.2  使用注解@Service暴露服务
 
-需要注意的是这里的@Service注解不是spring的注解，而是dubbo的注解 com.alibaba.dubbo.config.annotation.Service
+需要注意的是这里的@Service 注解不是 spring 的注解，而是 dubbo 的注解 com.alibaba.dubbo.config.annotation.Service
 
 ```java
 package com.heibaiying.dubboprovider.service;
@@ -182,7 +183,7 @@ public class ProductService implements IProductService {
 dubbo:
   application:
     name: boot-duboo-provider
-  # 指定注册协议和注册地址  dubbo推荐使用zookeeper作为注册中心，并且在start依赖中引入了zookeeper的java客户端Curator
+  # 指定注册协议和注册地址  dubbo 推荐使用 zookeeper 作为注册中心，并且在 start 依赖中引入了 zookeeper 的 java 客户端 Curator
   registry:
     protocol: zookeeper
     address: 127.0.0.1:2181
@@ -213,7 +214,7 @@ import java.util.List;
 @RequestMapping("sell")
 public class SellController {
 
-    // dubbo远程引用注解
+    // dubbo 远程引用注解
     @Reference
     private IProductService productService;
 
@@ -235,13 +236,13 @@ public class SellController {
 
 ## 六、项目构建的说明
 
-因为在项目中，consumer和provider模块均依赖公共模块,所以在构建consumer和provider项目前需要将common 模块安装到本地仓库，**依次**对**父工程**和**common模块**执行：
+因为在项目中，consumer 和 provider 模块均依赖公共模块,所以在构建 consumer 和 provider 项目前需要将 common 模块安装到本地仓库，**依次**对**父工程**和**common 模块**执行：
 
 ```shell
 mvn install -Dmaven.test.skip = true
 ```
 
-consumer中 pom.xml如下
+consumer 中 pom.xml 如下
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -286,7 +287,7 @@ consumer中 pom.xml如下
 </project>
 ```
 
-provider中 pom.xml如下
+provider 中 pom.xml 如下
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -347,7 +348,7 @@ mvn clean package
 ```sh
 配置文件为：
 dubbo-admin-backend/src/main/resources/application.properties
-主要的配置有 默认的配置就是127.0.0.1:2181：
+主要的配置有 默认的配置就是 127.0.0.1:2181：
 dubbo.registry.address=zookeeper://127.0.0.1:2181
 ```
 

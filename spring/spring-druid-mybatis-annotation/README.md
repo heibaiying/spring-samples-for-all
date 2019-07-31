@@ -76,7 +76,7 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 
 #### 3、基于servlet 3.0的支持，可以采用注解的方式注册druid的servlet和filter 
 
-​     注：关于servlet 更多注解支持可以查看[Servlet 规范文档](https://github.com/heibaiying/spring-samples-for-all/blob/master/referenced%20documents/Servlet3.1%E8%A7%84%E8%8C%83%EF%BC%88%E6%9C%80%E7%BB%88%E7%89%88%EF%BC%89.pdf)中**8.1小节 注解和可插拔性** 
+​     注：关于 servlet 更多注解支持可以查看[Servlet 规范文档](https://github.com/heibaiying/spring-samples-for-all/blob/master/referenced%20documents/Servlet3.1%E8%A7%84%E8%8C%83%EF%BC%88%E6%9C%80%E7%BB%88%E7%89%88%EF%BC%89.pdf) 中**8.1 小节 注解和可插拔性** 
 
 ```java
 /**
@@ -98,7 +98,7 @@ public class DruidStatViewServlet extends StatViewServlet {
 
 /**
  * @author : heibaiying
- * @description : WebStatFilter用于采集web-jdbc关联监控的数据
+ * @description : WebStatFilter 用于采集 web-jdbc 关联监控的数据
  */
 @WebFilter(filterName="druidWebStatFilter",urlPatterns="/*",
         initParams={
@@ -124,7 +124,7 @@ mysql.password=root
 ```properties
 # oracle 数据库配置
 oracle.driverClassName=oracle.jdbc.driver.OracleDriver
-oracle.url=jdbc:oracle:thin:@//IP地址:端口号/数据库实例名
+oracle.url=jdbc:oracle:thin:@//IP 地址:端口号/数据库实例名
 oracle.username=用户名
 oracle.password=密码
 ```
@@ -157,7 +157,7 @@ public class DataSourceConfig {
  * @author : heibaiying
  */
 @Configuration
-@EnableTransactionManagement // 开启声明式事务处理 等价于xml中<tx:annotation-driven/>
+@EnableTransactionManagement // 开启声明式事务处理 等价于 xml 中<tx:annotation-driven/>
 @EnableWebMvc
 @ComponentScan(basePackages = {"com.heibaiying.*"})
 public class ServletConfig implements WebMvcConfigurer {
@@ -170,7 +170,7 @@ public class ServletConfig implements WebMvcConfigurer {
     }
 
     /**
-     * 配置druid 数据源
+     * 配置 druid 数据源
      */
     @Bean
     public DruidDataSource dataSource(DataSourceConfig sourceConfig) throws SQLException {
@@ -189,24 +189,24 @@ public class ServletConfig implements WebMvcConfigurer {
         dataSource.setMinEvictableIdleTimeMillis(600000);
         dataSource.setMaxEvictableIdleTimeMillis(900000);
 
-        /* validationQuery 用来检测连接是否有效的sql，要求是一个查询语句，常用select 'x'。
+        /* validationQuery 用来检测连接是否有效的 sql，要求是一个查询语句，常用 select 'x'。
          * 但是在 oracle 数据库下需要写成 select 'x' from dual 不然实例化数据源的时候就会失败,
-         * 这是由于oracle 和 mysql 语法间的差异造成的
+         * 这是由于 oracle 和 mysql 语法间的差异造成的
          */
         dataSource.setValidationQuery("select 'x'");
 
-        // 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。
+        // 建议配置为 true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于 timeBetweenEvictionRunsMillis，执行 validationQuery 检测连接是否有效。
         dataSource.setTestWhileIdle(true);
-        // 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。
+        // 申请连接时执行 validationQuery 检测连接是否有效，做了这个配置会降低性能。
         dataSource.setTestOnBorrow(false);
-        // 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+        // 归还连接时执行 validationQuery 检测连接是否有效，做了这个配置会降低性能
         dataSource.setTestOnReturn(false);
 
-        // 连接池中的minIdle数量以内的连接，空闲时间超过minEvictableIdleTimeMillis，则会执行keepAlive操作。
+        // 连接池中的 minIdle 数量以内的连接，空闲时间超过 minEvictableIdleTimeMillis，则会执行 keepAlive 操作。
         dataSource.setPhyMaxUseCount(100000);
 
-        /*配置监控统计拦截的filters Druid连接池的监控信息主要是通过StatFilter 采集的，
-         采集的信息非常全面，包括SQL执行、并发、慢查、执行时间区间分布等*/
+        /*配置监控统计拦截的 filters Druid 连接池的监控信息主要是通过 StatFilter 采集的，
+         采集的信息非常全面，包括 SQL 执行、并发、慢查、执行时间区间分布等*/
         dataSource.setFilters("stat");
 
         return dataSource;
@@ -214,10 +214,10 @@ public class ServletConfig implements WebMvcConfigurer {
 
 
     /**
-     * 配置mybatis 会话工厂
+     * 配置 mybatis 会话工厂
      *
      * @param dataSource 这个参数的名称需要保持和上面方法名一致 才能自动注入,因为
-     *                   采用@Bean注解生成的bean 默认采用方法名为名称，当然也可以在使用@Bean时指定name属性
+     *                   采用@Bean 注解生成的 bean 默认采用方法名为名称，当然也可以在使用@Bean 时指定 name 属性
      */
     @Bean
     public SqlSessionFactoryBean sessionFactoryBean(DruidDataSource dataSource) throws IOException {
@@ -230,7 +230,7 @@ public class ServletConfig implements WebMvcConfigurer {
     }
 
     /**
-     * 配置mybatis 会话工厂
+     * 配置 mybatis 会话工厂
      */
     @Bean
     public MapperScannerConfigurer MapperScannerConfigurer() {
@@ -267,7 +267,7 @@ public class ServletConfig implements WebMvcConfigurer {
     <settings>
         <!-- 开启驼峰命名 -->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
-        <!-- 打印查询sql -->
+        <!-- 打印查询 sql -->
         <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
 
@@ -358,6 +358,6 @@ public class OracleController {
 
 #### 10、druid 监控页面访问地址http://localhost:8080/druid/index.html
 
-![druid控制台](https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/druid%E6%8E%A7%E5%88%B6%E5%8F%B0.png)
+![druid 控制台](https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/druid%E6%8E%A7%E5%88%B6%E5%8F%B0.png)
 
 

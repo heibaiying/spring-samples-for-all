@@ -1,5 +1,6 @@
 # spring AOP（xml配置方式）
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一说明">一、说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构说明">1.1 项目结构说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-依赖说明">1.2 依赖说明</a><br/>
@@ -16,7 +17,7 @@
 
 ### 1.1 项目结构说明
 
-切面配置位于resources下的aop.xml文件，其中CustomAdvice是自定义切面类，OrderService是待切入的方法。
+切面配置位于 resources 下的 aop.xml 文件，其中 CustomAdvice 是自定义切面类，OrderService 是待切入的方法。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-aop.png"/> </div>
 
@@ -24,7 +25,7 @@
 
 ### 1.2 依赖说明
 
-除了spring的基本依赖外，需要导入aop依赖包
+除了 spring 的基本依赖外，需要导入 aop 依赖包
 
 ```xml
  <!--aop 相关依赖-->
@@ -84,7 +85,7 @@ public class CustomAdvice {
         System.out.println(name + "方法调用前：获取调用参数" + Arrays.toString(args));
     }
 
-    //后置通知(抛出异常后不会被执行)
+    //后置通知 (抛出异常后不会被执行)
     public void afterReturning(JoinPoint joinPoint, Object result) {
         System.out.println("后置返回通知结果" + result);
     }
@@ -125,7 +126,7 @@ public class CustomAdvice {
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <!--开启后允许使用Spring AOP的@AspectJ注解 如果是纯xml配置 可以不用开启这个声明-->
+    <!--开启后允许使用 Spring AOP 的@AspectJ 注解 如果是纯 xml 配置 可以不用开启这个声明-->
     <aop:aspectj-autoproxy/>
 
     <!-- 1.配置目标对象 -->
@@ -134,7 +135,7 @@ public class CustomAdvice {
     <bean name="myAdvice" class="com.heibaiying.advice.CustomAdvice"/>
     <!-- 3.配置将通知织入目标对象 -->
     <aop:config>
-        <!--命名切入点 关于切入点更多表达式写法可以参见README.md-->
+        <!--命名切入点 关于切入点更多表达式写法可以参见 README.md-->
         <aop:pointcut expression="execution(* com.heibaiying.service.OrderService.*(..))" id="cutPoint"/>
         <aop:aspect ref="myAdvice">
             <!-- 前置通知 -->
@@ -184,7 +185,7 @@ execution(modifiers-pattern? ret-type-pattern declaring-type-pattern?name-patter
 
 - 除了返回类型模式，名字模式和参数模式以外，所有的部分都是可选的;
 -  `*`，它代表了匹配任意的返回类型; 
-- `()` 匹配了一个不接受任何参数的方法， 而 `(..)` 匹配了一个接受任意数量参数的方法（零或者更多）。 模式 `(*)` 匹配了一个接受一个任何类型的参数的方法。 模式 `(*,String)` 匹配了一个接受两个参数的方法，第一个可以是任意类型，第二个则必须是String类型。
+- `()` 匹配了一个不接受任何参数的方法， 而 `(..)` 匹配了一个接受任意数量参数的方法（零或者更多）。 模式 `(*)` 匹配了一个接受一个任何类型的参数的方法。 模式 `(*,String)` 匹配了一个接受两个参数的方法，第一个可以是任意类型，第二个则必须是 String 类型。
 
 下面给出一些常见切入点表达式的例子。
 
@@ -206,31 +207,31 @@ execution(modifiers-pattern? ret-type-pattern declaring-type-pattern?name-patter
   execution(* com.xyz.service.AccountService.*(..))
   ```
 
-- 定义在service包里的任意方法的执行：
+- 定义在 service 包里的任意方法的执行：
 
   ```java
   execution(* com.xyz.service.*.*(..))
   ```
 
-- 定义在service包或者子包里的任意方法的执行：
+- 定义在 service 包或者子包里的任意方法的执行：
 
   ```java
   execution(* com.xyz.service..*.*(..))
   ```
 
-- 在service包里的任意连接点（在Spring AOP中只是方法执行） ：
+- 在 service 包里的任意连接点（在 Spring AOP 中只是方法执行） ：
 
   ```java
   within(com.xyz.service.*)
   ```
 
-- 在service包或者子包里的任意连接点（在Spring AOP中只是方法执行） ：
+- 在 service 包或者子包里的任意连接点（在 Spring AOP 中只是方法执行） ：
 
   ```
   within(com.xyz.service..*)
   ```
 
-- 实现了 `AccountService` 接口的代理对象的任意连接点（在Spring AOP中只是方法执行） ：
+- 实现了 `AccountService` 接口的代理对象的任意连接点（在 Spring AOP 中只是方法执行） ：
 
   ```
   this(com.xyz.service.AccountService)

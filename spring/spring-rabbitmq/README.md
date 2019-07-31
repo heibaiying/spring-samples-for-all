@@ -1,5 +1,6 @@
 # spring 整合 rabbitmq（xml配置方式）
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一说明">一、说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构说明">1.1 项目结构说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-依赖说明">1.2 依赖说明</a><br/>
@@ -18,13 +19,13 @@
 
 ### 1.1 项目结构说明
 
-1. 本用例关于rabbitmq的整合提供**简单消息发送**和**对象消费发送**两种情况下的sample。
+1. 本用例关于 rabbitmq 的整合提供**简单消息发送**和**对象消费发送**两种情况下的 sample。
 
-2. rabbitBaseAnnotation.java中声明了topic类型的交换机、持久化队列、及其绑定关系，用于测试说明topic交换机路由键的绑定规则。
+2. rabbitBaseAnnotation.java 中声明了 topic 类型的交换机、持久化队列、及其绑定关系，用于测试说明 topic 交换机路由键的绑定规则。
 
-3. rabbitObjectAnnotation.java中声明了direct类型的交换机，持久化队列，及其绑定关系，用于示例对象消息的传输。
+3. rabbitObjectAnnotation.java 中声明了 direct 类型的交换机，持久化队列，及其绑定关系，用于示例对象消息的传输。
 
-   注：关于rabbitmq安装、交换机、队列、死信队列等基本概念可以参考我的手记[《RabbitMQ实战指南》读书笔记](https://github.com/heibaiying/LearningNotes/blob/master/notes/%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/%E3%80%8ARabbitMQ%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0.md),里面有详细的配图说明。
+   注：关于 rabbitmq 安装、交换机、队列、死信队列等基本概念可以参考我的手记[《RabbitMQ 实战指南》读书笔记](https://github.com/heibaiying/LearningNotes/blob/master/notes/%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/%E3%80%8ARabbitMQ%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0.md),里面有详细的配图说明。
 
 
 
@@ -34,7 +35,7 @@
 
 ### 1.2 依赖说明
 
-除了spring的基本依赖外，需要导入spring rabbitmq 整合依赖
+除了 spring 的基本依赖外，需要导入 spring rabbitmq 整合依赖
 
 ```xml
  <!--spring rabbitmq 整合依赖-->
@@ -87,14 +88,14 @@ rabbitmq.virtualhost=/
                                virtual-host="${rabbitmq.virtualhost}"/>
 
     <!--创建一个管理器（org.springframework.amqp.rabbit.core.RabbitAdmin），用于管理交换，队列和绑定。
-    auto-startup 指定是否自动声明上下文中的队列,交换和绑定, 默认值为true。-->
+    auto-startup 指定是否自动声明上下文中的队列,交换和绑定, 默认值为 true。-->
     <rabbit:admin connection-factory="connectionFactory" auto-startup="true"/>
 
-    <!--声明 template 的时候需要声明id 不然会抛出异常-->
+    <!--声明 template 的时候需要声明 id 不然会抛出异常-->
     <rabbit:template id="rabbitTemplate" connection-factory="connectionFactory"/>
 
 
-    <!--可以在xml采用如下方式声明交换机、队列、绑定管理 但是建议使用代码方式声明 方法更加灵活且可以采用链调用-->
+    <!--可以在 xml 采用如下方式声明交换机、队列、绑定管理 但是建议使用代码方式声明 方法更加灵活且可以采用链调用-->
     <rabbit:queue name="remoting.queue"/>
 
     <rabbit:direct-exchange name="remoting.exchange">
@@ -103,7 +104,7 @@ rabbitmq.virtualhost=/
         </rabbit:bindings>
     </rabbit:direct-exchange>
 
-    <!--扫描rabbit包 自动声明交换器、队列、绑定关系-->
+    <!--扫描 rabbit 包 自动声明交换器、队列、绑定关系-->
     <context:component-scan base-package="com.heibaiying.rabbit"/>
 
 </beans>
@@ -140,19 +141,19 @@ public class RabbitBaseAnnotation {
 
     @Bean
     public Queue firstQueue() {
-        // 创建一个持久化的队列1
+        // 创建一个持久化的队列 1
         return new Queue("FirstQueue", true);
     }
 
     @Bean
     public Queue secondQueue() {
-        // 创建一个持久化的队列2
+        // 创建一个持久化的队列 2
         return new Queue("SecondQueue", true);
     }
 
     /**
      * BindingKey 中可以存在两种特殊的字符串“#”和“*”，其中“*”用于匹配一个单词，“#”用于匹配零个或者多个单词
-     * 这里我们声明三个绑定关系用于测试topic这种类型交换器
+     * 这里我们声明三个绑定关系用于测试 topic 这种类型交换器
      */
     @Bean
     public Binding orange() {
@@ -170,7 +171,7 @@ public class RabbitBaseAnnotation {
     }
 
 
-    /*创建队列1消费者监听*/
+    /*创建队列 1 消费者监听*/
     @Bean
     public SimpleMessageListenerContainer firstQueueLister(ConnectionFactory connectionFactory) {
 
@@ -193,7 +194,7 @@ public class RabbitBaseAnnotation {
                 System.out.println(firstQueue().getName() + "收到消息:" + new String(body));
                 /*
                  * DeliveryTag 是一个单调递增的整数
-                 * 第二个参数 代表是否一次签收多条，如果设置为true,则所有DeliveryTag小于该DeliveryTag的消息都会被签收
+                 * 第二个参数 代表是否一次签收多条，如果设置为 true,则所有 DeliveryTag 小于该 DeliveryTag 的消息都会被签收
                  */
                 channel.basicAck(properties.getDeliveryTag(), false);
             }
@@ -202,7 +203,7 @@ public class RabbitBaseAnnotation {
     }
 
 
-    /*创建队列2消费者监听*/
+    /*创建队列 2 消费者监听*/
     @Bean
     public SimpleMessageListenerContainer secondQueueLister(ConnectionFactory connectionFactory) {
 
@@ -240,15 +241,15 @@ public class RabbitTest {
     public void sendMessage() {
         MessageProperties properties = new MessageProperties();
 
-        String allReceived = "我的路由键 quick.orange.rabbit 符合queue1 和 queue2 的要求，我应该被两个监听器接收到";
+        String allReceived = "我的路由键 quick.orange.rabbit 符合 queue1 和 queue2 的要求，我应该被两个监听器接收到";
         Message message1 = new Message(allReceived.getBytes(), properties);
         rabbitTemplate.send("topic01", "quick.orange.rabbit", message1);
 
-        String firstReceived = "我的路由键 quick.orange.fox 只符合queue1 的要求，只能被queue 1 接收到";
+        String firstReceived = "我的路由键 quick.orange.fox 只符合 queue1 的要求，只能被 queue 1 接收到";
         Message message2 = new Message(firstReceived.getBytes(), properties);
         rabbitTemplate.send("topic01", "quick.orange.fox", message2);
 
-        String secondReceived = "我的路由键 lazy.brown.fox 只符合queue2 的要求，只能被queue 2 接收到";
+        String secondReceived = "我的路由键 lazy.brown.fox 只符合 queue2 的要求，只能被 queue 2 接收到";
         Message message3 = new Message(secondReceived.getBytes(), properties);
         rabbitTemplate.send("topic01", "lazy.brown.fox", message3);
 
@@ -261,10 +262,10 @@ public class RabbitTest {
 
 ```java
 结果:
-  SecondQueue收到消息:我的路由键 quick.orange.rabbit 符合queue1 和 queue2 的要求，我应该被两个监听器接收到
-  FirstQueue收到消息:我的路由键 quick.orange.rabbit 符合queue1 和 queue2 的要求，我应该被两个监听器接收到
-  FirstQueue收到消息:我的路由键 quick.orange.fox 只符合queue1 的要求，只能被queue 1 接收到
-  SecondQueue收到消息:我的路由键 lazy.brown.fox 只符合queue2 的要求，只能被queue 2 接收到
+  SecondQueue 收到消息:我的路由键 quick.orange.rabbit 符合 queue1 和 queue2 的要求，我应该被两个监听器接收到
+  FirstQueue 收到消息:我的路由键 quick.orange.rabbit 符合 queue1 和 queue2 的要求，我应该被两个监听器接收到
+  FirstQueue 收到消息:我的路由键 quick.orange.fox 只符合 queue1 的要求，只能被 queue 1 接收到
+  SecondQueue 收到消息:我的路由键 lazy.brown.fox 只符合 queue2 的要求，只能被 queue 2 接收到
 ```
 
 
@@ -273,7 +274,7 @@ public class RabbitTest {
 
 #### 4.1 创建消息的委托处理器
 
-这里为了增强用例的实用性，我们创建的处理器的handleMessage方法是一个重载方法，对于同一个队列的监听，不仅可以传输对象消息，同时针对不同的对象类型调用不同的处理方法。
+这里为了增强用例的实用性，我们创建的处理器的 handleMessage 方法是一个重载方法，对于同一个队列的监听，不仅可以传输对象消息，同时针对不同的对象类型调用不同的处理方法。
 
 ```java
 /**
@@ -331,7 +332,7 @@ public class RabbitObjectAnnotation {
         container.setQueues(objectQueue());
         // 将监听到的消息委派给实际的处理类
         MessageListenerAdapter adapter = new MessageListenerAdapter(new MessageDelegate());
-        // 指定由哪个方法来处理消息 默认就是handleMessage
+        // 指定由哪个方法来处理消息 默认就是 handleMessage
         adapter.setDefaultListenerMethod("handleMessage");
 
         // 消息转换
@@ -367,12 +368,12 @@ public class RabbitSendObjectTest {
     @Test
     public void sendProgrammer() throws JsonProcessingException {
         MessageProperties messageProperties = new MessageProperties();
-        //必须设置 contentType为 application/json
+        //必须设置 contentType 为 application/json
         messageProperties.setContentType("application/json");
         // 必须指定类型
         messageProperties.getHeaders().put("__TypeId__", Type.PROGRAMMER);
         Programmer programmer = new Programmer("xiaoming", 34, 52200.21f, new Date());
-        // 序列化与反序列化都使用的Jackson
+        // 序列化与反序列化都使用的 Jackson
         ObjectMapper mapper = new ObjectMapper();
         String programmerJson = mapper.writeValueAsString(programmer);
         Message message = new Message(programmerJson.getBytes(), messageProperties);

@@ -1,5 +1,6 @@
 # spring 整合 mybatis（xml配置方式）
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一说明">一、说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目依赖">1.2 项目依赖</a><br/>
@@ -20,7 +21,7 @@
 
 #### 1.2 项目依赖
 
-除了spring相关依赖外，还需要导入数据库驱动和对应的mybatis依赖包
+除了 spring 相关依赖外，还需要导入数据库驱动和对应的 mybatis 依赖包
 
 ```xml
 <!--jdbc 相关依赖包-->
@@ -65,7 +66,7 @@ mysql.password=root
 
 # oracle 数据库配置
 oracle.driverClassName=oracle.jdbc.driver.OracleDriver
-oracle.url=jdbc:oracle:thin:@//IP地址:端口号/数据库实例名
+oracle.url=jdbc:oracle:thin:@//IP 地址:端口号/数据库实例名
 oracle.username=用户名
 oracle.password=密码
 ```
@@ -103,7 +104,7 @@ oracle.password=密码
     <!--配置 mybatis 会话工厂 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <!--指定mapper文件所在的位置-->
+        <!--指定 mapper 文件所在的位置-->
         <property name="mapperLocations" value="classpath*:/mappers/**/*.xml"/>
         <property name="configLocation" value="classpath:mybatisConfig.xml"/>
     </bean>
@@ -113,7 +114,7 @@ oracle.password=密码
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--指定会话工厂 -->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-        <!-- 指定mybatis接口所在的包 -->
+        <!-- 指定 mybatis 接口所在的包 -->
         <property name="basePackage" value="com.heibaiying.dao"/>
     </bean>
 
@@ -124,7 +125,7 @@ oracle.password=密码
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <!-- 开启事务注解@Transactional支持 -->
+    <!-- 开启事务注解@Transactional 支持 -->
     <tx:annotation-driven/>
 
 </beans>
@@ -143,7 +144,7 @@ oracle.password=密码
     <settings>
         <!-- 开启驼峰命名 -->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
-        <!-- 打印查询sql -->
+        <!-- 打印查询 sql -->
         <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
 

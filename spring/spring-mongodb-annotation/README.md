@@ -1,5 +1,6 @@
 # spring 整合 mongodb（注解方式）
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一说明">一、说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构说明">1.1 项目结构说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-依赖说明">1.2 依赖说明</a><br/>
@@ -14,7 +15,7 @@
 
 ### 1.1 项目结构说明
 
-配置文件位于com.heibaiying.config下,项目以单元测试的方式进行测试。
+配置文件位于 com.heibaiying.config 下,项目以单元测试的方式进行测试。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-mongodb-annotation.png"/> </div>
 
@@ -22,7 +23,7 @@
 
 ### 1.2 依赖说明
 
-除了spring的基本依赖外，需要导入mongodb整合依赖包
+除了 spring 的基本依赖外，需要导入 mongodb 整合依赖包
 
 ```xml
  <!--spring mongodb 整合依赖-->

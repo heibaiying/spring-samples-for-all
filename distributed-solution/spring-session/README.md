@@ -1,5 +1,6 @@
 # spring session 实现分布式 session
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一项目结构">一、项目结构</a><br/>
 <a href="#二分布式session的配置">二、分布式session的配置</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-引入依赖">2.1 引入依赖</a><br/>
@@ -12,7 +13,7 @@
 
 ## 一、项目结构
 
-分布式session 主要配置文件为spring-session.xml和web.xml，其他的配置为标准的web工程的配置。
+分布式 session 主要配置文件为 spring-session.xml 和 web.xml，其他的配置为标准的 web 工程的配置。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-session.png"/> </div>
 
@@ -58,8 +59,8 @@
 
 有两点需要特别说明：
 
-1. spring-session 不仅提供了redis作为公共session存储的方案，同时也支持jdbc、mongodb、Hazelcast等作为公共session的存储；
-2. 对于redis 存储方案而言，官方也提供了不止一种整合方式，这里我们选取的整合方案是jedis客户端作为连接，当然也可以使用Lettuce作为客户端连接。
+1. spring-session 不仅提供了 redis 作为公共 session 存储的方案，同时也支持 jdbc、mongodb、Hazelcast 等作为公共 session 的存储；
+2. 对于 redis 存储方案而言，官方也提供了不止一种整合方式，这里我们选取的整合方案是 jedis 客户端作为连接，当然也可以使用 Lettuce 作为客户端连接。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -79,7 +80,7 @@
         <property name="maxInactiveIntervalInSeconds" value="1800"/>
     </bean>
 
-    <!--单机版本配置redis 配置-->
+    <!--单机版本配置 redis 配置-->
     <bean id="redisStandaloneConfiguration"
           class="org.springframework.data.redis.connection.RedisStandaloneConfiguration">
         <constructor-arg name="hostName" value="${redis.host}"/>
@@ -135,9 +136,9 @@ public class LoginController {
 
     @PostMapping("login")
     public String login(User user, HttpSession session, HttpServletRequest request, Model model){
-        // 随机生成用户id
+        // 随机生成用户 id
         user.setUserId(Math.round(Math.floor(Math.random() *10*1000)));
-        // 将用户信息保存到id中
+        // 将用户信息保存到 id 中
         session.setAttribute("USER",user);
         return "redirect:home";
     }
@@ -164,7 +165,7 @@ public class LoginController {
 </html>
 ```
 
-session 信息展示页面(home.jsp)：
+session 信息展示页面 (home.jsp)：
 
 ```jsp
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -182,7 +183,7 @@ session 信息展示页面(home.jsp)：
 
 #### 3.2 启动项目
 
-这里我们采用两个tomcat分别启动项目，在第一个项目index.jsp页面进行登录，第二个项目不登录，直接访问session展示页（home.jsp）
+这里我们采用两个 tomcat 分别启动项目，在第一个项目 index.jsp 页面进行登录，第二个项目不登录，直接访问 session 展示页（home.jsp）
 
 tomcat 1 配置：
 

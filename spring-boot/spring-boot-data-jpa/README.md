@@ -1,5 +1,6 @@
 # spring boot data jpa
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一说明">一、说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目主要依赖">1.2 项目主要依赖</a><br/>
@@ -27,7 +28,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
-    <!--引入mysql驱动-->
+    <!--引入 mysql 驱动-->
     <dependency>
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
@@ -56,7 +57,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    #Hibernate默认创建的表是myisam引擎，可以用以下方式指定为使用innodb创建表
+    #Hibernate 默认创建的表是 myisam 引擎，可以用以下方式指定为使用 innodb 创建表
     database-platform: org.hibernate.dialect.MySQL57Dialect
     show-sql: true
 ```
@@ -66,7 +67,7 @@ spring:
 ```java
 /**
  * @author : heibaiying
- * @description : 查询接口继承自CrudRepository,CrudRepository 默认定义了部分增删改查方法
+ * @description : 查询接口继承自 CrudRepository,CrudRepository 默认定义了部分增删改查方法
  */
 public interface ProgRepository extends CrudRepository<Programmer, Integer> {
 
@@ -172,7 +173,7 @@ public class DataJPATests {
         List<Programmer> byCondition = repository.findByConditionAndOrder("pro03", 3321.34f, Sort.Order.asc("salary"));
         System.out.println("byCondition:" + byCondition);
 
-        //条件与分页查询 需要注意的是这里的页数是从第0页开始计算的
+        //条件与分页查询 需要注意的是这里的页数是从第 0 页开始计算的
         Page<Programmer> page = repository.findAll(PageRequest.of(0, 10, Sort.Direction.DESC, "salary"));
         page.get().forEach(System.out::println);
     }

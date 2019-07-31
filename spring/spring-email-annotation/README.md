@@ -1,5 +1,6 @@
 # spring 邮件发送（xml配置方式）
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一说明">一、说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构说明">1.1 项目结构说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-依赖说明">1.2 依赖说明</a><br/>
@@ -14,9 +15,9 @@
 
 ### 1.1 项目结构说明
 
-1. 邮件发送配置类为com.heibaiying.config下EmailConfig.java;
-2. 简单邮件发送、附件邮件发送、内嵌资源邮件发送、模板邮件发送的方法封装在SpringMail类中；
-3. 项目以单元测试的方法进行测试，测试类为SendEmail。
+1. 邮件发送配置类为 com.heibaiying.config 下 EmailConfig.java;
+2. 简单邮件发送、附件邮件发送、内嵌资源邮件发送、模板邮件发送的方法封装在 SpringMail 类中；
+3. 项目以单元测试的方法进行测试，测试类为 SendEmail。
 
 
 
@@ -26,7 +27,7 @@
 
 ### 1.2 依赖说明
 
-除了spring的基本依赖外，需要导入邮件发送的支持包spring-context-support
+除了 spring 的基本依赖外，需要导入邮件发送的支持包 spring-context-support
 
 ```xml
  <!--邮件发送依赖包-->
@@ -36,7 +37,7 @@
     <version>${spring-base-version}</version>
 </dependency>
  <!--模板引擎-->
-        <!--这里采用的是beetl,beetl性能很卓越并且功能也很全面 官方文档地址 <a href="http://ibeetl.com/guide/#beetl">-->
+        <!--这里采用的是 beetl,beetl 性能很卓越并且功能也很全面 官方文档地址 <a href="http://ibeetl.com/guide/#beetl">-->
 <dependency>
     <groupId>com.ibeetl</groupId>
     <artifactId>beetl</artifactId>
@@ -61,7 +62,7 @@
 public class EmailConfig {
 
     /***
-     * 在这里可以声明不同的邮件服务器主机，通常是SMTP主机,而具体的用户名和时授权码则建议在业务中从数据库查询
+     * 在这里可以声明不同的邮件服务器主机，通常是 SMTP 主机,而具体的用户名和时授权码则建议在业务中从数据库查询
      */
     @Bean(name = "qqMailSender")
     JavaMailSenderImpl javaMailSender() {
@@ -76,9 +77,9 @@ public class EmailConfig {
      */
     @Bean
     GroupTemplate groupTemplate() throws IOException {
-        //指定加载模板资源的位置 指定在classpath:beetl下-
+        //指定加载模板资源的位置 指定在 classpath:beetl 下-
         ClasspathResourceLoader loader = new ClasspathResourceLoader("beetl");
-        //beetl配置 这里采用默认的配置-
+        //beetl 配置 这里采用默认的配置-
         org.beetl.core.Configuration configuration = org.beetl.core.Configuration.defaultConfiguration();
         return new GroupTemplate(loader, configuration);
     }
@@ -103,9 +104,9 @@ public class SpringMail {
 
     /**
      * 发送简单邮件
-     * 在qq邮件发送的测试中，测试结果表明不管是简单邮件还是复杂邮件都必须指定发送用户，
+     * 在 qq 邮件发送的测试中，测试结果表明不管是简单邮件还是复杂邮件都必须指定发送用户，
      * 且发送用户已经授权不然都会抛出异常: SMTPSendFailedException 501 mail from address must be same as authorization user
-     * qq 的授权码 可以在 设置/账户/POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务 中开启服务后获取
+     * qq 的授权码 可以在 设置/账户/POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV 服务 中开启服务后获取
      */
     public void sendTextMessage(String from, String authWord, String to, String subject, String content) {
         // 设置发送人邮箱和授权码
@@ -138,7 +139,7 @@ public class SpringMail {
             qqMailSender.setPassword(authWord);
             // 实例化消息对象
             MimeMessage message = qqMailSender.createMimeMessage();
-            // 需要指定第二个参数为true 代表创建支持可选文本，内联元素和附件的多部分消息
+            // 需要指定第二个参数为 true 代表创建支持可选文本，内联元素和附件的多部分消息
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
             helper.setFrom(from);
             helper.setTo(to);
@@ -169,12 +170,12 @@ public class SpringMail {
             qqMailSender.setPassword(authWord);
             // 实例化消息对象
             MimeMessage message = qqMailSender.createMimeMessage();
-            // 需要指定第二个参数为true 代表创建支持可选文本，内联元素和附件的多部分消息
+            // 需要指定第二个参数为 true 代表创建支持可选文本，内联元素和附件的多部分消息
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
             helper.setFrom(from);
             helper.setTo(to);
             helper.setSubject(subject);
-            // 使用true标志来指示包含的文本是HTML 固定格式资源前缀 cid:
+            // 使用 true 标志来指示包含的文本是 HTML 固定格式资源前缀 cid:
             helper.setText("<html><body><img src='cid:image'></body></html>", true);
             // 需要先指定文本 再指定资源文件
             FileSystemResource res = new FileSystemResource(file);
@@ -208,7 +209,7 @@ public class SpringMail {
             helper.setFrom(from);
             helper.setTo(to);
             helper.setSubject(subject);
-            // 为true 时候 表示文本内容以 html 渲染
+            // 为 true 时候 表示文本内容以 html 渲染
             helper.setText(text, true);
             this.qqMailSender.send(message);
             System.out.println("发送邮件成功");
@@ -226,9 +227,9 @@ public class SpringMail {
 
 - 模板引擎最主要的作用是，在对邮件格式有要求的时候，采用拼接字符串不够直观，所以采用模板引擎；
 
-- 这里我们使用的beetl模板引擎，原因是其性能优异，官网是介绍其性能6倍与freemaker,并有完善的文档支持。当然大家也可以换成任何其他的模板引擎（freemarker,thymeleaf）
+- 这里我们使用的 beetl 模板引擎，原因是其性能优异，官网是介绍其性能 6 倍与 freemaker,并有完善的文档支持。当然大家也可以换成任何其他的模板引擎（freemarker,thymeleaf）
 
-  一个简单的模板template.html如下：
+  一个简单的模板 template.html 如下：
 
 ```html
 <!doctype html>
@@ -269,29 +270,29 @@ public class SendEmail {
     @Test
     public void sendMessage() {
        
-        springMail.sendTextMessage(from, authWord, to, "spring简单邮件", "Hello Spring Email!");
+        springMail.sendTextMessage(from, authWord, to, "spring 简单邮件", "Hello Spring Email!");
     }
 
 
     @Test
     public void sendComplexMessage() {
         Map<String, File> fileMap = new HashMap<>();
-        fileMap.put("image1.jpg", new File("D:\\LearningNotes\\picture\\msm相关依赖.png"));
-        fileMap.put("image2.jpg", new File("D:\\LearningNotes\\picture\\RabbitMQ模型架构.png"));
-        springMail.sendEmailWithAttachments(from, authWord, to, "spring多附件邮件"
+        fileMap.put("image1.jpg", new File("D:\\LearningNotes\\picture\\msm 相关依赖.png"));
+        fileMap.put("image2.jpg", new File("D:\\LearningNotes\\picture\\RabbitMQ 模型架构.png"));
+        springMail.sendEmailWithAttachments(from, authWord, to, "spring 多附件邮件"
                 , "Hello Spring Email!", fileMap);
     }
 
     @Test
     public void sendEmailWithInline() {
-        springMail.sendEmailWithInline(from, authWord, to, "spring内嵌资源邮件"
-                , "Hello Spring Email!", new File("D:\\LearningNotes\\picture\\RabbitMQ模型架构.png"));
+        springMail.sendEmailWithInline(from, authWord, to, "spring 内嵌资源邮件"
+                , "Hello Spring Email!", new File("D:\\LearningNotes\\picture\\RabbitMQ 模型架构.png"));
     }
 
     @Test
     public void sendEmailByTemplate() {
         springMail.sendEmailByTemplate(from, authWord, to,
-                "spring模板邮件", "Hello Spring Email!");
+                "spring 模板邮件", "Hello Spring Email!");
     }
 }
 ```

@@ -1,5 +1,6 @@
 # spring boot 整合 mecached
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一说明">一、说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#11--XMemcached客户端说明">1.1  XMemcached客户端说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目结构说明">1.2 项目结构说明</a><br/>
@@ -19,11 +20,11 @@
 
 ### 1.1  XMemcached客户端说明
 
-spring boot 官方并没有提供关于 memcached 的starter，所以我们这里还是采用XMemcached作为客户端进行整合。 XMemcached是基于java nio的memcached高性能客户端，支持完整的memcached协议，支持客户端分布并且提供了一致性哈希(consistent hash)算法的实现。
+spring boot 官方并没有提供关于 memcached 的 starter，所以我们这里还是采用 XMemcached 作为客户端进行整合。 XMemcached 是基于 java nio 的 memcached 高性能客户端，支持完整的 memcached 协议，支持客户端分布并且提供了一致性哈希 (consistent hash) 算法的实现。
 
 ### 1.2 项目结构说明
 
-memcached的整合配置位于config文件夹下。
+memcached 的整合配置位于 config 文件夹下。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-memcached.png"/> </div>
 
@@ -74,7 +75,7 @@ public MemcachedClient memcachedClientForCluster() {
     builder.setConnectionPoolSize(10);
     // 协议工厂
     builder.setCommandFactory(new TextCommandFactory());
-    // 分布策略，一致性哈希KetamaMemcachedSessionLocator或者ArraySessionLocator(默认)
+    // 分布策略，一致性哈希 KetamaMemcachedSessionLocator 或者 ArraySessionLocator(默认)
     builder.setSessionLocator(new KetamaMemcachedSessionLocator());
     // 设置序列化器
     builder.setTranscoder(new SerializingTranscoder());
@@ -90,7 +91,7 @@ public MemcachedClient memcachedClientForCluster() {
 
 #### 2.3 存储基本类型测试用例
 
-xmemcached单机版本和集群版本注入的实例是相同的。
+xmemcached 单机版本和集群版本注入的实例是相同的。
 
 ```java
 /**
@@ -150,14 +151,14 @@ public class MemObjectSamples {
 | 命令            | 格式                                               | 说明                                  |
 | --------------- | -------------------------------------------------- | ------------------------------------- |
 | 新增 set        | set  key  flags   exTime  length -> value          | 无论什么情况，都可以插入              |
-| 新增 add        | add key  flags   exTime  length -> value           | 只有当key不存在的情况下，才可以插入   |
-| 替换 replace    | replace  key  flags   exTime  length -> value      | 只修改已存在key的value值              |
-| 追加内容append  | append  key  flags   exTime  length -> value       | length表示追加的长度而不是总长度      |
-| 前面追加prepend | prepend  key  flags   exTime  length -> value      | length表示追加的长度而不是总长度      |
+| 新增 add        | add key  flags   exTime  length -> value           | 只有当 key 不存在的情况下，才可以插入   |
+| 替换 replace    | replace  key  flags   exTime  length -> value      | 只修改已存在 key 的 value 值              |
+| 追加内容 append  | append  key  flags   exTime  length -> value       | length 表示追加的长度而不是总长度      |
+| 前面追加 prepend | prepend  key  flags   exTime  length -> value      | length 表示追加的长度而不是总长度      |
 | 查询操作 get    | get  key                                           |                                       |
 | 检查更新 cas    | cas  key  flags  exTime  length  version  -> value | 版本正确才更新                        |
 | 详细获取 gets   | gets   key                                         | 返回的最后一个数代表 key 的 CAS 令牌  |
 | 删除 delete     | delete   key                                       | 将数据打一个删除标记                  |
-| 自增 incr       | incr  key  增加偏移量                              | incr和decr只能操作能转换为数字的Value |
-| 自减 decr       | decr  key  减少偏移量                              | desr不能将数字减少至0以下             |
+| 自增 incr       | incr  key  增加偏移量                              | incr 和 decr 只能操作能转换为数字的 Value |
+| 自减 decr       | decr  key  减少偏移量                              | desr 不能将数字减少至 0 以下             |
 | 清库            | flush_all                                          |                                       |

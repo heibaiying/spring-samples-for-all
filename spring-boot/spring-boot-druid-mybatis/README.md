@@ -1,5 +1,6 @@
 # spring boot 整合 druid+mybatis
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一说明">一、说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目主要依赖">1.2 项目主要依赖</a><br/>
@@ -17,20 +18,20 @@
 
 #### 1.1 项目结构
 
-1. 项目查询用的表对应的建表语句放置在resources的sql文件夹下；
+1. 项目查询用的表对应的建表语句放置在 resources 的 sql 文件夹下；
 
-2. 为了使用druid控制台的功能，项目以web的方式构建。
+2. 为了使用 druid 控制台的功能，项目以 web 的方式构建。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-druid-mybatis.png"/> </div>
 
 #### 1.2 项目主要依赖
 
-需要说明的是按照spring 官方对于自定义的starter 命名规范的推荐：
+需要说明的是按照 spring 官方对于自定义的 starter 命名规范的推荐：
 
-- 官方的starter命名：spring-boot-starter-XXXX
-- 其他第三方starter命名：XXXX-spring-boot-starte
+- 官方的 starter 命名：spring-boot-starter-XXXX
+- 其他第三方 starter 命名：XXXX-spring-boot-starte
 
-所以mybatis的starter命名为mybatis-spring-boot-starter，如果有自定义starter需求，也需要按照此命名规则进行命名。
+所以 mybatis 的 starter 命名为 mybatis-spring-boot-starter，如果有自定义 starter 需求，也需要按照此命名规则进行命名。
 
 ```xml
 <dependency>
@@ -67,7 +68,7 @@ spring boot 与 mybatis 版本的对应关系：
 
 #### 2.1 在application.yml 中配置数据源
 
-本用例采用druid作为数据库连接池，虽然druid性能略逊于Hikari，但是提供了更为全面的监控管理，可以按照实际需求选用druid或者Hikari。（关于Hikari数据源的配置可以参考[spring-boot-mybatis项目](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-mybatis)）
+本用例采用 druid 作为数据库连接池，虽然 druid 性能略逊于 Hikari，但是提供了更为全面的监控管理，可以按照实际需求选用 druid 或者 Hikari。（关于 Hikari 数据源的配置可以参考[spring-boot-mybatis 项目](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-mybatis)）
 
 ```yaml
 spring:
@@ -80,50 +81,50 @@ spring:
     # 使用 druid 作为连接池  更多配置的说明可以参见 druid starter 中文文档 https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
-      # 初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者第一次getConnection时
+      # 初始化时建立物理连接的个数。初始化发生在显示调用 init 方法，或者第一次 getConnection 时
       initialSize: 5
       # 最小连接池数量
       minIdle: 5
       # 最大连接池数量
       maxActive: 10
-      # 获取连接时最大等待时间，单位毫秒。配置了maxWait之后，缺省启用公平锁，并发效率会有所下降，如果需要可以通过配置useUnfairLock属性为true使用非公平锁。
+      # 获取连接时最大等待时间，单位毫秒。配置了 maxWait 之后，缺省启用公平锁，并发效率会有所下降，如果需要可以通过配置 useUnfairLock 属性为 true 使用非公平锁。
       maxWait: 60000
-      # Destroy线程会检测连接的间隔时间，如果连接空闲时间大于等于minEvictableIdleTimeMillis则关闭物理连接。
+      # Destroy 线程会检测连接的间隔时间，如果连接空闲时间大于等于 minEvictableIdleTimeMillis 则关闭物理连接。
       timeBetweenEvictionRunsMillis: 60000
       # 连接保持空闲而不被驱逐的最小时间
       minEvictableIdleTimeMillis: 300000
-      # 用来检测连接是否有效的sql 因数据库方言而差, 例如 oracle 应该写成 SELECT 1 FROM DUAL
+      # 用来检测连接是否有效的 sql 因数据库方言而差, 例如 oracle 应该写成 SELECT 1 FROM DUAL
       validationQuery: SELECT 1
-      # 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。
+      # 建议配置为 true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于 timeBetweenEvictionRunsMillis，执行 validationQuery 检测连接是否有效。
       testWhileIdle: true
-      # 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。
+      # 申请连接时执行 validationQuery 检测连接是否有效，做了这个配置会降低性能。
       testOnBorrow: false
-      # 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。
+      # 归还连接时执行 validationQuery 检测连接是否有效，做了这个配置会降低性能。
       testOnReturn: false
       # 是否自动回收超时连接
       removeAbandoned: true
-      # 超时时间(以秒数为单位)
+      # 超时时间 (以秒数为单位)
       remove-abandoned-timeout: 180
 
       # druid 监控的配置 如果不使用 druid 的监控功能的话 以下配置就不是必须的
       # 本项目监控台访问地址: http://localhost:8080/druid/login.html
 
-      # WebStatFilter用于采集web-jdbc关联监控的数据。
+      # WebStatFilter 用于采集 web-jdbc 关联监控的数据。
       # 更多配置可参见: https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_%E9%85%8D%E7%BD%AEWebStatFilter
       web-stat-filter:
-        # 是否开启 WebStatFilter 默认是true
+        # 是否开启 WebStatFilter 默认是 true
         enabled: true
-        # 需要拦截的url
+        # 需要拦截的 url
         url-pattern: /*
         # 排除静态资源的请求
         exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
 
-      # Druid内置提供了一个StatViewServlet用于展示Druid的统计信息。
+      # Druid 内置提供了一个 StatViewServlet 用于展示 Druid 的统计信息。
       # 更多配置可参见:https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_StatViewServlet%E9%85%8D%E7%BD%AE
       stat-view-servlet:
-        #是否启用StatViewServlet 默认值true
+        #是否启用 StatViewServlet 默认值 true
         enabled: true
-        # 需要拦截的url
+        # 需要拦截的 url
         url-pattern: /druid/*
         # 允许清空统计数据
         reset-enable: true
@@ -136,9 +137,9 @@ spring:
 mybatis:
     configuration:
       # 当没有为参数提供特定的 JDBC 类型时，为空值指定 JDBC 类型。
-      # oracle数据库建议配置为JdbcType.NULL, 默认是Other
+      # oracle 数据库建议配置为 JdbcType.NULL, 默认是 Other
       jdbc-type-for-null: 'null'
-      # 是否打印sql语句 调试的时候可以开启
+      # 是否打印 sql 语句 调试的时候可以开启
 log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 ```
 
@@ -185,7 +186,7 @@ public class ProgrammerController {
 ```java
 /**
  * @author : heibaiying
- * @description :在 Spring Boot 中可以通过 HTTP 接口将 Druid 监控数据以JSON 的形式暴露出去，
+ * @description :在 Spring Boot 中可以通过 HTTP 接口将 Druid 监控数据以 JSON 的形式暴露出去，
  * 实际使用中你可以根据你的需要自由地对监控数据、暴露方式进行扩展。
  */
 

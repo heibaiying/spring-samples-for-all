@@ -1,5 +1,6 @@
 # spring 整合 dubbo（xml配置方式）
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一-项目结构说明">一、 项目结构说明</a><br/>
 <a href="#二项目依赖">二、项目依赖</a><br/>
 <a href="#三公共模块dubbo-common">三、公共模块（dubbo-common）</a><br/>
@@ -16,13 +17,13 @@
 
 ## 一、 项目结构说明
 
-1.1  按照dubbo 文档推荐的服务最佳实践，建议将服务接口、服务模型、服务异常等均放在 API 包中，所以项目采用maven多模块的构建方式，在spring-dubbo下构建三个子模块：
+1.1  按照 dubbo 文档推荐的服务最佳实践，建议将服务接口、服务模型、服务异常等均放在 API 包中，所以项目采用 maven 多模块的构建方式，在 spring-dubbo 下构建三个子模块：
 
-1. dubbo-common 是公共模块，用于存放公共的接口和bean,被dubbo-provider和dubbo-provider在pom.xml中引用；
+1. dubbo-common 是公共模块，用于存放公共的接口和 bean,被 dubbo-provider 和 dubbo-provider 在 pom.xml 中引用；
 2. dubbo-provider 是服务的提供者，提供商品的查询服务；
-3. dubbo-provider 是服务的消费者，调用provider提供的查询服务。
+3. dubbo-provider 是服务的消费者，调用 provider 提供的查询服务。
 
-1.2  本项目dubbo的搭建采用zookeeper作为注册中心， 关于zookeeper的安装和基本操作可以参见我的手记[Zookeeper 基础命令与Java客户端](https://github.com/heibaiying/LearningNotes/blob/master/notes/%E4%B8%AD%E9%97%B4%E4%BB%B6/ZooKeeper/ZooKeeper%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%E4%B8%8EJava%E5%AE%A2%E6%88%B7%E7%AB%AF.md)
+1.2  本项目 dubbo 的搭建采用 zookeeper 作为注册中心， 关于 zookeeper 的安装和基本操作可以参见我的手记[Zookeeper 基础命令与 Java 客户端](https://github.com/heibaiying/LearningNotes/blob/master/notes/%E4%B8%AD%E9%97%B4%E4%BB%B6/ZooKeeper/ZooKeeper%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%E4%B8%8EJava%E5%AE%A2%E6%88%B7%E7%AB%AF.md)
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-dubbo.png"/> </div>
 
@@ -30,9 +31,9 @@
 
 ## 二、项目依赖
 
-**在父工程的项目中统一导入依赖dubbo依赖的的jar包**
+**在父工程的项目中统一导入依赖 dubbo 依赖的的 jar 包**
 
-这里需要注意的是ZooKeeper 3.5.x 和 ZooKeeper 3.4.x 是存在不兼容的情况 详见官网解释[ZooKeeper Version Compatibility](https://curator.apache.org/zk-compatibility.html), zookeeper 3.5 目前是beta版本，所以zookeeper 我选择的版本是 zookeeper-3.4.9 作为服务端。但默认情况下 curator-framework自动引用的最新的3.5的版本客户端，会出现 KeeperException$UnimplementedException 异常
+这里需要注意的是 ZooKeeper 3.5.x 和 ZooKeeper 3.4.x 是存在不兼容的情况 详见官网解释[ZooKeeper Version Compatibility](https://curator.apache.org/zk-compatibility.html), zookeeper 3.5 目前是 beta 版本，所以 zookeeper 我选择的版本是 zookeeper-3.4.9 作为服务端。但默认情况下 curator-framework 自动引用的最新的 3.5 的版本客户端，会出现 KeeperException$UnimplementedException 异常
 
 ```xml
 <!--dubbo 依赖-->
@@ -73,7 +74,7 @@
 
 #### 4.1  productService是服务的提供者（ 商品数据用模拟数据展示）
 
-注：这里实现的接口IProductService来源于公共模块
+注：这里实现的接口 IProductService 来源于公共模块
 
 ```java
 /**
@@ -122,16 +123,16 @@ public class ProductService implements IProductService {
     <!-- 提供方应用信息，用于计算依赖关系 -->
     <dubbo:application name="dubbo-provider"/>
 
-    <!-- 使用zookeeper注册中心暴露服务地址 如果是集群配置 用, 分隔地址 -->
+    <!-- 使用 zookeeper 注册中心暴露服务地址 如果是集群配置 用, 分隔地址 -->
     <dubbo:registry protocol="zookeeper" address="127.0.0.1:2181"/>
 
-    <!-- 用dubbo协议在20880端口暴露服务 -->
+    <!-- 用 dubbo 协议在 20880 端口暴露服务 -->
     <dubbo:protocol name="dubbo" port="20880"/>
 
     <!-- 声明需要暴露的服务接口 -->
     <dubbo:service interface="com.heibaiying.api.IProductService" ref="productService"/>
 
-    <!-- 和本地bean一样实现服务 -->
+    <!-- 和本地 bean 一样实现服务 -->
     <bean id="productService" class="com.heibaiying.service.ProductService"/>
 </beans>
 ```
@@ -161,10 +162,10 @@ public class ProductService implements IProductService {
     <!--可以关闭所有服务的启动时检查 -->
     <dubbo:consumer check="false" />
 
-    <!-- 使用zookeeper注册中心暴露发现服务地址 -->
+    <!-- 使用 zookeeper 注册中心暴露发现服务地址 -->
     <dubbo:registry protocol="zookeeper" address="127.0.0.1:2181"/>
 
-    <!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
+    <!-- 生成远程服务代理，可以和本地 bean 一样使用 demoService -->
     <dubbo:reference id="sellService" interface="com.heibaiying.api.IProductService"/>
 
 
@@ -199,13 +200,13 @@ public class SellController {
 
 ## 六、项目构建的说明
 
-因为在项目中，consumer和provider模块均依赖公共模块,所以在构建consumer和provider项目前需要将common 模块安装到本地仓库，**依次**对**父工程**和**common模块**执行：
+因为在项目中，consumer 和 provider 模块均依赖公共模块,所以在构建 consumer 和 provider 项目前需要将 common 模块安装到本地仓库，**依次**对**父工程**和**common 模块**执行：
 
 ```shell
 mvn install -Dmaven.test.skip = true
 ```
 
-consumer中 pom.xml如下
+consumer 中 pom.xml 如下
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -233,7 +234,7 @@ consumer中 pom.xml如下
 </project>
 ```
 
-provider中 pom.xml如下
+provider 中 pom.xml 如下
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -276,7 +277,7 @@ mvn clean package
 ```sh
 配置文件为：
 dubbo-admin-backend/src/main/resources/application.properties
-主要的配置有 默认的配置就是127.0.0.1:2181：
+主要的配置有 默认的配置就是 127.0.0.1:2181：
 dubbo.registry.address=zookeeper://127.0.0.1:2181
 ```
 

@@ -17,23 +17,23 @@
 
 ### 1.1 Springfox
 
-Springfox 是一个开源的API Doc的框架， 它的前身是swagger-springmvc，能够完美的支持springmvc，可以将spring 接口方法自动转换为接口文档。 目前spring fox 正致力于对更多JSON API规范和标准的扩展和支持，例如：[swagger](http://swagger.io/)，[RAML](http://raml.org/)和[jsonapi](http://jsonapi.org/)。
+Springfox 是一个开源的 API Doc 的框架， 它的前身是 swagger-springmvc，能够完美的支持 springmvc，可以将 spring 接口方法自动转换为接口文档。 目前 spring fox 正致力于对更多 JSON API 规范和标准的扩展和支持，例如：[swagger](http://swagger.io/)，[RAML](http://raml.org/) 和[jsonapi](http://jsonapi.org/)。
 
 ### 1.2 Swagger
 
-Swagger是一个规范和完整的框架，用于生成、描述、调用和可视化 RESTful 风格的 Web 服务，支持从整个API生命周期（从设计和文档到测试和部署）的开发。
+Swagger 是一个规范和完整的框架，用于生成、描述、调用和可视化 RESTful 风格的 Web 服务，支持从整个 API 生命周期（从设计和文档到测试和部署）的开发。
 
-swagger 是一个综合的开源项目，包含[swagger-core](https://github.com/swagger-api/swagger-core)、[swagger-ui](https://github.com/swagger-api/swagger-ui)、[swagger-codegen](https://github.com/swagger-api/swagger-codegen)、[swagger-editor](https://github.com/swagger-api/swagger-editor)等多个子项目。
+swagger 是一个综合的开源项目，包含[swagger-core](https://github.com/swagger-api/swagger-core)、[swagger-ui](https://github.com/swagger-api/swagger-ui)、[swagger-codegen](https://github.com/swagger-api/swagger-codegen)、[swagger-editor](https://github.com/swagger-api/swagger-editor) 等多个子项目。
 
-+ **swagger-core**：Swagger Core是OpenAPI规范（以前称为Swagger规范）的**Java实现**。
++ **swagger-core**：Swagger Core 是 OpenAPI 规范（以前称为 Swagger 规范）的**Java 实现**。
 
-+ **swagger-ui**：依据可视化文档，提供与API资源的可视化交互。
++ **swagger-ui**：依据可视化文档，提供与 API 资源的可视化交互。
 
-+ **swagger-codegen**：开源的代码生成器,根据Swagger定义的RESTful API可以自动建立服务端和客户端的连接。
++ **swagger-codegen**：开源的代码生成器,根据 Swagger 定义的 RESTful API 可以自动建立服务端和客户端的连接。
 
-+ **swagger-editor**：开源的api文档编辑器。
++ **swagger-editor**：开源的 api 文档编辑器。
 
-下图为swagger-ui 提供的文档可视化界面示例：
+下图为 swagger-ui 提供的文档可视化界面示例：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/Swagger_UI.png"/> </div>
 
@@ -41,7 +41,7 @@ swagger 是一个综合的开源项目，包含[swagger-core](https://github.com
 
 ### 1.3 OpenApi、Swagger、Springfox的关系
 
-**Swagger Core 是 OpenApi 规范（以前称为Swagger规范）的Java 实现，而 Springfox 提供 Swagger 与 spring 的集成支持**。<br/>
+**Swagger Core 是 OpenApi 规范（以前称为 Swagger 规范）的 Java 实现，而 Springfox 提供 Swagger 与 spring 的集成支持**。<br/>
 
 
 
@@ -68,17 +68,17 @@ swagger 是一个综合的开源项目，包含[swagger-core](https://github.com
 
 ### 2.2  进行swagger个性化配置、并用@EnableSwagger2开启Swagger支持
 
-这里需要说明的是swagger虽然是一个非常直观易用的接口调试插件，但是有可能导致接口信息泄露的危险，所以建议在开发环境和测试环境开启，在生产环境关闭。这里一共给出三种Swagger开关切换的方法：
+这里需要说明的是 swagger 虽然是一个非常直观易用的接口调试插件，但是有可能导致接口信息泄露的危险，所以建议在开发环境和测试环境开启，在生产环境关闭。这里一共给出三种 Swagger 开关切换的方法：
 
-1. 如下面代码所示，在配置文件中配置自定义的开关参数，并在创建Docket时候，在链式调用的enable()方法中传入；
+1. 如下面代码所示，在配置文件中配置自定义的开关参数，并在创建 Docket 时候，在链式调用的 enable() 方法中传入；
 
-2. 在`SwaggerConfig`配置类上添加`@Profile({"dev","test"}) `注解，指明在开发环境和测试环境下激活此配置类，打包或者部署时候使用spring.profiles.active指明环境即可；
+2. 在 `SwaggerConfig` 配置类上添加 `@Profile({"dev","test"}) ` 注解，指明在开发环境和测试环境下激活此配置类，打包或者部署时候使用 spring.profiles.active 指明环境即可；
 
-3. 在配置文件中配置自定义的开关参数，并在`SwaggerConfig`配置类上添加`@ConditionalOnProperty(name = "swagger.enable", havingValue = "true") `，指明配置类的生效条件
+3. 在配置文件中配置自定义的开关参数，并在 `SwaggerConfig` 配置类上添加 `@ConditionalOnProperty(name = "swagger.enable", havingValue = "true") `，指明配置类的生效条件
 
    注：@ConditionalOnProperty 注解说明
 
-   @ConditionalOnProperty注解能够控制某个@configuration修饰的配置类是否生效。具体操作是通过name和havingValue属性来实现，name对应application.properties（yml）中的某个属性值，如果该值为空，则返回false；如果值不为空，则将该值与havingValue指定的值进行比较，如果一样则返回true；否则返回false。如果返回值为false，则该configuration不生效；为true则生效。
+   @ConditionalOnProperty 注解能够控制某个@configuration 修饰的配置类是否生效。具体操作是通过 name 和 havingValue 属性来实现，name 对应 application.properties（yml）中的某个属性值，如果该值为空，则返回 false；如果值不为空，则将该值与 havingValue 指定的值进行比较，如果一样则返回 true；否则返回 false。如果返回值为 false，则该 configuration 不生效；为 true 则生效。
 
 ```java
 /**
@@ -93,8 +93,8 @@ public class SwaggerConfig {
     private boolean swaggerEnable;
 
     /***
-     * 配置swagger
-     * 开发和测试环境下可以开启swagger辅助进行调试,而生产环境下可以关闭或者进行相应的权限控制，防止接口信息泄露
+     * 配置 swagger
+     * 开发和测试环境下可以开启 swagger 辅助进行调试,而生产环境下可以关闭或者进行相应的权限控制，防止接口信息泄露
      */
     @Bean
     public Docket createRestApi() {
@@ -121,7 +121,7 @@ public class SwaggerConfig {
     }
 
     /**
-     * 可以使用正则定义url过滤规则
+     * 可以使用正则定义 url 过滤规则
      */
     private Predicate<String> doFilteringRules() {
         return not(
@@ -149,7 +149,7 @@ swagger.enable = true
 public class ProductController {
 
     /***
-     * 一个标准的swagger注解
+     * 一个标准的 swagger 注解
      */
     @ApiOperation(notes = "查询所有产品", value = "产品查询接口")
     @ApiImplicitParams(
@@ -197,7 +197,7 @@ public class ProductController {
     }
 
     /**
-     * 不加上任何swagger相关的注解也会被扫描到 如果不希望被扫描到，需要用 @ApiIgnore 修饰
+     * 不加上任何 swagger 相关的注解也会被扫描到 如果不希望被扫描到，需要用 @ApiIgnore 修饰
      */
     @PostMapping(value = "/normal")
     public ResponseEntity<Void> normal() {
@@ -233,19 +233,19 @@ swagger 为了最大程度防止对逻辑代码的侵入，基本都是依靠注
 
 4. `@ApiImplicitParams`：用在方法上说明方法参数的作用；
 
-5. `@ApiImplicitParam`：用在@ApiImplicitParams注解中，描述每个具体参数；
+5. `@ApiImplicitParam`：用在@ApiImplicitParams 注解中，描述每个具体参数；
 
-6. `@ApiResponses`：一组@ApiResponse的配置；
+6. `@ApiResponses`：一组@ApiResponse 的配置；
 
 7. `@ApiResponse`：请求返回的配置；
 
 8. `@ResponseHeader`：响应头的配置；
 
-9. `@ApiModel`：描述一个Model的信息（一般用在post创建的时候，使用@RequestBody接收参数的场景）；
+9. `@ApiModel`：描述一个 Model 的信息（一般用在 post 创建的时候，使用@RequestBody 接收参数的场景）；
 
-10. `@ApiModelProperty`：描述model的属性。
+10. `@ApiModelProperty`：描述 model 的属性。
 
-11. `@ApiIgnore`：可以用于类、方法、属性，代表该方法、类、属性不被swagger的文档所管理。
+11. `@ApiIgnore`：可以用于类、方法、属性，代表该方法、类、属性不被 swagger 的文档所管理。
 
     
 
@@ -258,10 +258,10 @@ swagger 为了最大程度防止对逻辑代码的侵入，基本都是依靠注
 ### 2.5 利用swagger-ui进行接口测试
 
 
-​点击对应接口的`try it out`按钮可以进行接口测试，此时可以输入对应的参数的值，然后点击下方的`Execute`按钮发送请求。<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/swagger-try-it.png"/> </div>
+​点击对应接口的 `try it out` 按钮可以进行接口测试，此时可以输入对应的参数的值，然后点击下方的 `Execute` 按钮发送请求。<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/swagger-try-it.png"/> </div>
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/swagger-execute.png"/> </div>
 
-post方法可以直接修改model 对应的 json数据 ，然后点击下方的`Execute`按钮发送请求。
+post 方法可以直接修改 model 对应的 json 数据 ，然后点击下方的 `Execute` 按钮发送请求。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/swagger-post-try.png"/> </div>

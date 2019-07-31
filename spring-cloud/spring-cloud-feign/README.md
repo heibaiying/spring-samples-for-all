@@ -12,14 +12,14 @@
 
 ## 一、feign 简介
 
-在上一个用例中，我们使用ribbon+restTemplate 实现服务之间的远程调用，实际上每一个调用都是模板化的内容，所以spring cloud Feign 在此基础上进行了进一步的封装。我们只需要定义一个接口并使用feign注解的方式来进行配置，同时采用springMvc 注解进行参数绑定就可以完成服务的调用。feign同时还内置实现了负载均衡、服务容错等功能。
+在上一个用例中，我们使用 ribbon+restTemplate 实现服务之间的远程调用，实际上每一个调用都是模板化的内容，所以 spring cloud Feign 在此基础上进行了进一步的封装。我们只需要定义一个接口并使用 feign 注解的方式来进行配置，同时采用 springMvc 注解进行参数绑定就可以完成服务的调用。feign 同时还内置实现了负载均衡、服务容错等功能。
 
 
 
 ## 二、项目结构
 
 + common: 公共的接口和实体类；
-+ consumer: 服务的消费者，采用feign调用产品服务；
++ consumer: 服务的消费者，采用 feign 调用产品服务；
 + producer：服务的提供者；
 + eureka: 注册中心。
 
@@ -186,7 +186,7 @@ public interface ProductFeign {
     List<Product> productList();
 
     /**
-     * 这是需要强调的是使用feign时候@PathVariable一定要用value指明参数，
+     * 这是需要强调的是使用 feign 时候@PathVariable 一定要用 value 指明参数，
      * 不然会抛出.IllegalStateException: PathVariable annotation was empty on param 异常
      */
     @GetMapping("product/{id}")
@@ -259,7 +259,7 @@ public class SellController {
 
 #### 5.1 启动一个Eureka服务、三个producer服务（注意区分端口）、和一个消费者服务
 
-feign 的依赖中导入了spring-cloud-starter-netflix-ribbon依赖，并且在内部实现了基于ribbon的客户端负载均衡，所以我们这里启动三个producer实例来观察负载均衡的情况。
+feign 的依赖中导入了 spring-cloud-starter-netflix-ribbon 依赖，并且在内部实现了基于 ribbon 的客户端负载均衡，所以我们这里启动三个 producer 实例来观察负载均衡的情况。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-ribbon-app.png"/> </div>
 
@@ -292,7 +292,7 @@ feign 的依赖中导入了spring-cloud-starter-netflix-ribbon依赖，并且在
 ```yml
 feign:
   hystrix:
-    # 如果为true，则OpenFign客户端将使用Hystrix断路器进行封装 默认为false
+    # 如果为 true，则 OpenFign 客户端将使用 Hystrix 断路器进行封装 默认为 false
     enabled: true
 ```
 
@@ -301,7 +301,7 @@ feign:
 ```java
 /**
  * @author : heibaiying
- * @description : 定义发生熔断时候的回退处理。除了继承自CProductFeign,还需要用@Component声明为spring的组件
+ * @description : 定义发生熔断时候的回退处理。除了继承自 CProductFeign,还需要用@Component 声明为 spring 的组件
  */
 @Component
 public class CProductFeignImpl implements CProductFeign {
@@ -368,7 +368,7 @@ public interface CProductFeign extends ProductFeign {
 
 #### 6.5 测试熔断处理
 
-hystrix 默认调用超时时间为2s ,这里我们使用线程休眠的方式来模拟超时熔断。
+hystrix 默认调用超时时间为 2s ,这里我们使用线程休眠的方式来模拟超时熔断。
 
 ```java
 public List<Product> queryAllProducts() {

@@ -1,5 +1,6 @@
 # spring 整合 mongodb（xml配置方式）
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一说明">一、说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构说明">1.1 项目结构说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-依赖说明">1.2 依赖说明</a><br/>
@@ -14,7 +15,7 @@
 
 ### 1.1 项目结构说明
 
-配置文件位于resources下,项目以单元测试的方式进行测试。
+配置文件位于 resources 下,项目以单元测试的方式进行测试。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-mongodb.png"/> </div>
 
@@ -22,7 +23,7 @@
 
 ### 1.2 依赖说明
 
-除了spring的基本依赖外，需要导入mongodb整合依赖包
+除了 spring 的基本依赖外，需要导入 mongodb 整合依赖包
 
 ```xml
  <!--spring mongodb 整合依赖-->
@@ -76,7 +77,7 @@ mongo.socketTimeout=1500
     <!--扫描配置文件-->
     <context:property-placeholder location="classpath:mongodb.properties"/>
 
-    <!--定义用于访问MongoDB的MongoClient实例-->
+    <!--定义用于访问 MongoDB 的 MongoClient 实例-->
     <mongo:mongo-client host="${mongo.host}" port="${mongo.port}">
         <mongo:client-options
                 connections-per-host="${mongo.connectionsPerHost}"
@@ -91,7 +92,7 @@ mongo.socketTimeout=1500
     <!--定义用于连接到数据库的连接工厂-->
     <mongo:db-factory dbname="${mongo.dbname}" mongo-ref="mongoClient"/>
 
-    <!--实际操作mongodb的template,在代码中注入-->
+    <!--实际操作 mongodb 的 template,在代码中注入-->
     <bean id="anotherMongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
         <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
     </bean>

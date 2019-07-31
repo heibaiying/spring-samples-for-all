@@ -1,5 +1,6 @@
 # spring boot 实现分布式 session
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一项目结构">一、项目结构</a><br/>
 <a href="#二分布式session的配置">二、分布式session的配置</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-引入依赖">2.1 引入依赖</a><br/>
@@ -51,7 +52,7 @@ spring:
         min-idle: 1
     timeout: 300ms
   session:
-    # session 存储方式 支持redis、mongo、jdbc、hazelcast
+    # session 存储方式 支持 redis、mongo、jdbc、hazelcast
     store-type: redis
 
 # 如果是集群节点 采用如下配置指定节点
@@ -61,14 +62,14 @@ spring:
 
 有两点需要特别说明：
 
-1. spring-session 不仅提供了redis作为公共session存储的方案，同时也支持jdbc、mongodb、Hazelcast等作为公共session的存储，可以用session.store-type 指定；
-2. 对于redis 存储方案而言，官方也提供了不止一种整合方式，这里我们选取的整合方案是jedis客户端作为连接，当然也可以使用Lettuce作为客户端连接。
+1. spring-session 不仅提供了 redis 作为公共 session 存储的方案，同时也支持 jdbc、mongodb、Hazelcast 等作为公共 session 的存储，可以用 session.store-type 指定；
+2. 对于 redis 存储方案而言，官方也提供了不止一种整合方式，这里我们选取的整合方案是 jedis 客户端作为连接，当然也可以使用 Lettuce 作为客户端连接。
 
 #### 2.3 启动类上添加@EnableRedisHttpSession 注解开启 spring-session-redis 整合方案的自动配置
 
 ```java
 @SpringBootApplication
-@EnableRedisHttpSession(maxInactiveIntervalInSeconds= 1800) //开启redis session支持,并配置session过期时间
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds= 1800) //开启 redis session 支持,并配置 session 过期时间
 public class SpringBootSessionApplication {
 
     public static void main(String[] args) {
@@ -100,9 +101,9 @@ public class LoginController {
 
     @PostMapping("login")
     public String login(User user, HttpSession session) {
-        // 随机生成用户id
+        // 随机生成用户 id
         user.setUserId(Math.round(Math.floor(Math.random() * 10 * 1000)));
-        // 将用户信息保存到id中
+        // 将用户信息保存到 id 中
         session.setAttribute("USER", user);
         return "home";
     }
@@ -110,7 +111,7 @@ public class LoginController {
 }
 ```
 
-登录页面index.ftl：
+登录页面 index.ftl：
 
 ```jsp
 <!doctype html>
@@ -128,7 +129,7 @@ public class LoginController {
 </html>
 ```
 
-session 信息展示页面home.ftl：
+session 信息展示页面 home.ftl：
 
 ```jsp
 <!doctype html>
@@ -145,13 +146,13 @@ session 信息展示页面home.ftl：
 
 #### 3.2 启动项目
 
-由于我们这里采用的是spring boot 的内置容器作为web容器，所以直接启动两个实例测试即可。
+由于我们这里采用的是 spring boot 的内置容器作为 web 容器，所以直接启动两个实例测试即可。
 
-应用1启动配置：
+应用 1 启动配置：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-session-app1.png"/> </div>
 
-应用2启动配置，需要用 `--server.port `指定不同的端口号：
+应用 2 启动配置，需要用 `--server.port ` 指定不同的端口号：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-session-app2.png"/> </div>
 

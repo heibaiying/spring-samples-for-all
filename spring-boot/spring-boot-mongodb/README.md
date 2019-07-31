@@ -1,5 +1,6 @@
 # spring boot 整合 mongodb
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一说明">一、说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-用例结构">1.1 用例结构</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目主要依赖">1.2 项目主要依赖</a><br/>
@@ -16,9 +17,9 @@
 
 #### 1.1 用例结构
 
-1. 本用例提供mongdb的简单整合用例；
-2. 提供用MongoTemplate的方式操作mongdb，见测试用例MongoOriginalTests.java
-3. 提供基于spring data jpa 的方式操作mongodb(推荐)，见测试用例MongoJPATests.java
+1. 本用例提供 mongdb 的简单整合用例；
+2. 提供用 MongoTemplate 的方式操作 mongdb，见测试用例 MongoOriginalTests.java
+3. 提供基于 spring data jpa 的方式操作 mongodb(推荐)，见测试用例 MongoJPATests.java
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-mongodb.png"/> </div>
 
@@ -159,7 +160,7 @@ public class MongoJPATests {
 }
 ```
 
-查询方法支持的关键字如下,更多命名规范可以参见Spring Data MongoDB官方文档[Query Methods](https://docs.spring.io/spring-data/mongodb/docs/2.1.3.RELEASE/reference/html/#mongodb.repositories.queries)：
+查询方法支持的关键字如下,更多命名规范可以参见 Spring Data MongoDB 官方文档[Query Methods](https://docs.spring.io/spring-data/mongodb/docs/2.1.3.RELEASE/reference/html/#mongodb.repositories.queries)：
 
 | Keyword                              | Sample                                                       | Logical result                                               |
 | ------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |

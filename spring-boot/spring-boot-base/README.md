@@ -1,5 +1,6 @@
 # spring-boot 基础
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一说明">一、说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构说明">1.1 项目结构说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目依赖">1.2 项目依赖</a><br/>
@@ -18,15 +19,15 @@
 
 #### 1.1 项目结构说明
 
-1. 本项目搭建一个简单的hello spring 的 web工程，简单说明spring-boot 的开箱即用的特性；
-2. 模板引擎采用freemaker 和 thymeleaf 作为示例，分别对应模板文件makershow.ftl 和 leafShow.html；
-3. spring boot 2.x 默认是不支持jsp的，需要额外的配置，关于使用jsp的整合可以参考[spring-boot-jsp](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-jsp)项目。
+1. 本项目搭建一个简单的 hello spring 的 web 工程，简单说明 spring-boot 的开箱即用的特性；
+2. 模板引擎采用 freemaker 和 thymeleaf 作为示例，分别对应模板文件 makershow.ftl 和 leafShow.html；
+3. spring boot 2.x 默认是不支持 jsp 的，需要额外的配置，关于使用 jsp 的整合可以参考[spring-boot-jsp](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-jsp) 项目。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-base.png"/> </div>
 
 #### 1.2 项目依赖
 
-导入相关的starter(启动器)
+导入相关的 starter(启动器)
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -78,7 +79,7 @@
         </dependency>
     </dependencies>
 
-    <!--Spring Boot的Maven插件（Spring Boot Maven plugin）能够以Maven的方式为应用提供Spring Boot的支持-->
+    <!--Spring Boot 的 Maven 插件（Spring Boot Maven plugin）能够以 Maven 的方式为应用提供 Spring Boot 的支持-->
     <build>
         <plugins>
             <plugin>
@@ -92,17 +93,17 @@
 
 ```
 
-1. spring boot 项目默认继承自spring-boot-starter-parent，而spring-boot-starter-parent继承自spring-boot-dependencies,  spring-boot-dependencies中定义了关于spring boot 依赖的各种jar包的版本，是spring boot 的版本管理中心。
+1. spring boot 项目默认继承自 spring-boot-starter-parent，而 spring-boot-starter-parent 继承自 spring-boot-dependencies,  spring-boot-dependencies 中定义了关于 spring boot 依赖的各种 jar 包的版本，是 spring boot 的版本管理中心。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-dependencies.png"/> </div>
 
-2. 关于spring boot 2.x官方支持的所有starter 可以参见官方文档 [Table 13.1. Spring Boot application starters](https://docs.spring.io/spring-boot/docs/2.1.1.RELEASE/reference/htmlsingle/#using-boot-starter)
+2. 关于 spring boot 2.x 官方支持的所有 starter 可以参见官方文档 [Table 13.1. Spring Boot application starters](https://docs.spring.io/spring-boot/docs/2.1.1.RELEASE/reference/htmlsingle/#using-boot-starter)
 
 
 
 ## 二、spring boot 主启动类
 
- 如果采用IDEA 或者 Spring Tool Suite (STS) 等开发工具创建的spring boot 工程，会默认创建启动类，如果没有创建，需要手动创建启动类
+ 如果采用 IDEA 或者 Spring Tool Suite (STS) 等开发工具创建的 spring boot 工程，会默认创建启动类，如果没有创建，需要手动创建启动类
 
 ```java
 package com.heibaiying.springbootbase;
@@ -121,7 +122,7 @@ public class SpringBootBaseApplication {
 }
 ```
 
-@SpringBootApplication 注解是一个复合注解,里面包含了@ComponentScan注解，默认开启包扫描，扫描与主程序所在包及其子包，对于本工程而言 默认扫描 com.heibaiying.springbootbase
+@SpringBootApplication 注解是一个复合注解,里面包含了@ComponentScan 注解，默认开启包扫描，扫描与主程序所在包及其子包，对于本工程而言 默认扫描 com.heibaiying.springbootbase
 
 ```java
 @Target(ElementType.TYPE)
@@ -142,7 +143,7 @@ public @interface SpringBootApplication {
 
 ## 三、开箱即用的web工程
 
-在springbootBaseApplication.java 的同级目录创建controller文件夹，并在其中创建RestfulController.java,启动项目访问localhost:8080/restful/programmers 即可看到项目搭建成功。
+在 springbootBaseApplication.java 的同级目录创建 controller 文件夹，并在其中创建 RestfulController.java,启动项目访问 localhost:8080/restful/programmers 即可看到项目搭建成功。
 
 ```java
 /**
@@ -163,20 +164,20 @@ public class RestfulController {
 }
 ```
 
-这里之所以能够开箱即用，是因为我们在项目中导入spring-boot-starter-web启动器，而@SpringBootApplication 复合注解中默认开启了@EnableAutoConfiguration注解允许开启自动化配置，spring在检查导入starter-web的依赖后就会开启web的自动化配置。
+这里之所以能够开箱即用，是因为我们在项目中导入 spring-boot-starter-web 启动器，而@SpringBootApplication 复合注解中默认开启了@EnableAutoConfiguration 注解允许开启自动化配置，spring 在检查导入 starter-web 的依赖后就会开启 web 的自动化配置。
 
 
 
 ## 四、模板引擎
 
-这里我们在一个项目中同时导入了freemaker 和 thymeleaf的starter（虽然并不推荐，但是在同一个项目中是可以混用这两种模板引擎的）。
+这里我们在一个项目中同时导入了 freemaker 和 thymeleaf 的 starter（虽然并不推荐，但是在同一个项目中是可以混用这两种模板引擎的）。
 
 #### 4.1 freemarker
 
 ```java
 /**
  * @author : heibaiying
- * @description : 跳转渲染模板引擎 默认模板的存放位置为classpath:templates
+ * @description : 跳转渲染模板引擎 默认模板的存放位置为 classpath:templates
  */
 @Controller
 @RequestMapping("freemarker")
@@ -199,7 +200,7 @@ public class FreeMarkerController {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>freemarker模板引擎</title>
+    <title>freemarker 模板引擎</title>
 </head>
 <body>
     <ul>
@@ -216,7 +217,7 @@ public class FreeMarkerController {
 ```java
 /**
  * @author : heibaiying
- * @description : 跳转渲染模板引擎 默认模板的存放位置为classpath:templates
+ * @description : 跳转渲染模板引擎 默认模板的存放位置为 classpath:templates
  */
 @Controller
 @RequestMapping("thymeleaf")
@@ -239,7 +240,7 @@ public class ThymeleafController {
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>thymeleaf模板引擎</title>
+    <title>thymeleaf 模板引擎</title>
 </head>
 <body>
     <ul th:each="programmer:${programmers}">
@@ -258,4 +259,4 @@ freemarker：提供了完善的中文文档，地址 http://freemarker.foofun.cn
 
 thymeleaf：官方英文文档地址：[thymeleaf 3.0.11RELEASE](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.pdf)
 
-注：我在本仓库中也上传了一份[thymeleaf中文文档（gangzi828(刘明刚 译）](https://github.com/heibaiying/spring-samples-for-all/tree/master/referenced%20documents)，翻译的版本为3.0.5RELEASE
+注：我在本仓库中也上传了一份[thymeleaf 中文文档（gangzi828(刘明刚 译）](https://github.com/heibaiying/spring-samples-for-all/tree/master/referenced%20documents)，翻译的版本为 3.0.5RELEASE

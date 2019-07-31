@@ -15,7 +15,7 @@
 
 #### 1.1 项目目录结构
 
-1. 数据源配置位于config目录下的DatabaseConfig.java和DataSourceConfig.java
+1. 数据源配置位于 config 目录下的 DatabaseConfig.java 和 DataSourceConfig.java
 2. 项目以单元测试的方法进行测试
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-jdbc-annotation.png"/> </div>
@@ -59,7 +59,7 @@ mysql.password=root
 ```properties
 # oracle 数据库配置
 oracle.driverClassName=oracle.jdbc.driver.OracleDriver
-oracle.url=jdbc:oracle:thin:@//IP地址:端口号/数据库实例名
+oracle.url=jdbc:oracle:thin:@//IP 地址:端口号/数据库实例名
 oracle.username=用户名
 oracle.password=密码
 ```
@@ -87,7 +87,7 @@ public class DataSourceConfig {
 
 ```java
 @Configuration
-@EnableTransactionManagement // 开启声明式事务处理 等价于xml中<tx:annotation-driven/>
+@EnableTransactionManagement // 开启声明式事务处理 等价于 xml 中<tx:annotation-driven/>
 @ComponentScan(basePackages = {"com.heibaiying.*"})
 public class DatabaseConfig {
 
@@ -106,9 +106,9 @@ public class DatabaseConfig {
 
 
     /**
-     * 配置jdbcTemplate
+     * 配置 jdbcTemplate
      * @param dataSource 这个参数的名称需要保持和上面方法名一致 才能自动注入,因为
-     *                   采用@Bean注解生成的bean 默认采用方法名为名称，当然也可以在使用@Bean时指定name属性
+     *                   采用@Bean 注解生成的 bean 默认采用方法名为名称，当然也可以在使用@Bean 时指定 name 属性
      */
     @Bean
     public JdbcTemplate jdbcTemplate(DriverManagerDataSource dataSource) {
@@ -141,7 +141,7 @@ public class MysqlDaoImpl implements MysqlDao {
     private JdbcTemplate jdbcTemplate;
 
     /**
-     * 更多JDBC 的使用可以参考官方文档
+     * 更多 JDBC 的使用可以参考官方文档
      * @see <a href="https://docs.spring.io/spring/docs/5.1.3.RELEASE/spring-framework-reference/data-access.html#jdbc-JdbcTemplate">JdbcTemplate</a>
      */
     public List<Relation> get() {
@@ -171,7 +171,7 @@ public class OracleDaoImpl implements OracleDao {
     private JdbcTemplate jdbcTemplate;
 
     /**
-     * 更多JDBC 的使用可以参考官方文档
+     * 更多 JDBC 的使用可以参考官方文档
      * @see <a href="https://docs.spring.io/spring/docs/5.1.3.RELEASE/spring-framework-reference/data-access.html#jdbc-JdbcTemplate">JdbcTemplate</a>
      */
     public List<Flow> get() {

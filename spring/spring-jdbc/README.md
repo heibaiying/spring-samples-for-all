@@ -55,7 +55,7 @@ mysql.password=root
 
 # oracle 数据库配置
 oracle.driverClassName=oracle.jdbc.driver.OracleDriver
-oracle.url=jdbc:oracle:thin:@//IP地址:端口号/数据库实例名
+oracle.url=jdbc:oracle:thin:@//IP 地址:端口号/数据库实例名
 oracle.username=用户名
 oracle.password=密码
 ```
@@ -102,7 +102,7 @@ oracle.password=密码
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <!-- 开启事务注解@Transactional支持 -->
+    <!-- 开启事务注解@Transactional 支持 -->
     <tx:annotation-driven/>
 
 </beans>
@@ -118,7 +118,7 @@ public class MysqlDaoImpl implements MysqlDao {
     private JdbcTemplate jdbcTemplate;
 
     /**
-     * 更多JDBC 的使用可以参考官方文档
+     * 更多 JDBC 的使用可以参考官方文档
      * @see <a href="https://docs.spring.io/spring/docs/5.1.3.RELEASE/spring-framework-reference/data-access.html#jdbc-JdbcTemplate">JdbcTemplate</a>
      */
     public List<Relation> get() {
@@ -146,7 +146,7 @@ public class OracleDaoImpl implements OracleDao {
     private JdbcTemplate jdbcTemplate;
 
     /**
-     * 更多JDBC 的使用可以参考官方文档
+     * 更多 JDBC 的使用可以参考官方文档
      * @see <a href="https://docs.spring.io/spring/docs/5.1.3.RELEASE/spring-framework-reference/data-access.html#jdbc-JdbcTemplate">JdbcTemplate</a>
      */
     public List<Flow> get() {

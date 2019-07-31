@@ -20,7 +20,7 @@
 
 ### 1.1 项目搭建
 
-1.新建maven web工程，并引入相应的依赖
+1.新建 maven web 工程，并引入相应的依赖
 
 ```xml
  <properties>
@@ -62,9 +62,9 @@
     </dependencies>
 ```
 
-2.得益于servlet3.0和spring的支持，我们可以在没有web.xml的情况下完成关于servlet配置。
+2.得益于 servlet3.0 和 spring 的支持，我们可以在没有 web.xml 的情况下完成关于 servlet 配置。
 
-   新建DispatcherServletInitializer.java文件,这个类的作用相当于我们在xml方式下web.xml中配置的DispatcherServlet
+   新建 DispatcherServletInitializer.java 文件,这个类的作用相当于我们在 xml 方式下 web.xml 中配置的 DispatcherServlet
 
 ```java
 package com.heibaiying.config;
@@ -92,7 +92,7 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 
 ```
 
-3.新建ServletConfig.java，文件内容如下(这个类相当于我们在xml配置方式中的springApplication.xml)
+3.新建 ServletConfig.java，文件内容如下 (这个类相当于我们在 xml 配置方式中的 springApplication.xml)
 
 ```java
 package com.heibaiying.config;
@@ -144,7 +144,7 @@ public class ServletConfig implements WebMvcConfigurer {
 
 ```
 
-4.在src 下新建controller用于测试
+4.在 src 下新建 controller 用于测试
 
 ```java
 package com.heibaiying.controller;
@@ -171,7 +171,7 @@ public class HelloController {
 
 ```
 
-5.在WEB-INF 下新建jsp文件夹，新建hello.jsp 文件
+5.在 WEB-INF 下新建 jsp 文件夹，新建 hello.jsp 文件
 
 ```jsp
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -185,23 +185,23 @@ public class HelloController {
 </html>
 ```
 
-6.启动tomcat服务，访问localhost:8080/mvc/hello
+6.启动 tomcat 服务，访问 localhost:8080/mvc/hello
 
 ### 1.2 相关注解说明
 
 **1.@Configuration**
 
-@Configuration用于定义配置类，可替换xml配置文件，被注解的类内部包含有一个或多个被@Bean注解的方法，这些方法将会被AnnotationConfigApplicationContext或AnnotationConfigWebApplicationContext类进行扫描，并用于构建bean定义，初始化Spring容器。
+@Configuration 用于定义配置类，可替换 xml 配置文件，被注解的类内部包含有一个或多个被@Bean 注解的方法，这些方法将会被 AnnotationConfigApplicationContext 或 AnnotationConfigWebApplicationContext 类进行扫描，并用于构建 bean 定义，初始化 Spring 容器。
 
 **2.@EnableWebMvc**
 
-简单的说就是提供了部分springmvc的功能，例如格式转换和参数绑定。
+简单的说就是提供了部分 springmvc 的功能，例如格式转换和参数绑定。
 
 
 
 ## 二、配置自定义拦截器
 
-1.创建自定义拦截器，实现接口HandlerInterceptor（这里我们创建两个拦截器，用于测试拦截器方法的执行顺序）
+1.创建自定义拦截器，实现接口 HandlerInterceptor（这里我们创建两个拦截器，用于测试拦截器方法的执行顺序）
 
 ```java
 package com.heibaiying.interceptors;
@@ -219,17 +219,17 @@ import javax.servlet.http.HttpServletResponse;
 public class MyFirstInterceptor implements HandlerInterceptor {
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        System.out.println("进入第一个拦截器preHandle");
+        System.out.println("进入第一个拦截器 preHandle");
         return true;
     }
 
-    // 需要注意的是，如果对应的程序报错，不一定会进入这个方法 但一定会进入afterCompletion这个方法
+    // 需要注意的是，如果对应的程序报错，不一定会进入这个方法 但一定会进入 afterCompletion 这个方法
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
-        System.out.println("进入第一个拦截器postHandle");
+        System.out.println("进入第一个拦截器 postHandle");
     }
 
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-        System.out.println("进入第一个拦截器afterCompletion");
+        System.out.println("进入第一个拦截器 afterCompletion");
     }
 }
 ```
@@ -250,22 +250,22 @@ import javax.servlet.http.HttpServletResponse;
 public class MySecondInterceptor implements HandlerInterceptor {
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        System.out.println("进入第二个拦截器preHandle");
+        System.out.println("进入第二个拦截器 preHandle");
         return true;
     }
 
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
-        System.out.println("进入第二个拦截器postHandle");
+        System.out.println("进入第二个拦截器 postHandle");
     }
 
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-        System.out.println("进入第二个拦截器afterCompletion");
+        System.out.println("进入第二个拦截器 afterCompletion");
     }
 }
 
 ```
 
-2.在ServletConfig.java中注册自定义拦截器
+2.在 ServletConfig.java 中注册自定义拦截器
 
 ```java
  /**
@@ -279,7 +279,7 @@ public class MySecondInterceptor implements HandlerInterceptor {
 
 3.关于多个拦截器方法执行顺序的说明
 
-拦截器的执行顺序是按声明的先后顺序执行的，先声明的拦截器中的preHandle方法会先执行，然而它的postHandle方法和afterCompletion方法却会后执行。
+拦截器的执行顺序是按声明的先后顺序执行的，先声明的拦截器中的 preHandle 方法会先执行，然而它的 postHandle 方法和 afterCompletion 方法却会后执行。
 
 
 
@@ -340,7 +340,7 @@ public class NoAuthExceptionResolver implements HandlerExceptionResolver {
         return new ModelAndView();
     }
 
-    // 判断是否是Ajax请求
+    // 判断是否是 Ajax 请求
     private boolean isAjax(HttpServletRequest request) {
         return "XMLHttpRequest".equalsIgnoreCase(request.getHeader("X-Requested-With"));
     }
@@ -348,7 +348,7 @@ public class NoAuthExceptionResolver implements HandlerExceptionResolver {
 
 ```
 
-3.在ServletConfig.java注册自定义异常处理器
+3.在 ServletConfig.java 注册自定义异常处理器
 
 ```java
 /**
@@ -359,7 +359,7 @@ public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> re
 }
 ```
 
-4.定义测试controller，抛出自定义异常
+4.定义测试 controller，抛出自定义异常
 
 ```java
 @Controller
@@ -379,7 +379,7 @@ public class HelloController {
 }
 ```
 
-注：调用这个controller时，同时也可以验证在拦截器部分提到的：如果对应的程序报错，拦截器不一定会进入postHandle这个方法 但一定会进入afterCompletion这个方法
+注：调用这个 controller 时，同时也可以验证在拦截器部分提到的：如果对应的程序报错，拦截器不一定会进入 postHandle 这个方法 但一定会进入 afterCompletion 这个方法
 
 
 
@@ -387,7 +387,7 @@ public class HelloController {
 
 ### 4.1 参数绑定
 
-1.新建Programmer.java
+1.新建 Programmer.java
 
 ```java
 package com.heibaiying.bean;
@@ -412,9 +412,9 @@ public class Programmer {
 
 ```
 
-注：@Data 是lombok包下的注解，用来生成相应的set、get方法，使得类的书写更为简洁。
+注：@Data 是 lombok 包下的注解，用来生成相应的 set、get 方法，使得类的书写更为简洁。
 
-2.新建ParamBindController.java 文件
+2.新建 ParamBindController.java 文件
 
 ```java
 package com.heibaiying.controller;
@@ -475,7 +475,7 @@ public class ParamBindController {
 
 ```
 
-3.新建param.jsp 文件
+3.新建 param.jsp 文件
 
 ```jsp
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -495,11 +495,11 @@ public class ParamBindController {
 
 ```
 
-4.启动tomcat，用[postman](https://www.getpostman.com/)软件发送请求进行测试
+4.启动 tomcat，用[postman](https://www.getpostman.com/) 软件发送请求进行测试
 
 ### 4.2 关于日期格式转换的三种方法
 
-1.如上实例代码所示，在对应的controller中初始化绑定
+1.如上实例代码所示，在对应的 controller 中初始化绑定
 
 ```java
 @InitBinder
@@ -508,13 +508,13 @@ public class ParamBindController {
     }
 ```
 
-2.利用@DateTimeFormat注解，如果是用实体类去接收参数，则在对应的属性上用@DateTimeFormat和@JsonFormat声明
+2.利用@DateTimeFormat 注解，如果是用实体类去接收参数，则在对应的属性上用@DateTimeFormat 和@JsonFormat 声明
 
 ```java
 public String param(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date birthday)
 ```
 
-3.使用全局的日期格式绑定，新建自定义日期格式转化类，之后在ServletConfig.java中进行注册
+3.使用全局的日期格式绑定，新建自定义日期格式转化类，之后在 ServletConfig.java 中进行注册
 
 ```java
 package com.heibaiying.convert;
@@ -558,7 +558,7 @@ public void addFormatters(FormatterRegistry registry) {
 
 ## 五、数据校验
 
-1.spring支持的数据校验是JSR303的标准，需要引入依赖的jar包
+1.spring 支持的数据校验是 JSR303 的标准，需要引入依赖的 jar 包
 
 ```java
  <!-- 数据校验依赖包 -->
@@ -574,7 +574,7 @@ public void addFormatters(FormatterRegistry registry) {
         </dependency>
 ```
 
-2.新建测试ParamValidController.java，主要是在需要校验的参数前加上@Validated，声明参数需要被校验，同时加上bindingResult参数，这个参数中包含了校验的结果
+2.新建测试 ParamValidController.java，主要是在需要校验的参数前加上@Validated，声明参数需要被校验，同时加上 bindingResult 参数，这个参数中包含了校验的结果
 
 ```java
 package com.heibaiying.controller;
@@ -620,7 +620,7 @@ public class ParamValidController {
 
 ```
 
-3.在Programmer.java的对应属性上加上注解约束(支持的注解可以在javax.validation.constraints包中查看)
+3.在 Programmer.java 的对应属性上加上注解约束 (支持的注解可以在 javax.validation.constraints 包中查看)
 
 ```java
 package com.heibaiying.bean;
@@ -655,7 +655,7 @@ public class Programmer {
 
 #### 6.1 文件上传
 
-1.在ServletConfig.java中进行配置，使之支持文件上传
+1.在 ServletConfig.java 中进行配置，使之支持文件上传
 
 ```java
 /**
@@ -671,7 +671,7 @@ public CommonsMultipartResolver multipartResolver(){
 }
 ```
 
-2.新建测试上传的FileController.java
+2.新建测试上传的 FileController.java
 
 ```java
 package com.heibaiying.controller;
@@ -714,7 +714,7 @@ public class FileController {
      */
     @PostMapping("upFile")
     public String upFile(MultipartFile file, HttpSession session) {
-        //保存在项目根目录下image文件夹下，如果文件夹不存在则创建
+        //保存在项目根目录下 image 文件夹下，如果文件夹不存在则创建
         FileUtil.saveFile(file, session.getServletContext().getRealPath("/image"));
         // success.jsp 就是一个简单的成功页面
         return "success";
@@ -732,7 +732,7 @@ public class FileController {
     }
 
     /***
-     * 多文件上传方式2 分别为不同文件指定不同名字
+     * 多文件上传方式 2 分别为不同文件指定不同名字
      */
     @PostMapping("upFiles2")
     public String upFile(String extendParam,
@@ -748,7 +748,7 @@ public class FileController {
 
 ```
 
-3.其中工具类FileUtil.java代码如下
+3.其中工具类 FileUtil.java 代码如下
 
 ```java
 package com.heibaiying.utils;
@@ -803,7 +803,7 @@ public class FileUtil {
 }
 ```
 
-4.新建用于上传的jsp页面，上传文件时表单必须声明 enctype="multipart/form-data"
+4.新建用于上传的 jsp 页面，上传文件时表单必须声明 enctype="multipart/form-data"
 
 ```jsp
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -820,13 +820,13 @@ public class FileUtil {
     </form>
 
     <form action="${pageContext.request.contextPath }/upFiles" method="post" enctype="multipart/form-data">
-        请选择上传文件(多选)：<input name="file" type="file" multiple><br>
+        请选择上传文件 (多选)：<input name="file" type="file" multiple><br>
         <input type="submit" value="点击上传文件">
     </form>
 
     <form action="${pageContext.request.contextPath }/upFiles2" method="post" enctype="multipart/form-data">
-        请选择上传文件1：<input name="file1" type="file"><br>
-        请选择上传文件2：<input name="file2" type="file"><br>
+        请选择上传文件 1：<input name="file1" type="file"><br>
+        请选择上传文件 2：<input name="file2" type="file"><br>
         文件内容额外备注: <input name="extendParam" type="text"><br>
         <input type="submit" value="点击上传文件">
     </form>
@@ -838,7 +838,7 @@ public class FileUtil {
 
 #### 6.2 文件下载
 
-1.在fileController.java中加上方法：
+1.在 fileController.java 中加上方法：
 
 ```java
   /***
@@ -869,7 +869,7 @@ public class FileUtil {
     }
 ```
 
-2.其中fileDownload.jsp 如下：
+2.其中 fileDownload.jsp 如下：
 
 ```jsp
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -887,7 +887,7 @@ public class FileUtil {
 
 ## 七、Restful风格的请求
 
-1.新建Pet.java实体类
+1.新建 Pet.java 实体类
 
 ```java
 package com.heibaiying.bean;
@@ -896,7 +896,7 @@ import lombok.Data;
 
 /**
  * @author : heibaiying
- * @description :测试restful风格的实体类
+ * @description :测试 restful 风格的实体类
  */
 
 @Data
@@ -909,13 +909,13 @@ public class Pet {
 
 ```
 
-2.新建RestfulController.java，用@PathVariable和@ModelAttribute注解进行参数绑定。
+2.新建 RestfulController.java，用@PathVariable 和@ModelAttribute 注解进行参数绑定。
 
-注： 在REST中，资源通过URL进行识别和定位。REST中的行为是通过HTTP方法定义的。在进行不同行为时对应HTTP方法和Spring注解分别如下：
+注： 在 REST 中，资源通过 URL 进行识别和定位。REST 中的行为是通过 HTTP 方法定义的。在进行不同行为时对应 HTTP 方法和 Spring 注解分别如下：
 
 - 创建资源时：POST（PostMapping）
 - 读取资源时：GET（ @GetMapping）
-- 更新资源时：PUT或PATCH（PutMapping、PatchMapping）
+- 更新资源时：PUT 或 PATCH（PutMapping、PatchMapping）
 - 删除资源时：DELETE（DeleteMapping）
 
 ```java

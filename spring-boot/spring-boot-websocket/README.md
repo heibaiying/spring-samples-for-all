@@ -17,10 +17,10 @@
 
 ### 1.1 项目结构说明
 
-1. 项目模拟一个简单的群聊功能，为区分不同的聊天客户端，登录时候将临时用户名存储在session当中；
-2. 关于websocket的主要配置在websocket文件夹下；
-3. 模板引擎采用freemaker；
-4. 项目以web的方式构建。
+1. 项目模拟一个简单的群聊功能，为区分不同的聊天客户端，登录时候将临时用户名存储在 session 当中；
+2. 关于 websocket 的主要配置在 websocket 文件夹下；
+3. 模板引擎采用 freemaker；
+4. 项目以 web 的方式构建。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-websocket.png"/> </div>
 
@@ -101,9 +101,9 @@ public class ChatSocket {
 public class WebSocketConfig {
 
     /***
-     * 检测{@link javax.websocket.server.ServerEndpointConfig}和{@link ServerEndpoint} 类型的bean，
-     * 并在运行时使用标准Java WebSocket时注册。
-     * 我们在{@link com.heibaiying.springboot.websocket.WebSocketConfig}中就是使用@ServerEndpoint去声明websocket服务
+     * 检测{@link javax.websocket.server.ServerEndpointConfig}和{@link ServerEndpoint} 类型的 bean，
+     * 并在运行时使用标准 Java WebSocket 时注册。
+     * 我们在{@link com.heibaiying.springboot.websocket.WebSocketConfig}中就是使用@ServerEndpoint 去声明 websocket 服务
      */
     @Bean
     public ServerEndpointExporter serverEndpointExporter() {
@@ -147,7 +147,7 @@ public class WebSocketConfig {
         }
         message.value = "";
     });
-    // 关闭页面时候关闭ws
+    // 关闭页面时候关闭 ws
     window.addEventListener("beforeunload", function (event) {
         ws.close();
     });

@@ -1,5 +1,6 @@
 # spring boot 整合 tomcat
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一说明">一、说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构说明">1.1 项目结构说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目主要依赖">1.2 项目主要依赖</a><br/>
@@ -15,7 +16,7 @@
 
 #### 1.1 项目结构说明
 
-spring boot 整合 tomcat 后支持jsp 的使用（内置容器默认是不支持jsp），所以项目整合后采用jspController 跳转到show.jsp测试整合是否成功。
+spring boot 整合 tomcat 后支持 jsp 的使用（内置容器默认是不支持 jsp），所以项目整合后采用 jspController 跳转到 show.jsp 测试整合是否成功。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-tomcat.png"/> </div>
 
@@ -25,7 +26,7 @@ spring boot 整合 tomcat 后支持jsp 的使用（内置容器默认是不支�
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-web</artifactId>
-    <!--排除内置容器依赖 使用外部tomcat容器启动-->
+    <!--排除内置容器依赖 使用外部 tomcat 容器启动-->
     <exclusions>
         <exclusion>
             <groupId>org.springframework.boot</groupId>
@@ -34,7 +35,7 @@ spring boot 整合 tomcat 后支持jsp 的使用（内置容器默认是不支�
     </exclusions>
 </dependency>
 <dependency>
-    <!--使用外置容器时候SpringBootServletInitializer 依赖此包 -->
+    <!--使用外置容器时候 SpringBootServletInitializer 依赖此包 -->
     <groupId>javax.servlet</groupId>
     <artifactId>servlet-api</artifactId>
     <version>2.5</version>
@@ -48,8 +49,8 @@ spring boot 整合 tomcat 后支持jsp 的使用（内置容器默认是不支�
 
 ```java
 /**
- * 如果用外置tomcat,启动报错java.lang.NoClassDefFoundError: javax/el/ELManager
- * 是因为tomcat 7.0 el-api包中没有ELManager类 , 切换tomcat 为8.0 以上版本即可
+ * 如果用外置 tomcat,启动报错 java.lang.NoClassDefFoundError: javax/el/ELManager
+ * 是因为 tomcat 7.0 el-api 包中没有 ELManager 类 , 切换 tomcat 为 8.0 以上版本即可
  */
 @SpringBootApplication
 public class SpringBootTomcatApplication extends SpringBootServletInitializer {
@@ -57,7 +58,7 @@ public class SpringBootTomcatApplication extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        //传入SpringBoot应用的主程序
+        //传入 SpringBoot 应用的主程序
         return application.sources(SpringBootTomcatApplication.class);
     }
 

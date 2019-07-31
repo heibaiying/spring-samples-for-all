@@ -12,7 +12,7 @@
 
 ## 一、config 简介
 
-spring cloud config 分为服务端和客户端，服务端称为分布式配置中心，集中管理配置文件，客户端为各个业务单元，它们从配置中心获取相关配置，同时config 还实现了配置热更新，在服务不停机的情况下刷新配置。
+spring cloud config 分为服务端和客户端，服务端称为分布式配置中心，集中管理配置文件，客户端为各个业务单元，它们从配置中心获取相关配置，同时 config 还实现了配置热更新，在服务不停机的情况下刷新配置。
 
 
 
@@ -117,13 +117,13 @@ spring:
           password:
           # 指定拉取的配置文件的存放位置,配置文件最后存储的目录为 basedir + search-paths
           # 这个地方还需要注意的是，配置文件的仓库最好只放配置文件
-          # 因为配置中心不仅会拉取search-paths下的文件，还会把uri指定仓库中的全部文件拉取到basedir下
+          # 因为配置中心不仅会拉取 search-paths 下的文件，还会把 uri 指定仓库中的全部文件拉取到 basedir 下
           basedir: D:\git-config
       # 指定分支
       label: master
 ```
 
-这里的git 仓库就是本用例的仓库，是公开的仓库，所以不用配置用户名和密码，配置文件如下
+这里的 git 仓库就是本用例的仓库，是公开的仓库，所以不用配置用户名和密码，配置文件如下
 
 - application.yml 为主配置；
 - application-dev.yml 为开发环境配置。
@@ -136,19 +136,19 @@ spring:
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/config-application-dev.png"/> </div>
 
-这里需要注意的拉取配置的时候，我们此时指定拉取的是dev配置，application.yml实际 配置如下：
+这里需要注意的拉取配置的时候，我们此时指定拉取的是 dev 配置，application.yml 实际 配置如下：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/config-dev.png"/> </div>
 
-这说明在用配置中心拉取配置的时候，和我们在本地开发的时候是一致的，配置是互补的，即dev中的实际配置应该是主配置和dev配置的结合，且遵循同名属性精确优先的原则。
+这说明在用配置中心拉取配置的时候，和我们在本地开发的时候是一致的，配置是互补的，即 dev 中的实际配置应该是主配置和 dev 配置的结合，且遵循同名属性精确优先的原则。
 
 
 
 #### 3.5 http请求地址和资源文件映射
 
-在本用例中如果我们想要直接访问主配置，用以下路径 http://localhost:8020/application.yml 是不行的，会得到错误页面。如果想要访问主配置,，可以用http://localhost:8020/application-X.yml，其中可以是任意字符，原因是：
+在本用例中如果我们想要直接访问主配置，用以下路径 http://localhost:8020/application.yml 是不行的，会得到错误页面。如果想要访问主配置,，可以用 http://localhost:8020/application-X.yml，其中可以是任意字符，原因是：
 
-请求地址和实际的配置文件应该遵循以下规则，application为配置文件名，profile 为环境，label为分支（如果不指定默认就是master分支）。
+请求地址和实际的配置文件应该遵循以下规则，application 为配置文件名，profile 为环境，label 为分支（如果不指定默认就是 master 分支）。
 
 - /{application}/{profile}[/{label}]
 - /{application}-{profile}.yml
@@ -212,9 +212,9 @@ spring:
 
 #### 4.2 新建 `bootstrap.yml`配置文件，指定注册中心地址和配置中心服务名,并在启动类上开启自动注册@EnableDiscoveryClient
 
-这里需要特别说明的是，在之前的所有项目中我们采用的配置文件都是application.yml,但是这里**一定要采用bootstrap.yml**。
+这里需要特别说明的是，在之前的所有项目中我们采用的配置文件都是 application.yml,但是这里**一定要采用 bootstrap.yml**。
 
-假设我们的数据库配置是放在远程配置中心的，那么我们应该先去远程配置中心拉取配置，然后再去进行数据库的自动化配置，反之如果我们先进行了数据库的自动化配置，那么就会因为找不到url或驱动而抛出异常。
+假设我们的数据库配置是放在远程配置中心的，那么我们应该先去远程配置中心拉取配置，然后再去进行数据库的自动化配置，反之如果我们先进行了数据库的自动化配置，那么就会因为找不到 url 或驱动而抛出异常。
 
 - bootstrap.yml（bootstrap.properties）用来程序引导时执行，应用于更加早期配置信息读取，bootstrap.yml 先于 application.yml 加载。
 
@@ -298,7 +298,7 @@ public class ConfigController {
 
 #### 4.4 依次启动eureka,config-server,config-client ，访问 http://localhost:8030/programmer
 
-这里需要注意是在启动eureka和config-server，要稍等一会在启动config-client，这里是为了确保config-server已经将服务注册到eureka，然后我们的config-client才能从eureka中获取配置中心的服务。
+这里需要注意是在启动 eureka 和 config-server，要稍等一会在启动 config-client，这里是为了确保 config-server 已经将服务注册到 eureka，然后我们的 config-client 才能从 eureka 中获取配置中心的服务。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/config-client-programmer.png"/> </div>
 
@@ -317,7 +317,7 @@ Located environment: name=config-client, profiles=[dev], label=master, version=5
 
 在微服务的架构中，我们通常想要构建一个共同的消息主题被所有微服务实例所监听，以便对所有微服务实例的管理和通知，这就是消息总线，spring cloud bus 就是消息总线的一种实现。
 
-目前spring cloud bus 支持的消息中间件有 RabbitMQ和kafka, 我们下面的整合采用的是RrabbitMQ。
+目前 spring cloud bus 支持的消息中间件有 RabbitMQ 和 kafka, 我们下面的整合采用的是 RrabbitMQ。
 
 关于热更新只需要对配置客户端（config-client）做更改，不需要对（config-server）做改动。
 
@@ -356,10 +356,10 @@ spring:
     bus:
       #开启总线
       enabled: true
-      # 打开ack跟踪的标志（默认关闭）
+      # 打开 ack 跟踪的标志（默认关闭）
       trace:
         enabled: true
-  # 使用bus实现热更新
+  # 使用 bus 实现热更新
   rabbitmq:
     host: 127.0.0.1
     port: 5672
@@ -408,7 +408,7 @@ public class Programmer{
 
 #### 5.4 依次启动eureka，config-server, config-client 服务
 
-在client服务端启动时候，可以在控制台 看到bus 自动创建了交换机、队列等
+在 client 服务端启动时候，可以在控制台 看到 bus 自动创建了交换机、队列等
 
 ```
 Created new connection: rabbitConnectionFactory#496c6d94:22/SimpleConnection@185d85d2 [delegate=amqp://guest@127.0.0.1:5672/, localPort= 63713]

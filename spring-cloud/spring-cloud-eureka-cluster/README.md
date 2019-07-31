@@ -19,9 +19,9 @@
 
 ## 一、项目结构
 
-eureka-server为服务注册中心，负责服务的管理；
+eureka-server 为服务注册中心，负责服务的管理；
 
-eureka-client 为eureka客户端；
+eureka-client 为 eureka 客户端；
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-eureka-cluster.png"/> </div>
 
@@ -103,7 +103,7 @@ eureka:
           defaultZone: http://127.0.0.1:8010/eureka/,http://localhost:8020/eureka/
 ```
 
-需要注意的是Eureka互相注册要求各个Eureka实例的eureka.instance.hostname不同，如果相同，则会被Eureka标记为unavailable-replicas（不可用副本）。
+需要注意的是 Eureka 互相注册要求各个 Eureka 实例的 eureka.instance.hostname 不同，如果相同，则会被 Eureka 标记为 unavailable-replicas（不可用副本）。
 
 #### 2.3 启动类上增加注解@EnableEurekaServer激活eureka服务端自动配置
 
@@ -170,22 +170,22 @@ public class EurekaClientApplication {
 
 ### 4.2  高可用集群搭建成功的判定
 
-这里需要主要的是仅仅status中出现其他注册中心时，并不一定是搭建成功的，**一定是当注册中心的DS Replicas 和 available replicas中显示其余的注册中心时候**，才代表搭建成功。
+这里需要主要的是仅仅 status 中出现其他注册中心时，并不一定是搭建成功的，**一定是当注册中心的 DS Replicas 和 available replicas 中显示其余的注册中心时候**，才代表搭建成功。
 
 #### 4.2.1  点击下面注册中心的可用实例列表中的地址，访问链接分以下几个情况：
 
-1. hostname和prefer-ip-address都没有配置，则访问 主机名:服务名:端口号，
+1. hostname 和 prefer-ip-address 都没有配置，则访问 主机名:服务名:端口号，
 
 ```
     如：http://desktop-8jgsflj:8761/info
 ```
 
-2. 配置了hostname而没有配置prefer-ip-address，则访问 hostname:服务名:端口号，
+2. 配置了 hostname 而没有配置 prefer-ip-address，则访问 hostname:服务名:端口号，
 
 ```
      如：http://server:8761/info
 ```
-3. 如果配置了prefer-ip-address，则访问 ipAddress:服务名:端口号，
+3. 如果配置了 prefer-ip-address，则访问 ipAddress:服务名:端口号，
 ```
      如：http://192.168.200.228:8761/info
 ```
@@ -203,10 +203,10 @@ public class EurekaClientApplication {
 
 ### 4.3  prefer-ip-address 参数说明
 
-在有的配置示例中，配置了prefer-ip-address为true。
+在有的配置示例中，配置了 prefer-ip-address 为 true。
 
 ```properties
 eureka.instance.prefer-ip-address=true
 ```
 
-在多机器独立部署的情况下是没有问题的，配置prefer-ip-address为ture，代表发现服务时候优先按照ip去搜寻，对于多集群而言，可以保证尽快准确搜索到服务。而对于单机部署来说，ip地址都是相同的，这会导致其余注册中心出现在unavailable-replicas(不可用副本)中。所以单机部署时候不建议开启这个参数（默认值为false），多机部署时候可以开启。
+在多机器独立部署的情况下是没有问题的，配置 prefer-ip-address 为 ture，代表发现服务时候优先按照 ip 去搜寻，对于多集群而言，可以保证尽快准确搜索到服务。而对于单机部署来说，ip 地址都是相同的，这会导致其余注册中心出现在 unavailable-replicas(不可用副本) 中。所以单机部署时候不建议开启这个参数（默认值为 false），多机部署时候可以开启。

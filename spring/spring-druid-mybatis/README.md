@@ -63,7 +63,7 @@
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-    <!--配置spring前端控制器-->
+    <!--配置 spring 前端控制器-->
     <servlet>
         <servlet-name>springMvc</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -104,7 +104,7 @@
         <url-pattern>/druid/*</url-pattern>
     </servlet-mapping>
 
-    <!--配置WebStatFilter用于采集web-jdbc关联监控的数据-->
+    <!--配置 WebStatFilter 用于采集 web-jdbc 关联监控的数据-->
     <filter>
         <filter-name>DruidWebStatFilter</filter-name>
         <filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
@@ -131,7 +131,7 @@ mysql.username=root
 mysql.password=root
 
 # oracle 数据库配置
-oracle.url=jdbc:oracle:thin:@//IP地址:端口号/数据库实例名
+oracle.url=jdbc:oracle:thin:@//IP 地址:端口号/数据库实例名
 oracle.username=用户名
 oracle.password=密码
 ```
@@ -150,19 +150,19 @@ oracle.password=密码
     <!-- 开启注解包扫描-->
     <context:component-scan base-package="com.heibaiying.*"/>
 
-    <!--使用默认的Servlet来响应静态文件 -->
+    <!--使用默认的 Servlet 来响应静态文件 -->
     <mvc:default-servlet-handler/>
 
     <!-- 开启注解驱动-->
     <mvc:annotation-driven/>
 
-    <!--引入druid.xml配置 由于druid 的可配置项比较多，所以可以单独拆分为一个配置文件-->
+    <!--引入 druid.xml 配置 由于 druid 的可配置项比较多，所以可以单独拆分为一个配置文件-->
     <import resource="druid.xml"/>
 
     <!--配置 mybatis 会话工厂 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <!--指定mapper文件所在的位置-->
+        <!--指定 mapper 文件所在的位置-->
         <property name="mapperLocations" value="classpath*:/mappers/**/*.xml"/>
         <property name="configLocation" value="classpath:mybatisConfig.xml"/>
     </bean>
@@ -172,7 +172,7 @@ oracle.password=密码
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--指定会话工厂 -->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-        <!-- 指定mybatis接口所在的包 -->
+        <!-- 指定 mybatis 接口所在的包 -->
         <property name="basePackage" value="com.heibaiying.dao"/>
     </bean>
 
@@ -182,7 +182,7 @@ oracle.password=密码
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <!-- 开启事务注解@Transactional支持 -->
+    <!-- 开启事务注解@Transactional 支持 -->
     <tx:annotation-driven/>
 
 
@@ -201,7 +201,7 @@ oracle.password=密码
     <!--指定配置文件的位置-->
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
-    <!--配置druid数据源 关于更多的配置项 可以参考官方文档 <a href="https://github.com/alibaba/druid/wiki/DruidDataSource%E9%85%8D%E7%BD%AE%E5%B1%9E%E6%80%A7%E5%88%97%E8%A1%A8" > -->
+    <!--配置 druid 数据源 关于更多的配置项 可以参考官方文档 <a href="https://github.com/alibaba/druid/wiki/DruidDataSource%E9%85%8D%E7%BD%AE%E5%B1%9E%E6%80%A7%E5%88%97%E8%A1%A8" > -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <!-- 基本属性 url、user、password -->
         <property name="url" value="${mysql.url}"/>
@@ -224,24 +224,24 @@ oracle.password=密码
         <!-- 配置一个连接在池中最大生存的时间，单位是毫秒 -->
         <property name="maxEvictableIdleTimeMillis" value="900000"/>
 
-        <!--validationQuery 用来检测连接是否有效的sql，要求是一个查询语句，常用select 'x'。
+        <!--validationQuery 用来检测连接是否有效的 sql，要求是一个查询语句，常用 select 'x'。
             但是在 oracle 数据库下需要写成 select 'x' from dual 不然实例化数据源的时候就会失败,
-            这是由于oracle 和 mysql 语法间的差异造成的-->
+            这是由于 oracle 和 mysql 语法间的差异造成的-->
         <property name="validationQuery" value="select 'x'"/>
-        <!--建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，
-        如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。-->
+        <!--建议配置为 true，不影响性能，并且保证安全性。申请连接的时候检测，
+        如果空闲时间大于 timeBetweenEvictionRunsMillis，执行 validationQuery 检测连接是否有效。-->
         <property name="testWhileIdle" value="true"/>
-        <!--申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。-->
+        <!--申请连接时执行 validationQuery 检测连接是否有效，做了这个配置会降低性能。-->
         <property name="testOnBorrow" value="false"/>
-        <!--归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。-->
+        <!--归还连接时执行 validationQuery 检测连接是否有效，做了这个配置会降低性能。-->
         <property name="testOnReturn" value="false"/>
 
-        <!--连接池中的minIdle数量以内的连接，空闲时间超过minEvictableIdleTimeMillis，则会执行keepAlive操作。-->
+        <!--连接池中的 minIdle 数量以内的连接，空闲时间超过 minEvictableIdleTimeMillis，则会执行 keepAlive 操作。-->
         <property name="keepAlive" value="true"/>
         <property name="phyMaxUseCount" value="100000"/>
 
-        <!-- 配置监控统计拦截的filters Druid连接池的监控信息主要是通过StatFilter 采集的，
-        采集的信息非常全面，包括SQL执行、并发、慢查、执行时间区间分布等-->
+        <!-- 配置监控统计拦截的 filters Druid 连接池的监控信息主要是通过 StatFilter 采集的，
+        采集的信息非常全面，包括 SQL 执行、并发、慢查、执行时间区间分布等-->
         <property name="filters" value="stat"/>
     </bean>
 
@@ -262,7 +262,7 @@ oracle.password=密码
     <settings>
         <!-- 开启驼峰命名 -->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
-        <!-- 打印查询sql -->
+        <!-- 打印查询 sql -->
         <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
 
@@ -382,4 +382,4 @@ public class OracleController {
 
 #### 8、druid 监控页面访问地址http://localhost:8080/druid/index.html
 
-![druid控制台](https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/druid%E6%8E%A7%E5%88%B6%E5%8F%B0.png)
+![druid 控制台](https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/druid%E6%8E%A7%E5%88%B6%E5%8F%B0.png)

@@ -1,5 +1,6 @@
 # spring boot 整合 mybatis
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一说明">一、说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目主要依赖">1.2 项目主要依赖</a><br/>
@@ -16,28 +17,28 @@
 
 #### 1.1 项目结构
 
-1. 项目查询用的表对应的建表语句放置在resources的sql文件夹下；
+1. 项目查询用的表对应的建表语句放置在 resources 的 sql 文件夹下；
 
-2. 关于mybatis sql的写法提供两种方式:
+2. 关于 mybatis sql 的写法提供两种方式:
 
-   xml 写法：对应的类为ProgrammerMapper.java 和 programmerMapper.xml，用MybatisXmlTest进行测试；
+   xml 写法：对应的类为 ProgrammerMapper.java 和 programmerMapper.xml，用 MybatisXmlTest 进行测试；
 
-   注解写法：对应的类为Programmer.java ，用MybatisAnnotationTest进行测试。
+   注解写法：对应的类为 Programmer.java ，用 MybatisAnnotationTest 进行测试。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-mybatis.png"/> </div>
 
 #### 1.2 项目主要依赖
 
-需要说明的是按照spring 官方对应自定义的starter 命名规范的推荐：
+需要说明的是按照 spring 官方对应自定义的 starter 命名规范的推荐：
 
-- 官方的starter命名：spring-boot-starter-XXXX
-- 其他第三方starter命名：XXXX-spring-boot-starte
+- 官方的 starter 命名：spring-boot-starter-XXXX
+- 其他第三方 starter 命名：XXXX-spring-boot-starte
 
-所以mybatis的starter命名为mybatis-spring-boot-starter，如果有自定义starter需求，也需要按照此命名规则进行命名。
+所以 mybatis 的 starter 命名为 mybatis-spring-boot-starter，如果有自定义 starter 需求，也需要按照此命名规则进行命名。
 
 ```xml
 <!--spring 1.5 x 以上版本对应 mybatis 1.3.x (1.3.1)
-        关于更多spring-boot 与 mybatis 的版本对应可以参见 <a href="http://www.mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/">-->
+        关于更多 spring-boot 与 mybatis 的版本对应可以参见 <a href="http://www.mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/">-->
 <dependency>
     <groupId>org.mybatis.spring.boot</groupId>
     <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -74,7 +75,7 @@ spring boot 与 mybatis 版本的对应关系：
 
 #### 2.1 在application.yml 中配置数据源
 
-spring boot 2.x 版本默认采用Hikari作为数据库连接池，Hikari是目前java平台性能最好的连接池，性能好于druid。
+spring boot 2.x 版本默认采用 Hikari 作为数据库连接池，Hikari 是目前 java 平台性能最好的连接池，性能好于 druid。
 
 ```yaml
 spring:
@@ -92,17 +93,17 @@ spring:
       minimum-idle: 10
       # 池中最大连接数，包括闲置和使用中的连接
       maximum-pool-size: 20
-      # 此属性控制从池返回的连接的默认自动提交行为。默认为true
+      # 此属性控制从池返回的连接的默认自动提交行为。默认为 true
       auto-commit: true
       # 允许最长空闲时间
       idle-timeout: 30000
-      # 此属性表示连接池的用户定义名称，主要显示在日志记录和JMX管理控制台中，以标识池和池配置。 默认值：自动生成
+      # 此属性表示连接池的用户定义名称，主要显示在日志记录和 JMX 管理控制台中，以标识池和池配置。 默认值：自动生成
       pool-name: custom-hikari
-      #此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+      #此属性控制池中连接的最长生命周期，值 0 表示无限生命周期，默认 1800000 即 30 分钟
       max-lifetime: 1800000
-      # 数据库连接超时时间,默认30秒，即30000
+      # 数据库连接超时时间,默认 30 秒，即 30000
       connection-timeout: 30000
-      # 连接测试sql 这个地方需要根据数据库方言差异而配置 例如 oracle 就应该写成  select 1 from dual
+      # 连接测试 sql 这个地方需要根据数据库方言差异而配置 例如 oracle 就应该写成  select 1 from dual
       connection-test-query: SELECT 1
 
 # mybatis 相关配置
@@ -111,9 +112,9 @@ mybatis:
     mapper-locations: classpath*:mappers/*.xml
     configuration:
       # 当没有为参数提供特定的 JDBC 类型时，为空值指定 JDBC 类型。
-      # oracle数据库建议配置为JdbcType.NULL, 默认是Other
+      # oracle 数据库建议配置为 JdbcType.NULL, 默认是 Other
       jdbc-type-for-null: 'null'
-      # 是否打印sql语句 调试的时候可以开启
+      # 是否打印 sql 语句 调试的时候可以开启
       log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 ```
 
@@ -164,7 +165,7 @@ public interface ProgrammerMapper {
 
 ```java
 /***
- * @description: xml Sql测试类
+ * @description: xml Sql 测试类
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -223,7 +224,7 @@ public interface ProgrammerDao {
 
 ```java
 /***
- * @description: 注解Sql测试类
+ * @description: 注解 Sql 测试类
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest

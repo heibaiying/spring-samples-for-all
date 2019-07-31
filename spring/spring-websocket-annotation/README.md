@@ -1,5 +1,6 @@
 # spring websocket（注解方式）
-## 目录<br/>
+
+## 目录<br/>
 <a href="#一说明">一、说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构说明">1.1 项目结构说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-依赖说明">1.2 依赖说明</a><br/>
@@ -16,12 +17,12 @@
 
 ### 1.1 项目结构说明
 
-1. 项目模拟一个简单的群聊功能，为区分不同的聊天客户端，登录时候将临时用户名存储在session当中；
-2. webconfig 包是基础注解的方式配置web，在spring-base-annotation项目中已经讲解过每个类作用；
-3. CustomHander为消息的自定义处理器；
-4. CustomHandershakerInterceptor为自定义的 websocket 的握手拦截器；
-5. webSocketConfig 是websocket 的主要配置类；
-6. 项目以web的方式构建。
+1. 项目模拟一个简单的群聊功能，为区分不同的聊天客户端，登录时候将临时用户名存储在 session 当中；
+2. webconfig 包是基础注解的方式配置 web，在 spring-base-annotation 项目中已经讲解过每个类作用；
+3. CustomHander 为消息的自定义处理器；
+4. CustomHandershakerInterceptor 为自定义的 websocket 的握手拦截器；
+5. webSocketConfig 是 websocket 的主要配置类；
+6. 项目以 web 的方式构建。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-websocket-annotation.png"/> </div>
 
@@ -29,7 +30,7 @@
 
 ### 1.2 依赖说明
 
-除了基本的spring 依赖外，还需要导入webSocket的依赖包
+除了基本的 spring 依赖外，还需要导入 webSocket 的依赖包
 
 ```xml
  <!--spring webSocket 的依赖包 -->
@@ -112,10 +113,10 @@ public class CustomHandshakeInterceptor extends HttpSessionHandshakeInterceptor 
         InetAddress address = remoteAddress.getAddress();
         System.out.println(address);
         /*
-         * 最后需要要显示调用父类方法，父类的beforeHandshake方法
-         * 把ServerHttpRequest 中session中对应的值拷贝到WebSocketSession中。
-         * 如果我们没有实现这个方法，我们在最后的handler处理中 是拿不到 session中的值
-         * 作为测试 可以注释掉下面这一行 可以发现自定义处理器中session的username总是为空
+         * 最后需要要显示调用父类方法，父类的 beforeHandshake 方法
+         * 把 ServerHttpRequest 中 session 中对应的值拷贝到 WebSocketSession 中。
+         * 如果我们没有实现这个方法，我们在最后的 handler 处理中 是拿不到 session 中的值
+         * 作为测试 可以注释掉下面这一行 可以发现自定义处理器中 session 的 username 总是为空
          */
         return super.beforeHandshake(request, response, wsHandler, attributes);
     }
@@ -174,7 +175,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
         }
         message.value = "";
     });
-    // 关闭页面时候关闭ws
+    // 关闭页面时候关闭 ws
     window.addEventListener("beforeunload", function(event) {
         ws.close();
     });
