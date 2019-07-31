@@ -129,7 +129,6 @@ management.endpoint.shutdown.enabled = true
 3. CustomEndPoint：自定义端点。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-actuator.png"/> </div>
-
 #### 1.2 主要依赖
 
 ```xml
@@ -164,7 +163,6 @@ management:
 导入 actuator 的 start 并进行配置后，访问 http://127.0.0.1:8080/actuator/health 就可以看到对应的项目监控状态。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/health.png"/> </div>
-
 需要注意的是这里的监控状态根据实际项目所用到的技术不同而不同。因为以下 HealthIndicators 情况在适当时由 Spring Boot 自动配置的：
 
 | 名称                                                         | 描述                             |
@@ -211,11 +209,9 @@ public class CustomHealthIndicator implements HealthIndicator {
 自定义检查通过的情况下：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/actuator-health-up.png"/> </div>
-
 自定义检查失败的情况：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/health-fatal-200.png"/> </div>
-
 
 
 这里我们可以看到自定义检查不论是否通过都不会影响整体的 status,两种情况下都是 status 都是“up”。如果我们想通过自定义的检查检查去影响最终的检查结果，比如我们健康检查针对的是支付业务，在支付业务的不可用的情况下，我们就认为整个服务是不可用的。这个时候就需要实现自定义实现健康状态的聚合。
@@ -248,7 +244,6 @@ public class CustomHealthAggregator implements HealthAggregator {
 当我们自定义健康检查不通过时候的结果如下：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/actuator-heath-503.png"/> </div>
-
 这里需要注意的是返回我们自定义的聚合状态的时候，状态码也变成了 503,这是我们在配置文件中进行定义的：
 
 ```properties
@@ -322,10 +317,9 @@ public class CustomEndPoint {
 | @WriteOperation  | POST     |
 | @DeleteOperation | DELETE   |
 
-#### 5.2 访问自定义端点http://127.0.0.1:8080/actuator/customEndPoint
+#### 5.2 访问自定义端点：http://127.0.0.1:8080/actuator/customEndPoint
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/actuator-customEndPoint.png"/> </div>
-
 
 
 关于 Sigar 的 更多监控参数可以参考博客：[java 读取计算机 CPU、内存等信息（Sigar 使用）](https://blog.csdn.net/wudiazu/article/details/73829324)
