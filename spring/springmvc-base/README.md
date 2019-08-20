@@ -1,69 +1,63 @@
-# springmvc基础（基于xml配置）
-
-## 目录<br/>
-<a href="#一搭建hello-spring工程">一、搭建hello spring工程</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目搭建">1.1 项目搭建</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-相关配置讲解">1.2 相关配置讲解</a><br/>
+# Spring MVC 基础（基于 Xml 配置）
+<nav>
+<a href="#一搭建-Hello-Spring-工程">一、搭建 Hello Spring 工程</a><br/>
 <a href="#二配置自定义拦截器">二、配置自定义拦截器</a><br/>
 <a href="#三全局异常处理">三、全局异常处理 </a><br/>
 <a href="#四参数绑定">四、参数绑定</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-参数绑定">4.1 参数绑定</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-关于日期格式转换的三种方法">4.2 关于日期格式转换的三种方法</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-参数绑定">4.1 参数绑定</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-日期格式转换">4.2 日期格式转换</a><br/>
 <a href="#五数据校验">五、数据校验</a><br/>
 <a href="#六文件上传与下载">六、文件上传与下载</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#61-文件上传">6.1 文件上传</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#62-文件下载">6.2 文件下载</a><br/>
-<a href="#七Restful风格的请求">七、Restful风格的请求</a><br/>
+<a href="#七RESTful-风格的请求">七、RESTful 风格的请求</a><br/>
+</nav>
 
-## 正文<br/>
+## 一、搭建 Hello Spring 工程
 
-## 一、搭建hello spring工程
+### 1.1 构建 Web 项目
 
-### 1.1 项目搭建
-
-1.新建 maven web 工程，并引入相应的依赖
+1.新建 maven web 工程，并引入相应的依赖：
 
 ```xml
- <properties>
-        <spring-base-version>5.1.3.RELEASE</spring-base-version>
- </properties>
+<properties>
+    <spring-base-version>5.1.3.RELEASE</spring-base-version>
+</properties>
 
 <dependencies>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring-base-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>${spring-base-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring-base-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${spring-base-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring-base-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring-base-version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-beans</artifactId>
+        <version>${spring-base-version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>${spring-base-version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+        <version>${spring-base-version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webmvc</artifactId>
+        <version>${spring-base-version}</version>
+    </dependency>
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>4.0.1</version>
+        <scope>provided</scope>
+    </dependency>
+</dependencies>
 ```
 
-2.配置 web.xml
+2.在 `web.xml` 中配置前端控制器：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -92,7 +86,7 @@
 </web-app>
 ```
 
-3.在 resources 下新建 springApplication.xml 文件，文件内容如下:
+3.在 resources 下新建 `springApplication.xml` 文件，文件内容如下：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -125,20 +119,9 @@
 </beans>
 ```
 
-4.在 src 下新建 controller 用于测试
+4.新建 Controller 用于测试整体配置是否成功：
 
 ```java
-package com.heibaiying.controller;
-
-import com.heibaiying.exception.NoAuthException;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-/**
- * @author : heibaiying
- * @description : hello spring
- */
-
 @Controller
 @RequestMapping("mvc")
 public class HelloController {
@@ -147,12 +130,10 @@ public class HelloController {
     private String hello() {
         return "hello";
     }
-
 }
-
 ```
 
-5.在 WEB-INF 下新建 jsp 文件夹，新建 hello.jsp 文件
+5.在 WEB-INF 下新建 jsp 文件夹，并创建一个简单的 hello.jsp 文件：
 
 ```jsp
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -166,17 +147,17 @@ public class HelloController {
 </html>
 ```
 
-6.启动 tomcat 服务，访问 localhost:8080/mvc/hello
+6.启动 tomcat 服务，访问的服务地址为：localhost:8080/mvc/hello
 
 ### 1.2 相关配置讲解
 
-**1.\<mvc:default-servlet-handler/>**
+#### 1.\<mvc:default-servlet-handler/>
 
-在 web.xml 配置中，我们将 DispatcherServlet 的拦截路径设置为“\”，则 spring 会捕获所有 web 请求，包括对静态资源的请求，为了正确处理对静态资源的请求，spring 提供了两种解决方案：
+在上面的 web.xml 配置中，我们将 DispatcherServlet 的拦截路径设置为 `\`，此时 spring 会捕获所有 web 请求，包括对静态资源的请求，此时对 `.css` , `.js` 等文件的请求都会被拦截，为了正确处理静态资源的请求，spring 提供了两种解决方案：
 
-- 配置\<mvc:default-servlet-handler/>  ： 配置<mvc:default-servlet-handler />后，会在 Spring MVC 上下文中定义一个 org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler，它会对进入 DispatcherServlet 的 URL 进行筛查，如果发现是静态资源的请求，就将该请求转由 Web 应用服务器默认的 Servlet 处理，如果不是静态资源的请求，才由 DispatcherServlet 继续处理。
+- **配置 \<mvc:default-servlet-handler/>**  ： 配置后 Spring 会自动在上下文中定义一个 DefaultServletHttpRequestHandler，它会对所有进入 DispatcherServlet 的 URL 进行筛查，如果发现是静态资源的请求，就将该请求转发给 Web 应用服务器默认的 Servlet 处理，如果不是静态资源的请求，则仍由 DispatcherServlet 继续处理。
 
-- 配置\<mvc:resources /> ：指定静态资源的位置和路径映射：
+- **配置 \<mvc:resources />** ：通过指定静态资源的位置和路径映射来避免其被拦截，配置示例如下：
 
   ```xml
   <mvc:resources location="/img/" mapping="/img/**"/>   
@@ -184,30 +165,17 @@ public class HelloController {
   <mvc:resources location="/css/" mapping="/css/**"/>  
   ```
 
-**2.\<mvc:annotation-driven/>**
+#### 2.\<mvc:annotation-driven/>
 
-<mvc:annotation-driven /> 会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 
-两个 bean,用以支持@Controllers 分发请求。并提供了数据绑定、参数转换、json 转换等功能，所以必须加上这个配置。
+该配置会自动注册 DefaultAnnotationHandlerMapping 与 AnnotationMethodHandlerAdapter 两个 bean，用以支持 @Controller 注解，并额外提供了数据绑定、参数转换、json 转换等功能。
 
 
 
 ## 二、配置自定义拦截器
 
-1.创建自定义拦截器，实现接口 HandlerInterceptor（这里我们创建两个拦截器，用于测试拦截器方法的执行顺序）
+1.创建自定义拦截器，实现接口 HandlerInterceptor（这里我们创建两个拦截器，用于测试拦截器的执行顺序）：
 
 ```java
-package com.heibaiying.interceptors;
-
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-/**
- * @author : heibaiying
- * @description : spring5 中 preHandle，postHandle，afterCompletion 在接口中被声明为默认方法
- */
 public class MyFirstInterceptor implements HandlerInterceptor {
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -227,18 +195,6 @@ public class MyFirstInterceptor implements HandlerInterceptor {
 ```
 
 ```java
-package com.heibaiying.interceptors;
-
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-/**
- * @author : heibaiying
- * @description : spring5 中 preHandle，postHandle，afterCompletion 在接口中被声明为默认方法
- */
 public class MySecondInterceptor implements HandlerInterceptor {
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -257,24 +213,24 @@ public class MySecondInterceptor implements HandlerInterceptor {
 
 ```
 
-2.在 springApplication.xml 中注册自定义拦截器
+2.在 `springApplication.xml` 中注册自定义拦截器：
 
 ```xml
-    <!--配置拦截器-->
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/mvc/**"/>
-            <mvc:exclude-mapping path="/mvc/login"/>
-            <bean class="com.heibaiying.interceptors.MyFirstInterceptor"/>
-        </mvc:interceptor>
-        <mvc:interceptor>
-            <mvc:mapping path="/mvc/**"/>
-            <bean class="com.heibaiying.interceptors.MySecondInterceptor"/>
-        </mvc:interceptor>
-    </mvc:interceptors>
+<!--配置拦截器-->
+<mvc:interceptors>
+    <mvc:interceptor>
+        <mvc:mapping path="/mvc/**"/>
+        <mvc:exclude-mapping path="/mvc/login"/>
+        <bean class="com.heibaiying.interceptors.MyFirstInterceptor"/>
+    </mvc:interceptor>
+    <mvc:interceptor>
+        <mvc:mapping path="/mvc/**"/>
+        <bean class="com.heibaiying.interceptors.MySecondInterceptor"/>
+    </mvc:interceptor>
+</mvc:interceptors>
 ```
 
-3.关于多个拦截器方法执行顺序的说明
+**3. 关于多个拦截器方法执行顺序的说明**
 
 拦截器的执行顺序是按声明的先后顺序执行的，先声明的拦截器中的 preHandle 方法会先执行，然而它的 postHandle 方法和 afterCompletion 方法却会后执行。
 
@@ -282,15 +238,9 @@ public class MySecondInterceptor implements HandlerInterceptor {
 
 ## 三、全局异常处理 
 
-1.定义自定义异常
+1.定义自定义异常：
 
 ```java
-package com.heibaiying.exception;
-
-/**
- * @author : heibaiying
- * @description : 自定义无权限异常
- */
 public class NoAuthException extends RuntimeException {
 
     public NoAuthException() {
@@ -310,24 +260,11 @@ public class NoAuthException extends RuntimeException {
     }
 
 }
-
 ```
 
-2.实现自定义异常处理器
+2.实现自定义异常处理器：
 
 ```java
-package com.heibaiying.exception;
-
-import org.springframework.web.servlet.HandlerExceptionResolver;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-/**
- * @author : heibaiying
- * @description : 无权限异常处理机制
- */
 public class NoAuthExceptionResolver implements HandlerExceptionResolver {
 
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
@@ -342,17 +279,16 @@ public class NoAuthExceptionResolver implements HandlerExceptionResolver {
         return "XMLHttpRequest".equalsIgnoreCase(request.getHeader("X-Requested-With"));
     }
 }
-
 ```
 
-3.在 springApplication.xml 注册自定义异常处理器
+3.在 `springApplication.xml` 注册自定义的异常处理器：
 
 ```xml
 <!--配置全局异常处理器-->
 <bean class="com.heibaiying.exception.NoAuthExceptionResolver"/>
 ```
 
-4.定义测试 controller，抛出自定义异常
+4.创建测试 Controller，抛出自定义异常：
 
 ```java
 @Controller
@@ -364,7 +300,6 @@ public class HelloController {
         return "hello";
     }
 
-
     @RequestMapping("auth")
     private void auth() {
         throw new NoAuthException("没有对应的访问权限！");
@@ -372,7 +307,7 @@ public class HelloController {
 }
 ```
 
-注：调用这个 controller 时，同时也可以验证在拦截器部分提到的：如果对应的程序报错，拦截器不一定会进入 postHandle 这个方法 但一定会进入 afterCompletion 这个方法
+调用这个 Controller 时，同时可以验证在拦截器部分提到的：如果对应的程序报错，拦截器不一定会进入 postHandle 这个方法 但一定会进入 afterCompletion 这个方法。
 
 
 
@@ -380,16 +315,11 @@ public class HelloController {
 
 ### 4.1 参数绑定
 
-1.新建 Programmer.java
+1.新建 Programmer.java 作为测试实体类：
 
 ```java
-package com.heibaiying.bean;
-
-import lombok.Data;
-
 /**
- * @author : heibaiying
- * @description :
+ * @Data 是 lombok 包下的注解，用来生成相应的 set、get 方法，使得类的书写更为简洁。
  */
 @Data
 public class Programmer {
@@ -402,32 +332,11 @@ public class Programmer {
 
     private String birthday;
 }
-
 ```
 
-注：@Data 是 lombok 包下的注解，用来生成相应的 set、get 方法，使得类的书写更为简洁。
-
-2.新建 ParamBindController.java 文件
+2.新建 ParamBindController.java 文件，跳转到指定视图：
 
 ```java
-package com.heibaiying.controller;
-
-import com.heibaiying.bean.Programmer;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.datetime.DateFormatter;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.Date;
-
-/**
- * @author : heibaiying
- * @description :参数绑定
- */
 @Controller
 public class ParamBindController {
 
@@ -465,10 +374,9 @@ public class ParamBindController {
     }
 
 }
-
 ```
 
-3.新建 param.jsp 文件
+3.新建 param.jsp 文件，用于测试数据在视图中的绑定情况：
 
 ```jsp
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -488,39 +396,30 @@ public class ParamBindController {
 
 ```
 
-4.启动 tomcat，用[postman](https://www.getpostman.com/) 软件发送请求进行测试
+4.启动 tomcat，接着可以使用 [postman](https://www.getpostman.com/) 等接口测试软件发送测试请求。
 
-### 4.2 关于日期格式转换的三种方法
+### 4.2 日期格式转换
 
-1.如上实例代码所示，在对应的 controller 中初始化绑定
+Spring 支持使用以下三种方法来对参数中的日期格式进行转换：
+
+**方法一**：如上面的实例代码所示，在对应的 Controller 中初始化绑定：
 
 ```java
 @InitBinder
-    protected void initBinder(WebDataBinder binder) {
-        binder.addCustomFormatter(new DateFormatter("yyyy-MM-dd HH:mm:ss"));
-    }
+protected void initBinder(WebDataBinder binder) {
+    binder.addCustomFormatter(new DateFormatter("yyyy-MM-dd HH:mm:ss"));
+}
 ```
 
-2.利用@DateTimeFormat 注解，如果是用实体类去接收参数，则在对应的属性上用@DateTimeFormat 和@JsonFormat 声明
+**方法二**：利用 @DateTimeFormat 注解，如果是用实体类去接收参数，则在对应的实体类的属性上用 @DateTimeFormat 和 @JsonFormat 进行声明：
 
 ```java
 public String param(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date birthday)
 ```
 
-3.使用全局的日期格式绑定，新建自定义日期格式转化类，之后在 springApplication.xml 中进行注册
+**方法三**：使用全局的日期格式绑定，新建自定义日期格式转化类，之后在 `springApplication.xml` 中进行注册，采用这种方式会对全局范围内的日期格式转换生效：
 
 ```java
-package com.heibaiying.convert;
-
-import org.springframework.core.convert.converter.Converter;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-/**
- * @author : heibaiying
- * @description :
- */
 public class CustomDateConverter implements Converter<String, Date> {
 
     public Date convert(String s) {
@@ -533,103 +432,60 @@ public class CustomDateConverter implements Converter<String, Date> {
         return null;
     }
 }
-
 ```
 
-springApplication.xml
+在 `springApplication.xml` 中进行注册：
 
 ```xml
 <!-- 全局日期格式转换  -->
-    <bean id="formattingConversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+<bean id="formattingConversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
     <property name="converters">
         <list>
             <bean class="com.heibaiying.convert.CustomDateConverter"/>
         </list>
     </property>
-    </bean>
+</bean>
 ```
 
 
 
 ## 五、数据校验
 
-1.spring 支持的数据校验是 JSR303 的标准，需要引入依赖的 jar 包
+1.Spring 支持 JSR303 标准的校验，需要引入相关的依赖：
 
-```java
- <!-- 数据校验依赖包 -->
-      <dependency>
-            <groupId>org.hibernate.validator</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>6.0.13.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>2.0.1.Final</version>
-        </dependency>
+```xml
+<!-- 数据校验依赖包 -->
+<dependency>
+    <groupId>org.hibernate.validator</groupId>
+    <artifactId>hibernate-validator</artifactId>
+    <version>6.0.13.Final</version>
+</dependency>
+<dependency>
+    <groupId>javax.validation</groupId>
+    <artifactId>validation-api</artifactId>
+    <version>2.0.1.Final</version>
+</dependency>
 ```
 
-2.新建测试 ParamValidController.java，主要是在需要校验的参数前加上@Validated，声明参数需要被校验，同时加上 bindingResult 参数，这个参数中包含了校验的结果
+2.新建测试类 ParamValidController.java，在需要校验的参数前加上 @Validated 注解，表明该参数需要被校验。同时在方法声明中加上 bindingResult 参数，可以从这个参数中获取最终校验的结果：
 
 ```java
-package com.heibaiying.controller;
-
-import com.heibaiying.bean.Programmer;
-import org.hibernate.validator.constraints.Length;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.datetime.DateFormatter;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.util.List;
-
-/**
- * @author : heibaiying
- * @description :数据校验
- */
 @RestController
 public class ParamValidController {
 
-
     @PostMapping("validate")
-    public void valid(@Validated Programmer programmer,
-                      BindingResult bindingResult) {
+    public void valid(@Validated Programmer programmer,BindingResult bindingResult) {
         List<ObjectError> allErrors = bindingResult.getAllErrors();
         for (ObjectError error : allErrors) {
             System.out.println(error.getDefaultMessage());
         }
     }
-
 }
-
 ```
 
-3.在 Programmer.java 的对应属性上加上注解约束 (支持的注解可以在 javax.validation.constraints 包中查看)
+3.在 Programmer.java 的对应属性上加上注解约束，用于声明每个参数的校验规则：
 
 ```java
-package com.heibaiying.bean;
-
-import lombok.Data;
-
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-
-/**
- * @author : heibaiying
- * @description :
- */
-@Data
 public class Programmer {
 
     @NotNull
@@ -643,55 +499,30 @@ public class Programmer {
 
     private String birthday;
 }
-
 ```
+
+其他支持的注解可以到 javax.validation.constraints 包下进行查看。
 
 ## 六、文件上传与下载
 
 #### 6.1 文件上传
 
-1.在 springApplication.xml 中进行配置，使之支持文件上传
+1.在 `springApplication.xml` 中进行配置，开启文件上传：
 
 ```xml
- <!--配置文件上传-->
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-         <!--文件最大限制-->
-        <property name="maxUploadSize" value="102400000"/>
-          <!--单个文件最大限制-->
-        <property name="maxUploadSizePerFile" value="10240000"/>
-        <property name="defaultEncoding" value="utf-8"/>
-    </bean>
+<!--配置文件上传-->
+<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <!--文件最大限制-->
+    <property name="maxUploadSize" value="102400000"/>
+    <!--单个文件最大限制-->
+    <property name="maxUploadSizePerFile" value="10240000"/>
+    <property name="defaultEncoding" value="utf-8"/>
+</bean>
 ```
 
-2.新建测试上传的 FileController.java
+2.新建上传测试类：
 
 ```java
-package com.heibaiying.controller;
-
-import com.heibaiying.utils.FileUtil;
-import org.apache.commons.io.FileUtils;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
-/**
- * @author : heibaiying
- * @description : 文件上传
- */
-
 @Controller
 public class FileController {
 
@@ -699,7 +530,6 @@ public class FileController {
     public String filePage() {
         return "file";
     }
-
 
     /***
      * 单文件上传
@@ -737,22 +567,11 @@ public class FileController {
         return "success";
     }
 }
-
 ```
 
-3.其中工具类 FileUtil.java 代码如下
+3.其中工具类 FileUtil.java 的代码实现如下：
 
 ```java
-package com.heibaiying.utils;
-
-import org.springframework.web.multipart.MultipartFile;
-import java.io.*;
-
-/**
- * @author : heibaiying
- * @description : 文件上传工具类
- */
-
 public class FileUtil {
 
     public static String saveFile(MultipartFile file, String path) {
@@ -795,7 +614,7 @@ public class FileUtil {
 }
 ```
 
-4.新建用于上传的 jsp 页面，上传文件时表单必须声明 enctype="multipart/form-data"
+4.新建用于上传的 jsp 页面，上传文件时表单必须声明 `enctype="multipart/form-data"` ：
 
 ```jsp
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -830,38 +649,38 @@ public class FileUtil {
 
 #### 6.2 文件下载
 
-1.在 fileController.java 中加上方法：
+1.在 fileController.java 中增加下载方法：
 
 ```java
-  /***
-   * 上传用于下载的文件
-   */
-    @PostMapping("upFileForDownload")
-    public String upFileForDownload(MultipartFile file, HttpSession session, Model model) throws UnsupportedEncodingException {
-        String path = FileUtil.saveFile(file, session.getServletContext().getRealPath("/image"));
-        model.addAttribute("filePath", URLEncoder.encode(path,"utf-8"));
-        model.addAttribute("fileName", file.getOriginalFilename());
-        return "fileDownload";
-    }
+/***
+ * 上传用于下载的文件
+ */
+@PostMapping("upFileForDownload")
+public String upFileForDownload(MultipartFile file, HttpSession session, Model model) throws UnsupportedEncodingException {
+    String path = FileUtil.saveFile(file, session.getServletContext().getRealPath("/image"));
+    model.addAttribute("filePath", URLEncoder.encode(path,"utf-8"));
+    model.addAttribute("fileName", file.getOriginalFilename());
+    return "fileDownload";
+}
 
-    /***
-     * 下载文件
-     */
-    @GetMapping("download")
-    public ResponseEntity<byte[]> downloadFile(String filePath) throws IOException {
-        HttpHeaders headers = new HttpHeaders();
-        File file = new File(filePath);
-        // 解决文件名中文乱码
-        String fileName=new String(file.getName().getBytes("UTF-8"),"iso-8859-1");
-        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        headers.setContentDispositionFormData("attachment", fileName);
+/***
+ * 下载文件
+ */
+@GetMapping("download")
+public ResponseEntity<byte[]> downloadFile(String filePath) throws IOException {
+    HttpHeaders headers = new HttpHeaders();
+    File file = new File(filePath);
+    // 解决文件名中文乱码
+    String fileName=new String(file.getName().getBytes("UTF-8"),"iso-8859-1");
+    headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+    headers.setContentDispositionFormData("attachment", fileName);
 
-        return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),
-                headers, HttpStatus.CREATED);
-    }
+    return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),
+                                      headers, HttpStatus.CREATED);
+}
 ```
 
-2.其中 fileDownload.jsp 如下：
+2.其中 fileDownload.jsp 的内容如下：
 
 ```jsp
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -877,20 +696,11 @@ public class FileUtil {
 
 
 
-## 七、Restful风格的请求
+## 七、RESTful 风格的请求
 
-1.新建 Pet.java 实体类
+1.新建测试实体类：
 
 ```java
-package com.heibaiying.bean;
-
-import lombok.Data;
-
-/**
- * @author : heibaiying
- * @description :测试 restful 风格的实体类
- */
-
 @Data
 public class Pet {
 
@@ -898,30 +708,11 @@ public class Pet {
 
     private String petId;
 }
-
 ```
 
-2.新建 RestfulController.java，用@PathVariable 和@ModelAttribute 注解进行参数绑定。
-
-注： 在 REST 中，资源通过 URL 进行识别和定位。REST 中的行为是通过 HTTP 方法定义的。在进行不同行为时对应 HTTP 方法和 Spring 注解分别如下：
-
-- 创建资源时：POST（PostMapping）
-- 读取资源时：GET（ @GetMapping）
-- 更新资源时：PUT 或 PATCH（PutMapping、PatchMapping）
-- 删除资源时：DELETE（DeleteMapping）
+2.新建 RestfulController.java，用 @PathVariable 和 @ModelAttribute 注解进行参数绑定：
 
 ```java
-package com.heibaiying.controller;
-
-import com.heibaiying.bean.Pet;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-/**
- * @author : heibaiying
- * @description : Restful 风格的请求
- */
-
 @RestController
 public class RestfulController {
 
@@ -936,7 +727,13 @@ public class RestfulController {
         System.out.println("ownerId:" + pet.getOwnerId());
         System.out.println("petId:" + pet.getPetId());
     }
-
 }
-
 ```
+
+在 RESTful 风格的请求中，资源通过 URL 进行标识和定位，而操作行为是通过 HTTP 方法进行定义，在进行不同行为时对应 HTTP 方法和 Spring 注解分别如下：
+
+- 创建资源时：POST（@PostMapping）
+- 读取资源时：GET（ @GetMapping）
+- 更新资源时：PUT 或 PATCH（@PutMapping、@PatchMapping）
+- 删除资源时：DELETE（@DeleteMapping）
+
