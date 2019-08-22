@@ -3,18 +3,18 @@
 
 <nav>
 <a href="#一项目说明">一、项目说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12--项目依赖">1.2  项目依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12--项目依赖">1.2  项目依赖</a><br/>
 <a href="#二整合-JDBC-Template">二、整合 JDBC Template</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-数据库配置">2.1 数据库配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-配置数据源">2.2 配置数据源</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-数据查询">2.3 数据查询</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-测试查询">2.4 测试查询</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-数据库配置">2.1 数据库配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-配置数据源">2.2 配置数据源</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-数据查询">2.3 数据查询</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-测试查询">2.4 测试查询</a><br/>
 </nav>
 
 ## 一、项目说明
 
-#### 1.1 项目结构
+### 1.1 项目结构
 
 1. 数据源配置位于 config 目录下的 DatabaseConfig 和 DataSourceConfig；
 2. 项目以单元测试的方法进行测试。
@@ -22,7 +22,7 @@
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-jdbc-annotation.png"/> </div>
 
 
-#### 1.2  项目依赖
+### 1.2  项目依赖
 
 ```xml
 <!--jdbc 相关依赖包-->
@@ -48,7 +48,7 @@
 
 ## 二、整合 JDBC Template
 
-#### 2.1 数据库配置
+### 2.1 数据库配置
 
 在 resources 文件夹下新建数据库配置文件 mysql.properties、oracle.properties 及其映射的实体类：
 
@@ -86,7 +86,7 @@ public class DataSourceConfig {
 }
 ```
 
-#### 2.2 配置数据源
+### 2.2 配置数据源
 
 基于注解方式配置数据源：
 
@@ -135,7 +135,7 @@ public class DatabaseConfig {
 }
 ```
 
-#### 2.3 数据查询
+### 2.3 数据查询
 
 新建查询接口及其实现类，以下示例分别查询的是 MySQL 和 Oracle 中的字典表：
 
@@ -190,7 +190,7 @@ public class OracleDaoImpl implements OracleDao {
 }
 ```
 
-#### 2.4 测试查询
+### 2.4 测试查询
 
 新建测试类进行测试：
 
