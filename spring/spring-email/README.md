@@ -1,43 +1,43 @@
-# spring 邮件发送（xml配置方式）
+# Spring 邮件发送（XML 配置方式）
 
-## 目录<br/>
-<a href="#一说明">一、说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构说明">1.1 项目结构说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-依赖说明">1.2 依赖说明</a><br/>
-<a href="#二spring-email">二、spring email</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-邮件发送配置">2.1 邮件发送配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-新建邮件发送基本类">2.2 新建邮件发送基本类</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-邮件发送的测试">2.3 邮件发送的测试</a><br/>
-## 正文<br/>
+<nav>
+<a href="#一项目说明">一、项目说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-基本依赖">1.2 基本依赖</a><br/>
+<a href="#二Spring-Email">二、Spring Email</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-基本配置">2.1 基本配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-发送邮件">2.2 发送邮件</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-单元测试">2.3 单元测试</a><br/>
+</nav>
 
+## 一、项目说明
 
-## 一、说明
+### 1.1 项目结构
 
-### 1.1 项目结构说明
+- 邮件发送的配置文件为 `springApplication.xml`;
 
-1. 邮件发送配置文件为 springApplication.xml;
-2. 简单邮件发送、附件邮件发送、内嵌资源邮件发送、模板邮件发送的方法封装在 SpringMail 类中；
-3. 项目以单元测试的方法进行测试，测试类为 SendEmail。
+- 简单邮件发送、附件邮件发送、内嵌资源邮件发送、模板邮件发送的方法封装在 SpringMail 类中；
 
+- 项目以单元测试的方法进行测试，测试类为 SendEmail。
 
+  
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-email.png"/> </div>
 
 
+### 1.2 基本依赖
 
-### 1.2 依赖说明
-
-除了 spring 的基本依赖外，需要导入邮件发送的支持包 spring-context-support
+除了 Spring 的基本依赖外，需要导入邮件发送的支持包 spring-context-support：
 
 ```xml
- <!--邮件发送依赖包-->
+<!--邮件发送依赖包-->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-context-support</artifactId>
     <version>${spring-base-version}</version>
 </dependency>
- <!--模板引擎-->
-        <!--这里采用的是 beetl,beetl 性能很卓越并且功能也很全面 官方文档地址 <a href="http://ibeetl.com/guide/#beetl">-->
+<!--模板引擎-->
+<!--这里采用的是 beetl,beetl 性能很卓越并且功能也很全面 官方文档地址 <a href="http://ibeetl.com/guide/#beetl">-->
 <dependency>
     <groupId>com.ibeetl</groupId>
     <artifactId>beetl</artifactId>
@@ -47,9 +47,9 @@
 
 
 
-## 二、spring email
+## 二、Spring Email
 
-#### 2.1 邮件发送配置
+### 2.1 基本配置
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -86,11 +86,10 @@
 </beans>
 ```
 
-#### 2.2 新建邮件发送基本类
+### 2.2 发送邮件
 
 ```java
 /**
- * @author : heibaiying
  * @description : 邮件发送基本类
  */
 @Component
@@ -217,18 +216,12 @@ public class SpringMail {
             System.err.println("发送邮件失败" + ex.getMessage());
         }
     }
-
 }
-
 ```
 
 **关于模板邮件的说明：**
 
-- 模板引擎最主要的作用是，在对邮件格式有要求的时候，采用拼接字符串不够直观，所以采用模板引擎；
-
-- 这里我们使用的 beetl 模板引擎，原因是其性能优异，官网是介绍其性能 6 倍与 freemaker,并有完善的文档支持。当然大家也可以换成任何其他的模板引擎（freemarker,thymeleaf）
-
-  一个简单的模板 template.html 如下：
+通常邮件都有规范的格式要求，因此 Spring 支持使用任意模板引擎来配置模板。这里我们使用的 beetl 模板引擎，其性能比较优异，官网是介绍其性能 6 倍于 freemaker，当然也可以换成其他模板引擎（ 如 freemarker，thymeleaf）。示例如下：
 
 ```html
 <!doctype html>
@@ -243,15 +236,9 @@ public class SpringMail {
 </html>
 ```
 
-
-
-#### 2.3 邮件发送的测试
+### 2.3 单元测试
 
 ```java
-/**
- * @author : heibaiying
- * @description : 发送邮件测试类
- */
 @RunWith(SpringRunner.class)
 @ContextConfiguration({"classpath:springApplication.xml"})
 public class SendEmail {

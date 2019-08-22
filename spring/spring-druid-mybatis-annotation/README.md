@@ -1,23 +1,23 @@
-# spring +druid+ mybatis（注解方式）
+# Spring +Druid+ Mybatis（注解方式）
 
-## 目录<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1创建maven工程除了Spring基本依赖外还需要导入mybatis和druid的相关依赖">1、创建maven工程，除了Spring基本依赖外，还需要导入mybatis和druid的相关依赖</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2新建-DispatcherServletInitializerjava继承自AbstractAnnotationConfigDispatcherServletInitializer等价于我们在webxml中配置的前端控制器">2、新建 DispatcherServletInitializer.java继承自AbstractAnnotationConfigDispatcherServletInitializer,等价于我们在web.xml中配置的前端控制器</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3基于servlet-30的支持可以采用注解的方式注册druid的servlet和filter">3、基于servlet 3.0的支持，可以采用注解的方式注册druid的servlet和filter </a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4在resources文件夹下新建数据库配置文件mysqlpropertiesoracleproperties">4、在resources文件夹下新建数据库配置文件mysql.properties、oracle.properties</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#5在新建数据库配置映射类DataSourceConfigjava">5、在新建数据库配置映射类DataSourceConfig.java</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#6新建ServletConfigjava进行数据库相关配置">6、新建ServletConfig.java，进行数据库相关配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#7新建mybtais-配置文件按需要进行额外参数配置-更多settings配置项可以参考[官方文档]http//wwwmybatisorg/mybatis-3/zh/configurationhtml">7、新建mybtais 配置文件，按需要进行额外参数配置， 更多settings配置项可以参考[官方文档](http://www.mybatis.org/mybatis-3/zh/configuration.html)</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#8新建查询接口及其对应的mapper文件">8、新建查询接口及其对应的mapper文件</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#9新建测试controller进行测试">9、新建测试controller进行测试</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#10druid-监控页面访问地址http//localhost8080/druid/indexhtml">10、druid 监控页面访问地址http://localhost:8080/druid/index.html</a><br/>
-## 正文<br/>
-
+<nav>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#项目目录结构">项目目录结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-导入依赖">1. 导入依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-配置前端控制器">2. 配置前端控制器</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3-配置-Druid-监控">3. 配置 Druid 监控</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4-数据库配置">4. 数据库配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#5--Druid-连接池配置">5.  Druid 连接池配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#6-MyBatis-配置">6. MyBatis 配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#7-数据查询">7. 数据查询</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#8-测试查询">8. 测试查询</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#9-Druid-监控台">9. Druid 监控台</a><br/>
+</nav>
 ### 项目目录结构
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-druid-mybatis-annotation.png"/> </div>
+#### 1. 导入依赖
 
-#### 1、创建maven工程，除了Spring基本依赖外，还需要导入mybatis和druid的相关依赖
+创建 maven 工程，除了 Spring 的基本依赖外，还需要导入 Mybatis 和 Druid 的相关依赖：
 
 ```xml
 <!--jdbc 相关依赖包-->
@@ -55,7 +55,9 @@
 </dependency>
 ```
 
-#### 2、新建 DispatcherServletInitializer.java继承自AbstractAnnotationConfigDispatcherServletInitializer,等价于我们在web.xml中配置的前端控制器
+#### 2. 配置前端控制器
+
+新建 DispatcherServletInitializer 继承自 AbstractAnnotationConfigDispatcherServletInitializer，等价于在 web.xml 方式中配置的前端控制器：
 
 ```java
 public class DispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -74,15 +76,11 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 }
 ```
 
-#### 3、基于servlet 3.0的支持，可以采用注解的方式注册druid的servlet和filter 
+#### 3. 配置 Druid 监控
 
-​     注：关于 servlet 更多注解支持可以查看[Servlet 规范文档](https://github.com/heibaiying/spring-samples-for-all/blob/master/referenced%20documents/Servlet3.1%E8%A7%84%E8%8C%83%EF%BC%88%E6%9C%80%E7%BB%88%E7%89%88%EF%BC%89.pdf) 中**8.1 小节 注解和可插拔性** 
+基于 servlet 3.0 的支持，可以采用注解的方式注册 druid 的 servlet 和 filter。关于 servlet 更多注解支持可以查看 [Servlet 规范文档](https://github.com/heibaiying/spring-samples-for-all/blob/master/referenced%20documents/Servlet3.1%E8%A7%84%E8%8C%83%EF%BC%88%E6%9C%80%E7%BB%88%E7%89%88%EF%BC%89.pdf) 中的 **8.1 小节 注解和可插拔性**
 
 ```java
-/**
- * @author : heibaiying
- * @description : 配置监控页面用户名密码
- */
 @WebServlet(urlPatterns = "/druid/*",
         initParams={
                 @WebInitParam(name="resetEnable",value="true"),
@@ -95,11 +93,6 @@ public class DruidStatViewServlet extends StatViewServlet {
 ```
 
 ```java
-
-/**
- * @author : heibaiying
- * @description : WebStatFilter 用于采集 web-jdbc 关联监控的数据
- */
 @WebFilter(filterName="druidWebStatFilter",urlPatterns="/*",
         initParams={
                 @WebInitParam(name="exclusions",value="*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*")// 忽略资源
@@ -108,10 +101,11 @@ public class DruidStatViewServlet extends StatViewServlet {
 public class DruidStatFilter extends WebStatFilter {
 
 }
-
 ```
 
-#### 4、在resources文件夹下新建数据库配置文件mysql.properties、oracle.properties
+#### 4. 数据库配置
+
+在 resources 文件夹下新建数据库配置文件及其映射类：
 
 ```properties
 # mysql 数据库配置
@@ -129,8 +123,6 @@ oracle.username=用户名
 oracle.password=密码
 ```
 
-#### 5、在新建数据库配置映射类DataSourceConfig.java
-
 ```java
 @Configuration
 @PropertySource(value = "classpath:mysql.properties")
@@ -147,15 +139,13 @@ public class DataSourceConfig {
     private String password;
 
 }
-
 ```
 
-#### 6、新建ServletConfig.java，进行数据库相关配置
+#### 5.  Druid 连接池配置
+
+新建 ServletConfig，进行数据库相关配置：
 
 ```java
-/**
- * @author : heibaiying
- */
 @Configuration
 @EnableTransactionManagement // 开启声明式事务处理 等价于 xml 中<tx:annotation-driven/>
 @EnableWebMvc
@@ -249,12 +239,12 @@ public class ServletConfig implements WebMvcConfigurer {
         manager.setDataSource(dataSource);
         return manager;
     }
-
 }
-
 ```
 
-#### 7、新建mybtais 配置文件，按需要进行额外参数配置， 更多settings配置项可以参考[官方文档](http://www.mybatis.org/mybatis-3/zh/configuration.html)
+#### 6. MyBatis 配置
+
+新建 mybtais 配置文件，按照需求配置额外参数， 更多 settings 配置项可以参考 [官方文档](
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -272,12 +262,11 @@ public class ServletConfig implements WebMvcConfigurer {
     </settings>
 
 </configuration>
-
-<!--更多settings配置项可以参考官方文档: <a href="http://www.mybatis.org/mybatis-3/zh/configuration.html"/>-->
-
 ```
 
-#### 8、新建查询接口及其对应的mapper文件
+#### 7. 数据查询
+
+新建查询接口及其实现类，以下示例分别查询的是 MySQL 和 Oracle 中的字典表：
 
 ```java
 public interface MysqlDao {
@@ -324,7 +313,9 @@ public interface OracleDao {
 </mapper>
 ```
 
-#### 9、新建测试controller进行测试
+#### 8. 测试查询
+
+新建测试类进行测试：
 
 ```java
 @RestController
@@ -338,7 +329,6 @@ public class MysqlController {
         return mysqlDao.queryById(id).get(0).toString();
     }
 }
-
 ```
 
 ```java
@@ -353,10 +343,11 @@ public class OracleController {
         return oracleDao.queryById(id).get(0).toString();
     }
 }
-
 ```
 
-#### 10、druid 监控页面访问地址http://localhost:8080/druid/index.html
+#### 9. Druid 监控台
+
+Druid Web 页面访问地址为：http://localhost:8080/druid/index.html，可以登录后查看数据库相关监控数据：
 
 ![druid 控制台](https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/druid%E6%8E%A7%E5%88%B6%E5%8F%B0.png)
 

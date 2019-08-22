@@ -1,29 +1,27 @@
-# spring 整合 mongodb（xml配置方式）
+# Spring 整合 MongoDB（ XML 配置方式）
 
-## 目录<br/>
-<a href="#一说明">一、说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构说明">1.1 项目结构说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-依赖说明">1.2 依赖说明</a><br/>
-<a href="#二spring-mongodb">二、spring mongodb</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-新建配置文件">2.1 新建配置文件</a><br/>
+<nav>
+<a href="#一项目说明">一、项目说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-相关依赖">1.2 相关依赖</a><br/>
+<a href="#二整合-MongoDB">二、整合 MongoDB</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-配置文件">2.1 配置文件</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-整合配置">2.2 整合配置</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-测试整合">2.3 测试整合</a><br/>
-## 正文<br/>
+</nav>
 
+## 一、项目说明
 
-## 一、说明
-
-### 1.1 项目结构说明
+### 1.1 项目结构
 
 配置文件位于 resources 下,项目以单元测试的方式进行测试。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-mongodb.png"/> </div>
 
 
+### 1.2 相关依赖
 
-### 1.2 依赖说明
-
-除了 spring 的基本依赖外，需要导入 mongodb 整合依赖包
+除了 Spring 的基本依赖外，需要导入 MongoDB 的整合依赖：
 
 ```xml
  <!--spring mongodb 整合依赖-->
@@ -36,9 +34,9 @@
 
 
 
-## 二、spring mongodb
+## 二、整合 MongoDB
 
-#### 2.1 新建配置文件
+### 2.1 配置文件
 
 ```properties
 mongo.host=192.168.200.228
@@ -59,7 +57,7 @@ mongo.socketKeepAlive=true
 mongo.socketTimeout=1500
 ```
 
-#### 2.2 整合配置
+### 2.2 整合配置
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -100,13 +98,9 @@ mongo.socketTimeout=1500
 </beans>
 ```
 
-#### 2.3 测试整合
+### 2.3 测试整合
 
 ```java
-/**
- * @author : heibaiying
- * @description : MongoDB 查询
- */
 @RunWith(SpringRunner.class)
 @ContextConfiguration(locations = "classpath:mongodb.xml")
 public class MongoDBTest {

@@ -1,21 +1,24 @@
-# spring +druid+ mybatis（xml配置方式）
+# Spring +Druid+ Mybatis（XML 配置方式）
 
-## 目录<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1创建maven工程除了Spring基本依赖外还需要导入mybatis和druid的相关依赖">1、创建maven工程，除了Spring基本依赖外，还需要导入mybatis和druid的相关依赖</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2在webxml-中配置spring前端控制器druid监控台servlet和filter">2、在web.xml 中配置spring前端控制器、druid监控台servlet和filter</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3在resources文件夹下新建数据库配置文件jdbcproperties">3、在resources文件夹下新建数据库配置文件jdbc.properties</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4在resources文件夹下创建springApplicationxml-配置文件和druidxml配置文件">4、在resources文件夹下创建springApplication.xml 配置文件和druid.xml配置文件 </a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#5新建mybtais-配置文件按需要进行额外配置更多settings配置项可以参考[官方文档]http//wwwmybatisorg/mybatis-3/zh/configurationhtml">5、新建mybtais 配置文件，按需要进行额外配置，更多settings配置项可以参考[官方文档](http://www.mybatis.org/mybatis-3/zh/configuration.html)</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#6新建查询接口及其对应的mapper文件">6、新建查询接口及其对应的mapper文件</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#7新建测试controller进行测试">7、新建测试controller进行测试</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#8druid-监控页面访问地址http//localhost8080/druid/indexhtml">8、druid 监控页面访问地址http://localhost:8080/druid/index.html</a><br/>
-## 正文<br/>
-
+<nav>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#项目目录结构">项目目录结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-导入依赖">1. 导入依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-webxml-配置">2. web.xml 配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3-数据库配置">3. 数据库配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4-Druid-连接池配置">4. Druid 连接池配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#5-MyBatis-配置">5. MyBatis 配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#6-数据查询">6. 数据查询</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#7-测试查询">7. 测试查询</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#8-Druid-监控台">8. Druid 监控台</a><br/>
+</nav>
 ### 项目目录结构
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-druid-mybatis.png"/> </div>
 
-#### 1、创建maven工程，除了Spring基本依赖外，还需要导入mybatis和druid的相关依赖
+
+#### 1. 导入依赖
+
+创建 maven 工程，除了 Spring 的基本依赖外，还需要导入 Mybatis 和 Druid 的相关依赖：
 
 ```xml
 <!--jdbc 相关依赖包-->
@@ -53,7 +56,9 @@
 </dependency>
 ```
 
-#### 2、在web.xml 中配置spring前端控制器、druid监控台servlet和filter
+#### 2. web.xml 配置
+
+在 `web.xml` 中配置 Spring 的前端控制器以及 Druid 的 Web 监控台，用于获取数据库的相关监控信息：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -118,11 +123,12 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-
 </web-app>
 ```
 
-#### 3、在resources文件夹下新建数据库配置文件jdbc.properties
+#### 3. 数据库配置
+
+在 resources 文件夹下新建数据库配置文件 `jdbc.properties`：
 
 ```properties
 # mysql 数据库配置
@@ -136,7 +142,9 @@ oracle.username=用户名
 oracle.password=密码
 ```
 
-#### 4、在resources文件夹下创建springApplication.xml 配置文件和druid.xml配置文件 
+#### 4. Druid 连接池配置
+
+在 resources 文件夹下创建 `springApplication.xml` 配置文件和 `druid.xml` 配置文件：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -145,7 +153,7 @@ oracle.password=密码
        xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!-- 开启注解包扫描-->
     <context:component-scan base-package="com.heibaiying.*"/>
@@ -185,7 +193,6 @@ oracle.password=密码
     <!-- 开启事务注解@Transactional 支持 -->
     <tx:annotation-driven/>
 
-
 </beans>
 ```
 
@@ -195,8 +202,7 @@ oracle.password=密码
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
-
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
 
     <!--指定配置文件的位置-->
     <context:property-placeholder location="classpath:jdbc.properties"/>
@@ -245,11 +251,12 @@ oracle.password=密码
         <property name="filters" value="stat"/>
     </bean>
 
-
 </beans>
 ```
 
-#### 5、新建mybtais 配置文件，按需要进行额外配置，更多settings配置项可以参考[官方文档](http://www.mybatis.org/mybatis-3/zh/configuration.html)
+#### 5. MyBatis 配置
+
+新建 mybtais 配置文件，按照需求配置额外参数， 更多 settings 配置项可以参考 [官方文档](http://www.mybatis.org/mybatis-3/zh/configuration.html)
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -267,12 +274,11 @@ oracle.password=密码
     </settings>
 
 </configuration>
-
-<!--更多settings配置项可以参考官方文档: <a href="http://www.mybatis.org/mybatis-3/zh/configuration.html"/>-->
-
 ```
 
-#### 6、新建查询接口及其对应的mapper文件
+#### 6. 数据查询
+
+新建查询接口及其实现类，以下示例分别查询的是 MySQL 和 Oracle 中的字典表：
 
 ```java
 public interface MysqlDao {
@@ -319,25 +325,11 @@ public interface OracleDao {
 </mapper>
 ```
 
-#### 7、新建测试controller进行测试
+#### 7. 测试查询
+
+新建测试类进行测试：
 
 ```java
-package com.heibaiying.controller;
-
-import com.heibaiying.bean.Relation;
-import com.heibaiying.dao.MysqlDao;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
-
-/**
- * @author : heibaiying
- * @description :
- */
-
 @RestController
 public class MysqlController {
 
@@ -349,23 +341,9 @@ public class MysqlController {
         return mysqlDao.queryById(id).get(0).toString();
     }
 }
-
 ```
 
 ```java
-package com.heibaiying.controller;
-
-import com.heibaiying.dao.OracleDao;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-
-/**
- * @author : heibaiying
- * @description :
- */
-
 @RestController
 public class OracleController {
 
@@ -377,9 +355,10 @@ public class OracleController {
         return oracleDao.queryById(id).get(0).toString();
     }
 }
-
 ```
 
-#### 8、druid 监控页面访问地址http://localhost:8080/druid/index.html
+#### 8. Druid 监控台
+
+Druid Web 页面访问地址为：http://localhost:8080/druid/index.html，可以登录后查看数据库相关监控数据：
 
 ![druid 控制台](https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/druid%E6%8E%A7%E5%88%B6%E5%8F%B0.png)

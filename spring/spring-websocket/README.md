@@ -1,37 +1,35 @@
-# spring websocket（xml配置方式）
+# Spring WebSocket（XML 配置方式）
 
-## 目录<br/>
-<a href="#一说明">一、说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构说明">1.1 项目结构说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-依赖说明">1.2 依赖说明</a><br/>
-<a href="#二spring-websocket">二、spring websocket</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-创建消息处理类继承自TextWebSocketHandler">2.1 创建消息处理类，继承自TextWebSocketHandler</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-创建websocket-握手拦截器如果没有权限拦截等需求这一步不是必须的">2.2 创建websocket 握手拦截器（如果没有权限拦截等需求，这一步不是必须的）</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-配置websocket">2.3 配置websocket</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-前端-websocket-的实现">2.4 前端 websocket 的实现</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-简单登录的实现">2.5 简单登录的实现</a><br/>
-## 正文<br/>
+<nav>
+<a href="#一项目说明">一、项目说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-基本依赖">1.2 基本依赖</a><br/>
+<a href="#二实现-WebSocket">二、实现 WebSocket</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-消息处理器">2.1 消息处理器</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22--握手拦截器">2.2  握手拦截器</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-配置-WebSocket">2.3 配置 WebSocket</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-前端-WebSocket">2.4 前端 WebSocket</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-实现简单登录">2.5 实现简单登录</a><br/>
+</nav>
 
+## 一、项目说明
 
-## 一、说明
-
-### 1.1 项目结构说明
+### 1.1 项目结构
 
 1. 项目模拟一个简单的群聊功能，为区分不同的聊天客户端，登录时候将临时用户名存储在 session 当中；
-2. CustomHander 为消息的自定义处理器；
+2. CustomHander 为自定义的消息处理器；
 3. CustomHandershakerInterceptor 为自定义的 websocket 的握手拦截器；
 4. 项目以 web 的方式构建。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-websocket.png"/> </div>
 
 
+### 1.2 基本依赖
 
-### 1.2 依赖说明
-
-除了基本的 spring 依赖外，还需要导入 webSocket 的依赖包
+除了基本的 Spring 依赖外，还需要导入 WebSocket 的相关依赖：
 
 ```xml
- <!--spring webSocket 的依赖包 -->
+<!--spring webSocket 的依赖包 -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-websocket</artifactId>
@@ -41,13 +39,14 @@
 
 
 
-## 二、spring websocket
+## 二、实现 WebSocket
 
-#### 2.1 创建消息处理类，继承自TextWebSocketHandler
+### 2.1 消息处理器
+
+继承自TextWebSocketHandler，创建消息处理类：
 
 ```java
 /**
- * @author : heibaiying
  * @description : 自定义消息处理类
  */
 public class CustomHandler extends TextWebSocketHandler {
@@ -96,11 +95,12 @@ public class CustomHandler extends TextWebSocketHandler {
 
 ```
 
-#### 2.2 创建websocket 握手拦截器（如果没有权限拦截等需求，这一步不是必须的）
+### 2.2  握手拦截器
+
+创建websocket 握手拦截器（如果没有权限拦截等需求，这一步不是必须的）：
 
 ```java
 /**
- * @author : heibaiying
  * @description : 可以按照需求实现权限拦截等功能
  */
 public class CustomHandshakeInterceptor extends HttpSessionHandshakeInterceptor {
@@ -121,7 +121,7 @@ public class CustomHandshakeInterceptor extends HttpSessionHandshakeInterceptor 
 }
 ```
 
-#### 2.3 配置websocket
+### 2.3 配置 WebSocket
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -171,7 +171,7 @@ public class CustomHandshakeInterceptor extends HttpSessionHandshakeInterceptor 
 </beans>
 ```
 
-#### 2.4 前端 websocket 的实现
+### 2.4 前端 WebSocket
 
 ```jsp
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -215,9 +215,9 @@ public class CustomHandshakeInterceptor extends HttpSessionHandshakeInterceptor 
 
 ```
 
-#### 2.5 简单登录的实现
+### 2.5 实现简单登录
 
-```java
+```JSP
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

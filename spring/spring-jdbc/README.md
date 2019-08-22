@@ -1,23 +1,22 @@
-# spring 整合 jdbc template（xml配置方式）
+# Spring 整合 JDBC Template（XML 配置方式）
 
-## 目录<br/>
+
+<nav>
 <a href="#一说明">一、说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11--项目结构">1.1  项目结构</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12--项目依赖">1.2  项目依赖</a><br/>
-<a href="#二-spring-整合-jdbc-template">二、 spring 整合 jdbc template</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1在resources文件夹下新建数据库配置文件jdbcproperties">1、在resources文件夹下新建数据库配置文件jdbc.properties</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2配置Jdbc数据源并定义事务管理器">2、配置Jdbc数据源并定义事务管理器</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3新建查询接口及其实现类这里我查询的表是mysql和oracle中的字典表">3、新建查询接口及其实现类</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4新建测试类进行测试">4、新建测试类进行测试</a><br/>
-## 正文<br/>
-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11--项目结构">1.1  项目结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12--项目依赖">1.2  项目依赖</a><br/>
+<a href="#二整合-JDBC-Template">二、整合 JDBC Template</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-数据库配置">2.1 数据库配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-配置数据源">2.2 配置数据源</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-数据查询">2.3 数据查询</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-测试查询">2.4 测试查询</a><br/>
+</nav>
 
 ## 一、说明
 
 #### 1.1  项目结构
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-jdbc.png"/> </div>
-
 #### 1.2  项目依赖
 
 ```xml
@@ -42,9 +41,11 @@
 
 
 
-## 二、 spring 整合 jdbc template
+## 二、整合 JDBC Template
 
-#### 1、在resources文件夹下新建数据库配置文件jdbc.properties
+#### 2.1 数据库配置
+
+在 resources 文件夹下新建数据库配置文件 `jdbc.properties`，内容如下：
 
 ```properties
 # mysql 数据库配置
@@ -60,7 +61,9 @@ oracle.username=用户名
 oracle.password=密码
 ```
 
-#### 2、配置Jdbc数据源并定义事务管理器
+#### 2.2 配置数据源
+
+在配置文件中配置 JDBC 数据源并定义事务管理器：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -68,7 +71,7 @@ oracle.password=密码
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- 开启注解包扫描-->
     <context:component-scan base-package="com.heibaiying.*"/>
@@ -108,7 +111,9 @@ oracle.password=密码
 </beans>
 ```
 
-#### 3、新建查询接口及其实现类,这里我查询的表是mysql和oracle中的字典表
+#### 2.3 数据查询
+
+新建查询接口及其实现类，以下示例分别查询的是 MySQL 和 Oracle 中的字典表：
 
 ```java
 @Repository
@@ -145,10 +150,6 @@ public class OracleDaoImpl implements OracleDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    /**
-     * 更多 JDBC 的使用可以参考官方文档
-     * @see <a href="https://docs.spring.io/spring/docs/5.1.3.RELEASE/spring-framework-reference/data-access.html#jdbc-JdbcTemplate">JdbcTemplate</a>
-     */
     public List<Flow> get() {
         List<Flow> flows = jdbcTemplate.query("select * from APEX_030200.WWV_FLOW_CALS where ID = ? ", new Object[]{217584603977429772L},
                 new RowMapper<Flow>() {
@@ -166,7 +167,9 @@ public class OracleDaoImpl implements OracleDao {
 }
 ```
 
-#### 4、新建测试类进行测试
+#### 2.4 测试查询
+
+新建测试类进行测试：
 
 ```java
 @RunWith(SpringRunner.class)
@@ -186,7 +189,6 @@ public class MysqlDaoTest {
         }
     }
 }
-
 ```
 
 ```java

@@ -1,32 +1,30 @@
-# spring 整合 mecached（xml配置方式）
+# Spring 整合 Mecached（XML配置方式）
 
-## 目录<br/>
-<a href="#一说明">一、说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11--XMemcached客户端说明">1.1  XMemcached客户端说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目结构说明">1.2 项目结构说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-依赖说明">1.3 依赖说明</a><br/>
-<a href="#二spring-整合-memcached">二、spring 整合 memcached</a><br/>
+<nav>
+<a href="#一项目说明">一、项目说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11--XMemcached">1.1  XMemcached</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目结构">1.2 项目结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-相关依赖">1.3 相关依赖</a><br/>
+<a href="#二整合-XMemcached">二、整合 XMemcached</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-单机配置">2.1 单机配置</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-集群配置">2.2 集群配置</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-存储基本类型测试用例">2.3 存储基本类型测试用例</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-存储实体对象测试用例">2.5 存储实体对象测试用例</a><br/>
-<a href="#附memcached-基本命令">附：memcached 基本命令</a><br/>
-## 正文<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-存储实体对象测试用例">2.4 存储实体对象测试用例</a><br/>
+<a href="#附Memcached-基本命令">附：Memcached 基本命令</a><br/>
+</nav>
 
+## 一、项目说明
 
-## 一、说明
+### 1.1  XMemcached
 
-### 1.1  XMemcached客户端说明
+XMemcached 是基于 Java NIO 实现的 Memcached 的高性能客户端，支持完整的 Memcached 协议，支持客户端分布并且提供了一致性哈希 (consistent hash) 算法的实现。
 
-XMemcached 是基于 java nio 的 memcached 高性能客户端，支持完整的 memcached 协议，支持客户端分布并且提供了一致性哈希 (consistent hash) 算法的实现。
+### 1.2 项目结构
 
-### 1.2 项目结构说明
-
-1. memcached 的整合配置位于 resources 下的 memcached 文件夹下，其中集群配置用 cluster 开头。所有配置按照需要在 springApplication.xml 用 import 导入。
-2. 实体类 Programmer.java 用于测试 memcached 序列化与反序列化
+- Memcached 的整合配置位于 resources 下的 memcached 文件夹下，其中集群配置以 cluster 开头。所有配置按需在 `springApplication.xml` 中用 import 标签导入。
+- 实体类 Programmer 用于测试 Memcached 的序列化与反序列化。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-memcached.png"/> </div>
-
 **springapplication.xml 文件：**
 
 ```xml
@@ -44,9 +42,9 @@ XMemcached 是基于 java nio 的 memcached 高性能客户端，支持完整的
 </beans>
 ```
 
-### 1.3 依赖说明
+### 1.3 相关依赖
 
-除了 spring 的基本依赖外，需要导入 xmemcached 依赖包
+除了 Spring 的基本依赖外，需要导入 xmemcached 依赖包：
 
 ```xml
  <!--memcached java 客户端-->
@@ -59,9 +57,9 @@ XMemcached 是基于 java nio 的 memcached 高性能客户端，支持完整的
 
 
 
-## 二、spring 整合 memcached
+## 二、整合 XMemcached
 
-#### 2.1 单机配置
+### 2.1 单机配置
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -79,7 +77,7 @@ XMemcached 是基于 java nio 的 memcached 高性能客户端，支持完整的
 </beans>
 ```
 
-#### 2.2 集群配置
+### 2.2 集群配置
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -129,15 +127,11 @@ XMemcached 是基于 java nio 的 memcached 高性能客户端，支持完整的
 </beans>
 ```
 
-#### 2.3 存储基本类型测试用例
+### 2.3 存储基本类型测试用例
 
-xmemcached 单机版本和集群版本注入的实例是相同的；
+XMemcached  单机版和集群版注入的实例是完全相同的：
 
 ```java
-/**
- * @author : heibaiying
- * @description : Memcached 操作基本对象
- */
 @RunWith(SpringRunner.class)
 @ContextConfiguration({"classpath:springApplication.xml"})
 public class MemSamples {
@@ -158,13 +152,9 @@ public class MemSamples {
 
 ```
 
-#### 2.5 存储实体对象测试用例
+### 2.4 存储实体对象测试用例
 
 ```java
-/**
- * @author : heibaiying
- * @description :Memcached 序列化与反序列化
- */
 @RunWith(SpringRunner.class)
 @ContextConfiguration({"classpath:springApplication.xml"})
 public class MemObjectSamples {
@@ -187,7 +177,7 @@ public class MemObjectSamples {
 
 
 
-## 附：memcached 基本命令
+## 附：Memcached 基本命令
 
 | 命令            | 格式                                               | 说明                                  |
 | --------------- | -------------------------------------------------- | ------------------------------------- |

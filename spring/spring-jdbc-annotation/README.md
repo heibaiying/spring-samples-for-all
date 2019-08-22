@@ -1,25 +1,25 @@
-# spring 整合 jdbc template（注解方式）
-
-## 目录<br/>
-<a href="#1说明">1.说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12--项目依赖">1.2  项目依赖</a><br/>
-<a href="#二spring-整合-jdbc-template">二、spring 整合 jdbc template</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-在resources文件夹下新建数据库配置文件mysqlpropertiesoracleproperties及其映射类">2.1 在resources文件夹下新建数据库配置文件mysql.properties、oracle.properties及其映射类</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-新建数据库配置类DatabaseConfigjava">2.2 新建数据库配置类DatabaseConfig.java</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-新建查询接口及其实现类这里我查询的表是mysql和oracle中的字典表">2.3 新建查询接口及其实现类</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-新建测试类进行测试">2.4 新建测试类进行测试</a><br/>
-## 正文<br/>
+# Spring 整合 Jdbc Template（注解方式）
 
 
-## 1.说明
+<nav>
+<a href="#一项目说明">一、项目说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12--项目依赖">1.2  项目依赖</a><br/>
+<a href="#二整合-JDBC-Template">二、整合 JDBC Template</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-数据库配置">2.1 数据库配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-配置数据源">2.2 配置数据源</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-数据查询">2.3 数据查询</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-测试查询">2.4 测试查询</a><br/>
+</nav>
 
-#### 1.1 项目目录结构
+## 一、项目说明
 
-1. 数据源配置位于 config 目录下的 DatabaseConfig.java 和 DataSourceConfig.java
-2. 项目以单元测试的方法进行测试
+#### 1.1 项目结构
+
+1. 数据源配置位于 config 目录下的 DatabaseConfig 和 DataSourceConfig；
+2. 项目以单元测试的方法进行测试。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-jdbc-annotation.png"/> </div>
-
 
 
 #### 1.2  项目依赖
@@ -44,9 +44,13 @@
 </dependencies>
 ```
 
-## 二、spring 整合 jdbc template
 
-#### 2.1 在resources文件夹下新建数据库配置文件mysql.properties、oracle.properties及其映射类
+
+## 二、整合 JDBC Template
+
+#### 2.1 数据库配置
+
+在 resources 文件夹下新建数据库配置文件 mysql.properties、oracle.properties 及其映射的实体类：
 
 ```properties
 # mysql 数据库配置
@@ -80,10 +84,11 @@ public class DataSourceConfig {
     private String password;
 
 }
-
 ```
 
-#### 2.2 新建数据库配置类DatabaseConfig.java
+#### 2.2 配置数据源
+
+基于注解方式配置数据源：
 
 ```java
 @Configuration
@@ -128,10 +133,11 @@ public class DatabaseConfig {
     }
 
 }
-
 ```
 
-#### 2.3 新建查询接口及其实现类,这里我查询的表是mysql和oracle中的字典表
+#### 2.3 数据查询
+
+新建查询接口及其实现类，以下示例分别查询的是 MySQL 和 Oracle 中的字典表：
 
 ```java
 @Repository
@@ -158,10 +164,7 @@ public class MysqlDaoImpl implements MysqlDao {
         return relations;
     }
 }
-
 ```
-
-
 
 ```java
 @Repository
@@ -170,10 +173,6 @@ public class OracleDaoImpl implements OracleDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    /**
-     * 更多 JDBC 的使用可以参考官方文档
-     * @see <a href="https://docs.spring.io/spring/docs/5.1.3.RELEASE/spring-framework-reference/data-access.html#jdbc-JdbcTemplate">JdbcTemplate</a>
-     */
     public List<Flow> get() {
         List<Flow> flows = jdbcTemplate.query("select * from APEX_030200.WWV_FLOW_CALS where ID = ? ", new Object[]{217584603977429772L},
                 new RowMapper<Flow>() {
@@ -189,10 +188,11 @@ public class OracleDaoImpl implements OracleDao {
         return flows;
     }
 }
-
 ```
 
-#### 2.4 新建测试类进行测试
+#### 2.4 测试查询
+
+新建测试类进行测试：
 
 ```java
 @RunWith(SpringRunner.class)
@@ -234,7 +234,5 @@ public class OracleDaoTest {
         }
     }
 }
-
-
 ```
 

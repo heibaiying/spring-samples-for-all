@@ -1,102 +1,74 @@
-# spring 定时任务（注解方式）
+# Spring 定时任务（注解方式）
 
-## 目录<br/>
-<a href="#一说明">一、说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构说明">1.1 项目结构说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-依赖说明">1.2 依赖说明</a><br/>
-<a href="#二spring-scheduling">二、spring scheduling</a><br/>
+<nav>
+<a href="#一项目说明">一、项目说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-基本依赖">1.2 基本依赖</a><br/>
+<a href="#二Spring-Scheduling">二、Spring Scheduling</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-创建定时任务">2.1 创建定时任务</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-配置定时任务">2.2 配置定时任务</a><br/>
-## 正文<br/>
+</nav>
 
+## 一、项目说明
 
-## 一、说明
+### 1.1 项目结构
 
-### 1.1 项目结构说明
-
-关于任务的调度配置定义在 ServletConfig.java 中，为方便观察项目定时执行的情况，项目以 web 的方式构建。
+关于任务的调度配置定义在 ServletConfig 中，为方便观察定时执行的情况，项目以 web 的方式构建。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-scheduling-annotation.png"/> </div>
 
 
+### 1.2 基本依赖
 
-### 1.2 依赖说明
-
-导入基本依赖
+导入基本依赖：
 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<properties>
+    <spring-base-version>5.1.3.RELEASE</spring-base-version>
+</properties>
 
-    <groupId>com.heibaiying</groupId>
-    <artifactId>spring-scheduling</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-    <properties>
-        <spring-base-version>5.1.3.RELEASE</spring-base-version>
-    </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring-base-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>${spring-base-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring-base-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${spring-base-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring-base-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
-
-</project>
+<dependencies>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring-base-version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-beans</artifactId>
+        <version>${spring-base-version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>${spring-base-version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+        <version>${spring-base-version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webmvc</artifactId>
+        <version>${spring-base-version}</version>
+    </dependency>
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>4.0.1</version>
+        <scope>provided</scope>
+    </dependency>
+</dependencies>
 ```
 
 
 
-## 二、spring scheduling
+## 二、Spring Scheduling
 
-#### 2.1 创建定时任务
+### 2.1 创建定时任务
 
 ```java
-/**
- * @author : heibaiying
- */
 @Component
 public class Task {
 
@@ -132,13 +104,9 @@ public class Task {
 
 ```
 
-#### 2.2 配置定时任务
+### 2.2 配置定时任务
 
 ```java
-/**
- * @author : heibaiying
- * spring 主配置类
- */
 @Configuration
 @EnableWebMvc
 @EnableScheduling  //启用 Spring 的计划任务执行功能
@@ -194,9 +162,8 @@ public class ServletConfig implements WebMvcConfigurer, AsyncConfigurer, Schedul
 
 **关于调度程序线程池作用说明**：
 
-按照例子 我们有 methodA 、 methodB 、methodC 三个方法 其中 methodB 是耗时的方法如果不声明调度程序线程池 则 methodB 会阻塞  methodA 、methodC 方法的执行 因为调度程序是单线程的
+如上 methodA 、 methodB 、methodC 三个方法，其中 methodB 是耗时方法，如果不声明调度程序线程池则 methodB 会阻塞  methodA 、methodC 方法的执行 因为调度程序是单线程的。
 
 **关于任务执行线程池作用说明**：
 
-按照例子 如果我们声明 methodB 是按照 fixedRate=5000 方法执行的 ，理论上不管任务耗时多久，任务都应该是每 5 秒执行一次，但是实际上任务是被加入执行队列，也不会立即被执行，因为默认执行任务是单线程的，这个时候需要开启@EnableAsync 并指定方法是 @Async 异步的，并且配置执行任务线程池 (如果不配置就使用默认的线程池配置)
-
+按照上面的例子，如果我们声明 methodB 是按照 fixedRate=5000 方法执行的 ，理论上不管任务耗时多久，任务都应该是每 5 秒执行一次，但是实际上任务是被加入执行队列，并不会立即被执行，因为默认执行任务是单线程的。这个时候需要开启@EnableAsync 注解并指定方法是 @Async 异步的，并且配置执行任务线程池 (如果不配置就使用默认的线程池配置)。

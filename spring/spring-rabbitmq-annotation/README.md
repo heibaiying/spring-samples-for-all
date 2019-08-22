@@ -1,43 +1,37 @@
-# spring 整合 rabbitmq（注解方式）
+# Spring 整合 RabbitMQ（注解方式）
 
-## 目录<br/>
-<a href="#一说明">一、说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构说明">1.1 项目结构说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-依赖说明">1.2 依赖说明</a><br/>
-<a href="#二spring-rabbit-基本配置">二、spring rabbit 基本配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-基本配置属性及其映射类">2.1 基本配置属性及其映射类</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-创建连接工厂管理器">2.2 创建连接工厂、管理器</a><br/>
-<a href="#三简单消费的发送">三、简单消费的发送</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-声明交换机队列绑定关系和消费者监听器">3.1 声明交换机、队列、绑定关系和消费者监听器</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-测试简单消息的发送">3.2 测试简单消息的发送</a><br/>
-<a href="#四传输对象">四、传输对象</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-创建消息的委托处理器">4.1 创建消息的委托处理器</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-声明交换机队列绑定关系和消费者监听器">4.2 声明交换机、队列、绑定关系和消费者监听器</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#43-测试对象消息的发送">4.3 测试对象消息的发送</a><br/>
-## 正文<br/>
+<nav>
+<a href="#一项目说明">一、项目说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-基本依赖">1.2 基本依赖</a><br/>
+<a href="#二整合-RabbitMQ">二、整合 RabbitMQ</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-基本配置">2.1 基本配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-连接工厂与管理器">2.2 连接工厂与管理器</a><br/>
+<a href="#三简单消息发送">三、简单消息发送</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-创建组件">3.1 创建组件</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-单元测试">3.2 单元测试</a><br/>
+<a href="#四对象消息发送">四、对象消息发送</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-委托处理器">4.1 委托处理器</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-创建组件">4.2 创建组件</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#43-单元测试">4.3 单元测试</a><br/>
+</nav>
 
+## 一、项目说明
 
-## 一、说明
+### 1.1 项目结构
 
-### 1.1 项目结构说明
-
-1. 本用例关于 rabbitmq 的整合提供**简单消息发送**和**对象消费发送**两种情况下的 sample。
-
-2. rabbitBaseAnnotation.java 中声明了 topic 类型的交换机、持久化队列、及其绑定关系，用于测试说明 topic 交换机路由键的绑定规则。
-
-3. rabbitObjectAnnotation.java 中声明了 direct 类型的交换机，持久化队列，及其绑定关系，用于示例对象消息的传输。
-
-   注：关于 rabbitmq 安装、交换机、队列、死信队列等基本概念可以参考我的手记[《RabbitMQ 实战指南》读书笔记](https://github.com/heibaiying/LearningNotes/blob/master/notes/%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/%E3%80%8ARabbitMQ%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0.md),里面有详细的配图说明。
+1. 本用例关于 RabbitMQ 的整合提供**简单消息发送**和**对象消费发送**两种情况下的示例代码。
+2. `rabbitBaseAnnotation` 中声明了 topic 类型的交换机、持久化队列及其绑定关系，用于说明 topic 交换机的路由规则。
+3. `rabbitObjectAnnotation`中声明了 direct 类型的交换机，持久化队列及其绑定关系，用于示例对象消息的传输。
 
 
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-rabbitmq-annotation.png"/> </div>
 
 
+### 1.2 基本依赖
 
-### 1.2 依赖说明
-
-除了 spring 的基本依赖外，需要导入 spring rabbitmq 整合依赖
+除了 Spring 的基本依赖外，需要导入 Spring RabbitMQ 整合依赖：
 
 ```xml
  <!--spring rabbitmq 整合依赖-->
@@ -56,28 +50,25 @@
 
 
 
-## 二、spring rabbit 基本配置
+## 二、整合 RabbitMQ
 
-#### 2.1 基本配置属性及其映射类
+### 2.1 基本配置
+
+创建配置文件及其映射类：
 
 ```properties
 rabbitmq.addresses=localhost:5672
 rabbitmq.username=guest
 rabbitmq.password=guest
-# 虚拟主机，可以类比为命名空间 默认为/  必须先用图形界面或者管控台添加 程序不会自动创建且会抛出异常
+# 虚拟主机，等价于名称空间，默认为 / ，如果想使用其他名称空间必须先用图形界面或者管控台添加，程序不会自动创建
 rabbitmq.virtualhost=/
 ```
 
 ```java
-/**
- * @author : heibaiying
- * @description : rabbit 属性配置
- */
 @Data
 @PropertySource(value = "classpath:rabbitmq.properties")
 @Configuration
 public class RabbitProperty {
-
 
     @Value("${rabbitmq.addresses}")
     private String addresses;
@@ -93,10 +84,9 @@ public class RabbitProperty {
 }
 ```
 
-#### 2.2 创建连接工厂、管理器
+### 2.2 连接工厂与管理器
 
 ```java
-
 @Configuration
 @ComponentScan("com.heibaiying.rabbit.config")
 public class RabbitBaseConfig {
@@ -136,21 +126,14 @@ public class RabbitBaseConfig {
 
 
 
-## 三、简单消费的发送
+## 三、简单消息发送
 
-#### 3.1 声明交换机、队列、绑定关系和消费者监听器
+### 3.1 创建组件
+
+声明交换机、队列、绑定关系和消费者监听器：
 
 ```java
-import com.rabbitmq.client.Channel;
-import org.springframework.amqp.core.*;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
-import org.springframework.amqp.rabbit.listener.api.ChannelAwareMessageListener;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
 /**
- * @author : heibaiying
  * @description : 声明队列、交换机、绑定关系、和队列消息监听
  */
 
@@ -246,7 +229,7 @@ public class RabbitBaseAnnotation {
 }
 ```
 
-#### 3.2 测试简单消息的发送
+### 3.2 单元测试
 
 ```java
 /**
@@ -294,11 +277,11 @@ public class RabbitTest {
 
 
 
-## 四、传输对象
+## 四、对象消息发送
 
-#### 4.1 创建消息的委托处理器
+### 4.1 委托处理器
 
-这里为了增强用例的实用性，我们创建的处理器的 handleMessage 方法是一个重载方法，对于同一个队列的监听，不仅可以传输对象消息，同时针对不同的对象类型调用不同的处理方法。
+这里为了增强用例的实用性，我们创建的一个委托处理器，并重载其 handleMessage 方法，从而可以针对不同类型的消息调用不同的处理方法：
 
 ```java
 /**
@@ -318,7 +301,9 @@ public class MessageDelegate {
 }
 ```
 
-#### 4.2 声明交换机、队列、绑定关系和消费者监听器
+### 4.2 创建组件
+
+声明交换机、队列、绑定关系和消费者监听器：
 
 ```java
 /**
@@ -379,7 +364,7 @@ public class RabbitObjectAnnotation {
 }
 ```
 
-#### 4.3 测试对象消息的发送
+### 4.3 单元测试
 
 ```java
 @RunWith(SpringRunner.class)

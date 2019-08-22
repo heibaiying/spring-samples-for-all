@@ -1,39 +1,35 @@
-# spring 整合 dubbo（xml配置方式）
+# Spring 整合 Dubbo（XML 配置方式）
 
-## 目录<br/>
-<a href="#一-项目结构说明">一、 项目结构说明</a><br/>
+<nav>
+<a href="#一-项目结构">一、 项目结构</a><br/>
 <a href="#二项目依赖">二、项目依赖</a><br/>
-<a href="#三公共模块dubbo-common">三、公共模块（dubbo-common）</a><br/>
-<a href="#四-服务提供者dubbo-provider">四、 服务提供者（dubbo-provider）</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41--productService是服务的提供者-商品数据用模拟数据展示">4.1  productService是服务的提供者（ 商品数据用模拟数据展示）</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-在dubboxml暴露服务">4.2 在dubbo.xml暴露服务</a><br/>
-<a href="#五服务消费者dubbo-consumer">五、服务消费者（dubbo-consumer）</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1在dubboxml调用远程的服务">1.在dubbo.xml调用远程的服务</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2消费服务">2.消费服务</a><br/>
-<a href="#六项目构建的说明">六、项目构建的说明</a><br/>
-<a href="#七关于dubbo新版本管理控制台的安装说明">七、关于dubbo新版本管理控制台的安装说明</a><br/>
-## 正文<br/>
+<a href="#三公共模块">三、公共模块</a><br/>
+<a href="#四-服务提供者">四、 服务提供者</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41--开发服务">4.1  开发服务</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-暴露服务">4.2 暴露服务</a><br/>
+<a href="#五服务消费者">五、服务消费者</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#51-调用服务">5.1 调用服务</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#52-消费服务">5.2 消费服务</a><br/>
+<a href="#六项目构建">六、项目构建</a><br/>
+<a href="#七Dubbo-控制台">七、Dubbo 控制台</a><br/>
+</nav>
 
+## 一、 项目结构
 
-## 一、 项目结构说明
+按照 Dubbo 官方文档推荐的服务最佳化方案，建议将服务接口、服务模型、服务异常等均放在单独的 API 包中，所以项目采用 maven 多模块的构建方式，在 spring-dubbo 下构建三个子模块：
 
-1.1  按照 dubbo 文档推荐的服务最佳实践，建议将服务接口、服务模型、服务异常等均放在 API 包中，所以项目采用 maven 多模块的构建方式，在 spring-dubbo 下构建三个子模块：
+- **dubbo-common**：公共模块，用于存放公共的接口和 bean，被 dubbo-provider 和 dubbo-provider 所引用；
+- **dubbo-provider** ：服务的提供者，提供商品的查询服务；
+- **dubbo-provider** ：是服务的消费者，调用 provider 提供的查询服务。
 
-1. dubbo-common 是公共模块，用于存放公共的接口和 bean,被 dubbo-provider 和 dubbo-provider 在 pom.xml 中引用；
-2. dubbo-provider 是服务的提供者，提供商品的查询服务；
-3. dubbo-provider 是服务的消费者，调用 provider 提供的查询服务。
-
-1.2  本项目 dubbo 的搭建采用 zookeeper 作为注册中心， 关于 zookeeper 的安装和基本操作可以参见我的手记[Zookeeper 基础命令与 Java 客户端](https://github.com/heibaiying/LearningNotes/blob/master/notes/%E4%B8%AD%E9%97%B4%E4%BB%B6/ZooKeeper/ZooKeeper%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%E4%B8%8EJava%E5%AE%A2%E6%88%B7%E7%AB%AF.md)
+另外，本项目 Dubbo 的搭建采用 ZooKeeper 作为注册中心。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-dubbo.png"/> </div>
 
 
-
 ## 二、项目依赖
 
-**在父工程的项目中统一导入依赖 dubbo 依赖的的 jar 包**
-
-这里需要注意的是 ZooKeeper 3.5.x 和 ZooKeeper 3.4.x 是存在不兼容的情况 详见官网解释[ZooKeeper Version Compatibility](https://curator.apache.org/zk-compatibility.html), zookeeper 3.5 目前是 beta 版本，所以 zookeeper 我选择的版本是 zookeeper-3.4.9 作为服务端。但默认情况下 curator-framework 自动引用的最新的 3.5 的版本客户端，会出现 KeeperException$UnimplementedException 异常
+在父工程的项目中统一导入依赖 Dubbo 的依赖：
 
 ```xml
 <!--dubbo 依赖-->
@@ -59,28 +55,22 @@
 </dependency>
 ```
 
+上面之所以要排除 curator-framework 中的 zookeeper，然后再次进行引入，是因为默认情况下 curator-framework 自动引用的最新的 3.5.x 的 zookeeper，但我本地安装是 3.4.x 的 zookeeper （因为我安装时候 zookeeper 3.5 还是 beta 版本），此时会出现 KeeperException$UnimplementedException 异常。因为  ZooKeeper 3.5.x 和 ZooKeeper 3.4.x 存在不兼容的情况，详见官方说明 [ZooKeeper Version Compatibility](https://curator.apache.org/zk-compatibility.html) 。
 
-
-## 三、公共模块（dubbo-common）
+## 三、公共模块
 
 - api 下为公共的调用接口；
 - bean 下为公共的实体类。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/dubbo-common.png"/> </div>
-
-## 四、 服务提供者（dubbo-provider）
+## 四、 服务提供者
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/dubbo-provider.png"/> </div>
+### 4.1  开发服务
 
-#### 4.1  productService是服务的提供者（ 商品数据用模拟数据展示）
-
-注：这里实现的接口 IProductService 来源于公共模块
+productService 是服务的提供者，其实现的接口 IProductService 来源于公共模块，这里商品数据用模拟数据展示：
 
 ```java
-/**
- * @author : heibaiying
- * @description : 产品提供接口实现类
- */
 @Service
 public class ProductService implements IProductService {
 
@@ -108,7 +98,9 @@ public class ProductService implements IProductService {
 }
 ```
 
-#### 4.2 在dubbo.xml暴露服务
+### 4.2 暴露服务
+
+在 `dubbo.xml` 中暴露服务：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -137,11 +129,12 @@ public class ProductService implements IProductService {
 </beans>
 ```
 
-## 五、服务消费者（dubbo-consumer）
+## 五、服务消费者
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/dubbo-consumer.png"/> </div>
+### 5.1 调用服务
 
-#### 1.在dubbo.xml调用远程的服务
+在 `dubbo.xml` 中调用远程的服务：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -172,7 +165,7 @@ public class ProductService implements IProductService {
 </beans>
 ```
 
-#### 2.消费服务
+### 5.2 消费服务
 
 ```java
 @Controller
@@ -198,73 +191,17 @@ public class SellController {
 }
 ```
 
-## 六、项目构建的说明
+## 六、项目构建
 
-因为在项目中，consumer 和 provider 模块均依赖公共模块,所以在构建 consumer 和 provider 项目前需要将 common 模块安装到本地仓库，**依次**对**父工程**和**common 模块**执行：
+在项目中，consumer 和 provider 模块均依赖公共模块，所以在构建 consumer 和 provider 模块前需要将 common 模块安装到本地仓库，依次对 父工程 和 common 模块执行以下命令：
 
 ```shell
 mvn install -Dmaven.test.skip = true
 ```
 
-consumer 中 pom.xml 如下
+## 七、Dubbo 控制台
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>spring-dubbo</artifactId>
-        <groupId>com.heibaiying</groupId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>dubbo-consumer</artifactId>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.heibaiying</groupId>
-            <artifactId>dubbo-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
-
-</project>
-```
-
-provider 中 pom.xml 如下
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>spring-dubbo</artifactId>
-        <groupId>com.heibaiying</groupId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>dubbo-provider</artifactId>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.heibaiying</groupId>
-            <artifactId>dubbo-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
-
-</project>
-```
-
-## 七、关于dubbo新版本管理控制台的安装说明
-
-安装:
+Dubbo 新版本管理控制台的安装步骤如下：
 
 ```sh
 git clone https://github.com/apache/incubator-dubbo-ops.git /var/tmp/dubbo-ops
@@ -274,21 +211,22 @@ mvn clean package
 
 配置：
 
-```sh
-配置文件为：
+```properties
+# 配置文件为：
 dubbo-admin-backend/src/main/resources/application.properties
-主要的配置有 默认的配置就是 127.0.0.1:2181：
+
+# 可以在其中修改zookeeper的地址
 dubbo.registry.address=zookeeper://127.0.0.1:2181
 ```
 
-启动:
+启动：
 
 ```sh
 mvn --projects dubbo-admin-backend spring-boot:run
 ```
 
-访问:
+访问：
 
-```
+```shell
 http://127.0.0.1:8080
 ```

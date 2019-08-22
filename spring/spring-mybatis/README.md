@@ -1,27 +1,25 @@
-# spring 整合 mybatis（xml配置方式）
+# Spring 整合 Mybatis（XML 配置方式）
 
-## 目录<br/>
-<a href="#一说明">一、说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目依赖">1.2 项目依赖</a><br/>
-<a href="#二spring-整合-mybatis">二、spring 整合 mybatis</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21--在resources文件夹下新建数据库配置文件jdbcproperties">2.1  在resources文件夹下新建数据库配置文件jdbc.properties</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22--配置数据源和mybatis会话工厂定义事务管理器">2.2  配置数据源和mybatis会话工厂、定义事务管理器</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-新建mybtais配置文件按照需求配置额外参数-更多settings配置项可以参考[官方文档]http//wwwmybatisorg/mybatis-3/zh/configurationhtml">2.3 新建mybtais配置文件，按照需求配置额外参数， 更多settings配置项可以参考[官方文档](http://www.mybatis.org/mybatis-3/zh/configuration.html)</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-新建查询接口及其对应的mapper文件">2.4 新建查询接口及其对应的mapper文件</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-新建测试类进行测试">2.5 新建测试类进行测试</a><br/>
-## 正文<br/>
+<nav>
+<a href="#一项目说明">一、项目说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目依赖">1.2 项目依赖</a><br/>
+<a href="#二整合-Mybatis">二、整合 Mybatis</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21--数据库配置">2.1  数据库配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22--配置数据源">2.2  配置数据源</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-MyBatis-配置">2.3 MyBatis 配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-数据查询">2.4 数据查询</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-测试查询">2.5 测试查询</a><br/>
+</nav>
 
-
-## 一、说明
+## 一、项目说明
 
 #### 1.1 项目结构
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-mybatis.png"/> </div>
-
 #### 1.2 项目依赖
 
-除了 spring 相关依赖外，还需要导入数据库驱动和对应的 mybatis 依赖包
+除了 Spring 相关依赖外，还需要导入数据库驱动和对应的 Mybatis 依赖：
 
 ```xml
 <!--jdbc 相关依赖包-->
@@ -53,9 +51,11 @@
 </dependency>
 ```
 
-## 二、spring 整合 mybatis
+## 二、整合 Mybatis
 
-#### 2.1  在resources文件夹下新建数据库配置文件jdbc.properties
+#### 2.1  数据库配置
+
+在 resources 文件夹下新建数据库配置文件 jdbc.properties：
 
 ```properties
 # mysql 数据库配置
@@ -71,7 +71,9 @@ oracle.username=用户名
 oracle.password=密码
 ```
 
-#### 2.2  配置数据源和mybatis会话工厂、定义事务管理器
+#### 2.2  配置数据源
+
+配置数据源、Mybatis 会话工厂和事务管理器：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -79,7 +81,7 @@ oracle.password=密码
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- 开启注解包扫描-->
     <context:component-scan base-package="com.heibaiying.*"/>
@@ -110,7 +112,7 @@ oracle.password=密码
     </bean>
 
     <!--扫描注册接口 -->
-    <!--作用:从接口的基础包开始递归搜索，并将它们注册为 MapperFactoryBean(只有至少一种方法的接口才会被注册;, 具体类将被忽略)-->
+    <!--作用:从接口的基础包开始递归搜索，并将它们注册为 MapperFactoryBean(只有至少一种方法的接口才会被注册;具体类将被忽略)-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--指定会话工厂 -->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
@@ -131,7 +133,9 @@ oracle.password=密码
 </beans>
 ```
 
-#### 2.3 新建mybtais配置文件，按照需求配置额外参数， 更多settings配置项可以参考[官方文档](http://www.mybatis.org/mybatis-3/zh/configuration.html)
+#### 2.3 MyBatis 配置
+
+新建mybtais配置文件，按照需求配置额外参数， 更多 settings 配置项可以参考 [官方文档](http://www.mybatis.org/mybatis-3/zh/configuration.html)
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -154,7 +158,9 @@ oracle.password=密码
 
 ```
 
-#### 2.4 新建查询接口及其对应的mapper文件
+#### 2.4 数据查询
+
+新建查询接口及其实现类，以下示例分别查询的是 MySQL 和 Oracle 中的字典表：
 
 ```java
 public interface MysqlDao {
@@ -184,7 +190,6 @@ public interface OracleDao {
 
     List<Flow> queryById(long id);
 }
-
 ```
 
 ```xml
@@ -201,7 +206,9 @@ public interface OracleDao {
 </mapper>
 ```
 
-#### 2.5 新建测试类进行测试
+#### 2.5 测试查询
+
+新建测试类进行测试：
 
 ```java
 @RunWith(SpringRunner.class)
@@ -221,7 +228,6 @@ public class MysqlDaoTest {
         }
     }
 }
-
 ```
 
 ```java
@@ -244,6 +250,5 @@ public class OracleDaoTest {
         }
     }
 }
-
 ```
 

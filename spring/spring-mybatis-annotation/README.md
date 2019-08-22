@@ -1,27 +1,25 @@
-# spring 整合 mybatis（注解方式）
+# Spring 整合 Mybatis（注解方式）
 
-## 目录<br/>
-<a href="#一说明">一、说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目依赖">1.2 项目依赖</a><br/>
-<a href="#二spring-整合-mybatis">二、spring 整合 mybatis</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21--在resources文件夹下新建数据库配置文件jdbcproperties及其映射类">2.1  在resources文件夹下新建数据库配置文件jdbc.properties及其映射类</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22--配置数据源和mybatis会话工厂定义事务管理器">2.2  配置数据源和mybatis会话工厂、定义事务管理器</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-新建mybtais配置文件按照需求配置额外参数-更多settings配置项可以参考[官方文档]http//wwwmybatisorg/mybatis-3/zh/configurationhtml">2.3 新建mybtais配置文件，按照需求配置额外参数， 更多settings配置项可以参考[官方文档](http://www.mybatis.org/mybatis-3/zh/configuration.html)</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-新建查询接口及其对应的mapper文件">2.4 新建查询接口及其对应的mapper文件</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-新建测试类进行测试">2.5 新建测试类进行测试</a><br/>
-## 正文<br/>
+<nav>
+<a href="#一项目说明">一、项目说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目依赖">1.2 项目依赖</a><br/>
+<a href="#二整合-Mybatis">二、整合 Mybatis</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21--数据库配置">2.1  数据库配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22--配置数据源">2.2  配置数据源</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-MyBatis-配置">2.3 MyBatis 配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-数据查询">2.4 数据查询</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-测试查询">2.5 测试查询</a><br/>
+</nav>
 
-
-## 一、说明
+## 一、项目说明
 
 #### 1.1 项目结构
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-mybatis-annotation.png"/> </div>
-
 #### 1.2 项目依赖
 
-除了 spring 相关依赖外，还需要导入数据库驱动和对应的 mybatis 依赖包
+除了 Spring 相关依赖外，还需要导入数据库驱动和对应的 Mybatis 依赖：
 
 ```xml
 <!--jdbc 相关依赖包-->
@@ -53,9 +51,11 @@
 </dependency>
 ```
 
-## 二、spring 整合 mybatis
+## 二、整合 Mybatis
 
-#### 2.1  在resources文件夹下新建数据库配置文件jdbc.properties及其映射类
+#### 2.1  数据库配置
+
+在 resources 文件夹下新建数据库配置文件 jdbc.properties：
 
 ```properties
 # mysql 数据库配置
@@ -89,12 +89,11 @@ public class DataSourceConfig {
 }
 ```
 
-#### 2.2  配置数据源和mybatis会话工厂、定义事务管理器
+#### 2.2  配置数据源
+
+配置数据源、Mybatis 会话工厂和事务管理器：
 
 ```java
-/**
- * @author : heibaiying
- */
 @Configuration
 @EnableTransactionManagement // 开启声明式事务处理 等价于 xml 中<tx:annotation-driven/>
 @ComponentScan(basePackages = {"com.heibaiying.*"})
@@ -123,7 +122,7 @@ public class DatabaseConfig {
      * 配置 mybatis 会话工厂
      *
      * @param dataSource 这个参数的名称需要保持和上面方法名一致 才能自动注入,因为
-     *                   采用@Bean 注解生成的 bean 默认采用方法名为名称，当然也可以在使用@Bean 时指定 name 属性
+     *                   采用 @Bean 注解生成的 bean 默认采用方法名为名称，当然也可以通过name属性自行指定
      */
     @Bean
     public SqlSessionFactoryBean sessionFactoryBean(DriverManagerDataSource dataSource) throws IOException {
@@ -155,12 +154,12 @@ public class DatabaseConfig {
         manager.setDataSource(dataSource);
         return manager;
     }
-
 }
-
 ```
 
-#### 2.3 新建mybtais配置文件，按照需求配置额外参数， 更多settings配置项可以参考[官方文档](http://www.mybatis.org/mybatis-3/zh/configuration.html)
+#### 2.3 MyBatis 配置
+
+新建mybtais配置文件，按照需求配置额外参数， 更多 settings 配置项可以参考 [官方文档](http://www.mybatis.org/mybatis-3/zh/configuration.html)
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -180,10 +179,11 @@ public class DatabaseConfig {
 </configuration>
 
 <!--更多settings配置项可以参考官方文档: <a href="http://www.mybatis.org/mybatis-3/zh/configuration.html"/>-->
-
 ```
 
-#### 2.4 新建查询接口及其对应的mapper文件
+#### 2.4 数据查询
+
+新建查询接口及其实现类，以下示例分别查询的是 MySQL 和 Oracle 中的字典表：
 
 ```java
 public interface MysqlDao {
@@ -230,7 +230,9 @@ public interface OracleDao {
 </mapper>
 ```
 
-#### 2.5 新建测试类进行测试
+#### 2.5 测试查询
+
+新建测试类进行测试：
 
 ```java
 @RunWith(SpringRunner.class)
@@ -270,6 +272,5 @@ public class OracleDaoTest {
         }
     }
 }
-
 ```
 

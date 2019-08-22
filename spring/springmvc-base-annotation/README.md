@@ -1,6 +1,5 @@
 # Spring MVC 基础（基于注解）
 <nav>
-<a href="#"></a><br/>
 <a href="#一搭建-Hello-Spring-工程">一、搭建 Hello Spring 工程</a><br/>
 <a href="#二配置自定义拦截器">二、配置自定义拦截器</a><br/>
 <a href="#三全局异常处理">三、全局异常处理 </a><br/>
@@ -9,8 +8,11 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-日期格式转换">4.2 日期格式转换</a><br/>
 <a href="#五数据校验">五、数据校验</a><br/>
 <a href="#六文件上传与下载">六、文件上传与下载</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#61-文件上传">6.1 文件上传</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#62-文件下载">6.2 文件下载</a><br/>
 <a href="#七RESTful-风格的请求">七、RESTful 风格的请求</a><br/>
 </nav>
+
 
 
 
@@ -471,7 +473,7 @@ public class Programmer {
 
 ## 六、文件上传与下载
 
-#### 6.1 文件上传
+### 6.1 文件上传
 
 1.在 ServletConfig 中进行配置，开启文件上传：
 
@@ -613,7 +615,7 @@ public class FileUtil {
 </html>
 ```
 
-#### 6.2 文件下载
+### 6.2 文件下载
 
 1.在 fileController.java 中增加下载方法：
 
