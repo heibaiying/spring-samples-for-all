@@ -17,6 +17,7 @@
 #### 1.1 项目结构
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-mybatis-annotation.png"/> </div>
+
 #### 1.2 项目依赖
 
 除了 Spring 相关依赖外，还需要导入数据库驱动和对应的 Mybatis 依赖：
