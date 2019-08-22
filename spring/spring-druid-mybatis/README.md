@@ -361,6 +361,6 @@ public class OracleController {
 
 ### 8. Druid 监控台
 
-Druid Web 页面访问地址为：http://localhost:8080/druid/index.html，可以登录后查看数据库相关监控数据：
+Druid Web 页面访问地址为：http://localhost:8080/druid/index.html ，可以登录后查看数据库相关监控数据：
 
 ![druid 控制台](https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/druid%E6%8E%A7%E5%88%B6%E5%8F%B0.png)
