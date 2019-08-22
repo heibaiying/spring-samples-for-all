@@ -171,7 +171,7 @@ public class AopTest {
 
 - 优先级高的切面在切入方法前执行的通知 ( 如 before) 会优先执行，但是位于方法后执行的通知 ( 如 after，afterReturning ) 反而会延后执行，类似于同心圆原理：
 
-  <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/aop 执行顺序.png"/> </div>
+  <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/aop执行顺序.png"/> </div>
 
 
 
