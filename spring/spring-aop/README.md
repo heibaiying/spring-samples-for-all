@@ -1,4 +1,4 @@
-# spring AOP（ XML 配置方式）
+# Spring AOP（ XML 配置方式）
 <nav>
 <a href="#"></a><br/>
 <a href="#一说明">一、说明</a><br/>
