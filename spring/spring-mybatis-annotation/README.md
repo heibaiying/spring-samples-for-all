@@ -2,23 +2,23 @@
 
 <nav>
 <a href="#一项目说明">一、项目说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目依赖">1.2 项目依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目依赖">1.2 项目依赖</a><br/>
 <a href="#二整合-Mybatis">二、整合 Mybatis</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21--数据库配置">2.1  数据库配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22--配置数据源">2.2  配置数据源</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-MyBatis-配置">2.3 MyBatis 配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-数据查询">2.4 数据查询</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-测试查询">2.5 测试查询</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21--数据库配置">2.1  数据库配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22--配置数据源">2.2  配置数据源</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-MyBatis-配置">2.3 MyBatis 配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-数据查询">2.4 数据查询</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-测试查询">2.5 测试查询</a><br/>
 </nav>
 
 ## 一、项目说明
 
-#### 1.1 项目结构
+### 1.1 项目结构
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-mybatis-annotation.png"/> </div>
 
-#### 1.2 项目依赖
+### 1.2 项目依赖
 
 除了 Spring 相关依赖外，还需要导入数据库驱动和对应的 Mybatis 依赖：
 
@@ -54,7 +54,7 @@
 
 ## 二、整合 Mybatis
 
-#### 2.1  数据库配置
+### 2.1  数据库配置
 
 在 resources 文件夹下新建数据库配置文件 jdbc.properties：
 
@@ -90,7 +90,7 @@ public class DataSourceConfig {
 }
 ```
 
-#### 2.2  配置数据源
+### 2.2  配置数据源
 
 配置数据源、Mybatis 会话工厂和事务管理器：
 
@@ -158,7 +158,7 @@ public class DatabaseConfig {
 }
 ```
 
-#### 2.3 MyBatis 配置
+### 2.3 MyBatis 配置
 
 新建mybtais配置文件，按照需求配置额外参数， 更多 settings 配置项可以参考 [官方文档](http://www.mybatis.org/mybatis-3/zh/configuration.html)
 
@@ -182,7 +182,7 @@ public class DatabaseConfig {
 <!--更多settings配置项可以参考官方文档: <a href="http://www.mybatis.org/mybatis-3/zh/configuration.html"/>-->
 ```
 
-#### 2.4 数据查询
+### 2.4 数据查询
 
 新建查询接口及其实现类，以下示例分别查询的是 MySQL 和 Oracle 中的字典表：
 
@@ -231,7 +231,7 @@ public interface OracleDao {
 </mapper>
 ```
 
-#### 2.5 测试查询
+### 2.5 测试查询
 
 新建测试类进行测试：
 

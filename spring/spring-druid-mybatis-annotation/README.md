@@ -1,21 +1,25 @@
 # Spring +Druid+ Mybatis（注解方式）
 
 <nav>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#项目目录结构">项目目录结构</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-导入依赖">1. 导入依赖</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-配置前端控制器">2. 配置前端控制器</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3-配置-Druid-监控">3. 配置 Druid 监控</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4-数据库配置">4. 数据库配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#5--Druid-连接池配置">5.  Druid 连接池配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#6-MyBatis-配置">6. MyBatis 配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#7-数据查询">7. 数据查询</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#8-测试查询">8. 测试查询</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#9-Druid-监控台">9. Druid 监控台</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-导入依赖">1. 导入依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-配置前端控制器">2. 配置前端控制器</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3-配置-Druid-监控">3. 配置 Druid 监控</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4-数据库配置">4. 数据库配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#5--Druid-连接池配置">5.  Druid 连接池配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#6-MyBatis-配置">6. MyBatis 配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#7-数据查询">7. 数据查询</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#8-测试查询">8. 测试查询</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#9-Druid-监控台">9. Druid 监控台</a><br/>
 </nav>
+
+
+
 ### 项目目录结构
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-druid-mybatis-annotation.png"/> </div>
-#### 1. 导入依赖
+
+
+### 1. 导入依赖
 
 创建 maven 工程，除了 Spring 的基本依赖外，还需要导入 Mybatis 和 Druid 的相关依赖：
 
@@ -55,7 +59,7 @@
 </dependency>
 ```
 
-#### 2. 配置前端控制器
+### 2. 配置前端控制器
 
 新建 DispatcherServletInitializer 继承自 AbstractAnnotationConfigDispatcherServletInitializer，等价于在 web.xml 方式中配置的前端控制器：
 
@@ -76,7 +80,7 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 }
 ```
 
-#### 3. 配置 Druid 监控
+### 3. 配置 Druid 监控
 
 基于 servlet 3.0 的支持，可以采用注解的方式注册 druid 的 servlet 和 filter。关于 servlet 更多注解支持可以查看 [Servlet 规范文档](https://github.com/heibaiying/spring-samples-for-all/blob/master/referenced%20documents/Servlet3.1%E8%A7%84%E8%8C%83%EF%BC%88%E6%9C%80%E7%BB%88%E7%89%88%EF%BC%89.pdf) 中的 **8.1 小节 注解和可插拔性**
 
@@ -103,7 +107,7 @@ public class DruidStatFilter extends WebStatFilter {
 }
 ```
 
-#### 4. 数据库配置
+### 4. 数据库配置
 
 在 resources 文件夹下新建数据库配置文件及其映射类：
 
@@ -141,7 +145,7 @@ public class DataSourceConfig {
 }
 ```
 
-#### 5.  Druid 连接池配置
+### 5.  Druid 连接池配置
 
 新建 ServletConfig，进行数据库相关配置：
 
@@ -242,7 +246,7 @@ public class ServletConfig implements WebMvcConfigurer {
 }
 ```
 
-#### 6. MyBatis 配置
+### 6. MyBatis 配置
 
 新建 mybtais 配置文件，按照需求配置额外参数， 更多 settings 配置项可以参考 [官方文档](
 
@@ -264,7 +268,7 @@ public class ServletConfig implements WebMvcConfigurer {
 </configuration>
 ```
 
-#### 7. 数据查询
+### 7. 数据查询
 
 新建查询接口及其实现类，以下示例分别查询的是 MySQL 和 Oracle 中的字典表：
 
@@ -313,7 +317,7 @@ public interface OracleDao {
 </mapper>
 ```
 
-#### 8. 测试查询
+### 8. 测试查询
 
 新建测试类进行测试：
 
@@ -345,7 +349,7 @@ public class OracleController {
 }
 ```
 
-#### 9. Druid 监控台
+### 9. Druid 监控台
 
 Druid Web 页面访问地址为：http://localhost:8080/druid/index.html，可以登录后查看数据库相关监控数据：
 

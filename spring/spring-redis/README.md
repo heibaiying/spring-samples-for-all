@@ -1,11 +1,11 @@
 # Spring 整合 Redis （ XML配置方式）
 
 <nav>
-<a href="#一说明">一、说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11--客户端说明">1.1  客户端说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#一项目说明">一、项目说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11--Redis客户端">1.1  Redis客户端</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-可视化软件">1.2 可视化软件 </a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-项目结构">1.3 项目结构</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-依赖说明">1.4 依赖说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-基本依赖">1.4 基本依赖</a><br/>
 <a href="#二Spring-整合-Jedis">二、Spring 整合 Jedis</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-新建配置文件">2.1 新建配置文件</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-单机配置">2.2 单机配置</a><br/>
@@ -18,10 +18,9 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-存储基本类型测试用例">2.3 存储基本类型测试用例</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-存储实体对象测试用例">2.4 存储实体对象测试用例</a><br/>
 </nav>
+### 一、项目说明
 
-## 一、说明
-
-### 1.1  客户端说明
+### 1.1  Redis客户端
 
 关于 spring 整合 Redis 本用例提供两种整合方法：
 
@@ -45,6 +44,8 @@
 + 实体类 Programmer 用于测试 Redisson 序列化与反序列化。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-redis.png"/> </div>
+
+
 **springapplication.xml 文件：**
 
 ```xml
@@ -68,7 +69,7 @@
 </beans>
 ```
 
-### 1.4 依赖说明
+### 1.4 基本依赖
 
 除了 Spring 的基本依赖外，需要导入 Jedis 和 Redisson 对应的客户端依赖：
 

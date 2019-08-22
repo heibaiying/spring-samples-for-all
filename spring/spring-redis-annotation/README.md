@@ -1,10 +1,10 @@
 # Spring 整合 Redis （注解方式）
 <nav>
-<a href="#一说明">一、说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11--客户端说明">1.1  客户端说明</a><br/>
+<a href="#一项目说明">一、项目说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11--Redis客户端">1.1  Redis客户端</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-可视化软件">1.2 可视化软件 </a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-项目结构说明">1.3 项目结构说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-依赖说明">1.4 依赖说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-项目结构">1.3 项目结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-基本依赖">1.4 基本依赖</a><br/>
 <a href="#二spring-整合-jedis">二、spring 整合 jedis</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-新建配置文件">2.1 新建配置文件</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-单机配置">2.2 单机配置</a><br/>
@@ -18,9 +18,10 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-存储实体对象测试用例">2.4 存储实体对象测试用例</a><br/>
 </nav>
 
-## 一、说明
 
-### 1.1  客户端说明
+## 一、项目说明
+
+### 1.1  Redis客户端
 
 关于 spring 整合 Redis 本用例提供两种整合方法：
 
@@ -32,11 +33,12 @@
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/redis官方推荐客户端.png"/> </div>
 
+
 ### 1.2 可视化软件 
 
 推荐使用 **Redis Desktop Manager** 作为可视化查看工具，可以直观看到存储的数据及其序列化的情况。
 
-### 1.3 项目结构说明
+### 1.3 项目结构
 
 + Jedis 和 Redisson 的配置类和单元测试分别位于 config 和 test 下对应的包中，其中集群的配置类以 cluster 开头。
 
@@ -44,7 +46,8 @@
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-redis-annotation.png"/> </div>
 
-### 1.4 依赖说明
+
+### 1.4 基本依赖
 
 除了 Spring 的基本依赖外，需要导入 Jedis 和 Redisson 对应的客户端依赖：
 

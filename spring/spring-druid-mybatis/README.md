@@ -1,22 +1,24 @@
 # Spring +Druid+ Mybatis（XML 配置方式）
 
 <nav>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#项目目录结构">项目目录结构</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-导入依赖">1. 导入依赖</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-webxml-配置">2. web.xml 配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3-数据库配置">3. 数据库配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4-Druid-连接池配置">4. Druid 连接池配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#5-MyBatis-配置">5. MyBatis 配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#6-数据查询">6. 数据查询</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#7-测试查询">7. 测试查询</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#8-Druid-监控台">8. Druid 监控台</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-导入依赖">1. 导入依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-webxml-配置">2. web.xml 配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3-数据库配置">3. 数据库配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4-Druid-连接池配置">4. Druid 连接池配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#5-MyBatis-配置">5. MyBatis 配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#6-数据查询">6. 数据查询</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#7-测试查询">7. 测试查询</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#8-Druid-监控台">8. Druid 监控台</a><br/>
 </nav>
+
+
+
 ### 项目目录结构
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-druid-mybatis.png"/> </div>
 
 
-#### 1. 导入依赖
+### 1. 导入依赖
 
 创建 maven 工程，除了 Spring 的基本依赖外，还需要导入 Mybatis 和 Druid 的相关依赖：
 
@@ -56,7 +58,7 @@
 </dependency>
 ```
 
-#### 2. web.xml 配置
+### 2. web.xml 配置
 
 在 `web.xml` 中配置 Spring 的前端控制器以及 Druid 的 Web 监控台，用于获取数据库的相关监控信息：
 
@@ -126,7 +128,7 @@
 </web-app>
 ```
 
-#### 3. 数据库配置
+### 3. 数据库配置
 
 在 resources 文件夹下新建数据库配置文件 `jdbc.properties`：
 
@@ -142,7 +144,7 @@ oracle.username=用户名
 oracle.password=密码
 ```
 
-#### 4. Druid 连接池配置
+### 4. Druid 连接池配置
 
 在 resources 文件夹下创建 `springApplication.xml` 配置文件和 `druid.xml` 配置文件：
 
@@ -254,7 +256,7 @@ oracle.password=密码
 </beans>
 ```
 
-#### 5. MyBatis 配置
+### 5. MyBatis 配置
 
 新建 mybtais 配置文件，按照需求配置额外参数， 更多 settings 配置项可以参考 [官方文档](http://www.mybatis.org/mybatis-3/zh/configuration.html)
 
@@ -276,7 +278,7 @@ oracle.password=密码
 </configuration>
 ```
 
-#### 6. 数据查询
+### 6. 数据查询
 
 新建查询接口及其实现类，以下示例分别查询的是 MySQL 和 Oracle 中的字典表：
 
@@ -325,7 +327,7 @@ public interface OracleDao {
 </mapper>
 ```
 
-#### 7. 测试查询
+### 7. 测试查询
 
 新建测试类进行测试：
 
@@ -357,7 +359,7 @@ public class OracleController {
 }
 ```
 
-#### 8. Druid 监控台
+### 8. Druid 监控台
 
 Druid Web 页面访问地址为：http://localhost:8080/druid/index.html，可以登录后查看数据库相关监控数据：
 

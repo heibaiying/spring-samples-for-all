@@ -6,10 +6,10 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目结构">1.2 项目结构</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-相关依赖">1.3 相关依赖</a><br/>
 <a href="#二整合-XMemcached">二、整合 XMemcached</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-单机配置">2.1 单机配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-集群配置">2.2 集群配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-存储基本类型测试用例">2.3 存储基本类型测试用例</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-存储实体对象测试用例">2.5 存储实体对象测试用例</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-单机配置">2.1 单机配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-集群配置">2.2 集群配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-存储基本类型测试用例">2.3 存储基本类型测试用例</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-存储实体对象测试用例">2.4 存储实体对象测试用例</a><br/>
 <a href="#附Memcached-基本命令">附：Memcached 基本命令</a><br/>
 </nav>
 
@@ -24,6 +24,8 @@ XMemcached 是基于 Java NIO 实现的 Memcached 的高性能客户端，支持
 Memcached 的整合配置位于 com.heibaiying.config 文件夹下：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-memcached-annotation.png"/> </div>
+
+
 ### 1.3 相关依赖
 
 除了 Spring 的基本依赖外，需要导入 xmemcached 依赖包：
@@ -41,7 +43,7 @@ Memcached 的整合配置位于 com.heibaiying.config 文件夹下：
 
 ## 二、整合 XMemcached
 
-#### 2.1 单机配置
+### 2.1 单机配置
 
 ```java
 @Bean
@@ -57,7 +59,7 @@ try {
 }
 ```
 
-#### 2.2 集群配置
+### 2.2 集群配置
 
 ```java
 @Bean
@@ -87,7 +89,7 @@ public MemcachedClient memcachedClientForCluster() {
 }
 ```
 
-#### 2.3 存储基本类型测试用例
+### 2.3 存储基本类型测试用例
 
 XMemcached  单机版和集群版注入的实例是完全相同的：
 
@@ -111,7 +113,7 @@ public class MemSamples {
 }
 ```
 
-#### 2.5 存储实体对象测试用例
+### 2.4 存储实体对象测试用例
 
 ```java
 @RunWith(SpringRunner.class)

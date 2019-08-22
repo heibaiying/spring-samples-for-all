@@ -25,6 +25,8 @@ XMemcached 是基于 Java NIO 实现的 Memcached 的高性能客户端，支持
 - 实体类 Programmer 用于测试 Memcached 的序列化与反序列化。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-memcached.png"/> </div>
+
+
 **springapplication.xml 文件：**
 
 ```xml
