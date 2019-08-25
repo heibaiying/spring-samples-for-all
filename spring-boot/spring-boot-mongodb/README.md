@@ -1,6 +1,7 @@
 # Spring Boot 整合 MongoDB
 
-<nav>
+
+<nav>
 <a href="#一项目说明">一、项目说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-基本依赖">1.2 基本依赖</a><br/>
@@ -19,6 +20,7 @@
 - 提供基于 Spring Data JPA   的方式操作 MongoDB (推荐)，见测试用例 MongoJPATests。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-mongodb.png"/> </div>
+
 ### 1.2 基本依赖
 
 ```xml
