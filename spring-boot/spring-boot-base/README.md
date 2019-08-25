@@ -1,6 +1,7 @@
 # Spring-Boot 基础
 
-<nav>
+
+<nav>
 <a href="#一项目说明">一、项目说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-基本依赖">1.2 基本依赖</a><br/>
@@ -21,6 +22,7 @@
 3. Spring Boot 2.x 默认不支持 Jsp ，需要额外的配置，关于使用 jsp 的整合可以参考 [spring-boot-jsp](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-jsp) 项目。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-base.png"/> </div>
+
 ### 1.2 基本依赖
 
 导入相关的 starter (启动器)：
@@ -92,6 +94,7 @@
 + Spring Boot 项目默认继承自 spring-boot-starter-parent，而 spring-boot-starter-parent 则继承自 spring-boot-dependencies，spring-boot-dependencies 中定义了关于 spring boot 依赖的各种 jar 包的版本，它是 Spring Boot 的版本管理中心。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-dependencies.png"/> </div>
+
 + 关于Spring Boot 2.x 官方支持的所有 starter 可以参见官方文档：[Table 13.1. Spring Boot application starters](https://docs.spring.io/spring-boot/docs/2.1.1.RELEASE/reference/htmlsingle/#using-boot-starter)
 
 
