@@ -2,7 +2,8 @@
 
 
 
-<nav>
+
+<nav>
 <a href="#一项目说明">一、项目说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-基本依赖">1.2 基本依赖</a><br/>
@@ -22,6 +23,7 @@
 2. 为了演示 Druid 控制台的功能，项目以 Web 的方式构建。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-druid-mybatis.png"/> </div>
+
 ### 1.2 基本依赖
 
 按照 Spring 官方对于自定义的 starter 命名规范的要求：
