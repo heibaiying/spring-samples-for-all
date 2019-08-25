@@ -1,6 +1,7 @@
 # Spring Boot 整合 Mybatis
 
-<nav>
+
+<nav>
 <a href="#一项目说明">一、项目说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-主要依赖">1.2 主要依赖</a><br/>
@@ -23,6 +24,7 @@
    **注解写法**：对应的类为 Programmer.java ，用 MybatisAnnotationTest 进行测试。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-mybatis.png"/> </div>
+
 ### 1.2 主要依赖
 
 按照 Spring 官方对于自定义的 starter 命名规范的要求：
