@@ -1,5 +1,6 @@
 # Spring Boot 实现分布式 Session
-<nav>
+
+<nav>
 <a href="#一项目结构">一、项目结构</a><br/>
 <a href="#二实现分布式-Session">二、实现分布式 Session</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-基本依赖">2.1 基本依赖</a><br/>
@@ -151,9 +152,11 @@ Session 信息展示页面 home.ftl：
 应用 1 启动配置：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-session-app1.png"/> </div>
+
 应用 2 启动配置，需要用 `--server.port ` 指定不同的端口号：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-session-app2.png"/> </div>
+
 **测试结果：**
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-session-8080.png"/> </div>
