@@ -1,6 +1,7 @@
 # Spring Boot Actuator
 
-<nav>
+
+<nav>
 <a href="#一相关概念">一、相关概念</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-执行端点">1.1 执行端点</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-启用端点">1.2 启用端点</a><br/>
@@ -125,6 +126,7 @@ health 端点用于暴露程序运行的健康状态，暴露的信息的详细�
 - **CustomEndPoint**：自定义端点。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-actuator.png"/> </div>
+
 ### 2.2 主要依赖
 
 ```xml
