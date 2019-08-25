@@ -161,7 +161,9 @@ management:
 导入 Actuator 的 starter 并进行配置后，访问 http://127.0.0.1:8080/actuator/health 就可以看到对应的项目监控状态。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/health.png"/> </div>
+
 健康指标 HealthIndicators 由 Spring Boot 自动配置，因此这里显示监控信息是由项目所使用的技术栈而决定的：
+
 
 | 名称                                                         | 描述                             |
 | ------------------------------------------------------------ | -------------------------------- |
@@ -206,6 +208,7 @@ public class CustomHealthIndicator implements HealthIndicator {
 自定义检查通过的情况下：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/actuator-health-up.png"/> </div>
+
 自定义检查失败的情况：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/health-fatal-200.png"/> </div>
@@ -239,6 +242,7 @@ public class CustomHealthAggregator implements HealthAggregator {
 当我们自定义健康检查项不通过时候的结果如下：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/actuator-heath-503.png"/> </div>
+
 这里需要注意的是返回自定义的聚合状态时，状态码也变成了 503，这是我们在配置文件中进行定义的：
 
 ```properties
