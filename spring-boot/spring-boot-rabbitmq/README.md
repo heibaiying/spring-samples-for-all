@@ -24,6 +24,7 @@
 - **rabbitmq-consumer** ：是消息的消费者模块。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-rabbitmq.png"/> </div>
+
 ## 二、主要依赖
 
 在父工程的项目中统一导入依赖 RabbitMQ 的 starter，父工程的 pom.xml 如下：
@@ -186,6 +187,7 @@ public class RabbitmqConsumer {
 ## 五、消息生产者
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/rabbitmq-producer.png"/> </div>
+
 ### 5.1 生产者配置
 
 ```yaml
