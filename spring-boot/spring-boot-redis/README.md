@@ -1,6 +1,7 @@
 # Spring Boot 整合 Redis
 
-<nav>
+
+<nav>
 <a href="#一项目说明">一、项目说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-基本依赖">1.2 基本依赖</a><br/>
@@ -19,6 +20,7 @@
 - RedisOperation 和 RedisObjectOperation 分别封装了对基本类型和对象的操作。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-redis.png"/> </div>
+
 ### 1.2 基本依赖
 
 ```xml
