@@ -1,5 +1,6 @@
 # Spring Boot 集成 Swagger2 打造在线接口文档
-<nav>
+
+<nav>
 <a href="#一概念综述">一、概念综述</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-SpringFox">1.1 SpringFox </a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-Swagger">1.2 Swagger</a><br/>
@@ -243,6 +244,7 @@ Swagger 为了最大程度防止对逻辑代码的侵入，基本都是依靠注
 接口文档访问地址：http://localhost:8080/swagger-ui.html ，文档主界面如下：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/swagger-ui-index.png"/> </div>
+
 ### 2.5 接口测试
 
 Swagger-UI 除了提供接口可视化的功能外，还可以用于接口测试。点击对应接口的 `try it out` 按钮，然后输入对应的参数的值，最后点击下方的 `Execute` 按钮发送请求：
@@ -250,6 +252,7 @@ Swagger-UI 除了提供接口可视化的功能外，还可以用于接口测试
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/swagger-try-it.png"/> </div>
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/swagger-execute.png"/> </div>
+
 POST 接口可以直接修改 Model 对应的 Json 数据 ，然后点击下方的 `Execute` 按钮发送请求：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/swagger-post-try.png"/> </div>
