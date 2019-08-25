@@ -1,5 +1,6 @@
 # Spring 实现分布式 Session
-<nav>
+
+<nav>
 <a href="#一项目结构">一、项目结构</a><br/>
 <a href="#二实现分布式-Session">二、实现分布式 Session</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-基本依赖">2.1 基本依赖</a><br/>
@@ -15,6 +16,7 @@
 分布式 Session 主要配置文件为 spring-session.xml 和 web.xml，其他的配置为标准的 web 工程的配置：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-session.png"/> </div>
+
 ## 二、实现分布式 Session
 
 ### 2.1 基本依赖
@@ -187,9 +189,11 @@ session 信息展示页面 (home.jsp)：
 Tomcat 1 配置：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-session-tomcat01.png"/> </div>
+
 Tomcat 2 配置：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-session-tomcat02.png"/> </div>
+
 **测试结果：**
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-session-8080.png"/> </div>
