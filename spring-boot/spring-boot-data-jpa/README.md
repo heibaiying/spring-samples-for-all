@@ -1,6 +1,7 @@
 # Spring Boot Data JPA
 
-<nav>
+
+<nav>
 <a href="#一项目说明">一、项目说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-基本依赖">1.2 基本依赖</a><br/>
@@ -15,6 +16,7 @@
 ### 1.1 项目结构
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-data-jpa.png"/> </div>
+
 ### 1.2 基本依赖
 
 ```xml
