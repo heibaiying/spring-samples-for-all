@@ -1,29 +1,25 @@
-# spring boot 整合 mongodb
+# Spring Boot 整合 MongoDB
 
-## 目录<br/>
-<a href="#一说明">一、说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-用例结构">1.1 用例结构</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目主要依赖">1.2 项目主要依赖</a><br/>
-<a href="#二整合-mongodb">二、整合 mongodb</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-在applicationyml-中配置mongodb数据源">2.1 在application.yml 中配置mongodb数据源</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22--基于MongoTemplate实现对mongodb的操作">2.2  基于MongoTemplate实现对mongodb的操作</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-使用-data-jpa-方式操作mongodb-推荐使用">2.3 使用 data jpa 方式操作mongodb (推荐使用)</a><br/>
-## 正文<br/>
+<nav>
+<a href="#一项目说明">一、项目说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-基本依赖">1.2 基本依赖</a><br/>
+<a href="#二整合-MongoDB">二、整合 MongoDB </a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-配置数据源">2.1 配置数据源</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22--MongoTemplate">2.2  MongoTemplate</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-Spring-Data-JPA">2.3 Spring Data JPA</a><br/>
+</nav>
 
+## 一、项目说明
 
+### 1.1 项目结构
 
-
-## 一、说明
-
-#### 1.1 用例结构
-
-1. 本用例提供 mongdb 的简单整合用例；
-2. 提供用 MongoTemplate 的方式操作 mongdb，见测试用例 MongoOriginalTests.java
-3. 提供基于 spring data jpa 的方式操作 mongodb(推荐)，见测试用例 MongoJPATests.java
+- 本用例提供 MongoDB 的简单整合用例；
+- 提供基于 MongoTemplate 的方式操作 MongoDB，见测试用例 MongoOriginalTests；
+- 提供基于 Spring Data JPA   的方式操作 MongoDB (推荐)，见测试用例 MongoJPATests。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-mongodb.png"/> </div>
-
-#### 1.2 项目主要依赖
+### 1.2 基本依赖
 
 ```xml
 <dependency>
@@ -34,9 +30,9 @@
 
 
 
-## 二、整合 mongodb
+## 二、整合 MongoDB 
 
-#### 2.1 在application.yml 中配置mongodb数据源
+### 2.1 配置数据源
 
 ```yaml
 spring:
@@ -46,7 +42,9 @@ spring:
       uri: mongodb://192.168.0.108:27017
 ```
 
-#### 2.2  基于MongoTemplate实现对mongodb的操作
+### 2.2  MongoTemplate
+
+基于 MongoTemplate 实现对 MongoDB 的操作：
 
 ```java
 @RunWith(SpringRunner.class)
@@ -96,9 +94,9 @@ public class MongoOriginalTests {
 }
 ```
 
-#### 2.3 使用 data jpa 方式操作mongodb (推荐使用)
+### 2.3 Spring Data JPA
 
-1.新建查询结构，查询方法按照支持的关键字命名
+使用 Spring Data JPA 时，只需要将查询方法按照 Spring 的规范命令即可：
 
 ```java
 public interface ProgrammerRepository extends MongoRepository<Programmer, String> {
@@ -112,7 +110,7 @@ public interface ProgrammerRepository extends MongoRepository<Programmer, String
 }
 ```
 
-2.测试
+单元测试：
 
 ```java
 @RunWith(SpringRunner.class)
@@ -160,7 +158,7 @@ public class MongoJPATests {
 }
 ```
 
-查询方法支持的关键字如下,更多命名规范可以参见 Spring Data MongoDB 官方文档[Query Methods](https://docs.spring.io/spring-data/mongodb/docs/2.1.3.RELEASE/reference/html/#mongodb.repositories.queries)：
+查询方法所有支持的关键字如下，更多命名规范可以参见 Spring Data MongoDB 官方文档 [Query Methods](https://docs.spring.io/spring-data/mongodb/docs/2.1.3.RELEASE/reference/html/#mongodb.repositories.queries)：
 
 | Keyword                              | Sample                                                       | Logical result                                               |
 | ------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |

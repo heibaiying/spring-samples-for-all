@@ -1,39 +1,32 @@
-# spring boot 整合 rabbitmq
-
-## 目录<br/>
-<a href="#一-项目结构说明">一、 项目结构说明</a><br/>
-<a href="#二关键依赖">二、关键依赖</a><br/>
-<a href="#三公共模块rabbitmq-common">三、公共模块（rabbitmq-common）</a><br/>
-<a href="#四服务消费者rabbitmq-consumer">四、服务消费者（rabbitmq-consumer）</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-消息消费者配置">4.1 消息消费者配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-使用注解RabbitListener和RabbitHandler创建消息监听者">4.2 使用注解@RabbitListener和@RabbitHandler创建消息监听者</a><br/>
-<a href="#五-消息生产者rabbitmq-producer">五、 消息生产者（rabbitmq-producer）</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#51-消息生产者配置">5.1 消息生产者配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#52--创建消息生产者">5.2  创建消息生产者</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#53--以单元测试的方式发送消息">5.3  以单元测试的方式发送消息</a><br/>
-<a href="#六项目构建的说明">六、项目构建的说明</a><br/>
-## 正文<br/>
+# Spring Boot 整合 RabbitMQ
 
 
+<nav>
+<a href="#一-项目结构">一、 项目结构</a><br/>
+<a href="#二主要依赖">二、主要依赖</a><br/>
+<a href="#三公共模块">三、公共模块</a><br/>
+<a href="#四消息消费者">四、消息消费者</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-消费者配置">4.1 消费者配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-创建监听者">4.2 创建监听者</a><br/>
+<a href="#五消息生产者">五、消息生产者</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#51-生产者配置">5.1 生产者配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#52--创建生产者">5.2  创建生产者</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#53--单元测试">5.3  单元测试</a><br/>
+<a href="#六项目构建">六、项目构建</a><br/>
+</nav>
 
+## 一、 项目结构
 
-## 一、 项目结构说明
+之前关于 Spring 整合 RabbitMQ 我们采用的是单项目的方式，为了使得用例更具有实际意义，这里采用 Maven 多模块的构建方式，在 spring-boot-rabbitmq 下构建三个子模块：
 
-1.1  之前关于 spring 整合 rabbitmq 我们采用的是单项目的方式，为了使得用例更具有实际意义，这里采用 maven 多模块的构建方式，在 spring-boot-rabbitmq 下构建三个子模块：
-
-1. rabbitmq-common 是公共模块，用于存放公共的接口、配置和 bean,被 rabbitmq-producer 和 rabbitmq-consumer 在 pom.xml 中引用；
-2. rabbitmq-producer 是消息的生产者模块；
-3. rabbitmq-consumer 是消息的消费者模块。
-
-1.2  关于 rabbitmq 安装、交换机、队列、死信队列等基本概念可以参考我的手记[《RabbitMQ 实战指南》读书笔记](https://github.com/heibaiying/LearningNotes/blob/master/notes/%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/%E3%80%8ARabbitMQ%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0.md),里面有详细的配图说明。
+- **rabbitmq-common** ：公共模块，用于存放公共的接口、配置和 Java Bean，被 rabbitmq-producer 和 rabbitmq-consumer 在 pom.xml 中引用；
+- **rabbitmq-producer** ：消息的生产者模块；
+- **rabbitmq-consumer** ：是消息的消费者模块。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-rabbitmq.png"/> </div>
+## 二、主要依赖
 
-
-
-## 二、关键依赖
-
-在父工程的项目中统一导入依赖 rabbitmq 的 starter(spring-boot-starter-amqp)，父工程的 pom.xml 如下
+在父工程的项目中统一导入依赖 RabbitMQ 的 starter，父工程的 pom.xml 如下：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -86,26 +79,19 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    
+
 </project>
 ```
 
 
 
-## 三、公共模块（rabbitmq-common）
+## 三、公共模块
 
 - bean 下为公共的实体类。
-- constant 下为公共配置，用静态常量引用。（这里我使用静态常量是为了方便引用，实际中也可以按照情况，抽取为公共配置文件）
+- constant 下为公共配置，用静态常量进行引用。这里我使用静态常量是为了方便引用，实际中也可以按照情况，抽取为公共的配置文件。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/rabbitmq-common.png"/> </div>
-
 ```java
-package com.heibaiying.constant;
-
-/**
- * @author : heibaiying
- * @description : rabbit 公用配置信息
- */
 public class RabbitInfo {
 
     // queue 配置
@@ -124,11 +110,10 @@ public class RabbitInfo {
 
 
 
-## 四、服务消费者（rabbitmq-consumer）
+## 四、消息消费者
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/rabbitmq-consumer.png"/> </div>
-
-#### 4.1 消息消费者配置
+### 4.1 消费者配置
 
 ```yaml
 spring:
@@ -149,17 +134,11 @@ spring:
         max-concurrency: 50
 ```
 
-#### 4.2 使用注解@RabbitListener和@RabbitHandler创建消息监听者
+### 4.2 创建监听者
 
-1. 使用注解创建的交换机、队列、和绑定关系会在项目初始化的时候自动创建，但是不会重复创建；
-2. 这里我们创建两个消息监听器，分别演示消息是基本类型和消息是对象时的配置区别。
+使用注解 @RabbitListener 和 @RabbitHandler 创建消息的监听者，使用注解创建的交换机、队列、和绑定关系会在项目初始化的时候自动创建，但是不会重复创建。这里我们创建两个消息监听器，分别演示消息是基本类型和消息是对象时区别：
 
 ```java
-/**
- * @author : heibaiying
- * @description : 消息是对象的消费者
- */
-
 @Component
 @Slf4j
 public class RabbitmqBeanConsumer {
@@ -204,11 +183,10 @@ public class RabbitmqConsumer {
 
 
 
-## 五、 消息生产者（rabbitmq-producer）
+## 五、消息生产者
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/rabbitmq-producer.png"/> </div>
-
-#### 5.1 消息生产者配置
+### 5.1 生产者配置
 
 ```yaml
 spring:
@@ -230,13 +208,9 @@ server:
   port: 8090
 ```
 
-#### 5.2  创建消息生产者
+### 5.2  创建生产者
 
 ```java
-/**
- * @author : heibaiying
- * @description : 消息生产者
- */
 @Component
 @Slf4j
 public class RabbitmqProducer {
@@ -272,7 +246,9 @@ public class RabbitmqProducer {
 }
 ```
 
-#### 5.3  以单元测试的方式发送消息
+### 5.3  单元测试
+
+以单元测试的方式发送消息：
 
 ```java
 @RunWith(SpringRunner.class)
@@ -308,100 +284,11 @@ public class RabbitmqProducerTests {
 }
 ```
 
+## 六、项目构建
 
-
-## 六、项目构建的说明
-
-因为在项目中，consumer 和 producer 模块均依赖公共模块,所以在构建 consumer 和 producer 项目前需要将 common 模块安装到本地仓库，**依次**对**父工程**和**common 模块**执行：
+因为在项目中，consumer 和 producer 模块均依赖公共模块,所以在构建 consumer 和 producer 项目前需要将 common 模块安装到本地仓库，依次对父工程和 common 模块执行：
 
 ```shell
 mvn install -Dmaven.test.skip = true
 ```
 
-consumer 中 pom.xml 如下
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <parent>
-        <groupId>com.heibaiying</groupId>
-        <artifactId>spring-boot-rabbitmq</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-    </parent>
-
-    <artifactId>rabbitmq-consumer</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>rabbitmq-consumer</name>
-    <description>RabbitMQ consumer project for Spring Boot</description>
-
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.heibaiying</groupId>
-            <artifactId>rabbitmq-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-</project>
-```
-
-producer 中 pom.xml 如下
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <parent>
-        <groupId>com.heibaiying</groupId>
-        <artifactId>spring-boot-rabbitmq</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-    </parent>
-
-    <artifactId>rabbitmq-producer</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>rabbitmq-producer</name>
-    <description>RabbitMQ producer project for Spring Boot</description>
-
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.heibaiying</groupId>
-            <artifactId>rabbitmq-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
-</project>
-
-```

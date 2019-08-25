@@ -1,52 +1,48 @@
-# spring boot actuator
+# Spring Boot Actuator
 
-## 目录<br/>
-<a href="#一用例涉及到的概念综述">一、用例涉及到的概念综述</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-端点">1.1 端点</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-启用端点">1.2 启用端点</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-暴露端点">1.3 暴露端点</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-健康检查信息">1.4 健康检查信息</a><br/>
+<nav>
+<a href="#一相关概念">一、相关概念</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-执行端点">1.1 执行端点</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-启用端点">1.2 启用端点</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-暴露端点">1.3 暴露端点</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-健康检查">1.4 健康检查</a><br/>
 <a href="#二项目说明">二、项目说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构说明">1.1 项目结构说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-主要依赖">1.2 主要依赖</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-项目配置">1.3 项目配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-查看监控状态">1.4 查看监控状态</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-项目结构">2.1 项目结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-主要依赖">2.2 主要依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-项目配置">2.3 项目配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-监控状态">2.4 监控状态</a><br/>
 <a href="#三自定义健康检查指标">三、自定义健康检查指标</a><br/>
 <a href="#四自定义健康状态聚合规则">四、自定义健康状态聚合规则</a><br/>
-<a href="#五Endpoint自定义端点">五、@Endpoint自定义端点</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#51-自定义端点">5.1 自定义端点</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#52-访问自定义端点http//1270018080/actuator/customEndPoint">5.2 访问自定义端点http://127.0.0.1:8080/actuator/customEndPoint</a><br/>
-## 正文<br/>
+<a href="#五自定义端点">五、自定义端点</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#51-Hyperic-Sigar">5.1 Hyperic Sigar </a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#52-自定义端点">5.2 自定义端点</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#53-访问自定义端点">5.3 访问自定义端点</a><br/>
+</nav>
 
+## 一、相关概念
 
+### 1.1 执行端点
 
-
-## 一、用例涉及到的概念综述
-
-### 1.1 端点
-
-执行器端点（endpoints）可用于监控应用及与应用进行交互，Spring  Boot 包含很多内置的端点，你也可以添加自己的。例如，health 端点提供了应用的基本健康信息。  端点暴露的方式取决于你采用的技术类型，大部分应用选择 HTTP 监控，端点的 ID 映射到一个 URL。例如，health 端点默认映射到/health。
-
-下面的端点都是可用的：
+Spring  Boot 提供了很多执行器端点（endpoints）用于监控应用的运行情况以及与应用进行交互，并支持将这些端点按需暴露给外部使用。 端点暴露的方式取决于你采用的技术类型，通常可以端点的 ID 映射到一个 URL，从而可以将端口暴露为 HTTP 服务。例如，将health 端点默认映射到 /health。Spring Boot 内置的常用端点如下：
 
 | ID          | 描述                                                         | 是否敏感 |
 | ----------- | ------------------------------------------------------------ | -------- |
 | actuator    | 为其他端点提供基于超文本的导航页面，需要添加 Spring HATEOAS 依赖 | true     |
 | autoconfig  | 显示一个自动配置类的报告，该报告展示所有自动配置候选者及它们被应用或未被应用的原因 | true     |
-| beans       | 显示一个应用中所有 Spring Beans 的完整列表                     | true     |
-| configprops | 显示一个所有@ConfigurationProperties 的集合列表               | true     |
+| beans       | 显示一个应用中所有 Spring Beans 的完整列表                   | true     |
+| configprops | 显示一个所有 @ConfigurationProperties 的集合列表             | true     |
 | dump        | 执行一个线程转储                                             | true     |
-| env         | 暴露来自 Spring ConfigurableEnvironment 的属性                 | true     |
+| env         | 暴露来自 Spring ConfigurableEnvironment 的属性               | true     |
 | flyway      | 显示数据库迁移路径，如果有的话                               | true     |
-| health      | 展示应用的健康信息（当使用一个未认证连接访问时显示一个简单的'status'，使用认证连接访问则显示全部信息详情） | false    |
+| health      | 展示应用的健康信息（当使用一个未认证连接访问时显示一个简单的 'status'，使用认证连接访问则显示全部信息详情） | false    |
 | info        | 显示任意的应用信息                                           | false    |
-| liquibase   | 展示任何 Liquibase 数据库迁移路径，如果有的话                  | true     |
-| metrics     | 展示当前应用的'metrics'信息                                  | true     |
-| mappings    | 显示一个所有@RequestMapping 路径的集合列表                    | true     |
+| liquibase   | 展示任何 Liquibase 数据库迁移路径，如果有的话                | true     |
+| metrics     | 展示当前应用的 'metrics' 信息                                | true     |
+| mappings    | 显示一个所有 @RequestMapping 路径的集合列表                  | true     |
 | shutdown    | 允许应用以优雅的方式关闭（默认情况下不启用）                 | true     |
-| trace       | 显示 trace 信息（默认为最新的 100 条 HTTP 请求）                   | true     |
+| trace       | 显示 trace 信息（默认为最新的 100 条 HTTP 请求）             | true     |
 
-如果使用 Spring MVC，你还可以使用以下端点：
+如果使用了 Spring MVC，还有以下额外的端点：
 
 | ID       | 描述                                                         | 是否敏感 |
 | -------- | ------------------------------------------------------------ | -------- |
@@ -55,13 +51,13 @@
 | jolokia  | 通过 HTTP 暴露 JMX beans（依赖 Jolokia）                         | true     |
 | logfile  | 返回日志文件内容（如果设置 logging.file 或 logging.path 属性），支持使用 HTTP Range 头接收日志文件内容的部分信息 |          |
 
-注：根据端点暴露的方式，sensitive 属性可用做安全提示，例如，在使用 HTTP 访问敏感（sensitive）端点时需要提供用户名/密码（如果没有启用 web 安全，可能会简化为禁止访问该端点）。
+端点按照安全属性可以分为敏感和非敏感两类，在启用 Web 安全服务后，访问敏感端点时需要提供用户名和密码，如果没有启用 web 安全服务，Spring Boot 可能会直接禁止访问该端点。
 
 
 
 ### 1.2 启用端点
 
-默认情况下，除了以外的所有端点 shutdown 都已启用。要配置端点的启用，请使用其 management.endpoint.<id>.enabled 属性。以下示例启用 shutdown 端点：
+默认情况下，除了 shutdown 以外的所有端点都已启用。端点的启停可以使用 management.endpoint.\<id>.enabled 属性来进行控制，示例如下：
 
 ```properties
 management.endpoint.shutdown.enabled = true
@@ -71,7 +67,7 @@ management.endpoint.shutdown.enabled = true
 
 ### 1.3 暴露端点
 
-由于端点可能包含敏感信息，因此应仔细考虑何时公开它们。下表显示了内置端点的默认曝光情况：
+由于端点可能包含敏感信息，因此应仔细考虑后再决定是否公开。下表显示了内置端点的默认公开情况：
 
 | ID             | JMX   | Web  |
 | -------------- | ----- | ---- |
@@ -97,7 +93,7 @@ management.endpoint.shutdown.enabled = true
 | shutdown       | 是    | 没有 |
 | threaddump     | 是    | 没有 |
 
-**可以选择是否暴露端点（include）或者排除端点（exclude）,其中排除优先于暴露：**
+可以选择是否暴露端点（include）或者排除端点（exclude）,其中排除属性优先于暴露属性：
 
 | 属性                                      | 默认         |
 | ----------------------------------------- | ------------ |
@@ -108,9 +104,9 @@ management.endpoint.shutdown.enabled = true
 
 
 
-### 1.4 健康检查信息
+### 1.4 健康检查
 
-您可以使用健康信息来检查正在运行的应用程序的状态。health 端点公开的信息取决于 management.endpoint.health.show-details 可以使用以下值之一配置的属性：
+health 端点用于暴露程序运行的健康状态，暴露的信息的详细程度由 management.endpoint.health.show-details 来控制，它具有以下三个可选值：
 
 | 名称            | 描述                                                         |
 | --------------- | ------------------------------------------------------------ |
@@ -122,14 +118,14 @@ management.endpoint.shutdown.enabled = true
 
 ## 二、项目说明
 
-#### 1.1 项目结构说明
+### 2.1 项目结构
 
-1. CustomHealthIndicator 自定义健康指标；
-2. CustomHealthAggregator：自定义健康聚合规则；
-3. CustomEndPoint：自定义端点。
+- **CustomHealthIndicator** 自定义健康指标；
+- **CustomHealthAggregator**：自定义健康状态聚合规则；
+- **CustomEndPoint**：自定义端点。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-actuator.png"/> </div>
-#### 1.2 主要依赖
+### 2.2 主要依赖
 
 ```xml
 <dependency>
@@ -138,7 +134,7 @@ management.endpoint.shutdown.enabled = true
 </dependency>
 ```
 
-#### 1.3 项目配置
+### 2.3 项目配置
 
 ```yaml
 management:
@@ -158,12 +154,12 @@ management:
         FATAL:  503
 ```
 
-#### 1.4 查看监控状态
+### 2.4 监控状态
 
-导入 actuator 的 start 并进行配置后，访问 http://127.0.0.1:8080/actuator/health 就可以看到对应的项目监控状态。
+导入 Actuator 的 starter 并进行配置后，访问 http://127.0.0.1:8080/actuator/health 就可以看到对应的项目监控状态。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/health.png"/> </div>
-需要注意的是这里的监控状态根据实际项目所用到的技术不同而不同。因为以下 HealthIndicators 情况在适当时由 Spring Boot 自动配置的：
+健康指标 HealthIndicators 由 Spring Boot 自动配置，因此这里显示监控信息是由项目所使用的技术栈而决定的：
 
 | 名称                                                         | 描述                             |
 | ------------------------------------------------------------ | -------------------------------- |
@@ -186,7 +182,6 @@ management:
 
 ```java
 /**
- * @author : heibaiying
  * @description : 自定义健康检查指标
  */
 @Component
@@ -213,8 +208,7 @@ public class CustomHealthIndicator implements HealthIndicator {
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/health-fatal-200.png"/> </div>
 
-
-这里我们可以看到自定义检查不论是否通过都不会影响整体的 status,两种情况下都是 status 都是“up”。如果我们想通过自定义的检查检查去影响最终的检查结果，比如我们健康检查针对的是支付业务，在支付业务的不可用的情况下，我们就认为整个服务是不可用的。这个时候就需要实现自定义实现健康状态的聚合。
+自定义检查不论是否通过都不会影响整体的 status，因此两种情况下的 status 值都是 `up`。如果想通过自定义检查去影响整体的检查结果，比如健康检查针对的是支付业务，在支付业务的不可用的情况下，我们就应该认为整个服务是不可用的，这个时候就需要通过自定义健康状态的聚合规则来实现。
 
 
 
@@ -222,8 +216,7 @@ public class CustomHealthIndicator implements HealthIndicator {
 
 ```java
 /**
- * @author : heibaiying
- * @description : 对所有的自定义健康指标进行聚合，按照自定义规则返回总和健康状态
+ * @description : 对所有的自定义健康指标进行聚合，按照自定义规则返回总的健康状态
  */
 @Component
 public class CustomHealthAggregator implements HealthAggregator {
@@ -241,16 +234,16 @@ public class CustomHealthAggregator implements HealthAggregator {
 }
 ```
 
-当我们自定义健康检查不通过时候的结果如下：
+当我们自定义健康检查项不通过时候的结果如下：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/actuator-heath-503.png"/> </div>
-这里需要注意的是返回我们自定义的聚合状态的时候，状态码也变成了 503,这是我们在配置文件中进行定义的：
+这里需要注意的是返回自定义的聚合状态时，状态码也变成了 503，这是我们在配置文件中进行定义的：
 
 ```properties
 management.health.status.http-mapping.FATAL = 503
 ```
 
-下表显示了内置状态的默认状态映射：
+下表显示了内置状态的默认映射：
 
 | Status         | Mapping                                      |
 | -------------- | -------------------------------------------- |
@@ -261,19 +254,18 @@ management.health.status.http-mapping.FATAL = 503
 
 
 
-## 五、@Endpoint自定义端点
+## 五、自定义端点
 
-#### 5.1 自定义端点
+### 5.1 Hyperic Sigar 
 
-spring boot 支持使用@Endpoint 来自定义端点暴露应用信息。这里我们采用第三方 sigar 来暴露服务所在硬件的监控信息。
+Spring Boot 支持使用 `@Endpoint` 来自定义端点暴露信息，这里以暴露服务所在硬件的监控信息为例。想要获取服务器信息需要通过第三方工具来实现，这里我们使用的是 Sigar。Sigar 是 Hyperic HQ 下的数据收集组件，其底层采用 C 语言进行编写，它通过本地方法调用操作系统的 API 来获取系统相关数据 ，其 JAR 包的下载地址为：https://sourceforge.net/projects/sigar/  。
 
-Sigar 是 Hyperic-hq 产品的基础包，是 Hyperic HQ 主要的数据收集组件。Sigar.jar 的底层是用 C 语言编写的，它通过本地方法来调用操作系统 API 来获取系统相关数据 [jar 包下载地址](https://sourceforge.net/projects/sigar/)。
+Sigar 为不同平台提供了不同的库文件，下载后需要将库文件放到服务所在主机的对应位置：
 
-Sigar 为不同平台提供了不同的库文件,下载后需要将库文件放到服务所在主机的对应位置：
+- **Windows** ：根据操作系统版本选择 sigar-amd64-winnt.dll 或 sigar-x86-winnt.dll 并拷贝到 C:\Windows\System32 下；
+- **Linux**：将 libsigar-amd64-linux.so 或 libsigar-x86-linux.so 拷贝以下任意目录：`/usr/lib64` ， `/lib64` ，`/lib` ， `/usr/lib` ，如果不起作用，还需要通过 `sudo chmod 744` 命令修改 libsigar-amd64-linux.so 的文件权限。
 
-- Windows 下配置：根据自己的操作系统版本选择 sigar-amd64-winnt.dll 或 sigar-x86-winnt.dll 拷贝到 C:\Windows\System32 中
-
-- Linux 下配置：将 libsigar-amd64-linux.so 或 libsigar-x86-linux.so 拷贝到/usr/lib64 或/lib64 或/lib 或/usr/lib 目录下，如果不起作用，还需要 sudochmod 744 修改 libsigar-amd64-linux.so 文件权限
+### 5.2 自定义端点
 
 ```java
 @Endpoint(id = "customEndPoint")
@@ -309,7 +301,7 @@ public class CustomEndPoint {
 }
 ```
 
-其中可用的方法注解由 http 操作决定：
+可用的方法注解由 HTTP 操作所决定：
 
 | operation        | HTTP 方法 |
 | ---------------- | -------- |
@@ -317,13 +309,12 @@ public class CustomEndPoint {
 | @WriteOperation  | POST     |
 | @DeleteOperation | DELETE   |
 
-#### 5.2 访问自定义端点：http://127.0.0.1:8080/actuator/customEndPoint
+### 5.3 访问自定义端点
+
+地址为：http://127.0.0.1:8080/actuator/customEndPoint ：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/actuator-customEndPoint.png"/> </div>
 
-
-关于 Sigar 的 更多监控参数可以参考博客：[java 读取计算机 CPU、内存等信息（Sigar 使用）](https://blog.csdn.net/wudiazu/article/details/73829324)
-
-Sigar 下载包中也提供了各种参数的参考用例：
+关于 Sigar 的更多监控参数可以参考博客：[java 读取计算机 CPU、内存等信息（Sigar 使用）](https://blog.csdn.net/wudiazu/article/details/73829324) 或 Sigar 下载包中的用例：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/sigar.png"/> </div>

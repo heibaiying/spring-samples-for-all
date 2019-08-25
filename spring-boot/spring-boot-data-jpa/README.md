@@ -1,25 +1,21 @@
-# spring boot data jpa
+# Spring Boot Data JPA
 
-## 目录<br/>
-<a href="#一说明">一、说明</a><br/>
+<nav>
+<a href="#一项目说明">一、项目说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目主要依赖">1.2 项目主要依赖</a><br/>
-<a href="#二data-jpa-的使用">二、data jpa 的使用</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-在applicationyml-中配置数据源">2.1 在application.yml 中配置数据源</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-新建查询接口">2.2 新建查询接口</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23--测试类">2.3  测试类</a><br/>
-## 正文<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-基本依赖">1.2 基本依赖</a><br/>
+<a href="#二-使用-Data-JPA">二、 使用 Data JPA</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-数据源配置">2.1 数据源配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-查询接口">2.2 查询接口</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23--单元测试">2.3  单元测试</a><br/>
+</nav>
 
+## 一、项目说明
 
-
-
-## 一、说明
-
-#### 1.1 项目结构
+### 1.1 项目结构
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-data-jpa.png"/> </div>
-
-#### 1.2 项目主要依赖
+### 1.2 基本依赖
 
 ```xml
 <dependencies>
@@ -43,9 +39,11 @@
 </dependencies>
 ```
 
-## 二、data jpa 的使用
+## 二、 使用 Data JPA
 
-#### 2.1 在application.yml 中配置数据源
+### 2.1 数据源配置
+
+在 application.yml 中配置数据源：
 
 ```yaml
 spring:
@@ -62,11 +60,10 @@ spring:
     show-sql: true
 ```
 
-#### 2.2 新建查询接口
+### 2.2 查询接口
 
 ```java
 /**
- * @author : heibaiying
  * @description : 查询接口继承自 CrudRepository,CrudRepository 默认定义了部分增删改查方法
  */
 public interface ProgRepository extends CrudRepository<Programmer, Integer> {
@@ -99,7 +96,7 @@ public interface ProgRepository extends CrudRepository<Programmer, Integer> {
 
 ```
 
-关于查询方法遵循的命名规范和关键词见下表:
+在使用 Spring Data JPA 时你甚至可以不用写 SQL 语句，只需要在定义方法名时满足 Spring 的规范即可，Spring 会自动将这些方法按照其命名转换为对应的 SQL 语句，以下是其转换对照表：
 
 | Keyword             | Sample                                                       | JPQL snippet                                                 |
 | ------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -128,7 +125,7 @@ public interface ProgRepository extends CrudRepository<Programmer, Integer> {
 | `False`             | `findByActiveFalse()`                                        | `… where x.active = false`                                   |
 | `IgnoreCase`        | `findByFirstnameIgnoreCase`                                  | `… where UPPER(x.firstame) = UPPER(?1)`                      |
 
-#### 2.3  测试类
+### 2.3  单元测试
 
 ```java
 @RunWith(SpringRunner.class)

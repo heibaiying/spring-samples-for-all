@@ -1,21 +1,29 @@
-# spring boot + druid + mybatis + atomikos 配置多数据源 并支持分布式事务
+# Spring Boot + Druid + Mybatis + Atomikos 配置多数据源 并支持分布式事务
 
-<a href="#一综述">一、综述</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目说明">1.1 项目说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目结构">1.2 项目结构</a><br/>
+<nav>
+<a href="#一项目综述">一、项目综述</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目说明">1.1 项目说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目结构">1.2 项目结构</a><br/>
 <a href="#二配置多数据源并支持分布式事务">二、配置多数据源并支持分布式事务</a><br/>
-<a href="#三整合结果测试">三、整合结果测试</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21--导入基本依赖">2.1  导入基本依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-配置多数据源">2.2 配置多数据源</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-实现多数据源">2.3 实现多数据源</a><br/>
+<a href="#三测试整合结果">三、测试整合结果</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31--测试数据库整合结果">3.1  测试数据库整合结果</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-测试单数据库事务">3.2 测试单数据库事务</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-测试分布式事务">3.3 测试分布式事务</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-测试-Druid-数据源">3.4 测试 Druid 数据源</a><br/>
 <a href="#四JTA与两阶段提交">四、JTA与两阶段提交</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-XA-与-JTA">4.1 XA 与 JTA</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-两阶段提交">4.2 两阶段提交</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-XA-与-JTA">4.1 XA 与 JTA</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-两阶段提交">4.2 两阶段提交</a><br/>
 <a href="#五常见整合异常">五、常见整合异常</a><br/>
+</nav>
 
-
-## 一、综述
+## 一、项目综述
 
 ### 1.1 项目说明
 
-本用例基于 spring boot + druid + mybatis 配置多数据源，并采用 **JTA 实现分布式事务**。
+本用例基于 Spring Boot + Druid + Mybatis 配置多数据源，并采用 JTA 实现分布式事务。
 
 ### 1.2 项目结构
 
@@ -25,15 +33,11 @@
 
 
 
-
-
 ## 二、配置多数据源并支持分布式事务
 
 ### 2.1  导入基本依赖
 
-除了 mybatis 、durid 等依赖外，我们依靠切面来实现动态数据源的切换，所以还需要导入 aop 依赖。
-
-最主要的是还要导入 spring-boot-starter-jta-atomikos，Spring Boot 通过[Atomkos](http://www.atomikos.com/) 或[Bitronix](http://docs.codehaus.org/display/BTM/Home) 的内嵌事务管理器支持跨多个 XA 资源的分布式 JTA 事务，当发现 JTA 环境时，Spring  Boot 将使用 Spring 的 JtaTransactionManager 来管理事务。自动配置的 JMS，DataSource 和 JPA beans 将被升级以支持 XA 事务。
+除了 Mybatis 、Durid 等基本依赖外，由于我们是依靠切面来实现动态数据源的切换，所以还需要导入 AOP 依赖。另外还需要导入 spring-boot-starter-jta-atomikos，Spring Boot 通过 [Atomkos](http://www.atomikos.com/) 或 [Bitronix](http://docs.codehaus.org/display/BTM/Home) 等内嵌事务管理器来支持跨多个 XA 资源的分布式  JTA 事务，当发现 JTA 的依赖和环境时，Spring  Boot 将使用 Spring 的 JtaTransactionManager 来管理事务，并且自动配置的 JMS，DataSource 和 JPA Beans 也会被升级以支持 XA 事务。
 
 ```xml
 <!--mybatis starter-->
@@ -76,11 +80,9 @@
 </dependency>
 ```
 
-### 2.2 在yml中配置多数据源信息
+### 2.2 配置多数据源
 
 **注意**：Spring Boot 2.X 版本不再支持配置继承，多数据源的话每个数据源的所有配置都需要单独配置，否则配置不会生效。
-
-这里我用的本地数据库 mysql 和 mysql02,配置如下：
 
 ```yml
 spring:
@@ -169,11 +171,11 @@ spring:
         login-password: druid
 ```
 
+### 2.3 实现多数据源
 
+#### 1.  关闭自动化配置
 
-### 2.3  进行多数据源的配置
-
-#### 1.  在启动类关闭springboot对数据源的自动化配置，由我们手动进行多数据源的配置
+在启动类关闭 Spring Boot 对数据源的自动化配置，由我们手动进行多数据源的配置：
 
 ```java
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
@@ -186,11 +188,13 @@ public class DruidMybatisMultiApplication {
 }
 ```
 
-#### 2.  创建多数据源配置类`DataSourceFactory.java`, 手动配置多数据源
+#### 2.  手动配置多数据源
+
+创建多数据源配置类 `DataSourceFactory.java`, 手动配置多数据源：
 
 + 这里我们创建 druid 数据源的时候，创建的是 `DruidXADataSource`，它继承自 `DruidDataSource ` 并支持 XA 分布式事务；
 + 使用 `AtomikosDataSourceBean` 包装我们创建的 `DruidXADataSource`，使得数据源能够被 JTA 事务管理器管理；
-+ 这里我们使用的 sqlSessionTemplate 是我们重写的 `CustomSqlSessionTemplate`,原生的 sqlSessionTemplate 是不能实现在一个事务中实现数据源切换的。（为了不占用篇幅，我会在后文再给出详细的原因分析）
++ 这里我们使用的 SqlSessionTemplate 是我们重写的 `CustomSqlSessionTemplate`，原生的 SqlSessionTemplate 并不支持在同一个事务中切换数据源。（为了不占用篇幅，我会在后文再给出详细的原因分析）
 
 ```java
 /**
@@ -312,9 +316,9 @@ public class DataSourceFactory {
 }
 ```
 
-#### 3.  自定义sqlSessionTemplate的主要实现逻辑
+#### 3.  自定义 SqlSessionTemplate
 
-这里主要覆盖重写了 sqlSessionTemplate 的 getSqlSessionFactory，从 ThreadLocal 去获取实际使用的数据源（AOP 切面将实际使用的数据源存入 ThreadLocal）。
+这里主要覆盖重写了 SqlSessionTemplate 的 getSqlSessionFactory，从 ThreadLocal 去获取实际使用的数据源（ AOP 切面会将实际使用的数据源存入 ThreadLocal）。
 
 ```java
 /***
@@ -373,11 +377,11 @@ private class SqlSessionInterceptor implements InvocationHandler {
 }
 ```
 
-#### 4.  使用AOP动态切换数据源，将当前使用的数据源名称保存到线程隔离的ThreadLocal中
+#### 4.  AOP 动态切换数据源
 
-这里我们直接对 dao 层接口进行切面，如果第一个参数指明需要使用哪一个数据源，就使用对应的数据源，如果没有指定，就使用默认的数据源。
+使用 AOP 动态切换数据源，将当前使用的数据源名称保存到线程隔离的 ThreadLocal 中 。这里我们直接对 dao 层接口进行切面，如果第一个参数指明了需要使用哪一个数据源，就使用对应的数据源，如果没有指定，就使用默认的数据源。
 
-注：使用切面来切换数据源是一种实现思路，而具体如何定义切入点可以按照自己的实际情况来定，你可以使用第一个参数指明数据源，也可以自定义注解来指定数据源，这个按照自己的实际使用方便来实现即可。
+使用切面来切换数据源是一种实现思路，而具体如何定义切入点可以按照自己的实际情况来定，你可以使用第一个参数指明数据源，也可以自定义注解来指定数据源，这个按照自己的实际使用的方便来实现即可。
 
 ```java
 @Aspect
@@ -466,12 +470,11 @@ public class XATransactionManagerConfig {
 
 
 
-## 三、整合结果测试
+## 三、测试整合结果
 
 这里我一共给了三种情况的测试接口，如下：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/springboot-druid-mybatis-multi-test.png"/> </div>
-
 ### 3.1  测试数据库整合结果
 
 这里我在 mysql 和 mysql02 的表中分别插入了一条数据：
@@ -479,22 +482,18 @@ public class XATransactionManagerConfig {
 mysql 数据库：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/mysql01.png"/> </div>
-
 mysql02 数据库：
 
 
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/mysql02.png"/> </div>
-
 **前端查询结果**：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/mysql0102.png"/> </div>
 
-
-
 ### 3.2 测试单数据库事务
 
-这里因为没有复杂的业务逻辑，我直接将@Transactional 加载 controller 层，实际中最好加到 service 层
+这里因为没有复杂的业务逻辑，我直接将 @Transactional 加在 Controller 层，实际中最好加到 Service 层：
 
 ```java
 /**
@@ -565,25 +564,20 @@ public class XATransactionController {
 }
 ```
 
-### 3.4 测试druid数据源是否整合成功
+### 3.4 测试 Druid 数据源
 
-访问 http://localhost:8080/druid/index.html  ，可以在数据源监控页面看到两个数据源已配置成功，同时配置都与我们在 yml 配置文件中的一致。
+访问 http://localhost:8080/druid/index.html  ，可以在数据源监控页面看到两个数据源已配置成功，同时参数也与我们在 yml 中配置的完全一致。
 
 数据源 1：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/druid-mysql01.png"/> </div>
 
-
-
 数据源 2：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/durud-mysql02.png"/> </div>
-
 url 监控情况：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/durid-mysql-weburl.png"/> </div>
-
-
 
 
 
@@ -601,8 +595,6 @@ XA 是由 X/Open 组织提出的分布式事务的规范。XA 规范主要定义
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/XA.gif"/> </div>
 
-
-
 ### 4.2 两阶段提交
 
 分布式事务必须满足传统事务的特性，即原子性，一致性，分离性和持久性。但是分布式事务处理过程中，某些节点 (Server) 可能发生故障，或 者由于网络发生故障而无法访问到某些节点。为了防止分布式系统部分失败时产生数据的不一致性。在分布式事务的控制中采用了两阶段提交协议（Two- Phase Commit Protocol）。即事务的提交分为两个阶段：
@@ -612,12 +604,11 @@ XA 是由 X/Open 组织提出的分布式事务的规范。XA 规范主要定义
 
 两阶段提交用来协调参与一个更新中的多个服务器的活动，以防止分布式系统部分失败时产生数据的不一致性。例如，如果一个更新操作要求位于三个不同结点上的记录被改变，且其中只要有一个结点失败，另外两个结点必须检测到这个失败并取消它们所做的改变。为了支持两阶段提交，一个分布式更新事务中涉及到的服务器必须能够相互通信。一般来说一个服务器会被指定为"控制"或"提交"服务器并监控来自其它服务器的信息。
 
-在分布式更新期间，各服务器首先标志它们已经完成（但未提交）指定给它们的分布式事务的那一部分，并准备提交（以使它们的更新部分成为永久性的）。这是   两阶段提交的第一阶段。如果有一结点不能响应，那么控制服务器要指示其它结点撤消分布式事务的各个部分的影响。如果所有结点都回答准备好提交，控制服务器  则指示它们提交并等待它们的响应。等待确认信息阶段是第二阶段。在接收到可以提交指示后，每个服务器提交分布式事务中属于自己的那一部分，并给控制服务器 发回提交完成信息。
+在分布式更新期间，各服务器首先标志它们已经完成（但未提交）指定给它们的分布式事务的那一部分，并准备提交（以使它们的更新部分成为永久性的）。这是   两阶段提交的第一阶段。如果有一结点不能响应，那么控制服务器要指示其它结点撤消分布式事务的各个部分的影响。如果所有结点都回答准备好提交，控制服务器则指示它们提交并等待它们的响应。等待确认信息阶段是第二阶段。在接收到可以提交指示后，每个服务器提交分布式事务中属于自己的那一部分，并给控制服务器 发回提交完成信息。
 
 在一个分布式事务中，必须有一个场地的 Server 作为协调者 (coordinator)，它能向  其它场地的 Server 发出请求，并对它们的回答作出响应，由它来控制一个分布式事务的提交或撤消。该分布式事务中涉及到的其它场地的 Server 称为参与者 (Participant)。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/commit.png"/> </div>
-
 事务两阶段提交的过程如下：
 
 **第一阶段**：
@@ -644,7 +635,7 @@ XA 是由 X/Open 组织提出的分布式事务的规范。XA 规范主要定义
 
 <br>
 
-本小结的表述引用自博客[浅谈分布式事务](https://www.cnblogs.com/baiwa/p/5328722.html)
+本小结的表述引用自博客：[浅谈分布式事务](https://www.cnblogs.com/baiwa/p/5328722.html)
 
 
 
@@ -652,19 +643,18 @@ XA 是由 X/Open 组织提出的分布式事务的规范。XA 规范主要定义
 
 ### 5.1 事务下多数据源无法切换
 
-这里是主要是对上文提到为什么不重写 sqlSessionTemplate 会导致在事务下数据源切换失败的补充，我们先看看 sqlSessionTemplate 源码中关于该类的定义：
+这里是主要是对上文提到为什么不重写 SqlSessionTemplate 会导致在事务下数据源切换失败的补充，我们先看看 sqlSessionTemplate 源码中关于该类的定义：
 
-> sqlSessionTemplate 与 Spring 事务管理一起使用，以确保使用的实际 SqlSession 是与当前 Spring 事务关联的,此外它还管理会话生命周期，包括根据 Spring 事务配置根据需要关闭，提交或回滚会话
+> sqlSessionTemplate 与 Spring 事务管理一起使用，以确保使用的实际 SqlSession 是与当前 Spring 事务关联的,此外它还管理会话生命周期，包括根据 Spring 事务配置根据需要关闭，提交或回滚会话。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/sqlSessionTemplate.png"/> </div>
+这里最主要的是说明 SqlSession 是与当前是 Spring 事务是关联的。
 
-这里最主要的是说明 sqlSession 是与当前是 spring 事务是关联的。
+#### 1. SqlSession与事务关联导致问题
 
-#### 1. sqlSession与事务关联导致问题：
+对于 Mybatis 来说，是默认开启一级缓存的，一级缓存是 Session 级别的，对于同一个 Session 如果是相同的查询语句并且查询参数都相同，第二次的查询就直接从一级缓存中获取。
 
-对于 mybatis 来说，是默认开启一级缓存的，一级缓存是 session 级别的，对于同一个 session 如果是相同的查询语句并且查询参数都相同，第二次的查询就直接从一级缓存中获取。
-
-这也就是说，对于如下的情况，由于 sqlSession 是与事务绑定的，如果使用原生 sqlSessionTemplate，则第一次查询和第二次查询都是用的同一个 sqlSession，那么第二个查询数据库 2 的查询语句根本不会执行，会直接从一级缓存中获取查询结果。两次查询得到都是第一次查询的结果。
+这也就是说，对于如下的情况，由于 SqlSession 是与事务绑定的，如果使用原生 SqlSessionTemplate，则第一次查询和第二次查询都是用的同一个 SqlSession，那么第二个查询 数据库2 的查询语句根本不会执行，会直接从一级缓存中获取查询结果。两次查询得到都是第一次查询的结果。
 
 ```java
 @GetMapping("ts/db/programmers")
@@ -678,11 +668,11 @@ public List<Programmer> getAllProgrammers() {
 
 
 
-#### 2. 连接的复用导致无法切换数据源：
+#### 2. 连接的复用导致无法切换数据源
 
 先说一下为什么会出现连接的复用：
 
-我们可以在 spring 的源码中看到 spring 在通过 `DataSourceUtils` 类中去获取新的连接 `doGetConnection` 的时候，会通过 `TransactionSynchronizationManager.getResource(dataSource)` 方法去判断当前数据源是否有可用的连接，如果有就直接返回，如果没有就通过 `fetchConnection` 方法去获取。
+我们可以在 Spring 的源码中看到 Spring 在通过 `DataSourceUtils` 类中去获取新的连接 `doGetConnection` 的时候，会通过 `TransactionSynchronizationManager.getResource(dataSource)` 方法去判断当前数据源是否有可用的连接，如果有就直接返回，如果没有就通过 `fetchConnection` 方法去获取。
 
 ```java
 public static Connection doGetConnection(DataSource dataSource) throws SQLException {
@@ -737,28 +727,20 @@ public static Connection doGetConnection(DataSource dataSource) throws SQLExcept
 这里主要的问题是 `TransactionSynchronizationManager.getResource(dataSource)` 中 dataSource 参数是在哪里进行注入的，这里可以沿着调用堆栈往上寻找，可以看到是在这个参数是 `SpringManagedTransaction` 类中获取连接的时候传入的。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/opneConnection.png"/> </div>
-
 而 `SpringManagedTransaction` 这类中的 dataSource 是如何得到赋值的，这里可以进入这个类中查看，只有在创建这个类的时候通过构造器为 dataSource 赋值，那么是哪个方法创建了 `SpringManagedTransaction`?
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/springManagerTransaction.png"/> </div>
-
 在构造器上打一个断点，沿着调用的堆栈往上寻找可以看到是 `DefaultSqlSessionFactory` 在创建 `SpringManagedTransaction` 中传入的，**这个数据源就是创建 sqlSession 的 `sqlSessionFactory` 中数据源**。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/DefaultSqlSessionFactory.png"/> </div>
-
-
-
-**这里说明连接的复用是与我们创建 sqlSession 时候传入的 sqlSessionFactory 是否是同一个有关**。
+**这里说明连接的复用是与我们创建 SqlSession 时候传入的 SqlSessionFactory 是否是同一个有关**。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/getsqlSession.png"/> </div>
-
-所以我们才重写了 sqlSessionTemplate 中的 `getSqlSession` 方法，获取 sqlSession 时候传入正在使用的数据源对应的 `sqlSessionFactory`，这样即便在同一个的事务中，由于传入的 `sqlSessionFactory` 中不同，就不会出现连接复用。
+所以我们才重写了 SqlSessionTemplate 中的 `getSqlSession` 方法，获取 SqlSession 时候传入正在使用的数据源对应的 `SqlSessionFactory`，这样即便在同一个的事务中，由于传入的 `SqlSessionFactory` 中不同，就不会出现连接复用。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/customSqlSessionTemplate.png"/> </div>
 
-
-
-关于 mybati-spring 的更多事务处理机制，推荐阅读博客[mybatis-spring 事务处理机制分析](https://my.oschina.net/fifadxj/blog/785621)
+关于 Mybati-Spring 的更多事务处理机制，推荐阅读博客：[mybatis-spring 事务处理机制分析](https://my.oschina.net/fifadxj/blog/785621)
 
 
 
@@ -779,7 +761,7 @@ private SqlSessionFactory createSqlSessionFactory(DataSource dataSource) throws 
     }
 ```
 
-上面这段代码没有任何编译问题，导致这个错误不容易发现，但是在调用 sql 时候就会出现异常。原因是 `factoryBean.getObject()` 方法被调用时就已经创建了 SqlSessionFactory，并且 SqlSessionFactory 只会被创建一次。此时还没有指定 sql 文件的位置，导致 mybatis 无法将接口与 xml 中的 sql 语句进行绑定，所以出现 BindingExceptionInvalid 绑定异常。
+上面这段代码没有任何编译问题，导致这个错误不容易发现，但是在调用 SQL 时候就会出现异常。原因是 `factoryBean.getObject()` 方法被调用时就已经创建了 SqlSessionFactory，并且 SqlSessionFactory 只会被创建一次。此时还没有指定 SQL 文件的位置，导致 Mybatis 无法将接口与 XML 中的 SQL 语句进行绑定，所以出现 BindingExceptionInvalid 绑定异常。
 
 ```java
 @Override
@@ -792,12 +774,11 @@ private SqlSessionFactory createSqlSessionFactory(DataSource dataSource) throws 
   }
 ```
 
-正常绑定的情况下，我们是可以在 sqlSessionFactory 中查看到绑定好的查询接口：
+正常绑定的情况下，我们是可以在 SqlSessionFactory 中查看到绑定好的查询接口：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/sqlSessionFactory.png"/> </div>
-
 <br>
 
-## 参考资料：
+## 参考资料
 
 + [浅谈分布式事务](https://www.cnblogs.com/baiwa/p/5328722.html)

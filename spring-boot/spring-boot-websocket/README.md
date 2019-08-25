@@ -1,32 +1,28 @@
-# spring boot websocket
-
-## 目录<br/>
-<a href="#一说明">一、说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构说明">1.1 项目结构说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-主要依赖">1.2 主要依赖</a><br/>
-<a href="#二spring-boot-websocket">二、spring boot websocket</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-创建消息处理类ChatSocket使用ServerEndpoint声明websocket服务">2.1 创建消息处理类ChatSocket，使用@ServerEndpoint声明websocket服务</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-配置ServerEndpointExporterServerEndpointExporter会在运行时候自动注册我们用ServerEndpoint声明的websocket服务">2.2 配置ServerEndpointExporter，ServerEndpointExporter会在运行时候自动注册我们用@ServerEndpoint声明的websocket服务</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-前端websocket的实现">2.3 前端websocket的实现</a><br/>
+# Spring Boot WebSocket
+<nav>
+<a href="#一项目说明">一、项目说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-基本依赖">1.2 基本依赖</a><br/>
+<a href="#二Spring-Boot-WebSocket">二、Spring Boot WebSocket</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-消息处理">2.1 消息处理</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-注册服务">2.2 注册服务</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-前端-WebSocket">2.3 前端 WebSocket</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-简单登录的实现">2.4 简单登录的实现</a><br/>
-## 正文<br/>
+</nav>
 
+## 一、项目说明
 
+### 1.1 项目结构
 
-## 一、说明
-
-### 1.1 项目结构说明
-
-1. 项目模拟一个简单的群聊功能，为区分不同的聊天客户端，登录时候将临时用户名存储在 session 当中；
-2. 关于 websocket 的主要配置在 websocket 文件夹下；
-3. 模板引擎采用 freemaker；
-4. 项目以 web 的方式构建。
+- 项目模拟一个简单的群聊功能，为区分不同的聊天客户端，登录时候将临时用户名存储在 session 当中；
+- 关于 WebSocket 的主要配置在 websocket 文件夹下；
+- 模板引擎采用 freemaker；
+- 项目以 Web 的方式构建。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-websocket.png"/> </div>
 
 
-
-### 1.2 主要依赖
+### 1.2 基本依赖
 
 ```xml
 <dependency>
@@ -46,9 +42,11 @@
 
 
 
-## 二、spring boot websocket
+## 二、Spring Boot WebSocket
 
-#### 2.1 创建消息处理类ChatSocket，使用@ServerEndpoint声明websocket服务
+### 2.1 消息处理
+
+创建消息处理类 ChatSocket，使用 @ServerEndpoint 声明 websocket 服务：
 
 ```java
 @ServerEndpoint(value = "/socket/{username}")
@@ -94,7 +92,9 @@ public class ChatSocket {
 
 ```
 
-#### 2.2 配置ServerEndpointExporter，ServerEndpointExporter会在运行时候自动注册我们用@ServerEndpoint声明的websocket服务。
+### 2.2 注册服务
+
+配置 ServerEndpointExporter，ServerEndpointExporter 会在运行时候自动注册我们用 @ServerEndpoint 注解声明的 WebSocket 服务：
 
 ```java
 @Configuration
@@ -112,7 +112,7 @@ public class WebSocketConfig {
 }
 ```
 
-#### 2.3 前端websocket的实现
+### 2.3 前端 WebSocket
 
 ```jsp
 <!doctype html>
@@ -157,7 +157,7 @@ public class WebSocketConfig {
 
 ```
 
-#### 2.4 简单登录的实现
+### 2.4 简单登录的实现
 
 ```java
 <!doctype html>

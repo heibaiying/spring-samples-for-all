@@ -1,26 +1,22 @@
-# spring boot 整合 tomcat
+# Spring Boot 整合 Tomcat
+<nav>
+<a href="#一项目说明">一、项目说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-基本依赖">1.2 基本依赖</a><br/>
+<a href="#二整合-Tomcat">二、整合 Tomcat</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-SpringBootServletInitializer">2.1 SpringBootServletInitializer</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-定义视图">2.2 定义视图</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-整合测试">2.3 整合测试</a><br/>
+</nav>
 
-## 目录<br/>
-<a href="#一说明">一、说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构说明">1.1 项目结构说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目主要依赖">1.2 项目主要依赖</a><br/>
-<a href="#二整合-tomcat">二、整合 tomcat</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-修改启动类继承自SpringBootServletInitializer并覆盖重写其中configure方法">2.1 修改启动类，继承自SpringBootServletInitializer，并覆盖重写其中configure方法</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-在applicationyml-中指定访问视图文件的前缀和后缀">2.2 在application.yml 中指定访问视图文件的前缀和后缀 </a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-新建controller和showjsp-测试整合是否成功">2.3 新建controller和show.jsp 测试整合是否成功</a><br/>
-## 正文<br/>
+## 一、项目说明
 
+### 1.1 项目结构
 
-
-## 一、说明
-
-#### 1.1 项目结构说明
-
-spring boot 整合 tomcat 后支持 jsp 的使用（内置容器默认是不支持 jsp），所以项目整合后采用 jspController 跳转到 show.jsp 测试整合是否成功。
+Spring Boot 默认采用内置的 Web 容器，因此打成 JAR 包后就可以直接运行。但在某的时候，你可能还是需要使用 Tomcat 来运行和管理 Web 项目，因此本用例主要介绍 Spring Boot 与 Tomcat 的整合方式。另外 Spring Boot 内置的 Web 容器默认并不支持 JSP，所以可以使用跳转到 JSP 页面的方式来测试整合外部容器是否成功。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-tomcat.png"/> </div>
-
-#### 1.2 项目主要依赖
+### 1.2 基本依赖
 
 ```xml
 <dependency>
@@ -43,9 +39,11 @@ spring boot 整合 tomcat 后支持 jsp 的使用（内置容器默认是不支�
 </dependency>
 ```
 
-## 二、整合 tomcat
+## 二、整合 Tomcat
 
-#### 2.1 修改启动类，继承自SpringBootServletInitializer，并覆盖重写其中configure方法
+### 2.1 SpringBootServletInitializer
+
+修改启动类，继承自 SpringBootServletInitializer，并覆盖重写其中 configure 方法：
 
 ```java
 /**
@@ -69,7 +67,9 @@ public class SpringBootTomcatApplication extends SpringBootServletInitializer {
 }
 ```
 
-#### 2.2 在application.yml 中指定访问视图文件的前缀和后缀 
+### 2.2 定义视图
+
+在 application.yml 中指定访问视图文件的前缀和后缀：
 
 ```yml
 spring:
@@ -79,7 +79,9 @@ spring:
       suffix: .jsp
 ```
 
-#### 2.3 新建controller和show.jsp 测试整合是否成功
+### 2.3 整合测试
+
+新建 controller 和 show.jsp 测试整合是否成功：
 
 ```java
 @Controller

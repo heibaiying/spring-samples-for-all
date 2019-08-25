@@ -1,25 +1,23 @@
-# spring boot 实现分布式 session
-
-## 目录<br/>
+# Spring Boot 实现分布式 Session
+<nav>
 <a href="#一项目结构">一、项目结构</a><br/>
-<a href="#二分布式session的配置">二、分布式session的配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-引入依赖">2.1 引入依赖</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-Redis配置">2.2 Redis配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-启动类上添加EnableRedisHttpSession-注解开启-spring-session-redis-整合方案的自动配置">2.3 启动类上添加@EnableRedisHttpSession 注解开启 spring-session-redis 整合方案的自动配置</a><br/>
-<a href="#三验证分布式session">三、验证分布式session</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-创建测试controller和测试页面">3.1 创建测试controller和测试页面</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-启动项目">3.2 启动项目</a><br/>
-## 正文<br/>
+<a href="#二实现分布式-Session">二、实现分布式 Session</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-基本依赖">2.1 基本依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-实现原理">2.2 实现原理</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-自动配置">2.3 自动配置</a><br/>
+<a href="#三验证分布式-Session">三、验证分布式 Session</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-测试准备">3.1 测试准备</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-测试结果">3.2 测试结果</a><br/>
+</nav>
 
 ## 一、项目结构
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-session.png"/> </div>
 
 
+## 二、实现分布式 Session
 
-## 二、分布式session的配置
-
-#### 2.1 引入依赖
+### 2.1 基本依赖
 
 ```xml
 <!--分布式 session 相关依赖-->
@@ -33,7 +31,11 @@
 </dependency>
 ```
 
-#### 2.2 Redis配置
+### 2.2 实现原理
+
+Spring 通过将 Session 信息存储到公共容器中，这样不同的 Web 服务就能共享到相同的 Session 信息，从而实现分布式 Session。Spring 支持使用 Redis， Jdbc，mongodb，Hazelcast 等作为公共的存储容器，可以在配置文件中使用参数 session.store-type 进行指定。
+
+这里我们以 Redis 作为公共的存储容器，配置如下。同时对于 Redis 存储方案，官方提供了 Jedis 和 Lettuce 两种客户端连接，这里我们选用的是 Jedis 连接：
 
 ```yaml
 spring:
@@ -57,15 +59,11 @@ spring:
 
 # 如果是集群节点 采用如下配置指定节点
 #spring.redis.cluster.nodes
-
 ```
 
-有两点需要特别说明：
+### 2.3 自动配置
 
-1. spring-session 不仅提供了 redis 作为公共 session 存储的方案，同时也支持 jdbc、mongodb、Hazelcast 等作为公共 session 的存储，可以用 session.store-type 指定；
-2. 对于 redis 存储方案而言，官方也提供了不止一种整合方式，这里我们选取的整合方案是 jedis 客户端作为连接，当然也可以使用 Lettuce 作为客户端连接。
-
-#### 2.3 启动类上添加@EnableRedisHttpSession 注解开启 spring-session-redis 整合方案的自动配置
+在启动类上添加 @EnableRedisHttpSession 开启 spring-session-redis 整合方案的自动配置：
 
 ```java
 @SpringBootApplication
@@ -81,9 +79,11 @@ public class SpringBootSessionApplication {
 
 
 
-## 三、验证分布式session
+## 三、验证分布式 Session
 
-#### 3.1 创建测试controller和测试页面
+### 3.1 测试准备
+
+创建测试接口和测试页面：
 
 ```java
 @Controller
@@ -129,7 +129,7 @@ public class LoginController {
 </html>
 ```
 
-session 信息展示页面 home.ftl：
+Session 信息展示页面 home.ftl：
 
 ```jsp
 <!doctype html>
@@ -144,20 +144,17 @@ session 信息展示页面 home.ftl：
 </html>
 ```
 
-#### 3.2 启动项目
+### 3.2 测试结果
 
-由于我们这里采用的是 spring boot 的内置容器作为 web 容器，所以直接启动两个实例测试即可。
+这里我采用的是 Spring Boot 的内置的 Web 容器，直接启动两个实例测试即可:
 
 应用 1 启动配置：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-session-app1.png"/> </div>
-
 应用 2 启动配置，需要用 `--server.port ` 指定不同的端口号：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-session-app2.png"/> </div>
-
 **测试结果：**
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-session-8080.png"/> </div>
-
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-session-8090.png"/> </div>

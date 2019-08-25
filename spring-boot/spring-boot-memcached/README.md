@@ -1,34 +1,32 @@
-# spring boot 整合 mecached
+# Spring Boot 整合 Memcached
 
-## 目录<br/>
-<a href="#一说明">一、说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11--XMemcached客户端说明">1.1  XMemcached客户端说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目结构说明">1.2 项目结构说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-主要依赖">1.3 主要依赖</a><br/>
-<a href="#二spring-boot-整合-memcached">二、spring boot 整合 memcached</a><br/>
+
+
+<nav>
+<a href="#一项目说明">一、项目说明</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11--XMemcached">1.1  XMemcached</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目结构">1.2 项目结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-基本依赖">1.3 基本依赖</a><br/>
+<a href="#二整合-Memcached">二、整合 Memcached</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-单机配置">2.1 单机配置</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-集群配置">2.2 集群配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-存储基本类型测试用例">2.3 存储基本类型测试用例</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-存储实体对象测试用例">2.5 存储实体对象测试用例</a><br/>
-<a href="#附memcached-基本命令">附：memcached 基本命令</a><br/>
-## 正文<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-存储基本类型">2.3 存储基本类型</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-存储实体对象">2.4 存储实体对象</a><br/>
+<a href="#附Memcached-基本命令">附：Memcached 基本命令</a><br/>
+</nav>
 
+## 一、项目说明
 
+### 1.1  XMemcached
 
+Spring 官方并没有提供关于 Memcached 的 starter，所以我们还是采用 XMemcached 作为客户端进行整合。XMemcached 是基于 Java NIO 的 Memcached 高性能客户端，支持完整的 Memcached 协议，支持客户端分布并且提供了一致性哈希 (consistent hash) 算法的实现。
 
-## 一、说明
+### 1.2 项目结构
 
-### 1.1  XMemcached客户端说明
-
-spring boot 官方并没有提供关于 memcached 的 starter，所以我们这里还是采用 XMemcached 作为客户端进行整合。 XMemcached 是基于 java nio 的 memcached 高性能客户端，支持完整的 memcached 协议，支持客户端分布并且提供了一致性哈希 (consistent hash) 算法的实现。
-
-### 1.2 项目结构说明
-
-memcached 的整合配置位于 config 文件夹下。
+Memcached 的整合配置位于 config 文件夹下：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-memcached.png"/> </div>
-
-### 1.3 主要依赖
+### 1.3 基本依赖
 
 ```xml
  <!--memcached java 客户端-->
@@ -41,9 +39,9 @@ memcached 的整合配置位于 config 文件夹下。
 
 
 
-## 二、spring boot 整合 memcached
+## 二、整合 Memcached
 
-#### 2.1 单机配置
+### 2.1 单机配置
 
 ```java
 @Bean
@@ -59,7 +57,7 @@ try {
 }
 ```
 
-#### 2.2 集群配置
+### 2.2 集群配置
 
 ```java
 @Bean
@@ -89,15 +87,9 @@ public MemcachedClient memcachedClientForCluster() {
 }
 ```
 
-#### 2.3 存储基本类型测试用例
-
-xmemcached 单机版本和集群版本注入的实例是相同的。
+### 2.3 存储基本类型
 
 ```java
-/**
- * @author : heibaiying
- * @description : Memcached 操作基本对象
- */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MemSamples {
@@ -117,13 +109,9 @@ public class MemSamples {
 }
 ```
 
-#### 2.5 存储实体对象测试用例
+### 2.4 存储实体对象
 
 ```java
-/**
- * @author : heibaiying
- * @description :Memcached 序列化与反序列化
- */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MemObjectSamples {
@@ -146,7 +134,7 @@ public class MemObjectSamples {
 
 
 
-## 附：memcached 基本命令
+## 附：Memcached 基本命令
 
 | 命令            | 格式                                               | 说明                                  |
 | --------------- | -------------------------------------------------- | ------------------------------------- |

@@ -1,37 +1,35 @@
-# spring boot 整合 druid+mybatis
+# Spring Boot 整合 Druid+Mybatis
 
-## 目录<br/>
-<a href="#一说明">一、说明</a><br/>
+
+
+<nav>
+<a href="#一项目说明">一、项目说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目主要依赖">1.2 项目主要依赖</a><br/>
-<a href="#二整合-druid-+-mybatis">二、整合 druid + mybatis</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-在applicationyml-中配置数据源">2.1 在application.yml 中配置数据源</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22--新建查询接口和controller">2.2  新建查询接口和controller</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-关于druid监控数据的外部化调用">2.3 关于druid监控数据的外部化调用</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-druid-控制台的使用默认访问地址-http//localhost8080/druid/loginhtml">2.4 druid 控制台的使用，默认访问地址 http://localhost:8080/druid/login.html</a><br/>
-## 正文<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-基本依赖">1.2 基本依赖</a><br/>
+<a href="#二整合-Druid-+-Mybatis">二、整合 Druid + Mybatis</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-配置数据源">2.1 配置数据源</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22--整合查询">2.2  整合查询</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-监控数据">2.3 监控数据</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-Druid-控制台">2.4 Druid 控制台</a><br/>
+</nav>
 
+## 一、项目说明
 
+### 1.1 项目结构
 
+1. 项目涉及表的建表语句放置在 resources 的 sql 文件夹下；
 
-## 一、说明
-
-#### 1.1 项目结构
-
-1. 项目查询用的表对应的建表语句放置在 resources 的 sql 文件夹下；
-
-2. 为了使用 druid 控制台的功能，项目以 web 的方式构建。
+2. 为了演示 Druid 控制台的功能，项目以 Web 的方式构建。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-druid-mybatis.png"/> </div>
+### 1.2 基本依赖
 
-#### 1.2 项目主要依赖
-
-需要说明的是按照 spring 官方对于自定义的 starter 命名规范的推荐：
+按照 Spring 官方对于自定义的 starter 命名规范的要求：
 
 - 官方的 starter 命名：spring-boot-starter-XXXX
-- 其他第三方 starter 命名：XXXX-spring-boot-starte
+- 其他第三方 starter 命名：XXXX-spring-boot-starter 
 
-所以 mybatis 的 starter 命名为 mybatis-spring-boot-starter，如果有自定义 starter 需求，也需要按照此命名规则进行命名。
+所以 Mybatis 的 starter 命名为 mybatis-spring-boot-starter，如果有自定义 starter 需求，也需要按照此命名规则进行命名。
 
 ```xml
 <dependency>
@@ -53,7 +51,7 @@
 </dependency>
 ```
 
-spring boot 与 mybatis 版本的对应关系：
+Spring Boot 与 Mybatis 版本的对应关系：
 
 | MyBatis-Spring-Boot-Starter | [MyBatis-Spring](http://www.mybatis.org/spring/index.html#Requirements) | Spring Boot   |
 | --------------------------- | ------------------------------------------------------------ | ------------- |
@@ -64,11 +62,11 @@ spring boot 与 mybatis 版本的对应关系：
 
 
 
-## 二、整合 druid + mybatis
+## 二、整合 Druid + Mybatis
 
-#### 2.1 在application.yml 中配置数据源
+### 2.1 配置数据源
 
-本用例采用 druid 作为数据库连接池，虽然 druid 性能略逊于 Hikari，但是提供了更为全面的监控管理，可以按照实际需求选用 druid 或者 Hikari。（关于 Hikari 数据源的配置可以参考[spring-boot-mybatis 项目](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-mybatis)）
+本用例采用 Druid 作为数据库连接池，虽然 Druid 性能略逊于 Hikari，但提供了更为全面的监控管理，可以按照实际需求选用 Druid 或者 Hikari。（关于 Hikari 数据源的配置可以参考 [spring-boot-mybatis 项目](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-mybatis)）
 
 ```yaml
 spring:
@@ -143,7 +141,9 @@ mybatis:
 log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 ```
 
-#### 2.2  新建查询接口和controller
+### 2.2  整合查询
+
+新建查询接口和测试 Controller：
 
 ```java
 @Mapper
@@ -181,15 +181,11 @@ public class ProgrammerController {
 }
 ```
 
-#### 2.3 关于druid监控数据的外部化调用
+### 2.3 监控数据
+
+在 Spring Boot 中可以通过 HTTP 接口将 Druid 的监控数据以  JSON 的形式暴露出去，可以用于健康检查等功能：
 
 ```java
-/**
- * @author : heibaiying
- * @description :在 Spring Boot 中可以通过 HTTP 接口将 Druid 监控数据以 JSON 的形式暴露出去，
- * 实际使用中你可以根据你的需要自由地对监控数据、暴露方式进行扩展。
- */
-
 @RestController
 public class DruidStatController {
 
@@ -203,8 +199,8 @@ public class DruidStatController {
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/druid-status.png"/> </div>
 
+### 2.4 Druid 控制台
 
-
-#### 2.4 druid 控制台的使用，默认访问地址 http://localhost:8080/druid/login.html
+默认访问地址为 http://localhost:8080/druid/login.html ：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-druid%20%E6%8E%A7%E5%88%B6%E5%8F%B0.png"/> </div>

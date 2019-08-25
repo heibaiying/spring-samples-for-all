@@ -1,40 +1,36 @@
-# spring boot 整合 mybatis
+# Spring Boot 整合 Mybatis
 
-## 目录<br/>
-<a href="#一说明">一、说明</a><br/>
+<nav>
+<a href="#一项目说明">一、项目说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-项目结构">1.1 项目结构</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目主要依赖">1.2 项目主要依赖</a><br/>
-<a href="#二整合-mybatis">二、整合 mybatis</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-在applicationyml-中配置数据源">2.1 在application.yml 中配置数据源</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22--xml方式的sql语句">2.2  xml方式的sql语句</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-注解方式的sql语句">2.3 注解方式的sql语句</a><br/>
-## 正文<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-主要依赖">1.2 主要依赖</a><br/>
+<a href="#二整合-Mybatis">二、整合 Mybatis</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-配置数据源">2.1 配置数据源</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22--XML-方式">2.2  XML 方式</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-注解方式">2.3 注解方式</a><br/>
+</nav>
 
+## 一、项目说明
 
+### 1.1 项目结构
 
+- 项目涉及表的建表语句放置在 resources 的 sql 文件夹下；
 
-## 一、说明
+- 关于 Mybatis SQL 的写法提供两种方式：
 
-#### 1.1 项目结构
+   **xml 写法**：对应的类为 ProgrammerMapper.java 和 programmerMapper.xml，用 MybatisXmlTest 进行测试；
 
-1. 项目查询用的表对应的建表语句放置在 resources 的 sql 文件夹下；
-
-2. 关于 mybatis sql 的写法提供两种方式:
-
-   xml 写法：对应的类为 ProgrammerMapper.java 和 programmerMapper.xml，用 MybatisXmlTest 进行测试；
-
-   注解写法：对应的类为 Programmer.java ，用 MybatisAnnotationTest 进行测试。
+   **注解写法**：对应的类为 Programmer.java ，用 MybatisAnnotationTest 进行测试。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-mybatis.png"/> </div>
+### 1.2 主要依赖
 
-#### 1.2 项目主要依赖
-
-需要说明的是按照 spring 官方对应自定义的 starter 命名规范的推荐：
+按照 Spring 官方对于自定义的 starter 命名规范的要求：
 
 - 官方的 starter 命名：spring-boot-starter-XXXX
 - 其他第三方 starter 命名：XXXX-spring-boot-starte
 
-所以 mybatis 的 starter 命名为 mybatis-spring-boot-starter，如果有自定义 starter 需求，也需要按照此命名规则进行命名。
+所以 Mybatis 的 starter 命名为 mybatis-spring-boot-starter，如果有自定义 starter 需求，也需要按照此命名规则进行命名。
 
 ```xml
 <!--spring 1.5 x 以上版本对应 mybatis 1.3.x (1.3.1)
@@ -71,11 +67,11 @@ spring boot 与 mybatis 版本的对应关系：
 | **1.1.x (1.1.1)**           | 1.3 or higher                                                | 1.3 or higher |
 | **1.0.x (1.0.2)**           | 1.2 or higher                                                | 1.3 or higher |
 
-## 二、整合 mybatis
+## 二、整合 Mybatis
 
-#### 2.1 在application.yml 中配置数据源
+### 2.1 配置数据源
 
-spring boot 2.x 版本默认采用 Hikari 作为数据库连接池，Hikari 是目前 java 平台性能最好的连接池，性能好于 druid。
+Spring Boot 2.x 版本默认采用 Hikari 作为数据库连接池，Hikari 是目前 Java 平台性能最好的连接池，性能好于 druid：
 
 ```yaml
 spring:
@@ -118,9 +114,9 @@ mybatis:
       log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 ```
 
-#### 2.2  xml方式的sql语句
+### 2.2  XML 方式
 
-新建 ProgrammerMapper.java 和 programmerMapper.xml，及其测试类
+新建 ProgrammerMapper.java 和 programmerMapper.xml，及其测试类：
 
 ```java
 @Mapper
@@ -161,12 +157,9 @@ public interface ProgrammerMapper {
 </mapper>
 ```
 
-测试类
+测试类：
 
 ```java
-/***
- * @description: xml Sql 测试类
- */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MybatisXmlTest {
@@ -200,7 +193,7 @@ public class MybatisXmlTest {
 }
 ```
 
-#### 2.3 注解方式的sql语句
+### 2.3 注解方式
 
 ```java
 @Mapper
@@ -220,12 +213,9 @@ public interface ProgrammerDao {
 }
 ```
 
-测试类
+测试类：
 
 ```java
-/***
- * @description: 注解 Sql 测试类
- */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MybatisAnnotationTest {

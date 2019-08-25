@@ -1,25 +1,23 @@
-# spring session 实现分布式 session
-
-## 目录<br/>
+# Spring 实现分布式 Session
+<nav>
 <a href="#一项目结构">一、项目结构</a><br/>
-<a href="#二分布式session的配置">二、分布式session的配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-引入依赖">2.1 引入依赖</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-在webxml中配置session拦截器">2.2 在web.xml中配置session拦截器</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-创建配置文件spring--sessionxml配置redis连接">2.3 创建配置文件spring- session.xml，配置redis连接</a><br/>
-<a href="#三验证分布式session">三、验证分布式session</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-创建测试controller和测试页面">3.1 创建测试controller和测试页面</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-启动项目">3.2 启动项目</a><br/>
-## 正文<br/>
+<a href="#二实现分布式-Session">二、实现分布式 Session</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-基本依赖">2.1 基本依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-Session-拦截器">2.2 Session 拦截器</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-实现原理">2.3 实现原理</a><br/>
+<a href="#三验证分布式-Session">三、验证分布式 Session</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-测试准备">3.1 测试准备</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-测试结果">3.2 测试结果</a><br/>
+</nav>
 
 ## 一、项目结构
 
-分布式 session 主要配置文件为 spring-session.xml 和 web.xml，其他的配置为标准的 web 工程的配置。
+分布式 Session 主要配置文件为 spring-session.xml 和 web.xml，其他的配置为标准的 web 工程的配置：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-session.png"/> </div>
+## 二、实现分布式 Session
 
-## 二、分布式session的配置
-
-#### 2.1 引入依赖
+### 2.1 基本依赖
 
 ```xml
 <!--分布式 session 相关依赖-->
@@ -40,7 +38,9 @@
 </dependency>
 ```
 
-#### 2.2 在web.xml中配置session拦截器
+### 2.2 Session 拦截器
+
+在 web.xml 中配置 Session 拦截器：
 
 ```xml
 <!--配置http session-->
@@ -55,12 +55,9 @@
 
 ```
 
-#### 2.3 创建配置文件spring- session.xml，配置redis连接
+### 2.3 实现原理
 
-有两点需要特别说明：
-
-1. spring-session 不仅提供了 redis 作为公共 session 存储的方案，同时也支持 jdbc、mongodb、Hazelcast 等作为公共 session 的存储；
-2. 对于 redis 存储方案而言，官方也提供了不止一种整合方式，这里我们选取的整合方案是 jedis 客户端作为连接，当然也可以使用 Lettuce 作为客户端连接。
+Spring 通过将 Session 信息存储到公共容器中，这样不同的 Web 服务就能共享到相同的 Session 信息，从而实现分布式 Session。Spring 支持使用 Redis， Jdbc，mongodb，Hazelcast 等作为公共的存储容器。这里我们以 Redis 作为公共的存储容器，需要创建配置文件 spring- session.xml，内容如下：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -116,9 +113,11 @@
 </beans>
 ```
 
-## 三、验证分布式session
+## 三、验证分布式 Session
 
-#### 3.1 创建测试controller和测试页面
+### 3.1 测试准备
+
+创建测试接口和测试页面：
 
 ```java
 @Controller
@@ -181,20 +180,17 @@ session 信息展示页面 (home.jsp)：
 </html>
 ```
 
-#### 3.2 启动项目
+### 3.2 测试结果
 
-这里我们采用两个 tomcat 分别启动项目，在第一个项目 index.jsp 页面进行登录，第二个项目不登录，直接访问 session 展示页（home.jsp）
+这里采用两个 Tomcat 分别启动项目，在第一个项目的 index.jsp 页面进行登录；第二个项目不登录，直接访问 Session 展示页home.jsp :
 
-tomcat 1 配置：
+Tomcat 1 配置：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-session-tomcat01.png"/> </div>
-
-tomcat 2 配置：
+Tomcat 2 配置：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-session-tomcat02.png"/> </div>
-
 **测试结果：**
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-session-8080.png"/> </div>
-
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-session-8090.png"/> </div>
