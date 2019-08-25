@@ -573,10 +573,15 @@ public class XATransactionController {
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/druid-mysql01.png"/> </div>
 
+
 数据源 2：
 
+
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/durud-mysql02.png"/> </div>
+
+
 url 监控情况：
+
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/durid-mysql-weburl.png"/> </div>
 
@@ -649,7 +654,9 @@ XA 是由 X/Open 组织提出的分布式事务的规范。XA 规范主要定义
 
 > sqlSessionTemplate 与 Spring 事务管理一起使用，以确保使用的实际 SqlSession 是与当前 Spring 事务关联的,此外它还管理会话生命周期，包括根据 Spring 事务配置根据需要关闭，提交或回滚会话。
 
+
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/sqlSessionTemplate.png"/> </div>
+
 
 这里最主要的是说明 SqlSession 是与当前是 Spring 事务是关联的。
 
@@ -729,23 +736,33 @@ public static Connection doGetConnection(DataSource dataSource) throws SQLExcept
 
 这里主要的问题是 `TransactionSynchronizationManager.getResource(dataSource)` 中 dataSource 参数是在哪里进行注入的，这里可以沿着调用堆栈往上寻找，可以看到是在这个参数是 `SpringManagedTransaction` 类中获取连接的时候传入的。
 
+
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/opneConnection.png"/> </div>
+
 
 而 `SpringManagedTransaction` 这类中的 dataSource 是如何得到赋值的，这里可以进入这个类中查看，只有在创建这个类的时候通过构造器为 dataSource 赋值，那么是哪个方法创建了 `SpringManagedTransaction`?
 
+
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/springManagerTransaction.png"/> </div>
+
 
 在构造器上打一个断点，沿着调用的堆栈往上寻找可以看到是 `DefaultSqlSessionFactory` 在创建 `SpringManagedTransaction` 中传入的，**这个数据源就是创建 sqlSession 的 `sqlSessionFactory` 中数据源**。
 
+
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/DefaultSqlSessionFactory.png"/> </div>
+
 
 **这里说明连接的复用是与我们创建 SqlSession 时候传入的 SqlSessionFactory 是否是同一个有关**。
 
+
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/getsqlSession.png"/> </div>
+
 
 所以我们才重写了 SqlSessionTemplate 中的 `getSqlSession` 方法，获取 SqlSession 时候传入正在使用的数据源对应的 `SqlSessionFactory`，这样即便在同一个的事务中，由于传入的 `SqlSessionFactory` 中不同，就不会出现连接复用。
 
+
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/customSqlSessionTemplate.png"/> </div>
+
 
 关于 Mybati-Spring 的更多事务处理机制，推荐阅读博客：[mybatis-spring 事务处理机制分析](https://my.oschina.net/fifadxj/blog/785621)
 
