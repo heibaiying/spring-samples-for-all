@@ -1,44 +1,27 @@
-# spring-cloud-ribbon
-
-## 目录<br/>
-<a href="#一ribbon-简介">一、ribbon 简介</a><br/>
-<a href="#二项目结构">二、项目结构</a><br/>
-<a href="#三服务提供者的实现">三、服务提供者的实现</a><br/>
-<a href="#四服务消费者的实现">四、服务消费者的实现</a><br/>
-<a href="#五启动测试">五、启动测试</a><br/>
-<a href="#六-附1-关于RestTemplate的说明">六、 附1： 关于RestTemplate的说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#61--restTemplate-规范">6.1  restTemplate 规范</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#62-ForEntity和ForObject的区别">6.2 ForEntity()和ForObject()的区别</a><br/>
-<a href="#七-附2-关于ribbon更多负载均衡的策略">七、 附2： 关于ribbon更多负载均衡的策略</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#71-内置的负载均衡的策略如下图">7.1 内置的负载均衡的策略如下图</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#72-配置文件指定负载均衡的方式">7.2 配置文件指定负载均衡的方式</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#73-代码指定负载均衡的方式">7.3 代码指定负载均衡的方式</a><br/>
-## 正文<br/>
+# Spring-Cloud-Ribbon
 
 
-## 一、ribbon 简介
+## 一、Ribbon 简介
 
-ribbon 是 Netfix 公司开源的负载均衡组件，采用服务端负载均衡的方式，即消费者客户端维护可用的服务列表，并通过负载均衡的方式将请求按照指定的策略分摊给消费者，从而达到负载均衡的方式。
+Ribbon 是 Netfix 公司开源的负载均衡组件，采用服务端负载均衡的方式，即消费者客户端维护可用的服务列表，并通过负载均衡的方式将请求按照指定的策略分摊给消费者，从而达到负载均衡的方式。
 
 
 
 ## 二、项目结构
 
-+ common: 公共的接口和实体类；
-+ consumer: 服务的消费者，采用 RestTemplate 调用产品服务；
-+ producer：服务的提供者；
-+ eureka: 注册中心，ribbon 从注册中心获取可用的服务列表，是实现负载均衡的基础。这里使用我们在[服务的注册与发现](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-eureka) 这个用例中搭建的简单注册中心作为测试即可。
++ **common**：公共的接口和实体类；
++ **consumer**：服务的消费者，采用 RestTemplate 调用产品服务；
++ **producer**：服务的提供者；
++ **eureka**：注册中心，Ribbon 从注册中心获取可用的服务列表，是实现负载均衡的基础。这里使用我们在 [服务的注册与发现](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-eureka) 这个用例中搭建的注册中心即可。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-ribbon.png"/> </div>
-
-
-
 ## 三、服务提供者的实现
 
-#### 3.1 产品服务由`ProductService`提供，并通过`ProducerController`将服务暴露给外部调用。
+### 3.1 定义服务
+
+ 产品服务由 `ProductService` 提供，并通过 `ProducerController` 将服务暴露给外部调用：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/ribbon-producer.png"/> </div>
-
 ProductService.java：
 
 ```java
@@ -106,7 +89,9 @@ public class ProducerController {
 }
 ```
 
-#### 3.2 指定注册中心地址,并在启动类上开启自动注册@EnableDiscoveryClient
+### 3.2 注册服务
+
+指定注册中心地址,并在启动类上开启自动注册 @EnableDiscoveryClient ：
 
 ```java
 server:
@@ -140,8 +125,7 @@ public class ProducerApplication {
 ## 四、服务消费者的实现
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/ribbon-consumer.png"/> </div>
-
-#### 4.1 导入负载均衡需要的依赖
+### 4.1 基本依赖
 
 ```xml
 <!--ribbon 依赖-->
@@ -151,7 +135,9 @@ public class ProducerApplication {
 </dependency>
 ```
 
-#### 4.2 指定注册中心地址,并在启动类上开启自动注册@EnableDiscoveryClient
+### 4.2 注册服务
+
+指定注册中心地址，并在启动类上开启自动注册@EnableDiscoveryClient：
 
 ```java
 server:
@@ -179,7 +165,9 @@ public class ConsumerApplication {
 }
 ```
 
-#### 4.3 使用@LoadBalanced配置RestTemplate即可实现客户端负载均衡
+### 4.3 @LoadBalanced
+
+使用 @LoadBalanced 配置 RestTemplate 即可实现客户端负载均衡：
 
 ```java
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -198,9 +186,9 @@ public class RibbonConfig {
 }
 ```
 
-#### 4.4 使用RestTemplate调用远程服务
+### 4.4 调用远程服务
 
-这里我们在调用远程服务的时候，url 填写的是服务名 + 具体接口地址 ，由于我们的同一个服务会存在多个实例，在使用@LoadBalanced 配置 RestTemplate 调用服务时，客户端就会从按照指定的负载均衡的方式将请求分摊到多个实例上。（默认的负载均衡采用的是 RoundRobinRule（轮询）的策略，有特殊需求时候可以采用其他内置的策略规则，或者实现 IRule 来定义自己的负载均衡策略）。
+使用 RestTemplate 调用远程服务，这里我们在调用远程服务的时候，url 填写的是 服务名 + 具体接口地址 ，由于我们的同一个服务会存在多个实例，在使用@LoadBalanced 配置 RestTemplate 调用服务时，客户端就会从按照指定的负载均衡的方式将请求分摊到多个实例上。（默认的负载均衡采用的是 RoundRobinRule（轮询）的策略，有特殊需求时候可以采用其他内置的策略规则，或者实现 IRule 来定义自己的负载均衡策略）。
 
 ```java
 @Service
@@ -232,38 +220,36 @@ public class ProductService implements IProductService {
 
 ## 五、启动测试
 
-#### 5.1 启动一个Eureka服务、三个producer服务（注意区分端口）、和一个消费者服务
+### 5.1 启动服务
+
+启动一个Eureka服务、三个生产者服务（注意区分端口）、和一个消费者服务：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-ribbon-app.png"/> </div>
-
 **服务注册中心：**
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-ribbon-eureka.png"/> </div>
+### 5.2  验证负载均衡
 
-#### 5.2  访问http://localhost:8080/sell/products 查看负载均衡的调用结果
+访问 http://localhost:8080/sell/products 查看负载均衡的调用结果：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-ribbon-products-8020.png"/> </div>
-
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-ribbon-products-8030.png"/> </div>
+## 六、RestTemplate
 
-## 六、 附1： 关于RestTemplate的说明
+### 6.1  RestTemplate 规范
 
-#### 6.1  restTemplate 规范
+在使用 RestTemplate 调用对应 RESTful 接口时候，使用的方法应该与接口声明方式（@GetMapping、@PostMapping、@PutMapping、@DeleteMapping）保持一致。其对应关系如下：
 
-restTemplate 调用对应 resultful 接口时候，使用的方法应该与接口声明方式（@GetMapping、@PostMapping、@PutMapping、@DeleteMapping）保持一致。请求类型与对应的调用方法如下。
+- GET 请求 ( getForObject 、getForEntity )
+- POST 请求（ postForObject 、postForEntity）
+- PUT 请求（ put ）
+- DELETE 请求 （ delete ）
 
-- GET 请求 (getForObject 、getForEntity)
-- POST 请求（postForObject 、postForEntity）
-- PUT 请求（put）
-- DELETE 请求 （delete）
+### 6.2  ForEntity 和 ForObject 的区别
 
-#### 6.2 ForEntity()和ForObject()的区别
+- `ForEntity()` 发送一个请求，返回的 ResponseEntity 包含了响应体所映射成的对象，
 
-- `ForEntity()` 发送一个请求，返回的 ResponseEntity 包含了响应体所映射成的对象
-
-- `ForObject()` 发送一个请求，返回的请求体将映射为一个对象
-
-例如：
+- `ForObject()` 发送一个请求，返回的请求体将映射为一个对象。示例如下：
 
 ```java
 ResponseEntity<Product> responseEntity = restTemplate.getForEntity("http://producer/product/{1}", Product.class, id);
@@ -272,11 +258,11 @@ Product product = restTemplate.getForObject("http://producer/product/{1}", Produ
 
 
 
-## 七、 附2： 关于ribbon更多负载均衡的策略
+## 七、负载均衡策略
 
 Ribbon 内置了多种负载均衡策略，如果有更复杂的需求，可以自己实现 IRule。
 
-#### 7.1 内置的负载均衡的策略如下图
+### 7.1 内置的负载均衡的策略
 
 ![Ribbon 负载均衡策略.png](http://upload-images.jianshu.io/upload_images/6944619-0355d316f5df9b3f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
@@ -284,9 +270,13 @@ Ribbon 内置了多种负载均衡策略，如果有更复杂的需求，可以�
 
 
 
-#### 7.2 配置文件指定负载均衡的方式
+### 7.2 指定负载均衡的策略
 
-要设置 `IRule` 名为的服务名称 `users`，您可以设置以下属性：
+可以通过两种方式来为服务指定具体的负载均衡的策略，分别是基于配置的方式和基于代码的方式：
+
+**1. 基于配置的方式**
+
+如下将为名为 `user` 的服务设置其负载均衡的策略为 WeightedResponseTimeRule ：
 
 ```yaml
 users:
@@ -294,9 +284,7 @@ users:
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule
 ```
 
-
-
-#### 7.3 代码指定负载均衡的方式
+**2. 基于代码的方式**
 
 ```java
 @Configuration
@@ -316,10 +304,11 @@ public class CustomConfiguration {
 }
 ```
 
-在使用代码方式的时候需要注意 [官方文档](http://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-ribbon.html#_customizing_the_ribbon_client) 中关于注解方式有以下强调：
+在使用代码方式时， [官方文档](http://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-ribbon.html#_customizing_the_ribbon_client) 中有以下强调说明：
 
-
+```
 The CustomConfiguration clas must be a @Configuration class, but take care that it is not in a @ComponentScan for the main application context. Otherwise, it is shared by all the @RibbonClients. If you use @ComponentScan (or @SpringBootApplication), you need to take steps to avoid it being included (for instance, you can put it in a separate, non-overlapping package or specify the packages to scan explicitly in the @ComponentScan).
+```
 
 
-该 `CustomConfiguration` 类必须是 `@Configuration` 标注的，但需要注意的它不是在 `@ComponentScan` 主应用程序上下文。否则，它将由所有 `@RibbonClients` 共享。如果你使用 `@ComponentScan`（或 `@SpringBootApplication`），你需要采取一些措施来避免它被扫描到（例如，你可以把它放在一个独立的，非重叠的包，或用 `@ComponentScan` 时显示扫描指定的包）。
+CustomConfiguration 类必须使用 @Configuration 进行注解，但需要注意的它不能在 @ComponentScan 主应用程序的上下文。否则，它将被所有 @RibbonClients 共享。如果你使用 @ComponentScan（或 @SpringBootApplication），你需要采取一些措施来避免它被扫描到（例如，你可以把它放在一个独立的，非重叠的包，或用 @ComponentScan 时显示扫描指定的包，从而避开扫描到 CustomConfiguration 所在的包）。

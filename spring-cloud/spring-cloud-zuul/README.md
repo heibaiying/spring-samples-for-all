@@ -1,59 +1,41 @@
-# spring-cloud-zuul
-
-## 目录<br/>
-<a href="#一zuul简介">一、zuul简介</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-API-网关">1.1 API 网关</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-zuul">1.2 zuul</a><br/>
-<a href="#二项目结构">二、项目结构</a><br/>
-<a href="#三构建api-网关-zuul">三、构建api 网关 zuul</a><br/>
-<a href="#四错误熔断">四、错误熔断</a><br/>
-<a href="#五zuul--过滤器">五、zuul  过滤器</a><br/>
-<a href="#六负载均衡">六、负载均衡</a><br/>
-<a href="#七附关于版本问题可能导致的-zuul-启动失败">七、附：关于版本问题可能导致的 zuul 启动失败</a><br/>
-## 正文<br/>
+# Spring-Cloud-Zuul
 
 
-## 一、zuul简介
+## 一、简介
 
 ### 1.1 API 网关
 
-api 网关是整个微服务系统的门面，所有的外部访问需要通过网关进行调度和过滤。它实现了请求转发、负载均衡、校验过滤、错误熔断、服务聚合等功能。
-
-下图是直观的显示 api Gateway 在微服务网关中的作用（图片引用自 spring boot 官网）。
+API 网关是整个微服务系统的门面，所有的外部访问需要通过网关进行调度和过滤。它实现了请求转发、负载均衡、校验过滤、错误熔断、服务聚合等功能：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/apiGateway.png"/> </div>
+### 1.2 Spring Cloud Zuul
 
-### 1.2 zuul
-
-spring cloud 中提供了基础 Net flix Zuul 实现的网关组件，这就是 Zuul,它除了实现负载均衡、错误熔断、路由转发等功能，还能与 spring 其他组件无缝配合使用。
+Spring Cloud 基于 Net Flix Zuul 实现了网关组件，这就是 Spring Cloud Zuul。它除了实现负载均衡、错误熔断、路由转发等功能，还能与 Spring 的其他组件无缝配合使用。
 
 
 
 ## 二、项目结构
 
-[spring-cloud-feign](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-feign) 用例已经实现通过 feign 实现服务间的调用，且提供了两个业务服务单元 (consumer、producer)，可以方便直观的测试 zuul 的路由、负载均衡、和错误熔断等功能，所以本用例在其基础上进行 zuul 的整合。
+[spring-cloud-feign](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-feign) 用例已经通过 Feign 实现服务间的调用，且提供了两个服务单元 (consumer、producer)，可以方便直观地测试 Zuul 的路由、负载均衡、和错误熔断等功能，所以本用例在其基础上进行整合。
 
-+ common: 公共的接口和实体类；
-+ consumer: 服务的消费者，采用 feign 调用产品服务；
-+ producer：服务的提供者；
-+ eureka: 注册中心；
-+ zuul: api 网关。
++ **common**：公共的接口和实体类；
++ **consumer**：服务的消费者，采用 Feign 调用产品服务；
++ **producer**：服务的提供者；
++ **eureka**：注册中心；
++ **zuul**：API 网关。
 
 聚合项目目录如下：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-zuul.png"/> </div>
-
-zuul 项目目录如下：
+Zuul 项目目录如下：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul.png"/> </div>
 
+## 三、Zuul 网关
 
+### 3.1 引入依赖
 
-## 三、构建api 网关 zuul
-
-#### 3.1 引入依赖
-
-主要的依赖是 spring-cloud-starter-netflix-zuul
+主要的依赖是 spring-cloud-starter-netflix-zuul：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -127,11 +109,9 @@ zuul 项目目录如下：
 </project>
 ```
 
+### 3.2 添加注解
 
-
-#### 3.2 在启动类上添加注解@EnableZuulProxy和@EnableDiscoveryClient
-
-@EnableZuulProxy 会自动设置 Zuul 服务器端点并在其中开启一些反向代理过滤器，以便将请求转发到后端服务器。
+在启动类上添加 @EnableZuulProxy和 @EnableDiscoveryClient 注解，@EnableZuulProxy 会自动设置 Zuul 服务器端点并在其中开启一些反向代理过滤器，以便将请求转发到后端服务器：
 
 ```java
 @SpringBootApplication
@@ -146,11 +126,9 @@ public class ZuulApplication {
 }
 ```
 
+### 3.3  项目配置
 
-
-#### 3.3  指定注册中心、配置网关的路由规则
-
-zuul 需要指定注册中心的地址，zuul 会从 eureka 获取其他微服务的实例信息，然后按照指定的路由规则进行请求转发。
+在配置文件中指定注册中心的地址并配置网关的路由规则。Zuul 需要指定注册中心的地址，Zuul 会从 Eureka 获取其他微服务的实例信息，然后按照指定的路由规则进行请求转发：
 
 ```yaml
 server:
@@ -175,21 +153,22 @@ zuul:
       serviceId: consumer
 ```
 
+### 3.4  启动服务
 
-
-#### 3.4  启动eureka、producer、consumer、zuul服务，访问 localhost:8090/consumer/sell/product 
+启动 eureka、producer、consumer、zuul 四个服务，访问 localhost:8090/consumer/sell/product ：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-consumer.png"/> </div>
 
-
-
 ## 四、错误熔断
 
-#### 4.1  zuul 默认整合了 hystrix ，不用导入其他额外依赖
+### 4.1  默认依赖
+
+Zuul 默认整合了 Hystrix ，不用导入其他额外依赖：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-hystrix.png"/> </div>
+### 4.2 服务降级
 
-#### 4.2 创建 CustomZuulFallbackProvider并实现FallbackProvider 接口，同时用@Component声明为spring 组件，即可实现熔断时候的回退服务
+创建 CustomZuulFallbackProvider 并实现 FallbackProvider 接口，同时用 @Component 声明为 Spring 组件，即可实现熔断时候的回退服务：
 
 ```java
 /**
@@ -262,15 +241,13 @@ public class CustomZuulFallbackProvider implements FallbackProvider {
 }
 ```
 
-正确返回了内容、同时返回的 http 状态码也和我们设置的一样。
+正确返回了内容、同时返回的 Http 状态码也和我们设置的一样。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-broker.png"/> </div>
 
+## 五、Zuul  过滤器
 
-
-## 五、zuul  过滤器
-
-创建自定义过滤器继承自 CustomZuulFilter，当我们访问网关的时候，如果判断 session 中没有对应的 code,则跳转到我们自定义的登录页面。
+创建自定义过滤器继承自 CustomZuulFilter，当我们访问网关的时候，如果判断 Session 中没有对应的 code，则跳转到我们自定义的登录页面：
 
 ```java
 /**
@@ -331,7 +308,7 @@ public class CustomZuulFilter extends ZuulFilter {
 }
 ```
 
-index.ftl:
+**index.ftl：**
 
 ```html
 <!doctype html>
@@ -352,27 +329,21 @@ index.ftl:
 
 ## 六、负载均衡
 
-#### zuul 默认集成了ribbon 实现了负载均衡。只要启动多个实例即可查看到负载均衡的效果。
+Zuul 默认集成了 Ribbon 并实现了负载均衡，只要启动多个实例即可查看到负载均衡的效果：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-ribbon.png"/> </div>
-
-#### 这里我们直接在idea 中启动多个实例来测试：
+**这里我们直接在idea 中启动多个实例来测试：**
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-config.png"/> </div>
-
-#### 负载均衡测试结果：
+**负载均衡测试结果：**
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-consumer.png"/> </div>
-
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-consumer-8040.png"/> </div>
-
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-consumer-8030.png"/> </div>
 
+## 七、常见异常
 
-
-## 七、附：关于版本问题可能导致的 zuul 启动失败
-
-如果出现以下错误导致启动失败，是 spring boot 版本不兼容导致的错误，Finchley SR2 版本 spring cloud 中的 zuul 和 spring boot 2.1.x 版本存在不兼容。如果出现这个问题，则将 spring boot 将至 2.0.x 的版本即可，用例中采用的是 2.0.8 版本。在实际的开发中应该严格遵循 spring 官方的版本依赖说明。
+如果出现以下错误导致启动失败，是 Spring Boot 版本不兼容导致的错误，Finchley SR2 版本的 Zuul 组件和 Spring Boot 2.1.x 存在不兼容的情况。如果出现这个问题，则将 Spring Boot 版本降至 2.0.x 即可，本用例中采用的是 2.0.8 。
 
 ```java
 APPLICATION FAILED TO START
@@ -389,7 +360,7 @@ Consider renaming one of the beans or enabling overriding by setting spring.main
 
 ```
 
-**spring cloud 版本说明**：
+在实际的开发中应该严格遵循 Spring 官方的版本依赖说明：
 
 | Release Train | Boot Version |
 | ------------- | ------------ |
@@ -398,4 +369,4 @@ Consider renaming one of the beans or enabling overriding by setting spring.main
 | Edgware       | 1.5.x        |
 | Dalston       | 1.5.x        |
 
-更多组件的版本说明可以在[spring cloud overview](https://spring.io/projects/spring-cloud#overview) 页面查看。
+更多组件的版本说明可以在 [spring cloud overview](https://spring.io/projects/spring-cloud#overview) 页面上查看。

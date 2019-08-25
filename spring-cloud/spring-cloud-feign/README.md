@@ -1,30 +1,20 @@
-# spring-cloud-feign
-
-## 目录<br/>
-<a href="#一feign-简介">一、feign 简介</a><br/>
-<a href="#二项目结构">二、项目结构</a><br/>
-<a href="#三服务提供者的实现">三、服务提供者的实现</a><br/>
-<a href="#四服务消费者的实现">四、服务消费者的实现</a><br/>
-<a href="#五启动测试">五、启动测试</a><br/>
-<a href="#六-feign-的服务容错">六、 feign 的服务容错</a><br/>
-## 正文<br/>
+# Spring-Cloud-Feign
 
 
-## 一、feign 简介
+## 一、Feign 简介
 
-在上一个用例中，我们使用 ribbon+restTemplate 实现服务之间的远程调用，实际上每一个调用都是模板化的内容，所以 spring cloud Feign 在此基础上进行了进一步的封装。我们只需要定义一个接口并使用 feign 注解的方式来进行配置，同时采用 springMvc 注解进行参数绑定就可以完成服务的调用。feign 同时还内置实现了负载均衡、服务容错等功能。
+在上一个用例中，我们使用 Ribbon + RestTemplate 实现服务之间的远程调用，实际上每一个调用都是模板化的内容，所以 Spring Cloud Feign 在此基础上进行了进一步的封装。我们只需要定义一个接口并使用 Feign 注解的方式来进行配置，同时采用 springMvc 注解进行参数绑定就可以完成服务的调用。Feign 同时还内置实现了负载均衡、服务容错等功能。
 
 
 
 ## 二、项目结构
 
-+ common: 公共的接口和实体类；
-+ consumer: 服务的消费者，采用 feign 调用产品服务；
-+ producer：服务的提供者；
-+ eureka: 注册中心。
++ **common**：公共的接口和实体类；
++ **consumer**：服务的消费者，采用 Feign 调用产品服务；
++ **producer**：服务的提供者；
++ **eureka**：注册中心。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-feign.png"/> </div>
-
 
 
 
@@ -32,8 +22,9 @@
 ## 三、服务提供者的实现
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/feign-producer.png"/> </div>
+### 3.1 定义服务
 
-#### 3.1 产品服务由`ProductService`提供，并通过`ProducerController`将服务暴露给外部调用。
+产品服务由 `ProductService` 提供，并通过 `ProducerController` 将服务暴露给外部调用：
 
 ProductService.java：
 
@@ -97,7 +88,9 @@ public class ProducerController implements ProductFeign {
 }
 ```
 
-#### 3.2 指定注册中心地址,并在启动类上开启自动注册@EnableDiscoveryClient
+### 3.2 服务注册
+
+指定注册中心地址,并在启动类上开启自动注册 @EnableDiscoveryClient：
 
 ```java
 server:
@@ -131,8 +124,7 @@ public class ProducerApplication {
 ## 四、服务消费者的实现
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/feign-consumer.png"/> </div>
-
-#### 4.1 导入openfeign依赖
+### 4.1 基本依赖
 
 ```xml
 <!-- feign 依赖-->
@@ -142,9 +134,9 @@ public class ProducerApplication {
 </dependency>
 ```
 
-#### 4.2 指定注册中心地址,并在启动类上添加注解@EnableDiscoveryClient和@EnableFeignClients
+### 4.2 @EnableFeignClients 
 
-@EnableFeignClients 会去扫描工程中所有用 @FeignClient 声明的 feign 客户端。
+指定注册中心地址，并在启动类上添加注解 @EnableDiscoveryClient 和 @EnableFeignClients，@EnableFeignClients 会去扫描工程中所有用 @FeignClient 声明的 Feign 客户端：
 
 ```java
 server:
@@ -173,7 +165,7 @@ public class ConsumerApplication {
 }
 ```
 
-#### 4.3 创建服务调用公共接口
+### 4.3 创建服务调用接口
 
 ```java
 /**
@@ -203,9 +195,9 @@ public interface ProductFeign {
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/common-feign.png"/> </div>
 
+### 4.4  Feign 客户端
 
-
-#### 4.4 继承公共接口，创建CProductFeign， 用@FeignClient声明为feign客户端
+继承公共接口，创建 CProductFeign， 用 @FeignClient 声明为 Feign 客户端：
 
 ```java
 /**
@@ -218,7 +210,9 @@ public interface CProductFeign extends ProductFeign {
 }
 ```
 
-#### 4.5  注入使用 feign 服务调用接口
+### 4.5  调用远程服务
+
+注入并使用 Feign 接口调用远程服务：
 
 ```java
 @Controller
@@ -257,37 +251,34 @@ public class SellController {
 
 ## 五、启动测试
 
-#### 5.1 启动一个Eureka服务、三个producer服务（注意区分端口）、和一个消费者服务
+### 5.1 启动服务
 
-feign 的依赖中导入了 spring-cloud-starter-netflix-ribbon 依赖，并且在内部实现了基于 ribbon 的客户端负载均衡，所以我们这里启动三个 producer 实例来观察负载均衡的情况。
+启动一个Eureka服务、三个生产者服务（注意区分端口）、和一个消费者服务。Feign 的依赖中导入了 spring-cloud-starter-netflix-ribbon 依赖，并且在内部实现了基于 Ribbon 的客户端负载均衡，所以我们这里启动三个生产者服务来观察负载均衡的情况：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-ribbon-app.png"/> </div>
-
 **服务注册中心：**
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-ribbon-eureka.png"/> </div>
+### 5.2  验证负载均衡
 
-#### 5.2  访问http://localhost:8080/sell/products 查看负载均衡的调用结果
+访问 http://localhost:8080/sell/products 查看负载均衡的调用结果：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-ribbon-products-8020.png"/> </div>
-
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-ribbon-products-8030.png"/> </div>
-
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/feign-8040.png"/> </div>
 
 
 
 
+## 六、Feign 的服务容错
 
-## 六、 feign 的服务容错
+### 6.1 开启容错配置
 
-#### 6.1 feign 的依赖中默认导入了hystrix 的相关依赖，我们不需要额外导入，只需要开启相关配置即可
+Feign 的依赖中默认导入了 Hystrix （熔断器）的相关依赖，我们不需要额外导入，只需要开启相关配置即可：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/feign-hystrix-maven.png"/> </div>
 
-
-
-#### 6.2 在application.yml 中开启hystrix
+ 在 application.yml 中开启 Hystrix ：
 
 ```yml
 feign:
@@ -296,12 +287,14 @@ feign:
     enabled: true
 ```
 
-#### 6.3 创建`CProductFeignImpl`,继承feign接口（CProductFeign），定义熔断时候的回退处理
+### 6.2 定义降级处理
+
+创建 `CProductFeignImpl`，继承 Feign接口（CProductFeign），定义熔断时候的降级处理机制：
 
 ```java
 /**
  * @author : heibaiying
- * @description : 定义发生熔断时候的回退处理。除了继承自 CProductFeign,还需要用@Component 声明为 spring 的组件
+ * @description : 定义发生熔断时候的降级处理。除了继承自 CProductFeign,还需要用 @Component 声明为 spring 的组件
  */
 @Component
 public class CProductFeignImpl implements CProductFeign {
@@ -353,7 +346,9 @@ public class CProductFeignImpl implements CProductFeign {
 </html>
 ```
 
-#### 6.4 在 @FeignClient 注解中，用fallback参数指定熔断时候的回退处理
+### 6.3 配置降级处理
+
+在 @FeignClient 注解中，用 fallback 参数指定熔断时候的降级处理：
 
 ```java
 /**
@@ -366,9 +361,9 @@ public interface CProductFeign extends ProductFeign {
 }
 ```
 
-#### 6.5 测试熔断处理
+### 6.4 测试熔断
 
-hystrix 默认调用超时时间为 2s ,这里我们使用线程休眠的方式来模拟超时熔断。
+Hystrix 默认调用超时时间为 2s ，这里我们使用线程休眠的方式来模拟超时熔断。
 
 ```java
 public List<Product> queryAllProducts() {
