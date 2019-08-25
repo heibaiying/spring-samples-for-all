@@ -1,6 +1,7 @@
 # Spring Boot 整合 Dubbo
 
-<nav>
+
+<nav>
 <a href="#一-项目结构">一、 项目结构</a><br/>
 <a href="#二基本依赖">二、基本依赖</a><br/>
 <a href="#三公共模块">三、公共模块</a><br/>
@@ -101,9 +102,11 @@
 - bean 下为公共的实体类。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/boot-dubbo-common.png"/> </div>
+
 ## 四、服务提供者
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/boot-dubbo-provider.png"/> </div>
+
 ### 4.1 提供者配置
 
 ```yaml
@@ -158,6 +161,7 @@ public class ProductService implements IProductService {
 ## 五、服务消费者
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/boot-dubbo-consumer1.png"/> </div>
+
 ### 5.1 消费者配置
 
 ```yaml
