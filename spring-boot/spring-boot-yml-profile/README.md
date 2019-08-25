@@ -1,5 +1,6 @@
 # Spring Boot YAML
-<nav>
+
+<nav>
 <a href="#一项目结构">一、项目结构</a><br/>
 <a href="#二YAML-语法">二、YAML 语法</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-基本规则">2.1 基本规则</a><br/>
@@ -17,6 +18,7 @@
 ## 一、项目结构
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-yml-profile.png"/> </div>
+
 ## 二、YAML 语法
 
 Spring Boot 支持使用 Yaml 语法来书写配置文件，相比于 properties 文件键值对的配置格式，Yaml 语法的配置更加精简，层次也更加分明。其基本规则和语法如下：
@@ -148,6 +150,7 @@ Spring Boot 在将环境属性绑定到 `@ConfigurationProperties` beans 时会�
 可以在同一个 yml 文件中包含多个配置文件，并使用 `---` 进行分割。或者遵循 application-xxx.yml 命名方式来为不同的环境（如开发环境，生产环境，测试环境）分别生成不同的配置文件，然后再在主配置文件 application.yml 中来决定使用哪个具体的配置，或在启动时候通过命令行参数来决定，命令行的优先级大于配置文件的优先级。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/profile.png"/> </div>
+
 ```yaml
 # 配置文件中激活开发环境配置
 spring:
