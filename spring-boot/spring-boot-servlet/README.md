@@ -1,6 +1,7 @@
 # Spring Boot 整合 Servlet 
 
-<nav>
+
+<nav>
 <a href="#一项目说明">一、项目说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-结构说明">1.1 结构说明</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-项目依赖">1.2 项目依赖</a><br/>
@@ -21,6 +22,7 @@
 - 为了说明外置容器对 Servlet 注解的自动发现机制，项目采用外置容器构建，关于 Spring Boot 整合外置容器的详细说明可以参考：[spring-boot-tomcat](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-tomcat) 。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-servlet.png"/> </div>
+
 ### 1.2 项目依赖
 
 ```xml
