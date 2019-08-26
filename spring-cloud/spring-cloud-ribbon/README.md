@@ -343,7 +343,10 @@ public class CustomConfiguration {
 在使用代码方式时， [官方文档](http://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-ribbon.html#_customizing_the_ribbon_client) 中有以下强调说明：
 
 ```
-The CustomConfiguration clas must be a @Configuration class, but take care that it is not in a @ComponentScan for the main application context. Otherwise, it is shared by all the @RibbonClients. If you use @ComponentScan (or @SpringBootApplication), you need to take steps to avoid it being included (for instance, you can put it in a separate, non-overlapping package or specify the packages to scan explicitly in the @ComponentScan).
+The CustomConfiguration clas must be a @Configuration class, but take care that it is not in a @ComponentScan
+for the main application context. Otherwise, it is shared by all the @RibbonClients. If you use @ComponentScan
+(or @SpringBootApplication), you need to take steps to avoid it being included (for instance, you can put it 
+in a separate, non-overlapping package or specify the packages to scan explicitly in the @ComponentScan).
 ```
 
 
