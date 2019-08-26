@@ -3,11 +3,11 @@
 
 <nav>
 <a href="#一项目结构">一、项目结构</a><br/>
-<a href="#二三步搭建-Eureka-高可用注册中心">二、三步搭建 Eureka 高可用注册中心</a><br/>
+<a href="#二三步搭建-Eureka-高可用注册中心">二、三步搭建Eureka高可用注册中心</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-服务端依赖">2.1 服务端依赖</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22--服务端配置">2.2  服务端配置</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-EnableEurekaServer">2.3 @EnableEurekaServer</a><br/>
-<a href="#三三步搭建-Eureka-客户端">三、三步搭建 Eureka 客户端</a><br/>
+<a href="#三三步搭建-Eureka-客户端">三、三步搭建Eureka客户端</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-客户端依赖">3.1 客户端依赖</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-客户端配置">3.2 客户端配置</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-EnableDiscoveryClient">3.3 @EnableDiscoveryClient</a><br/>
