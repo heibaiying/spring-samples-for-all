@@ -1,45 +1,43 @@
-# spring-sleuth-zipkin
+# Spring-Sleuth-Zipkin
 
-## 目录<br/>
+<nav>
 <a href="#一简介">一、简介</a><br/>
 <a href="#二项目结构">二、项目结构</a><br/>
-<a href="#三构建-zipkin-服务端">三、构建 zipkin 服务端</a><br/>
-<a href="#四集成zipkin">四、集成zipkin</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-对三个模块zuulconsumerproducer-添加依赖">4.1 对三个模块(zuul、consumer、producer )添加依赖</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-分别在三个模块的applicationyml-配置文件中指定zipkin的地址">4.2 分别在三个模块的application.yml 配置文件中指定zipkin的地址</a><br/>
+<a href="#三Zipkin-服务端">三、Zipkin 服务端</a><br/>
+<a href="#四Zipkin-的集成">四、Zipkin 的集成 </a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-添加依赖">4.1 添加依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-连接到服务端">4.2 连接到服务端</a><br/>
 <a href="#五启动项目">五、启动项目</a><br/>
-## 正文<br/>
-
+</nav>
 
 ## 一、简介
 
-在微服务架构中，几乎每一个前端的请求都会经过多个服务单元协调来提供服务，形成复杂的服务调用链路。当服务发生问题时候，很难知道问题来源于链路的哪一个环节，这时候就需要进行链路追踪。
-
-zipkin 是一个开源的分布式跟踪系统，可以使用 spring cloud sleuth 来轻松的集成 zipkin。
+在微服务架构中，几乎每一个前端的请求都会经过多个服务单元来协调提供服务，从而形成复杂的调用链路。此时如果服务发生问题，我们就很难知道其具体发生在哪一个环节，想要解决这个问题，可以使用链路追踪技术。Zipkin 是一个开源的分布式跟踪系统，Spring 支持使用 Spring Cloud Sleuth 来轻松地集成 Zipkin。
 
 
 
 ## 二、项目结构
 
-这里的项目是在之前的 [spring-cloud-zuul](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-zuul) 进行集成，zuul 项目的产品接口调用链路从 网关 -> consumer -> producer,历经三个环节的调用链路可以直观展示 zipkin 对链路追踪可视化的好处。
+这里的项目是在之前的 [spring-cloud-zuul](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-zuul) 上进行集成，该项目产品接口的调用链路为： 网关 -> consumer -> producer ，整个过程历经三个环节的调用，因此可以直观展示 Zipkin 链路追踪的效果。
 
-+ common: 公共的接口和实体类；
-+ consumer: 服务的消费者，采用 feign 调用产品服务；
-+ producer：服务的提供者；
-+ eureka: 注册中心；
-+ zuul: api 网关。
++ **common**：公共的接口和实体类；
++ **consumer**：服务的消费者，采用 Feign 调用产品服务；
++ **producer**：服务的提供者；
++ **eureka**：注册中心；
++ **zuul**： API 网关。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-sleuth-zipkin.png"/> </div>
 
-## 三、构建 zipkin 服务端
 
-zipkin 客户端可以不用自己构建，直接从[官网](https://zipkin.io/pages/quickstart) 上下载对应的 jar 包启动即可，默认端口 9411
+## 三、Zipkin 服务端
+
+zipkin  服务端可以不用自己构建，直接从 [官网](https://zipkin.io/pages/quickstart) 上下载对应的 JAR 包即可，启动命令如下。默认端口为 9411：
 
 ```shell
 java -jar zipkin.jar
 ```
 
-可以直接从 docker 仓库拉取，然后启动容器：
+也可以直接从 Docker 仓库拉取镜像，然后进行启动：
 
 ```shell
 docker run -d -p 9411:9411 openzipkin/zipkin
@@ -51,11 +49,14 @@ docker run -d -p 9411:9411 openzipkin/zipkin
 
 
 
-## 四、集成zipkin
 
-这里我们对 zuul、consumer、producer 三个模块都进行集成
+## 四、Zipkin 的集成 
 
-#### 4.1 对三个模块(zuul、consumer、producer )添加依赖
+这里我们对 zuul、consumer、producer 三个模块都进行集成：
+
+### 4.1 添加依赖
+
+对三个模块 (zuul、consumer、producer ) 添加 Zipkin 依赖：
 
 ```xml
 <!--zipkin-->
@@ -65,7 +66,9 @@ docker run -d -p 9411:9411 openzipkin/zipkin
 </dependency>
 ```
 
-#### 4.2 分别在三个模块的application.yml 配置文件中指定zipkin的地址
+### 4.2 连接到服务端
+
+分别在三个模块的 application.yml 配置文件中指定 zipkin 的服务地址 ：
 
 ```yaml
 spring:
@@ -81,24 +84,21 @@ spring:
 
 ## 五、启动项目
 
-分别启动，eureka，zuul，consumer，producer，zuul ，访问 http://localhost:9411/ ，查看我们的服务调用链路
+分别启动 eureka，zuul，consumer，producer 四个项目，访问 http://localhost:9411/ ，查看我们的服务调用链路：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zipkin.png"/> </div>
 
-点击链路，则可以查看具体的调用情况
+
+点击链路，即可以查看具体的调用情况：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zipkin-detail.png"/> </div>
 
+
 展示信息说明：
 
-Span ： 基本工作单元，发送一个远程调度任务就会产生一个 Span。 
+- **Span**：基本工作单元，发送一个远程调度任务就会产生一个 Span。 
+- **Trace**：由一系列 Span 组成的，呈树状结构。 所有由这个请求产生的 Span 组成了对应的 Trace 。 
+- **SpanId**：工作单元 ( Span ) 的唯一标识。 
+- **TraceId**：一条请求链路 ( Trace ) 的唯一标识。
 
-Trace：由一系列 Span 组成的，呈树状结构。 所有由这个请求产生的 Span 组成了这个 Trace 。 
-
-SpanId ; 工作单元 (Span) 的唯一标识。 
-
-TraceId :  一条请求链路 (Trace) 的唯 一 标识。
-
-除了 TraceID 外，还需要 SpanID 用于记录调用父子关系。每个服务会记录下 parent id 和 span id，通过他们可以组织一次完整调用链的父子关系。
-
-注：关于以上概念可以比对链表的实现原理来理解。
+除了 TraceID 外，还需要 SpanID 用于记录调用的父子关系。每个服务会记录下 parent id 和 span id，通过他们可以组成一条完整调用链，可以对比链表的实现原理来理解。

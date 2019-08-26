@@ -1,5 +1,25 @@
 # Spring-Cloud-Hystrix-Turbine
 
+<nav>
+<a href="#一简介">一、简介</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-Spring-Cloud-Hystrix">1.1 Spring Cloud Hystrix</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-熔断器工作机制">1.2 熔断器工作机制</a><br/>
+<a href="#二项目结构">二、项目结构</a><br/>
+<a href="#三整合-Hystrix">三、整合 Hystrix </a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-引入依赖">3.1 引入依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-暴露端点">3.2 暴露端点</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-添加注解">3.3 添加注解</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34--服务降级">3.4  服务降级</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#35-模拟熔断">3.5 模拟熔断</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#35---测试熔断">3.5   测试熔断</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#37-控制台">3.7 控制台</a><br/>
+<a href="#四聚合监控">四、聚合监控</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-导入依赖">4.1 导入依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-项目配置">4.2 项目配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#43-添加注解">4.3 添加注解</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#44-启动项目">4.4 启动项目</a><br/>
+<a href="#五常见问题">五、常见问题</a><br/>
+</nav>
 
 ## 一、简介
 
@@ -18,6 +38,7 @@
 - 当熔断器处于打开状态的一段时间后，熔断器处于半打开状态，这时候一定数量的请求回去调用实际的服务，如果调用成功，则代表服务可用了，熔断器关闭；如果还是失败，则代表服务还是不可用，熔断器继续打开。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/circuitbreaker.png"/> </div>
+
 ## 二、项目结构
 
 [spring-cloud-ribbon](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-ribbon) 用例已经实现通过 Ribbon + RestTemplate 实现服务间的调用，本用例在其基础上进行 Hystrix 的整合：
@@ -29,6 +50,7 @@
 + **turbine**：多个熔断器的聚合监控。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-hystrix.png"/> </div>
+
 
 ## 三、整合 Hystrix 
 
@@ -151,6 +173,7 @@ public List<Product> queryAllProducts() {
 启动服务，访问 http://localhost:8030/sell/products ，多次刷新查看熔断情况：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/hystrix-8030.png"/> </div>
+
 ### 3.7 控制台
 
 启动服务后，可以访问 localhost:8030/hystrix ，依次输出 http://localhost:8030/actuator/hystrix.stream（监控地址） ，2000（延迟时间），title 可以任意填写，进入Hystrix  监控台。
@@ -160,12 +183,15 @@ public List<Product> queryAllProducts() {
 **登录页面**：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/hystrix-single-login.png"/> </div>
+
 **监控页面**：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/hystrix-8030-login.png"/> </div>
+
 **关于各个参数的说明参见[官方 wiki](https://github.com/Netflix-Skunkworks/hystrix-dashboard/wiki) 提供的图**：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/dashboard.png"/> </div>
+
 
 
 
@@ -174,6 +200,7 @@ public List<Product> queryAllProducts() {
 如果你想要聚合监控不同服务单元下的多个断路器，可以使用 Turbine 来实现。单体监控和聚合监控的区别如下：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/dashboard-direct-vs-turbine-640.png"/> </div>
+
 
 ### 4.1 导入依赖
 
@@ -285,9 +312,11 @@ public class TurbineApplication {
 依次启动 eureka、producer、consumer、turbine 四个项目，因为 consumer 和 producer 都集成了 Hystrix ，所以可以在 localhost:8020/hystrix 或者 8030/hystrix 页面输入 http://localhost:8040/turbine.stream  来查看断路器聚合信息：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/hystrix-cluster-login.png"/> </div>
+
 **显示了不同服务单元（consumer,producer）的多个断路器信息：**
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/hystrix-cluster.png"/> </div>
+
 ## 五、常见问题
 
 在整合过程中可能出现的一些问题如下：
@@ -326,3 +355,4 @@ public ServletRegistrationBean getServlet() {
 这种情况是熔断器所在的方法没有被调用，所以没有产生监控数据，不是整合问题，这时候调用一下熔断器所在方法即可：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/hystrix-loading.png"/> </div>
+

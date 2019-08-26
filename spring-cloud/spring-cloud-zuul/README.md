@@ -1,6 +1,24 @@
 # Spring-Cloud-Zuul
 
 
+<nav>
+<a href="#一简介">一、简介</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-API-网关">1.1 API 网关</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-Spring-Cloud-Zuul">1.2 Spring Cloud Zuul</a><br/>
+<a href="#二项目结构">二、项目结构</a><br/>
+<a href="#三Zuul-网关">三、Zuul 网关</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-引入依赖">3.1 引入依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-添加注解">3.2 添加注解</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33--项目配置">3.3  项目配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34--启动服务">3.4  启动服务</a><br/>
+<a href="#四错误熔断">四、错误熔断</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41--默认依赖">4.1  默认依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-服务降级">4.2 服务降级</a><br/>
+<a href="#五Zuul--过滤器">五、Zuul  过滤器</a><br/>
+<a href="#六负载均衡">六、负载均衡</a><br/>
+<a href="#七常见异常">七、常见异常</a><br/>
+</nav>
+
 ## 一、简介
 
 ### 1.1 API 网关
@@ -8,6 +26,8 @@
 API 网关是整个微服务系统的门面，所有的外部访问需要通过网关进行调度和过滤。它实现了请求转发、负载均衡、校验过滤、错误熔断、服务聚合等功能：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/apiGateway.png"/> </div>
+
+
 ### 1.2 Spring Cloud Zuul
 
 Spring Cloud 基于 Net Flix Zuul 实现了网关组件，这就是 Spring Cloud Zuul。它除了实现负载均衡、错误熔断、路由转发等功能，还能与 Spring 的其他组件无缝配合使用。
@@ -27,9 +47,13 @@ Spring Cloud 基于 Net Flix Zuul 实现了网关组件，这就是 Spring Cloud
 聚合项目目录如下：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-zuul.png"/> </div>
+
+
 Zuul 项目目录如下：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul.png"/> </div>
+
+
 
 ## 三、Zuul 网关
 
@@ -159,6 +183,8 @@ zuul:
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-consumer.png"/> </div>
 
+
+
 ## 四、错误熔断
 
 ### 4.1  默认依赖
@@ -166,6 +192,8 @@ zuul:
 Zuul 默认整合了 Hystrix ，不用导入其他额外依赖：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-hystrix.png"/> </div>
+
+
 ### 4.2 服务降级
 
 创建 CustomZuulFallbackProvider 并实现 FallbackProvider 接口，同时用 @Component 声明为 Spring 组件，即可实现熔断时候的回退服务：
@@ -244,6 +272,8 @@ public class CustomZuulFallbackProvider implements FallbackProvider {
 正确返回了内容、同时返回的 Http 状态码也和我们设置的一样。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-broker.png"/> </div>
+
+
 
 ## 五、Zuul  过滤器
 
@@ -332,14 +362,24 @@ public class CustomZuulFilter extends ZuulFilter {
 Zuul 默认集成了 Ribbon 并实现了负载均衡，只要启动多个实例即可查看到负载均衡的效果：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-ribbon.png"/> </div>
+
+
 **这里我们直接在idea 中启动多个实例来测试：**
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-config.png"/> </div>
+
+
 **负载均衡测试结果：**
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-consumer.png"/> </div>
+
+
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-consumer-8040.png"/> </div>
+
+
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-consumer-8030.png"/> </div>
+
+
 
 ## 七、常见异常
 

@@ -1,6 +1,22 @@
 # Eureka 高可用注册中心的搭建
 
 
+<nav>
+<a href="#一项目结构">一、项目结构</a><br/>
+<a href="#二三步搭建-Eureka-高可用注册中心">二、三步搭建 Eureka 高可用注册中心</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-服务端依赖">2.1 服务端依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22--服务端配置">2.2  服务端配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-EnableEurekaServer">2.3 @EnableEurekaServer</a><br/>
+<a href="#三三步搭建-Eureka-客户端">三、三步搭建 Eureka 客户端</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-客户端依赖">3.1 客户端依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-客户端配置">3.2 客户端配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-EnableDiscoveryClient">3.3 @EnableDiscoveryClient</a><br/>
+<a href="#4启动项目">4.启动项目 </a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-启动注册中心">4.1 启动注册中心</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42--集群搭建成功的判定">4.2  集群搭建成功的判定</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#43--prefer-ip-address-参数">4.3  prefer-ip-address 参数</a><br/>
+</nav>
+
 ## 一、项目结构
 
 - **eureka-server** 为服务注册中心，负责服务的管理；
@@ -8,11 +24,15 @@
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-eureka-cluster.png"/> </div>
 
+
+
 ## 二、三步搭建 Eureka 高可用注册中心
 
 这里我们以单机伪集群的方式搭建，让三个单机注册中心互相注册，实现注册中心的高可用。配置示意图如下：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/eureka-server-client.png"/> </div>
+
+
 ### 2.1 服务端依赖
 
 ```xml
@@ -27,6 +47,8 @@
 创建三份配置文件，分别代表不同注册中心的配置：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/eureka-application.png"/> </div>
+
+
 application-01.yml:
 
 ```yaml
@@ -154,6 +176,8 @@ public class EurekaClientApplication {
 这里我们可以采用命令行方式指定配置，分别启动三个注册中心：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/eureka-active.png"/> </div>
+
+
 ### 4.2  集群搭建成功的判定
 
 这里需要注意的是仅仅 Status 中出现其他注册中心时，并不一定是搭建成功的，**一定是当注册中心的 DS Replicas 和 available replicas 中显示其余的注册中心时候，才代表搭建成功**。
@@ -161,12 +185,18 @@ public class EurekaClientApplication {
 8010 注册中心：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/eureka-8010.png"/> </div>
+
+
 8020 注册中心：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/eureka-8020.png"/> </div>
+
+
 8030 注册中心：
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/eureka-8030.png"/> </div>
+
+
 Status 下的每个注册中心都可以点击跳转到其监控页面，但其监控页面地址链接可能是动态变化的，主要情况如下：
 
 + 当 hostname 和 prefer-ip-address 都没有配置，则访问 `主机名:服务名:端口号`：
