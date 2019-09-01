@@ -17,10 +17,12 @@
 Spring Boot 默认采用内置的 Web 容器，因此打成 JAR 包后就可以直接运行。但在某的时候，你可能还是需要使用 Tomcat 来运行和管理 Web 项目，因此本用例主要介绍 Spring Boot 与 Tomcat 的整合方式。另外 Spring Boot 内置的 Web 容器默认并不支持 JSP，所以可以使用跳转到 JSP 页面的方式来测试整合外部容器是否成功。
 
 <div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-tomcat.png"/> </div>
-
 ### 1.2 基本依赖
 
 ```xml
+<!--指定打包方式--> 
+<packaging>war</packaging>
+
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-web</artifactId>
@@ -39,6 +41,19 @@ Spring Boot 默认采用内置的 Web 容器，因此打成 JAR 包后就可以�
     <version>2.5</version>
     <scope>provided</scope>
 </dependency>
+
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <configuration>
+                <!--不需要检查web.xml是否存在-->
+                <failOnMissingWebXml>false</failOnMissingWebXml>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 ```
 
 ## 二、整合 Tomcat
