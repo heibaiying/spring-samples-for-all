@@ -95,3 +95,9 @@ spring-cloud：Finchley.SR2
 
 - Servlet3.1 规范（最终版）.pdf
 - Thymeleaf 中⽂参考⼿册.pdf
+
+<br>
+
+<div align="center"> <img width="200px" src="pictures/blog-logo.png"/> </div>
+
+<div align="center"> <a  href = "https://blog.csdn.net/m0_37809146"> 欢迎关注我的博客：https://blog.csdn.net/m0_37809146</a> </div>
