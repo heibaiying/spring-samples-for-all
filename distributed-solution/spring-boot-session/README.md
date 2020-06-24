@@ -13,7 +13,7 @@
 
 ## 一、项目结构
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-session.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-boot-session.png"/> </div>
 
 
 ## 二、实现分布式 Session
@@ -151,13 +151,13 @@ Session 信息展示页面 home.ftl：
 
 应用 1 启动配置：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-session-app1.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-boot-session-app1.png"/> </div>
 
 应用 2 启动配置，需要用 `--server.port ` 指定不同的端口号：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-session-app2.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-boot-session-app2.png"/> </div>
 
 **测试结果：**
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-session-8080.png"/> </div>
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-session-8090.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-boot-session-8080.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-boot-session-8090.png"/> </div>

@@ -15,7 +15,7 @@
 
 分布式 Session 主要配置文件为 spring-session.xml 和 web.xml，其他的配置为标准的 web 工程的配置：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-session.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-session.png"/> </div>
 
 ## 二、实现分布式 Session
 
@@ -188,13 +188,13 @@ session 信息展示页面 (home.jsp)：
 
 Tomcat 1 配置：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-session-tomcat01.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-session-tomcat01.png"/> </div>
 
 Tomcat 2 配置：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-session-tomcat02.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-session-tomcat02.png"/> </div>
 
 **测试结果：**
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-session-8080.png"/> </div>
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-session-8090.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-session-8080.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-session-8090.png"/> </div>
