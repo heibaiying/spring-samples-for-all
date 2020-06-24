@@ -33,7 +33,7 @@ Swagger 是一个规范框架，用于生成、描述、调用和可视化 RESTf
 
 下图为 swagger-ui 提供的文档可视化界面示例：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/Swagger_UI.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/Swagger_UI.png"/> </div>
 
 
 ### 1.3 关联关系
@@ -243,16 +243,16 @@ Swagger 为了最大程度防止对逻辑代码的侵入，基本都是依靠注
 
 接口文档访问地址：http://localhost:8080/swagger-ui.html ，文档主界面如下：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/swagger-ui-index.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/swagger-ui-index.png"/> </div>
 
 ### 2.5 接口测试
 
 Swagger-UI 除了提供接口可视化的功能外，还可以用于接口测试。点击对应接口的 `try it out` 按钮，然后输入对应的参数的值，最后点击下方的 `Execute` 按钮发送请求：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/swagger-try-it.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/swagger-try-it.png"/> </div>
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/swagger-execute.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/swagger-execute.png"/> </div>
 
 POST 接口可以直接修改 Model 对应的 Json 数据 ，然后点击下方的 `Execute` 按钮发送请求：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/swagger-post-try.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/swagger-post-try.png"/> </div>

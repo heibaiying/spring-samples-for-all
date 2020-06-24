@@ -30,7 +30,7 @@ Spring Cloud Eureka 使用 Netﬂix Eureka 来实现服务注册与发现，它�
 - **eureka-server** 为服务注册中心，负责服务的管理；
 - **eureka-client** 为 Eureka 客户端。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-eureka.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-cloud-eureka.png"/> </div>
 
 
 
@@ -127,6 +127,6 @@ public class EurekaClientApplication {
 
 进入注册中心控制台，查看服务注册情况：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/eureka.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/eureka.png"/> </div>
 
 

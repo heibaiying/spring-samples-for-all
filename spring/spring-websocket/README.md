@@ -21,7 +21,7 @@
 3. CustomHandershakerInterceptor 为自定义的 websocket 的握手拦截器；
 4. 项目以 web 的方式构建。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-websocket.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-websocket.png"/> </div>
 
 
 ### 1.2 基本依赖

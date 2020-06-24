@@ -37,7 +37,7 @@
 - 当一个服务处理请求失败的次数大于阈值时，熔断器开启，这时所有的请求都会执行快速失败，而不会去调用实际的服务；
 - 当熔断器处于打开状态的一段时间后，熔断器处于半打开状态，这时候一定数量的请求回去调用实际的服务，如果调用成功，则代表服务可用了，熔断器关闭；如果还是失败，则代表服务还是不可用，熔断器继续打开。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/circuitbreaker.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/circuitbreaker.png"/> </div>
 
 ## 二、项目结构
 
@@ -49,7 +49,7 @@
 + **eureka**： 注册中心；
 + **turbine**：多个熔断器的聚合监控。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-hystrix.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-cloud-hystrix.png"/> </div>
 
 
 ## 三、整合 Hystrix 
@@ -172,7 +172,7 @@ public List<Product> queryAllProducts() {
 
 启动服务，访问 http://localhost:8030/sell/products ，多次刷新查看熔断情况：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/hystrix-8030.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/hystrix-8030.png"/> </div>
 
 ### 3.7 控制台
 
@@ -182,15 +182,15 @@ public List<Product> queryAllProducts() {
 
 **登录页面**：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/hystrix-single-login.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/hystrix-single-login.png"/> </div>
 
 **监控页面**：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/hystrix-8030-login.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/hystrix-8030-login.png"/> </div>
 
 **关于各个参数的说明参见[官方 wiki](https://github.com/Netflix-Skunkworks/hystrix-dashboard/wiki) 提供的图**：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/dashboard.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/dashboard.png"/> </div>
 
 
 
@@ -199,7 +199,7 @@ public List<Product> queryAllProducts() {
 
 如果你想要聚合监控不同服务单元下的多个断路器，可以使用 Turbine 来实现。单体监控和聚合监控的区别如下：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/dashboard-direct-vs-turbine-640.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/dashboard-direct-vs-turbine-640.png"/> </div>
 
 
 ### 4.1 导入依赖
@@ -311,11 +311,11 @@ public class TurbineApplication {
 
 依次启动 eureka、producer、consumer、turbine 四个项目，因为 consumer 和 producer 都集成了 Hystrix ，所以可以在 localhost:8020/hystrix 或者 8030/hystrix 页面输入 http://localhost:8040/turbine.stream  来查看断路器聚合信息：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/hystrix-cluster-login.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/hystrix-cluster-login.png"/> </div>
 
 **显示了不同服务单元（consumer,producer）的多个断路器信息：**
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/hystrix-cluster.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/hystrix-cluster.png"/> </div>
 
 ## 五、常见问题
 
@@ -354,5 +354,5 @@ public ServletRegistrationBean getServlet() {
 
 这种情况是熔断器所在的方法没有被调用，所以没有产生监控数据，不是整合问题，这时候调用一下熔断器所在方法即可：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/hystrix-loading.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/hystrix-loading.png"/> </div>
 

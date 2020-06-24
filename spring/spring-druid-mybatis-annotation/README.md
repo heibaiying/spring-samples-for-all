@@ -16,7 +16,7 @@
 
 ### 项目目录结构
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-druid-mybatis-annotation.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-druid-mybatis-annotation.png"/> </div>
 
 
 ### 1. 导入依赖
@@ -82,7 +82,7 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 
 ### 3. 配置 Druid 监控
 
-基于 servlet 3.0 的支持，可以采用注解的方式注册 druid 的 servlet 和 filter。关于 servlet 更多注解支持可以查看 [Servlet 规范文档](https://github.com/heibaiying/spring-samples-for-all/blob/master/referenced%20documents/Servlet3.1%E8%A7%84%E8%8C%83%EF%BC%88%E6%9C%80%E7%BB%88%E7%89%88%EF%BC%89.pdf) 中的 **8.1 小节 注解和可插拔性**
+基于 servlet 3.0 的支持，可以采用注解的方式注册 druid 的 servlet 和 filter。关于 servlet 更多注解支持可以查看 [Servlet 规范文档](https://gitee.com/heibaiying/spring-samples-for-all/raw/master/referenced%20documents/Servlet3.1%E8%A7%84%E8%8C%83%EF%BC%88%E6%9C%80%E7%BB%88%E7%89%88%EF%BC%89.pdf) 中的 **8.1 小节 注解和可插拔性**
 
 ```java
 @WebServlet(urlPatterns = "/druid/*",
@@ -353,6 +353,6 @@ public class OracleController {
 
 Druid Web 页面访问地址为：http://localhost:8080/druid/index.html ，可以登录后查看数据库相关监控数据：
 
-![druid 控制台](https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/druid%E6%8E%A7%E5%88%B6%E5%8F%B0.png)
+![druid 控制台](https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/druid%E6%8E%A7%E5%88%B6%E5%8F%B0.png)
 
 

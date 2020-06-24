@@ -22,7 +22,7 @@
 
   
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-email.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-email.png"/> </div>
 
 
 ### 1.2 基本依赖

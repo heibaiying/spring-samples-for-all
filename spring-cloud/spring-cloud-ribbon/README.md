@@ -36,7 +36,7 @@ Ribbon 是 Netfix 公司开源的负载均衡组件，采用服务端负载均�
 + **producer**：服务的提供者；
 + **eureka**：注册中心，Ribbon 从注册中心获取可用的服务列表，是实现负载均衡的基础。这里使用我们在 [服务的注册与发现](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-cloud/spring-cloud-eureka) 这个用例中搭建的注册中心即可。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-ribbon.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-cloud-ribbon.png"/> </div>
 
 
 ## 三、服务提供者的实现
@@ -45,7 +45,7 @@ Ribbon 是 Netfix 公司开源的负载均衡组件，采用服务端负载均�
 
  产品服务由 `ProductService` 提供，并通过 `ProducerController` 将服务暴露给外部调用：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/ribbon-producer.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/ribbon-producer.png"/> </div>
 
 
 ProductService.java：
@@ -150,7 +150,7 @@ public class ProducerApplication {
 
 ## 四、服务消费者的实现
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/ribbon-consumer.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/ribbon-consumer.png"/> </div>
 
 
 ### 4.1 基本依赖
@@ -252,22 +252,22 @@ public class ProductService implements IProductService {
 
 启动一个Eureka服务、三个生产者服务（注意区分端口）、和一个消费者服务：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-ribbon-app.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-cloud-ribbon-app.png"/> </div>
 
 
 **服务注册中心：**
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-ribbon-eureka.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-cloud-ribbon-eureka.png"/> </div>
 
 
 ### 5.2  验证负载均衡
 
 访问 http://localhost:8080/sell/products 查看负载均衡的调用结果：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-ribbon-products-8020.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-cloud-ribbon-products-8020.png"/> </div>
 
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-ribbon-products-8030.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-cloud-ribbon-products-8030.png"/> </div>
 
 
 ## 六、RestTemplate

@@ -36,7 +36,7 @@ Spring Cloud Config 分为服务端和客户端，服务端称为分布式配置
 + **config-client**：服务单元，可以从配置中心获取相关配置；
 + **eureka**：注册中心。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-config.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-cloud-config.png"/> </div>
 
 
 
@@ -147,20 +147,20 @@ spring:
 - **application.yml** ：为主配置；
 - **application-dev.yml**：为开发环境配置。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/config-git.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/config-git.png"/> </div>
 
 
 ### 3.4   启动服务
 
 启动 Eureka 和 Config-Server 服务，访问 http://localhost:8020/application-dev.yml  , 此时界面如下：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/config-application-dev.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/config-application-dev.png"/> </div>
 
 
 
 注意此时我们访问是 dev 分支，即开发环境配置，其实际的配置文件的内容如下：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/config-dev.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/config-dev.png"/> </div>
 
 
 
@@ -180,7 +180,7 @@ spring:
 
 其中 application 为配置文件名，profile 为环境，label 为分支（如果不指定默认就是 master 分支）。从上面的规则中我们可以看出并不存在单独的 `/{application}` 访问路径，所以必须接上一个任意字符，示例如下：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/config-a.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/config-a.png"/> </div>
 
 
 
@@ -323,7 +323,7 @@ public class ConfigController {
 
 依次启动 eureka，config-server，config-client 三个项目，访问 http://localhost:8030/programmer 。在启动 eureka 和 config-server 后，要稍等一会再启动 config-client，这里是为了确保 config-server 已经将服务注册到 Eureka，然后我们的 config-client 才能从 Eureka 中获取配置中心的服务：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/config-client-programmer.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/config-client-programmer.png"/> </div>
 
 
 启动时可以从控制台上看到拉取配置的相关信息：
@@ -442,10 +442,10 @@ o.s.amqp.rabbit.core.RabbitAdmin         : Auto-declaring a non-durable, auto-de
 
 也可以在 RabbitMQ 管控台上查看：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-bus-exchange.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-cloud-bus-exchange.png"/> </div>
 
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-bus-queue.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-cloud-bus-queue.png"/> </div>
 
 
 
@@ -453,7 +453,7 @@ o.s.amqp.rabbit.core.RabbitAdmin         : Auto-declaring a non-durable, auto-de
 
  直接在 Git 上修改配置文件，然后用 `post` 请求触发热刷新端点 http://localhost:8030/actuator/bus-refresh ，即可看到配置已经热刷新。注意这里的只能用 post 方式请求 ，你可以用 Postman 等测试软件来发送：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/bus-refresh.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/bus-refresh.png"/> </div>
 
 
 

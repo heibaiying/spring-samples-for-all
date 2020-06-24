@@ -26,7 +26,7 @@
 + **eureka**：注册中心；
 + **zuul**： API 网关。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-sleuth-zipkin.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-cloud-sleuth-zipkin.png"/> </div>
 
 
 ## 三、Zipkin 服务端
@@ -43,7 +43,7 @@ java -jar zipkin.jar
 docker run -d -p 9411:9411 openzipkin/zipkin
 ```
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zipkin-download.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/zipkin-download.png"/> </div>
 
 
 
@@ -86,12 +86,12 @@ spring:
 
 分别启动 eureka，zuul，consumer，producer 四个项目，访问 http://localhost:9411/ ，查看我们的服务调用链路：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zipkin.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/zipkin.png"/> </div>
 
 
 点击链路，即可以查看具体的调用情况：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zipkin-detail.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/zipkin-detail.png"/> </div>
 
 
 展示信息说明：

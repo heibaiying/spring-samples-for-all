@@ -30,7 +30,7 @@
 
  Redis 所有语言官方推荐的客户端可以在 [客户端](http://www.redis.cn/clients.html) 该网页查看，其中官方推荐的客户端使用了:star:进行标注：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/redis官方推荐客户端.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/redis官方推荐客户端.png"/> </div>
 
 
 ### 1.2 可视化软件 
@@ -43,7 +43,7 @@
 
 + 实体类 Programmer 用于测试 Redisson 序列化与反序列化。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-redis.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-redis.png"/> </div>
 
 
 **springapplication.xml 文件：**

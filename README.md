@@ -98,6 +98,9 @@ spring-cloud：Finchley.SR2
 
 <br>
 
-<div align="center"> <img width="200px" src="pictures/blog-logo.png"/> </div>
-
+<div align="center">
+	<a href = "https://blog.csdn.net/m0_37809146"> 
+	<img width="200px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/blog-logo.png"/> 
+	</a> 
+</div>
 <div align="center"> <a  href = "https://blog.csdn.net/m0_37809146"> 欢迎关注我的博客：https://blog.csdn.net/m0_37809146</a> </div>

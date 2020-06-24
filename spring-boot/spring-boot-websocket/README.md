@@ -19,7 +19,7 @@
 - 模板引擎采用 freemaker；
 - 项目以 Web 的方式构建。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-websocket.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-boot-websocket.png"/> </div>
 
 
 ### 1.2 基本依赖

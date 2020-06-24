@@ -25,7 +25,7 @@
 
 API 网关是整个微服务系统的门面，所有的外部访问需要通过网关进行调度和过滤。它实现了请求转发、负载均衡、校验过滤、错误熔断、服务聚合等功能：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/apiGateway.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/apiGateway.png"/> </div>
 
 
 ### 1.2 Spring Cloud Zuul
@@ -46,12 +46,12 @@ Spring Cloud 基于 Net Flix Zuul 实现了网关组件，这就是 Spring Cloud
 
 聚合项目目录如下：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-zuul.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-cloud-zuul.png"/> </div>
 
 
 Zuul 项目目录如下：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/zuul.png"/> </div>
 
 
 
@@ -181,7 +181,7 @@ zuul:
 
 启动 eureka、producer、consumer、zuul 四个服务，访问 localhost:8090/consumer/sell/product ：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-consumer.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/zuul-consumer.png"/> </div>
 
 
 
@@ -191,7 +191,7 @@ zuul:
 
 Zuul 默认整合了 Hystrix ，不用导入其他额外依赖：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-hystrix.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/zuul-hystrix.png"/> </div>
 
 
 ### 4.2 服务降级
@@ -271,7 +271,7 @@ public class CustomZuulFallbackProvider implements FallbackProvider {
 
 正确返回了内容、同时返回的 Http 状态码也和我们设置的一样。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-broker.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/zuul-broker.png"/> </div>
 
 
 
@@ -361,23 +361,23 @@ public class CustomZuulFilter extends ZuulFilter {
 
 Zuul 默认集成了 Ribbon 并实现了负载均衡，只要启动多个实例即可查看到负载均衡的效果：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-ribbon.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/zuul-ribbon.png"/> </div>
 
 
 **这里我们直接在idea 中启动多个实例来测试：**
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-config.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/zuul-config.png"/> </div>
 
 
 **负载均衡测试结果：**
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-consumer.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/zuul-consumer.png"/> </div>
 
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-consumer-8040.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/zuul-consumer-8040.png"/> </div>
 
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/zuul-consumer-8030.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/zuul-consumer-8030.png"/> </div>
 
 
 

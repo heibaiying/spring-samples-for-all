@@ -23,7 +23,7 @@
 - **boot-dubbo-provider** ：服务的提供者，提供商品的查询服务；
 - **boot-dubbo-consumer** ：是服务的消费者，调用 provider 提供的查询服务。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-dubbo.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-boot-dubbo.png"/> </div>
 
 ## 二、基本依赖
 
@@ -101,11 +101,11 @@
 - api 下为公共的调用接口；
 - bean 下为公共的实体类。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/boot-dubbo-common.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/boot-dubbo-common.png"/> </div>
 
 ## 四、服务提供者
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/boot-dubbo-provider.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/boot-dubbo-provider.png"/> </div>
 
 ### 4.1 提供者配置
 
@@ -160,7 +160,7 @@ public class ProductService implements IProductService {
 
 ## 五、服务消费者
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/boot-dubbo-consumer1.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/boot-dubbo-consumer1.png"/> </div>
 
 ### 5.1 消费者配置
 

@@ -23,7 +23,7 @@
 - **rabbitmq-producer** ：消息的生产者模块；
 - **rabbitmq-consumer** ：是消息的消费者模块。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-rabbitmq.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-boot-rabbitmq.png"/> </div>
 
 ## 二、主要依赖
 
@@ -91,7 +91,7 @@
 - bean 下为公共的实体类。
 - constant 下为公共配置，用静态常量进行引用。这里我使用静态常量是为了方便引用，实际中也可以按照情况，抽取为公共的配置文件。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/rabbitmq-common.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/rabbitmq-common.png"/> </div>
 ```java
 public class RabbitInfo {
 
@@ -113,7 +113,7 @@ public class RabbitInfo {
 
 ## 四、消息消费者
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/rabbitmq-consumer.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/rabbitmq-consumer.png"/> </div>
 ### 4.1 消费者配置
 
 ```yaml
@@ -186,7 +186,7 @@ public class RabbitmqConsumer {
 
 ## 五、消息生产者
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/rabbitmq-producer.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/rabbitmq-producer.png"/> </div>
 
 ### 5.1 生产者配置
 

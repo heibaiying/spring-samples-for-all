@@ -21,7 +21,7 @@
 - Servlet、过滤器、监听器分别位于 servlet、filter、listen 下，其中以 Annotation 命名结尾的代表是 Servlet 是以注解方式实现，采用 Spring 注册方式则需要在 ServletConfig 中进行注册；
 - 为了说明外置容器对 Servlet 注解的自动发现机制，项目采用外置容器构建，关于 Spring Boot 整合外置容器的详细说明可以参考：[spring-boot-tomcat](https://github.com/heibaiying/spring-samples-for-all/tree/master/spring-boot/spring-boot-tomcat) 。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-servlet.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-boot-servlet.png"/> </div>
 
 ### 1.2 项目依赖
 

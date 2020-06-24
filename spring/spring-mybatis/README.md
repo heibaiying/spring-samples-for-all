@@ -16,7 +16,7 @@
 
 ### 1.1 项目结构
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-mybatis.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-mybatis.png"/> </div>
 
 
 ### 1.2 项目依赖

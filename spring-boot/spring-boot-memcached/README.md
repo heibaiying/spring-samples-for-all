@@ -26,7 +26,7 @@ Spring 官方并没有提供关于 Memcached 的 starter，所以我们还是采
 
 Memcached 的整合配置位于 config 文件夹下：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-memcached.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-boot-memcached.png"/> </div>
 
 ### 1.3 基本依赖
 

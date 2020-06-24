@@ -26,7 +26,7 @@
 
 
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-rabbitmq.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-rabbitmq.png"/> </div>
 
 ### 1.2 基本依赖
 

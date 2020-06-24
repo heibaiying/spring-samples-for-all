@@ -24,7 +24,7 @@
 
 另外，本项目 Dubbo 的搭建采用 ZooKeeper 作为注册中心。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-dubbo.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-dubbo.png"/> </div>
 
 ## 二、项目依赖
 
@@ -61,10 +61,10 @@
 - api 下为公共的调用接口；
 - bean 下为公共的实体类。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/dubbo-ano-common.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/dubbo-ano-common.png"/> </div>
 ## 四、 服务提供者
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/dubbo-ano-provider.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/dubbo-ano-provider.png"/> </div>
 ### 4.1 提供者配置
 
 ```java
@@ -142,7 +142,7 @@ public class ProductService implements IProductService {
 
 ## 五、服务消费者
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/dubbo-ano-consumer.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/dubbo-ano-consumer.png"/> </div>
 ### 5.1 消费者配置
 
 ```java

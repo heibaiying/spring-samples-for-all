@@ -19,7 +19,7 @@
 1. 数据源配置位于 config 目录下的 DatabaseConfig 和 DataSourceConfig；
 2. 项目以单元测试的方法进行测试。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-jdbc-annotation.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-jdbc-annotation.png"/> </div>
 
 
 ### 1.2  项目依赖

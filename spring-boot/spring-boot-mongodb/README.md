@@ -19,7 +19,7 @@
 - 提供基于 MongoTemplate 的方式操作 MongoDB，见测试用例 MongoOriginalTests；
 - 提供基于 Spring Data JPA   的方式操作 MongoDB (推荐)，见测试用例 MongoJPATests。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-mongodb.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-boot-mongodb.png"/> </div>
 
 ### 1.2 基本依赖
 

@@ -9,7 +9,7 @@
 
 ## 一、项目说明
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-jsp.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-boot-jsp.png"/> </div>
 
 
 ## 二、整合 JSP

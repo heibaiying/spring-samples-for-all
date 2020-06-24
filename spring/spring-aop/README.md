@@ -21,7 +21,7 @@
 
 切面配置位于 resources 下的 `aop.xml` ，其中 CustomAdvice 是自定义切面类，OrderService 是待切入的方法。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-aop.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-aop.png"/> </div>
 
 
 ### 1.2 依赖说明

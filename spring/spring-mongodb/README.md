@@ -16,7 +16,7 @@
 
 配置文件位于 resources 下,项目以单元测试的方式进行测试。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-mongodb.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-mongodb.png"/> </div>
 
 
 ### 1.2 相关依赖

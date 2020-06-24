@@ -36,7 +36,7 @@
 + **producer**：服务的提供者；
 + **eureka**：注册中心。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-feign.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-cloud-feign.png"/> </div>
 
 
 
@@ -45,7 +45,7 @@
 
 ## 三、服务提供者的实现
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/feign-producer.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/feign-producer.png"/> </div>
 
 
 ### 3.1 定义服务
@@ -149,7 +149,7 @@ public class ProducerApplication {
 
 ## 四、服务消费者的实现
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/feign-consumer.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/feign-consumer.png"/> </div>
 
 
 ### 4.1 基本依赖
@@ -221,7 +221,7 @@ public interface ProductFeign {
 
 按照官方对于服务最佳化的推荐，这里我们的服务调用接口放在公共模块中，因为在实际的开发中，同一个服务调用接口可能被多个模块所使用。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/common-feign.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/common-feign.png"/> </div>
 
 
 
@@ -285,25 +285,25 @@ public class SellController {
 
 启动一个Eureka服务、三个生产者服务（注意区分端口）、和一个消费者服务。Feign 的依赖中导入了 spring-cloud-starter-netflix-ribbon 依赖，并且在内部实现了基于 Ribbon 的客户端负载均衡，所以我们这里启动三个生产者服务来观察负载均衡的情况：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-ribbon-app.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-cloud-ribbon-app.png"/> </div>
 
 
 **服务注册中心：**
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-ribbon-eureka.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-cloud-ribbon-eureka.png"/> </div>
 
 
 ### 5.2  验证负载均衡
 
 访问 http://localhost:8080/sell/products 查看负载均衡的调用结果：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-ribbon-products-8020.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-cloud-ribbon-products-8020.png"/> </div>
 
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-ribbon-products-8030.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-cloud-ribbon-products-8030.png"/> </div>
 
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/feign-8040.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/feign-8040.png"/> </div>
 
 
 
@@ -316,7 +316,7 @@ public class SellController {
 
 Feign 的依赖中默认导入了 Hystrix （熔断器）的相关依赖，我们不需要额外导入，只需要开启相关配置即可：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/feign-hystrix-maven.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/feign-hystrix-maven.png"/> </div>
 
 
 
@@ -422,6 +422,6 @@ public List<Product> queryAllProducts() {
 
 测试结果：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/feign-hystrix.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/feign-hystrix.png"/> </div>
 
 

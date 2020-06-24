@@ -22,7 +22,7 @@
 - **eureka-server** 为服务注册中心，负责服务的管理；
 - **eureka-client** 为 Eureka 客户端。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-cloud-eureka-cluster.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-cloud-eureka-cluster.png"/> </div>
 
 
 
@@ -30,7 +30,7 @@
 
 这里我们以单机伪集群的方式搭建，让三个单机注册中心互相注册，实现注册中心的高可用。配置示意图如下：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/eureka-server-client.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/eureka-server-client.png"/> </div>
 
 
 ### 2.1 服务端依赖
@@ -46,7 +46,7 @@
 
 创建三份配置文件，分别代表不同注册中心的配置：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/eureka-application.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/eureka-application.png"/> </div>
 
 
 application-01.yml:
@@ -175,7 +175,7 @@ public class EurekaClientApplication {
 
 这里我们可以采用命令行方式指定配置，分别启动三个注册中心：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/eureka-active.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/eureka-active.png"/> </div>
 
 
 ### 4.2  集群搭建成功的判定
@@ -184,17 +184,17 @@ public class EurekaClientApplication {
 
 8010 注册中心：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/eureka-8010.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/eureka-8010.png"/> </div>
 
 
 8020 注册中心：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/eureka-8020.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/eureka-8020.png"/> </div>
 
 
 8030 注册中心：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/eureka-8030.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/eureka-8030.png"/> </div>
 
 
 Status 下的每个注册中心都可以点击跳转到其监控页面，但其监控页面地址链接可能是动态变化的，主要情况如下：

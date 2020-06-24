@@ -125,7 +125,7 @@ health 端点用于暴露程序运行的健康状态，暴露的信息的详细�
 - **CustomHealthAggregator**：自定义健康状态聚合规则；
 - **CustomEndPoint**：自定义端点。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-boot-actuator.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-boot-actuator.png"/> </div>
 
 ### 2.2 主要依赖
 
@@ -160,7 +160,7 @@ management:
 
 导入 Actuator 的 starter 并进行配置后，访问 http://127.0.0.1:8080/actuator/health 就可以看到对应的项目监控状态。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/health.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/health.png"/> </div>
 
 健康指标 HealthIndicators 由 Spring Boot 自动配置，因此这里显示监控信息是由项目所使用的技术栈而决定的：
 
@@ -207,11 +207,11 @@ public class CustomHealthIndicator implements HealthIndicator {
 
 自定义检查通过的情况下：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/actuator-health-up.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/actuator-health-up.png"/> </div>
 
 自定义检查失败的情况：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/health-fatal-200.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/health-fatal-200.png"/> </div>
 
 自定义检查不论是否通过都不会影响整体的 status，因此两种情况下的 status 值都是 `up`。如果想通过自定义检查去影响整体的检查结果，比如健康检查针对的是支付业务，在支付业务的不可用的情况下，我们就应该认为整个服务是不可用的，这个时候就需要通过自定义健康状态的聚合规则来实现。
 
@@ -241,7 +241,7 @@ public class CustomHealthAggregator implements HealthAggregator {
 
 当我们自定义健康检查项不通过时候的结果如下：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/actuator-heath-503.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/actuator-heath-503.png"/> </div>
 
 这里需要注意的是返回自定义的聚合状态时，状态码也变成了 503，这是我们在配置文件中进行定义的：
 
@@ -319,8 +319,8 @@ public class CustomEndPoint {
 
 地址为：http://127.0.0.1:8080/actuator/customEndPoint ：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/actuator-customEndPoint.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/actuator-customEndPoint.png"/> </div>
 
 关于 Sigar 的更多监控参数可以参考博客：[java 读取计算机 CPU、内存等信息（Sigar 使用）](https://blog.csdn.net/wudiazu/article/details/73829324) 或 Sigar 下载包中的用例：
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/sigar.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/sigar.png"/> </div>

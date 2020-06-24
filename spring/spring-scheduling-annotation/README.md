@@ -15,7 +15,7 @@
 
 关于任务的调度配置定义在 ServletConfig 中，为方便观察定时执行的情况，项目以 web 的方式构建。
 
-<div align="center"> <img src="https://github.com/heibaiying/spring-samples-for-all/blob/master/pictures/spring-scheduling-annotation.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/spring-samples-for-all/raw/master/pictures/spring-scheduling-annotation.png"/> </div>
 
 
 ### 1.2 基本依赖
