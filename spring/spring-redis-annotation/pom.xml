@@ -8,7 +8,7 @@
     <artifactId>spring-redis-annotation</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
-        <spring-base-version>5.1.3.RELEASE</spring-base-version>
+        <spring-base-version>5.2.3.RELEASE</spring-base-version>
     </properties>
 
     <dependencies>
